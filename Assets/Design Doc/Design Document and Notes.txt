@@ -1,58 +1,43 @@
 ﻿Frogun (name TBD) Design Document / idea notes
 
-
-Use 1 and 2 to switch between the magnets 
-
-
-Cubes and player need impact when hitting ground 
-
-Trail renderers on the cubes 
-
-Make the cubes dice 
-
-Piano music 
-
-Speed upgrades, base speed 20f
-
+1. Use 1 and 2 to switch between the magnets.
+2. Cubes and player need impact when hitting the ground.
+3. Trail renderers on the cubes.
+4. Make the cubes dice.
+5. Piano music.
+6. Speed upgrades, base speed 20f.
 
 Possible upgrades:
 - Move speed
 - Rock shoot speed
 - Rock follow/attract speed
 - Bigger rocks
-- More rocks 
-- heavier cubes (cubes fall faster) (this may make the cubes look a lot less cool)
+- More rocks
+- Heavier cubes (cubes fall faster)
 
 Possible abilities:
 - Rock floating ability (magnet goes under player when pressing space)
 - Double jump
-- explosive rocks (rocks explode on impact)
+- Explosive rocks (rocks explode on impact)
 
-Look at BTD6 and Vampire survivors for upgrade and ability references/examples
+Look at BTD6 and Vampire survivors for upgrade and ability references/examples.
 
+Smaller cubes are faster and easier to control. Maybe smaller is just a straight upgrade, OR you have two paths like bloons: smaller or larger cubes.
 
-Smaller cubes are faster and easier to control
+2x cubes take up the entire screen.
 
-maybe smaller is just a straight upgrade, OR you have two paths like bloons: smaller or larger cubes
+Bigger cubes tumble more like dice while smaller cubes bounce like bullets.
 
-2x cubes take up the entire screen
+What kind of vibe are we going for?
 
-bigger cubes tumble more like dice while smaller cubes bounce like bullets
+BUG: When the cubes are all collected in front of the player, they can block the player because the player is walking into them. Consider turning off the cubes' collider when in front of the player (this opens up a lot more problems).
 
-what kinda vibe are we going for?
+Trails look really cool but block most of the screen.
 
-BUG: when the cubes are all collected in front of the player, they can block the player because the player is walking into them. Consider turning off the cubes' collider when in front of the player (this opens up a lot more problems)
+Better looking pistol position: Vector3(1.5,-0.300000012,1.41199994).
 
-trails look really cool but block most of the screen 
+Add blue sphere when cubes are being pulled in.
 
+Make a state machine and booleans that updated scriptable object variables so any object can access when you are attracting or repelling.
 
-
-
-add blue sphere when cubes are being pulled in
-
-
-make a state machine and booleans that updated scriptable object variables so any object can access when you are attracting or repelling
-
-
-if you kill all the cows, none of them respawn. Also the killcounter keeps counting up for some reason??
-TODO: Rework enemy spawning and fix bugs
+If you kill all the cows, none of them respawn. Also, the kill counter keeps counting up for some reason. TODO: Rework enemy spawning and fix bugs.
