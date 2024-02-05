@@ -8,18 +8,17 @@ public class SetHealthBar : MonoBehaviour
 {
     [SerializeField] private intVariable _entityHealth;
 
+    [SerializeField] private intVariable _entityMaxHp;
+
     [SerializeField] private Slider _slider;
 
     private void Start()
     {
-        _slider.maxValue = _entityHealth.Value;
     }
 
     // Update is called once per frame
     void Update()
     {
-//        Debug.Log(_entityHealth.name + " : " + _entityHealth.Value);
-
-        _slider.value = _entityHealth.Value;
+        _slider.value = (float) _entityHealth.Value / (float) _entityMaxHp.Value;
     }
 }
