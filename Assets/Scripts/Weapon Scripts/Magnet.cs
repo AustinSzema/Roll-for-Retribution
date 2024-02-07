@@ -29,6 +29,11 @@ public class Magnet : MonoBehaviour
     [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private GameObject _gravityParticlesRoot;
     [SerializeField] private ParticleSystem _gravityParticles;
+    
+    [SerializeField] private float _pullSpeed;
+    [SerializeField] private float _slamSpeed;
+    [SerializeField] private float _shotgunSpeed;
+
     private void Start()
     {
         /*for (int i = 0; i < 100; i++)
@@ -51,7 +56,7 @@ public class Magnet : MonoBehaviour
     }
 
     private bool _activateMagnet = false;
-    
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -86,7 +91,8 @@ public class Magnet : MonoBehaviour
             _attractParticlesRoot.SetActive(false);
 
         }
-
+        
+        //shotgun push
         if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
         {
             foreach (Rigidbody rb in _magneticObjects)
@@ -98,12 +104,12 @@ public class Magnet : MonoBehaviour
                 _repelParticlesRoot.SetActive(true);
                 _repelParticles.Clear();
                 _repelParticles.Play();
-                rb.AddForce(transform.forward * 5000f);
+                rb.AddForce(transform.forward * _shotgunSpeed);
                 _activateMagnet = false;
             }
         }
         
-        
+        //slam 
         if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
         {
             foreach (Rigidbody rb in _magneticObjects)
@@ -116,7 +122,7 @@ public class Magnet : MonoBehaviour
                 _gravityParticles.Clear();
                 _gravityParticles.Play();
                 
-                rb.AddForce(Vector3.down * 5000f);
+                rb.AddForce(Vector3.down * _slamSpeed);
                 
                 _activateMagnet = false;
             }
@@ -135,7 +141,7 @@ public class Magnet : MonoBehaviour
             foreach (Rigidbody obj in _magneticObjects )
             {
                 obj.velocity = Vector3.zero;
-                obj.position = Vector3.MoveTowards(obj.transform.position, transform.position, Time.deltaTime * 50f);
+                obj.position = Vector3.MoveTowards(obj.transform.position, transform.position, Time.deltaTime * _pullSpeed);
 
                 /*// Calculate the direction from the current position to the target position
                 Vector3 direction = (transform.position - obj.position).normalized;
