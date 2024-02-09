@@ -20,7 +20,7 @@ public class Magnetic : MonoBehaviour
     {
         if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
         {
-            Debug.Log(other.gameObject.name);
+            //Debug.Log(other.gameObject.name);
             other.gameObject.GetComponent<IDamageable>().takeDamage(1);
             //_dustParticles.transform.position = other.contacts[0].point;
             //_dustParticles.Play();

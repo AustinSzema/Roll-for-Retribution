@@ -24,11 +24,6 @@ public struct SpawnInfo
     public List<EnemyAndNumber> Spawnables;
 }
 
-[Serializable]
-public struct SpawnInfoList
-{
-    public SpawnInfo[] spinfo;
-}
 
 [CreateAssetMenu(menuName = "Scriptable Object Variable/Spawn Info",
     fileName = "New Spawn Info Variable")]

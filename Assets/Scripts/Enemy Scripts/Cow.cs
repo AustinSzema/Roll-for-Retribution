@@ -33,7 +33,7 @@ public class Cow : MonoBehaviour, IDamageable
     private void Explode()
     {
         _explosionParticles.Play();
-        Debug.Log("played cow particle effects");
+        //Debug.Log("played cow particle effects");
         _cowVisual.SetActive(false);
         
     }

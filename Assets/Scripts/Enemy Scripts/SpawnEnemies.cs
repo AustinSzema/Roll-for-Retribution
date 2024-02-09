@@ -20,6 +20,8 @@ public class SpawnEnemies : MonoBehaviour
   private SpawnInfo _currentSpawnInfo;
 
   private int _currentSpawnInfoIdx;
+
+  private bool _changeSpawnInfo;
   
 
   void Start()
@@ -38,19 +40,50 @@ public class SpawnEnemies : MonoBehaviour
 
     _currentSpawnInfo = _spawnInfos[0];
     _currentSpawnInfoIdx = 0;
+    _changeSpawnInfo = true;
 
     InvokeRepeating("SpawnCurrentEnemies", 0f, secondsBetweenSpawn);
   }
 
   void Update()
   {
+    if (_changeSpawnInfo)
+    {
+      Debug.Log("Current spawn info is index " + _currentSpawnInfoIdx);
+      StartCoroutine(SwapSpawnInfo());
+    }
+  }
+
+  IEnumerator SwapSpawnInfo()
+  {
+    // If we have reached the end of the list of spawn infos
+    // then we have no new spawn info to swap to, so we stay 
+    // on the last one
     if (_currentSpawnInfoIdx < _spawnInfos.Count - 1)
     {
-      if (Time.timeSinceLevelLoad > _spawnInfos[_currentSpawnInfoIdx + 1].StartTime)
+      float timeUntilSwap = _spawnInfos[_currentSpawnInfoIdx + 1].StartTime - Time.timeSinceLevelLoad;
+      // If the time to start the next spawn info is upon us
+      // set the current spawn info to the next one
+      if (timeUntilSwap < 0)
       {
         _currentSpawnInfoIdx += 1;
         _currentSpawnInfo = _spawnInfos[_currentSpawnInfoIdx];
       }
+      else
+      {
+        // If it isn't time to swap yet, wait until it is time to swap
+        // before checking again
+        _changeSpawnInfo = false;
+        yield return new WaitForSeconds(timeUntilSwap);
+        _changeSpawnInfo = true;
+      }
+    }
+    else
+    {
+      // if weve reached the end of the spawn info list
+      // then we will never swap spawn infos again
+      // so we just set it to false permaenently
+      _changeSpawnInfo = false;
     }
   }
 
@@ -58,6 +91,7 @@ public class SpawnEnemies : MonoBehaviour
   {
     foreach (var spawnable in _currentSpawnInfo.Spawnables)
     {
+      Debug.Log("I am about to spawn " + spawnable.number + " enemies");
       for (int i = 0; i < spawnable.number; i++)
       {
         
