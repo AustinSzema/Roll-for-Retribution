@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,6 +13,7 @@ public class SetTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      _timerText.text = Time.time.ToString("F2");
+      //_timerText.text = Time.time.ToString("F2");
+      _timerText.text = Time.timeSinceLevelLoad.ToString("F2");
     }
 }
