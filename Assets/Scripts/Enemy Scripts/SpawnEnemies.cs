@@ -89,13 +89,15 @@ public class SpawnEnemies : MonoBehaviour
 
   void SpawnCurrentEnemies()
   {
-    foreach (var spawnable in _currentSpawnInfo.Spawnables)
+    for (int j = 0; j < _currentSpawnInfo.Spawnables.Count; j++)
     {
+      EnemyAndNumber spawnable = _currentSpawnInfo.Spawnables[j];
       Debug.Log("I am about to spawn " + spawnable.number + " enemies");
       for (int i = 0; i < spawnable.number; i++)
       {
         
-        GameObject enemyGameObject = Instantiate(spawnable.enemy);
+        //GameObject enemyGameObject = Instantiate(spawnable.enemy);
+        GameObject enemyGameObject = EnemyPool.Instance.GetPooledObject(_currentSpawnInfo.Spawnables[j].enemy.name);
         float maxDistanceFromPlayer = 25f;
         float minDistanceFromPlayer = 30f;
 

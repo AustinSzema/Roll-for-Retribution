@@ -11,6 +11,8 @@ public class EnemyPool : MonoBehaviour
     // string is the .name field of the enemy gameobject in EnemyAndNumber in enemiesToPool
     private Dictionary<string, List<GameObject>> _enemyPool;
 
+    private Dictionary<string, EnemyAndNumber> _lookupTable;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,6 +20,11 @@ public class EnemyPool : MonoBehaviour
         {
             Instance = this;
         }
+
+        Dictionary<string, List<GameObject>> dict = new Dictionary<string, List<GameObject>>();
+        _enemyPool = dict;
+        Dictionary<string, EnemyAndNumber> lookupDict = new Dictionary<string, EnemyAndNumber>();
+        _lookupTable = lookupDict;
         for (int i = 0; i < enemiesToPool.Count; i++)
         {
             EnemyAndNumber current = enemiesToPool[i];
@@ -33,6 +40,7 @@ public class EnemyPool : MonoBehaviour
                 {
                     List<GameObject> enemyList = new List<GameObject>();
                     _enemyPool.Add(current.enemy.name, enemyList);
+                    _lookupTable.Add(current.enemy.name, current);
                 }
             }
        }
@@ -48,16 +56,30 @@ public class EnemyPool : MonoBehaviour
         {
             for (int i = 0; i < currentEnemyPool.Count; i++)
             {
-                if (currentEnemyPool[i].activeInHierarchy)
+                if (!currentEnemyPool[i].activeInHierarchy)
                 {
                     return currentEnemyPool[i];
                 }
             }
+            
+            
+                // we couldnt find any inactive members in the scene
+                // so we should make another
+                EnemyAndNumber inst = new EnemyAndNumber();
+                if (_lookupTable.TryGetValue(name, out inst))
+                {
+                    GameObject addToPool = Instantiate(inst.enemy); 
+                    addToPool.SetActive(false);
+                    currentEnemyPool.Add(addToPool);
+                    return addToPool;
+                }
+            
+
         }
         else
         {
             // this means the enemy type doesnt have a pool
-            // TODO finish this
+            // we can either make a pool for it or just return null, for now return null
             return null;
         }
 
