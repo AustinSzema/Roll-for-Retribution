@@ -30,7 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 2
-  normalizeMode: 0
+  normalizeMode: 1
   editorPreviewLOD: 0
   noiseScale: 25
   octaves: 5
@@ -154,4 +154,5 @@ MonoBehaviour:
     visibleDstThreshold: 600
     useForCollider: 0
   viewer: {fileID: 0}
-  mapMaterial: {fileID: 2100000, guid: 5a1e024e54af12645a2f1420fc760572, type: 2}
+  mapMaterial: {fileID: 2100000, guid: fe95cb4dbd6ef66449940abe832d5cbd, type: 2}
+  _mesh: {fileID: 0}
