@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class EndlessTerrain : MonoBehaviour
 {
-
-
     const float scale = 2.5f;
 
     const float viewerMoveThresholdForChunkUpdate = 25f;
@@ -25,11 +24,14 @@ public class EndlessTerrain : MonoBehaviour
     int chunkSize;
     int chunksVisibleInViewDst;
 
-    Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
-    static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
+    private Dictionary<Vector2, TerrainChunk> terrainChunkDictionary;
+    private static List<TerrainChunk> terrainChunksVisibleLastUpdate;
 
     void Start()
     {
+        terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
+        terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
+        
         mapMaterial = _mesh.material;
         mapGenerator = FindObjectOfType<MapGenerator>();
 
@@ -38,7 +40,15 @@ public class EndlessTerrain : MonoBehaviour
         chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
 
         UpdateVisibleChunks();
+        
     }
+
+    /*
+    private void OnDestroy()
+    {
+        terrainChunkDictionary.Clear();
+    }
+    */
 
     void Update()
     {
@@ -75,6 +85,7 @@ public class EndlessTerrain : MonoBehaviour
                 }
                 else
                 {
+                    // this is where the TerrainChunk class is being instantiated
                     terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial));
                 }
 
@@ -84,7 +95,7 @@ public class EndlessTerrain : MonoBehaviour
 
     public class TerrainChunk
     {
-
+        // meshObject is being instanitated here
         GameObject meshObject;
         Vector2 position;
         Bounds bounds;
@@ -205,6 +216,7 @@ public class EndlessTerrain : MonoBehaviour
 
         public void SetVisible(bool visible)
         {
+            //This is the object that is throwing a null reference exception when the scene is reloaded
             meshObject.SetActive(visible);
         }
 
