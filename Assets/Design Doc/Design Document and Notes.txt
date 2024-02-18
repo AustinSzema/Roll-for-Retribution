@@ -1,5 +1,8 @@
 ﻿Frogun (name TBD) Design Document / idea notes
 
+// Right now the player can just stand inside a ring of demon dice and never die. We need a solution to this. Either the player's health is decreased if they stop moving for a certain period of time, or if their displacement is too low after a short period of time, or something.
+// Maybe dice can only kill enemies when they're moving or above a certain velocity? Idk that's probably not a great solution but we can't rely on the player's to keep moving.
+
 1. Use 1 and 2 to switch between the magnets.
 2. Cubes and player need impact when hitting the ground.
 3. Trail renderers on the cubes.
@@ -41,3 +44,7 @@ Add blue sphere when cubes are being pulled in.
 Make a state machine and booleans that updated scriptable object variables so any object can access when you are attracting or repelling.
 
 If you kill all the cows, none of them respawn. Also, the kill counter keeps counting up for some reason. TODO: Rework enemy spawning and fix bugs.
+
+
+
+

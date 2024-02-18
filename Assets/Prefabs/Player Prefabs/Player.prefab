@@ -364,6 +364,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealth: {fileID: 11400000, guid: 949cbe3b130ef7548af788acef95f83e, type: 2}
+  _playerCurrentHealth: {fileID: 11400000, guid: 852666a7f8747244f819501a8cb0edbd,
+    type: 2}
+  _gameOverMenu: {fileID: 0}
 --- !u!1 &4429400767039744802
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +641,7 @@ PrefabInstance:
     - target: {fileID: 1870574598108192250, guid: 5511579077f94e84ab68c2d6448e9c68,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1870574598108192250, guid: 5511579077f94e84ab68c2d6448e9c68,
         type: 3}

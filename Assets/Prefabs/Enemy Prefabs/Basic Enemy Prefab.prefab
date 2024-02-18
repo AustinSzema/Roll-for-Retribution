@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1508831378797881915}
   m_Layer: 11
   m_Name: Enemy
-  m_TagString: Cow
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1897845184038939654}
   m_Layer: 11
   m_Name: Basic Enemy Prefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,6 +169,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minimap Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090188616763205952, guid: b51fe66c3ab201f48ab238a66a22f5e7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8852042726136436086, guid: b51fe66c3ab201f48ab238a66a22f5e7,
         type: 3}
@@ -273,6 +278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334612509446014874, guid: bd19533bedd9d394497da02e0e9e64ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8334612509446014879, guid: bd19533bedd9d394497da02e0e9e64ce,
         type: 3}
@@ -444,10 +454,51 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 04370312195122a4493fbadd8ae77b80, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 00ed9644a308db44d967ea17c34a2369, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 706c2296d79399a4bae938ee985fd7e8, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: afc8ad91ceaf85a499423a8eee75aacb, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d1413b259cd85c4a9adb7638da98170, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 842028241145420258, guid: 0b560ca9aee0558448e1436ba00eb738,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 7f671ddacb1902542a873e0af521d538,
         type: 3}
       propertyPath: m_Name
       value: Enemy Visual
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7f671ddacb1902542a873e0af521d538,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -456,7 +507,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f671ddacb1902542a873e0af521d538,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 878657908888797633}
+      addedObject: {fileID: 3740967048369907039}
   m_SourcePrefab: {fileID: 100100000, guid: 7f671ddacb1902542a873e0af521d538, type: 3}
 --- !u!1 &8570961902809321445 stripped
 GameObject:
@@ -464,8 +515,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8805458256183308980}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &878657908888797633
-BoxCollider:
+--- !u!64 &3740967048369907039
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -482,9 +533,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.9133825, y: 1.9999434, z: 1.1978953}
-  m_Center: {x: -0.19190234, y: -0.12060565, z: -0.025740147}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 842028241145420258, guid: 0b560ca9aee0558448e1436ba00eb738, type: 3}
 --- !u!4 &9059550147438663007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f671ddacb1902542a873e0af521d538,
