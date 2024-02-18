@@ -32,7 +32,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     private void OnCollisionEnter(Collision other)
     {
 
-        if (other.gameObject.GetComponent<Cow>() != null)
+        if (other.gameObject.GetComponent<Enemy>() != null)
         {
             takeDamage(1);
         }

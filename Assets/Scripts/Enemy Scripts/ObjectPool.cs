@@ -21,7 +21,7 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < _amountToPool; i++)
         {
             GameObject enemy = Instantiate(_enemyPrefab);
-            enemy.GetComponentInChildren<Cow>(true).gameObject.SetActive(false);
+            enemy.GetComponentInChildren<Enemy>(true).gameObject.SetActive(false);
             _pooledObjects.Add(enemy);
         }
     }
@@ -31,7 +31,7 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < _pooledObjects.Count; i++)
         {
-            if (!_pooledObjects[i].GetComponentInChildren<Cow>(true).gameObject.activeInHierarchy)
+            if (!_pooledObjects[i].GetComponentInChildren<Enemy>(true).gameObject.activeInHierarchy)
             {
                 return _pooledObjects[i];
             }

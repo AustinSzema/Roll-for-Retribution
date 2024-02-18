@@ -30,7 +30,7 @@ public class GenerateEnemy : MonoBehaviour
 
 //                Debug.Log("Cow X Offset" + xOffset + "          Cow Z Offset" + zOffset);
                 
-                GameObject cow = enemy.GetComponentInChildren<Cow>(true).gameObject;
+                GameObject cow = enemy.GetComponentInChildren<Enemy>(true).gameObject;
                 
                 cow.transform.position = _playerTransform.position + new Vector3(_playerTransform.position.x + xOffset, 20f,_playerTransform.position.z + zOffset);
             
