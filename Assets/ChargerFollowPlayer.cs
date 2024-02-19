@@ -48,6 +48,7 @@ public class ChargerFollowPlayer : MonoBehaviour
       float distToPlayer = Vector3.Distance(transform.position, _playerPosition.Value);
       Vector3 moveDirection = (_playerPosition.Value - transform.position).normalized;
       goalPosition = moveDirection * (distToPlayer + targetDistanceBehindPlayer);
+      goalPosition.y = _playerPosition.Value.y;
       yield return new WaitForSeconds(moveInterval);
       _charging = false;
     }
