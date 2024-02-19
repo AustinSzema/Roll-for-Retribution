@@ -6,30 +6,32 @@ using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    public int healthPoints { get; set; }
+    [SerializeField] private int healthPoints; 
     
     [SerializeField] private GameObject _enemy;
 
     [SerializeField] private intVariable _killCount;
 
     [SerializeField] private ParticleSystem _explosionParticles;
+
+    private int _currentHealth;
     
     private void Awake()
     {
         // this needs to be refactored when proper health system is in place
         // health should not be hard coded in awake
-        healthPoints = 1;
+        _currentHealth = healthPoints;
     }
 
 
     public void takeDamage(int hitPoints)
     {
-        healthPoints -= hitPoints;
-        if (healthPoints <= 0)
+        _currentHealth -= hitPoints;
+        if (_currentHealth <= 0)
         {
             Explode();
             _killCount.Value++;
-            healthPoints = 1;
+            _currentHealth = healthPoints;
         }
     }
 
