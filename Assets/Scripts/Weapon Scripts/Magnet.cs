@@ -10,19 +10,13 @@ public class Magnet : MonoBehaviour
 {
     private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
 
-
     [SerializeField] private Transform _footPosition;
 
     [SerializeField] private Transform _handPosition;
-    
-
-
 
     [SerializeField] private GameObject _attractImage;
     [SerializeField] private GameObject _repelImage;
     [SerializeField] private GameObject _defaultImage;
-
-
 
     [SerializeField] private GameObject _attractParticlesRoot;
     [SerializeField] private GameObject _repelParticlesRoot;
@@ -33,6 +27,9 @@ public class Magnet : MonoBehaviour
     [SerializeField] private float _pullSpeed;
     [SerializeField] private float _slamSpeed;
     [SerializeField] private float _shotgunSpeed;
+    [SerializeField] private float _reachThreshold = 1.0f;
+
+    [SerializeField] private AudioManager _audioManager;
 
     private void Start()
     {
@@ -42,6 +39,9 @@ public class Magnet : MonoBehaviour
             _magneticObjects.Add(cube.GetComponent<Rigidbody>());
             
         }*/
+
+        // caches the reference to the audio manager at start
+        _audioManager = FindObjectOfType<AudioManager>();
         
         Magnetic[] magneticObjects = GameObject.FindObjectsOfType<Magnetic>();
 
@@ -71,6 +71,7 @@ public class Magnet : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             _activateMagnet = true;
+            _audioManager.StartPullingSound();
             transform.position = _handPosition.position;
             _repelImage.SetActive(false);
             _attractImage.SetActive(true);
@@ -85,6 +86,7 @@ public class Magnet : MonoBehaviour
                 transform.position = _explodePosition.position;
                 rb.AddExplosionForce(20000f, transform.position, 100f, 0.0F);
             }*/
+            _audioManager.StopPullingSound();
             _repelImage.SetActive(false);
             _attractImage.SetActive(false);
             _defaultImage.SetActive(true);
@@ -140,8 +142,16 @@ public class Magnet : MonoBehaviour
         {
             foreach (Rigidbody obj in _magneticObjects )
             {
+                // calculate distance from object
+                float distance = Vector3.Distance(obj.position, transform.position);
+
                 obj.velocity = Vector3.zero;
                 obj.position = Vector3.MoveTowards(obj.transform.position, transform.position, Time.deltaTime * _pullSpeed);
+
+                if (distance <= _reachThreshold)
+                {
+                    _audioManager.PlayObjectReachedSound();
+                }
 
                 /*// Calculate the direction from the current position to the target position
                 Vector3 direction = (transform.position - obj.position).normalized;
