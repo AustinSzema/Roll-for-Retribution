@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1934430320}
-  - component: {fileID: 1934430319}
+  - component: {fileID: 5616478367047515945}
   m_Layer: 0
   m_Name: ObjectPool
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4429400766943435829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934430319
+--- !u!114 &5616478367047515945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +41,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1934430318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f378021fc77d8464ab4a0e04b2af10d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 40ba3dea988cb864e832db14b5808baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amountToPool: 500
-  _enemyPrefab: {fileID: 7475563400908805314, guid: 6a5fea37ba612a34783f2b6e26baff9c,
-    type: 3}
+  enemiesToPool:
+  - enemy: {fileID: 7475563400908805314, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
+    number: 500
+  - enemy: {fileID: 4774966363015993336, guid: 0200401a6ec4b8e4ab5f69d7c2812080, type: 3}
+    number: 500
+  - enemy: {fileID: 2476969678762307974, guid: 3060d308a8d5649479d34935b743d1ee, type: 3}
+    number: 500
 --- !u!1 &1991907602
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6344145247904706558}
-  - component: {fileID: 2103875065913132049}
+  - component: {fileID: 6289089765859564661}
   m_Layer: 0
   m_Name: GenerateEnemy
   m_TagString: Untagged
@@ -463,7 +467,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4429400766943435829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2103875065913132049
+--- !u!114 &6289089765859564661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -472,11 +476,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6062360428511023241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e56f724140fded499eb9c5d5fc2f933, type: 3}
+  m_Script: {fileID: 11500000, guid: 17f84eb491aa6c743a3121d73ba872c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 4429400766943435829}
-  _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
+  secondsBetweenSpawn: 5
+  spawnInfo: {fileID: 11400000, guid: 8bd7d8921c1ab6e4fb92fae1c605a5a4, type: 2}
+  playerTransform: {fileID: 4429400766943435829}
 --- !u!1 &6903496561041497951
 GameObject:
   m_ObjectHideFlags: 0
