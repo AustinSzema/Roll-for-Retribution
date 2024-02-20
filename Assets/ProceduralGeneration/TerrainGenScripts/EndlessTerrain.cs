@@ -26,7 +26,8 @@ public class EndlessTerrain : MonoBehaviour
 
     private Dictionary<Vector2, TerrainChunk> terrainChunkDictionary;
     private static List<TerrainChunk> terrainChunksVisibleLastUpdate;
-
+    
+    
     void Start()
     {
         terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
@@ -125,6 +126,7 @@ public class EndlessTerrain : MonoBehaviour
             meshFilter = meshObject.AddComponent<MeshFilter>();
             meshCollider = meshObject.AddComponent<MeshCollider>();
             meshRenderer.material = material;
+            meshObject.tag = "Ground";
 
             meshObject.transform.position = positionV3 * scale;
             meshObject.transform.parent = parent;

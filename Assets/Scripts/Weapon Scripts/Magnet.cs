@@ -10,30 +10,34 @@ public class Magnet : MonoBehaviour
 {
     private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
 
-
     [SerializeField] private Transform _footPosition;
-
     [SerializeField] private Transform _handPosition;
     
-
-
-
+    [Header("UI Images")]
     [SerializeField] private GameObject _attractImage;
     [SerializeField] private GameObject _repelImage;
     [SerializeField] private GameObject _defaultImage;
 
-
-
+    [Header("Root Objects")]
     [SerializeField] private GameObject _attractParticlesRoot;
     [SerializeField] private GameObject _repelParticlesRoot;
-    [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private GameObject _gravityParticlesRoot;
+    
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private ParticleSystem _gravityParticles;
     
+    [Header("Weapon Values")]
     [SerializeField] private float _pullSpeed;
     [SerializeField] private float _slamSpeed;
     [SerializeField] private float _shotgunSpeed;
 
+    [Header("Flight Ability")]
+    [SerializeField] private float _maxFlightDuration = 10;
+    [SerializeField] private float _fuelDecrementAmount = 1;
+    [SerializeField] private boolVariable _playerIsGrounded;
+    [SerializeField] private floatVariable _flightDuration;
+    
     private void Start()
     {
         /*for (int i = 0; i < 100; i++)
@@ -42,6 +46,7 @@ public class Magnet : MonoBehaviour
             _magneticObjects.Add(cube.GetComponent<Rigidbody>());
             
         }*/
+        _flightDuration.Value = _maxFlightDuration;
         
         Magnetic[] magneticObjects = GameObject.FindObjectsOfType<Magnetic>();
 
@@ -59,14 +64,35 @@ public class Magnet : MonoBehaviour
 
     private void Update()
     {
+
+        if (_playerIsGrounded.Value)
+        {
+            _flightDuration.Value = _maxFlightDuration;
+        }
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.position = _footPosition.position;
+            if (!_playerIsGrounded.Value)
+            {
+                _flightDuration.Value -= _fuelDecrementAmount * Time.deltaTime * 100;
+                
+                if (_flightDuration.Value >= 0)
+                {
+                    transform.position = _footPosition.position;
+                }
+                else
+                {
+                    transform.position = _handPosition.position;
+                }
+            }
         }
+
         else
         {
             transform.position = _handPosition.position;
         }
+        
+        
+        Debug.Log("Flight Duration: " + _flightDuration + ", is grounded: " + _playerIsGrounded.Value);
         
         if (Input.GetMouseButtonDown(1))
         {

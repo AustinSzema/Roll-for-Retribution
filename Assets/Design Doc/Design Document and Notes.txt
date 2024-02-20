@@ -2,6 +2,9 @@
 
 // Right now the player can just stand inside a ring of demon dice and never die. We need a solution to this. Either the player's health is decreased if they stop moving for a certain period of time, or if their displacement is too low after a short period of time, or something.
 // Maybe dice can only kill enemies when they're moving or above a certain velocity? Idk that's probably not a great solution but we can't rely on the player's to keep moving.
+// There is no feedback when hitting enemies that have more than 1 hp. Need some flash or blood particles like vampire survivors or ultrakill
+// Enemies sometimes fall directly onto the player. Need to adjust spawning so that enemies always spawn at least ~30m from the player
+
 
 1. Use 1 and 2 to switch between the magnets.
 2. Cubes and player need impact when hitting the ground.
