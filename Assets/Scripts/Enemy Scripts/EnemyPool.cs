@@ -31,7 +31,7 @@ public class EnemyPool : MonoBehaviour
             for (int j = 0; j < current.number; j++)
             { 
                 GameObject enemy = Instantiate(current.enemy);
-                enemy.SetActive(false);
+                enemy.GetComponentInChildren<Enemy>(true).gameObject.SetActive(false);
                 if (_enemyPool.ContainsKey(current.enemy.name))
                 {
                     _enemyPool[current.enemy.name].Add(enemy);
@@ -54,11 +54,11 @@ public class EnemyPool : MonoBehaviour
         bool alreadyExists = _enemyPool.TryGetValue(name, out currentEnemyPool);
         if (alreadyExists)
         {
-            for (int i = 0; i < currentEnemyPool.Count; i++)
+            for (int i = 0; i < (_enemyPool[name]).Count; i++)
             {
-                if (!currentEnemyPool[i].activeInHierarchy)
+                if (!(_enemyPool[name])[i].GetComponentInChildren<Enemy>(true).gameObject.activeInHierarchy)
                 {
-                    return currentEnemyPool[i];
+                    return (_enemyPool[name])[i];
                 }
             }
             
@@ -69,8 +69,8 @@ public class EnemyPool : MonoBehaviour
                 if (_lookupTable.TryGetValue(name, out inst))
                 {
                     GameObject addToPool = Instantiate(inst.enemy); 
-                    addToPool.SetActive(false);
-                    currentEnemyPool.Add(addToPool);
+                    addToPool.GetComponentInChildren<Enemy>(true).gameObject.SetActive(false);
+                    (_enemyPool[name]).Add(addToPool);
                     return addToPool;
                 }
             
