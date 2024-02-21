@@ -108,7 +108,7 @@ public class SpawnEnemies : MonoBehaviour
           playerTransform.position.z + zOffset);
 
 
-        enemyGameObject.SetActive(true);
+        enemyGameObject.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
       }
     }
   }
