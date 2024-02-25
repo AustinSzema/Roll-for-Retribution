@@ -92,7 +92,7 @@ public class Magnet : MonoBehaviour
         }
         
         
-        Debug.Log("Flight Duration: " + _flightDuration + ", is grounded: " + _playerIsGrounded.Value);
+        Debug.Log("Flight Duration: " + _flightDuration.Value + ", is grounded: " + _playerIsGrounded.Value);
         
         if (Input.GetMouseButtonDown(1))
         {

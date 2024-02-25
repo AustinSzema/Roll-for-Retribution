@@ -98,13 +98,13 @@ public class SpawnEnemies : MonoBehaviour
         
         //GameObject enemyGameObject = Instantiate(spawnable.enemy);
         GameObject enemyGameObject = EnemyPool.Instance.GetPooledObject(_currentSpawnInfo.Spawnables[j].enemy.name);
-        float maxDistanceFromPlayer = 25f;
-        float minDistanceFromPlayer = 30f;
+        float maxDistanceFromPlayer = 30f;
+        float minDistanceFromPlayer = 25f;
 
-        float xOffset = Random.Range(maxDistanceFromPlayer, minDistanceFromPlayer) * Mathf.Sign(Random.Range(-1f, 1f));
-        float zOffset = Random.Range(maxDistanceFromPlayer, minDistanceFromPlayer) * Mathf.Sign(Random.Range(-1f, 1f));
+        float xOffset = Random.Range(minDistanceFromPlayer, maxDistanceFromPlayer) * Mathf.Sign(Random.Range(-1f, 1f));
+        float zOffset = Random.Range(minDistanceFromPlayer, maxDistanceFromPlayer) * Mathf.Sign(Random.Range(-1f, 1f));
 
-        enemyGameObject.transform.position = playerTransform.position + new Vector3(playerTransform.position.x + xOffset, 20f,
+        enemyGameObject.transform.position = playerTransform.position + new Vector3(playerTransform.position.x + xOffset, 50f,
           playerTransform.position.z + zOffset);
 
 

@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] private int healthPoints; 
+    [SerializeField] private int healthPoints = 1; 
     
     [SerializeField] private GameObject _enemy;
 
@@ -44,9 +43,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if (transform.position.y < -5f)
+        if (transform.position.y <=-5f)
         {
-            takeDamage(1);
+            transform.position = new Vector3(transform.position.x, 50f, transform.position.z);
         }
     }
 }
