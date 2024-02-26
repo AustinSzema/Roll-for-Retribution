@@ -16,15 +16,8 @@ public class AudioManager : MonoBehaviour
     public Queue<AudioClip> _queue = new Queue<AudioClip>();
 
     private Vector3 _lastPosition;
-<<<<<<< Updated upstream
     
     public void AddClipToQueue(AudioClip _clip, Vector3 position)
-=======
-    private float objectReachedCooldown = 0.35f; // cooldown time in seconds for object reached sound
-    private float lastObjectReachedTime = -1f; // last time the object reached sound was played
-
-    public void AddClipToQueue(AudioClip clip, Vector3 position)
->>>>>>> Stashed changes
     {
         if (Vector3.Distance(_lastPosition, position) > 1)
         {
@@ -64,43 +57,4 @@ public class AudioManager : MonoBehaviour
     }
 
 
-<<<<<<< Updated upstream
-=======
-    // stop the continuous pulling sound
-    public void StopPullingSound()
-    {
-        _pullingSource.Stop();
-        _pullingSource.loop = false;
-    }
-
-    // plays the sound when an object reaches the player at random intervals and pitches
-    public void PlayObjectReachedSound()
-    {
-        if (Time.time - lastObjectReachedTime >= objectReachedCooldown)
-        {
-            _sfxSource.pitch = Random.Range(0.5f, 1.2f); 
-            
-            _sfxSource.PlayOneShot(_objectReachedClip);
-            
-            float randomCooldown = objectReachedCooldown * Random.Range(0.35f, 0.9f);
-            lastObjectReachedTime = Time.time + randomCooldown - objectReachedCooldown; // ensures variability in interval timing
-
-            _sfxSource.pitch = 1.0f;
-        }
-    }
-
-    // for playing background music
-    public void PlayMusic(AudioClip musicClip)
-    {
-        _musicSource.clip = musicClip;
-        _musicSource.loop = true;
-        _musicSource.Play();
-    }
-
-    // for playing a sound effect
-    public void PlaySFX(AudioClip clip)
-    {
-        _sfxSource.PlayOneShot(clip);
-    }
->>>>>>> Stashed changes
 }
