@@ -1307,7 +1307,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e37e503bb9fc614d9ee8e6cff4e8411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _musicSource: {fileID: 0}
+  _sfxSource: {fileID: 0}
+  _pullingSource: {fileID: 0}
+  _flyingSource: {fileID: 0}
+  _pullingClip: {fileID: 0}
+  _objectReachedClip: {fileID: 0}
+  _shotgunClip: {fileID: 0}
+  _slamClip: {fileID: 0}
+  _flyingClip: {fileID: 0}
   _audioSource: {fileID: 1596466098}
+  _hitClip: {fileID: 0}
+  _bigHitClip: {fileID: 0}
 --- !u!4 &1596466097
 Transform:
   m_ObjectHideFlags: 0
@@ -2025,6 +2036,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7581897039540109702, guid: ccab907b7da6d574ea353b3b8e597561,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562959648679046724, guid: ccab907b7da6d574ea353b3b8e597561,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562959648679046724, guid: ccab907b7da6d574ea353b3b8e597561,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
