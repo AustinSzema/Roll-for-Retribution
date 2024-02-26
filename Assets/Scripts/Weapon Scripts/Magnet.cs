@@ -31,6 +31,9 @@ public class Magnet : MonoBehaviour
     [SerializeField] private float _pullSpeed;
     [SerializeField] private float _slamSpeed;
     [SerializeField] private float _shotgunSpeed;
+    [SerializeField] private float _reachThreshold = 1.0f;
+
+    [SerializeField] private AudioManager _audioManager;
 
     [Header("Flight Ability")]
     [SerializeField] private float _maxFlightDuration = 10;
@@ -40,6 +43,9 @@ public class Magnet : MonoBehaviour
     
     private void Start()
     {
+        // caches the reference to the audio manager at start
+        _audioManager = FindObjectOfType<AudioManager>();
+
         /*for (int i = 0; i < 100; i++)
         {
             GameObject cube = Instantiate(_cubePrefab, transform.position + new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), Random.Range(-100f, 100f)), Quaternion.identity);
@@ -67,12 +73,14 @@ public class Magnet : MonoBehaviour
 
         if (_playerIsGrounded.Value)
         {
+            _audioManager.StopFlyingSound();
             _flightDuration.Value = _maxFlightDuration;
         }
         if (Input.GetKey(KeyCode.Space))
         {
             if (!_playerIsGrounded.Value)
             {
+                _audioManager.StartFlyingSound();
                 _flightDuration.Value -= _fuelDecrementAmount * Time.deltaTime * 100;
                 
                 if (_flightDuration.Value >= 0)
@@ -81,6 +89,7 @@ public class Magnet : MonoBehaviour
                 }
                 else
                 {
+                    _audioManager.StopFlyingSound();
                     transform.position = _handPosition.position;
                 }
             }
@@ -97,6 +106,7 @@ public class Magnet : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             _activateMagnet = true;
+            _audioManager.StartPullingSound();
             transform.position = _handPosition.position;
             _repelImage.SetActive(false);
             _attractImage.SetActive(true);
@@ -106,6 +116,7 @@ public class Magnet : MonoBehaviour
         if(Input.GetMouseButtonUp(1))
         {
             _activateMagnet = false;
+            _audioManager.StopPullingSound();
             /*foreach (Rigidbody rb in _magneticObjects)
             {
                 transform.position = _explodePosition.position;
@@ -121,6 +132,7 @@ public class Magnet : MonoBehaviour
         //shotgun push
         if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
         {
+            _audioManager.PlayShotgunSound();
             foreach (Rigidbody rb in _magneticObjects)
             {
                 _attractImage.SetActive(false);
@@ -138,6 +150,7 @@ public class Magnet : MonoBehaviour
         //slam 
         if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
         {
+            _audioManager.PlaySlamSound();
             foreach (Rigidbody rb in _magneticObjects)
             {
                 _attractImage.SetActive(false);
@@ -153,9 +166,6 @@ public class Magnet : MonoBehaviour
                 _activateMagnet = false;
             }
         }
-
-
-
         
     }
 
@@ -166,8 +176,16 @@ public class Magnet : MonoBehaviour
         {
             foreach (Rigidbody obj in _magneticObjects )
             {
+                // calculate distance from object
+                float distance = Vector3.Distance(obj.position, transform.position);
+
                 obj.velocity = Vector3.zero;
                 obj.position = Vector3.MoveTowards(obj.transform.position, transform.position, Time.deltaTime * _pullSpeed);
+
+                if (distance <= _reachThreshold)
+                {
+                    _audioManager.PlayObjectReachedSound();
+                }
 
                 /*// Calculate the direction from the current position to the target position
                 Vector3 direction = (transform.position - obj.position).normalized;
