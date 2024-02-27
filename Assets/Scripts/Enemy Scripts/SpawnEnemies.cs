@@ -14,6 +14,8 @@ public class SpawnEnemies : MonoBehaviour
   [SerializeField] private spawnInfoVariable spawnInfo;
 
   [SerializeField] private Transform playerTransform;
+
+  public static int EnemiesInScene = 0;
   
   private List<SpawnInfo> _spawnInfos;
 
@@ -95,6 +97,10 @@ public class SpawnEnemies : MonoBehaviour
       Debug.Log("I am about to spawn " + spawnable.number + " enemies");
       for (int i = 0; i < spawnable.number; i++)
       {
+        if (EnemiesInScene >= _currentSpawnInfo.MaxEnemiesInScene && _currentSpawnInfo.MaxEnemiesInScene != -1)
+        {
+          break;
+        }
         
         //GameObject enemyGameObject = Instantiate(spawnable.enemy);
         GameObject enemyGameObject = EnemyPool.Instance.GetPooledObject(_currentSpawnInfo.Spawnables[j].enemy.name);
@@ -109,6 +115,7 @@ public class SpawnEnemies : MonoBehaviour
 
 
         enemyGameObject.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
+        EnemiesInScene++;
       }
     }
   }
