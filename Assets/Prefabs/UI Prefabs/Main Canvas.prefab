@@ -945,17 +945,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557959326548099551}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8507181637503617244}
+  m_Father: {fileID: 7519938895079285097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0024108887, y: -149.85019}
-  m_SizeDelta: {x: 0.0048523, y: -299.7022}
+  m_AnchoredPosition: {x: -0.0024108887, y: -150.591}
+  m_SizeDelta: {x: 0.0048523, y: -301.18384}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6051622489240590286
 CanvasRenderer:
@@ -1161,7 +1161,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2300760246598523294}
-  m_Father: {fileID: 8507181637503617244}
+  m_Father: {fileID: 7519938895079285097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 1057649594427518318}
   - component: {fileID: 6813957008017362218}
   m_Layer: 5
-  m_Name: Flight Fuel
+  m_Name: Flight Ability Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1193,19 +1193,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2404642212515698165}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7519938895079285097}
-  - {fileID: 1533999732796709560}
-  - {fileID: 7188575521609351524}
   m_Father: {fileID: 8602792822618957282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -845.429, y: -39.1907}
+  m_AnchoredPosition: {x: -184, y: 15}
   m_SizeDelta: {x: 179.145, y: 370.4118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057649594427518318
@@ -1255,10 +1253,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.484
+  m_Value: 0.681
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6813957008017362218}
+        m_TargetAssemblyTypeName: SetFlightFuelValue, Assembly-CSharp
+        m_MethodName: EnableSliderVisual
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6813957008017362218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,7 +1283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flightFuelSlider: {fileID: 1057649594427518318}
   _flightDuration: {fileID: 11400000, guid: 06b7df4e672a03e42beef3eec031d9e5, type: 2}
-  _maxFlightDuration: 200
+  _flightSliderBackground: {fileID: 7192824417055707643}
 --- !u!1 &2895551712074839633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,7 +1799,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1533999732796709560}
+  - {fileID: 7188575521609351524}
   m_Father: {fileID: 8507181637503617244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
