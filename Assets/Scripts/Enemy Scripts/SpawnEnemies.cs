@@ -97,6 +97,10 @@ public class SpawnEnemies : MonoBehaviour
       Debug.Log("I am about to spawn " + spawnable.number + " enemies");
       for (int i = 0; i < spawnable.number; i++)
       {
+        if (EnemiesInScene >= _currentSpawnInfo.MaxEnemiesInScene && _currentSpawnInfo.MaxEnemiesInScene != -1)
+        {
+          break;
+        }
         
         //GameObject enemyGameObject = Instantiate(spawnable.enemy);
         GameObject enemyGameObject = EnemyPool.Instance.GetPooledObject(_currentSpawnInfo.Spawnables[j].enemy.name);

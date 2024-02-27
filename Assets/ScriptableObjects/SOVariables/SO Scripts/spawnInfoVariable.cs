@@ -22,6 +22,8 @@ public struct SpawnInfo
     // GameObject is the thing were spawning
     // Int is the number that we spawn every spawn interval
     public List<EnemyAndNumber> Spawnables;
+
+    public int MaxEnemiesInScene;
 }
 
 
