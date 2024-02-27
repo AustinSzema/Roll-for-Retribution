@@ -29,7 +29,7 @@ public class SetFlightFuelValue : MonoBehaviour
         // Set the slider value
         _flightFuelSlider.value = normalizedValue;
 
-        if (Input.GetKey(KeyCode.Space) && _flightDuration.Value < _maxFlightDuration)
+        if (Input.GetKey(KeyCode.Space) || _flightDuration.Value < _maxFlightDuration)
         {
             _flightSliderBackground.SetActive(true);
         }

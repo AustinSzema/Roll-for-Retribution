@@ -70,12 +70,7 @@ public class Magnet : MonoBehaviour
 
     private void Update()
     {
-
-        if (_playerIsGrounded.Value)
-        {
-            _audioManager.StopFlyingSound();
-            _flightDuration.Value = _maxFlightDuration;
-        }
+        
         if (Input.GetKey(KeyCode.Space))
         {
             if (!_playerIsGrounded.Value)
@@ -94,9 +89,10 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
-
         else
         {
+            _audioManager.StopFlyingSound();
+            _flightDuration.Value += _fuelDecrementAmount * Time.deltaTime * 100;
             transform.position = _handPosition.position;
         }
         
