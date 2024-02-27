@@ -11,32 +11,50 @@ public class SetFlightFuelValue : MonoBehaviour
     
     [SerializeField] private GameObject _flightSliderBackground;
 
-    private float _maxFlightDuration;
-
+    [SerializeField] private Magnet _magnet;
+    
+    [SerializeField] private Slider _minimumFuelSlider;
+    
     private void Start()
     {
-        _maxFlightDuration = _flightDuration.Value;
+        _flightFuelSlider.maxValue = _magnet._maxFlightDuration;
+        _minimumFuelSlider.maxValue = _magnet._maxFlightDuration;
     }
 
+    private float _previousFuel = 0;
+    
+    
+    
     private void Update()
     {
-        // Normalize flight duration between 0 and 1
-        float normalizedValue = _flightDuration.Value / _maxFlightDuration;
-
-        // Ensure the value is clamped between 0 and 1
-        normalizedValue = Mathf.Clamp01(normalizedValue);
-
         // Set the slider value
-        _flightFuelSlider.value = normalizedValue;
+        _flightFuelSlider.value = _flightDuration.Value;
+        _minimumFuelSlider.value = _magnet._minimumFuelAmount;
 
-        if (Input.GetKey(KeyCode.Space) || _flightDuration.Value < _maxFlightDuration)
+
+        
+        // if the slider's value is not changing, do not show the slider. Else, show it
+        if (_flightDuration.Value - _previousFuel <= 0.001f)
         {
-            _flightSliderBackground.SetActive(true);
+            //_flightSliderBackground.SetActive(false);
         }
         else
         {
-            _flightSliderBackground.SetActive(false);
+            _flightSliderBackground.SetActive(true);
         }
+        /*
+        if (_playerIsFlying.Value && _flightDuration.Value < _magnet._maxFlightDuration)
+        {
+            _flightSliderBackground.SetActive(true);
+        }
+        */
+        /*if(_flightDuration.Value - _magnet._maxFlightDuration <= 0.001f)
+        {
+            _flightSliderBackground.SetActive(false);
+        }*/
+
+        // Must go at end of update so it can be checked next frame
+        _previousFuel = _flightDuration.Value;
     }
 
     public void EnableSliderVisual()
