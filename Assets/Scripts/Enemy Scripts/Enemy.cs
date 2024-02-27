@@ -14,12 +14,27 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private ParticleSystem _explosionParticles;
 
     private int _currentHealth;
+
+    private bool _firstDisable = true;
     
     private void Awake()
     {
         // this needs to be refactored when proper health system is in place
         // health should not be hard coded in awake
         _currentHealth = healthPoints;
+    }
+
+    private void OnDisable()
+    {
+        if (_firstDisable)
+        {
+            _firstDisable = false;
+        }
+        else
+        {
+            SpawnEnemies.EnemiesInScene--;
+            _killCount.Value++;
+        }
     }
 
 
@@ -29,7 +44,6 @@ public class Enemy : MonoBehaviour, IDamageable
         if (_currentHealth <= 0)
         {
             Explode();
-            _killCount.Value++;
             _currentHealth = healthPoints;
         }
     }

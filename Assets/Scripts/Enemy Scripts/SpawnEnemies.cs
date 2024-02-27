@@ -14,6 +14,8 @@ public class SpawnEnemies : MonoBehaviour
   [SerializeField] private spawnInfoVariable spawnInfo;
 
   [SerializeField] private Transform playerTransform;
+
+  public static int EnemiesInScene = 0;
   
   private List<SpawnInfo> _spawnInfos;
 
@@ -109,6 +111,7 @@ public class SpawnEnemies : MonoBehaviour
 
 
         enemyGameObject.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
+        EnemiesInScene++;
       }
     }
   }

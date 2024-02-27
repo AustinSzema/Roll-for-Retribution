@@ -30,6 +30,7 @@ public class EndlessTerrain : MonoBehaviour
     
     void Start()
     {
+        viewer = GameObject.FindGameObjectWithTag("Player").transform;
         terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
         terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
         
