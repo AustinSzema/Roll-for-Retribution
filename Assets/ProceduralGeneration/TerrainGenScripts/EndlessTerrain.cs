@@ -14,7 +14,7 @@ public class EndlessTerrain : MonoBehaviour
     public static float maxViewDst;
 
     public Transform viewer;
-    public Material mapMaterial;
+    private Material mapMaterial;
 
     [SerializeField] private MeshRenderer _mesh;
 
