@@ -26,28 +26,30 @@ public class ChargerFollowPlayer : MonoBehaviour
       _charging = false;
     }
 
-    // Update is called once per frame
+
     private void FixedUpdate()
     {
-        if (_gameIsPaused.Value == false)
+      if (_gameIsPaused.Value == false && this.gameObject.activeSelf)
+      {
+        if (_charging == false)
         {
-          if (_charging == false)
-          {
-            StartCoroutine(Charge());
-          }
-          else
-          {
-            _rigidbody.position = Vector3.MoveTowards(transform.position, goalPosition, _moveSpeed * Time.deltaTime);
-          }
+          StartCoroutine(Charge());
         }
+        else
+        {
+          transform.position = Vector3.MoveTowards(transform.position, goalPosition, _moveSpeed * Time.deltaTime);
+        }
+      }
+
     }
 
     IEnumerator Charge()
     {
       _charging = true;
+      
       float distToPlayer = Vector3.Distance(transform.position, _playerPosition.Value);
       Vector3 moveDirection = (_playerPosition.Value - transform.position).normalized;
-      goalPosition = moveDirection * (distToPlayer + targetDistanceBehindPlayer);
+      goalPosition = transform.position + moveDirection * (distToPlayer + targetDistanceBehindPlayer);
       goalPosition.y = _playerPosition.Value.y;
       yield return new WaitForSeconds(moveInterval);
       _charging = false;
