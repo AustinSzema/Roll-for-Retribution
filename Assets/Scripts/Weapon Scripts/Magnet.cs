@@ -6,13 +6,18 @@ using UnityEngine;
 // TODO: Does this script need to be broken up? It has so many references
 public class Magnet : MonoBehaviour
 {
+    // Stores a reference to all of the demon dice
     private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
 
+    [Header("Magnet Positions")]
     [SerializeField] private Transform _footPosition;
     [SerializeField] private Transform _handPosition;
 
+    [Header("SO Variables")]
     [SerializeField] private boolVariable _gameIsPaused;
+    [SerializeField] private boolVariable _outOfFuel;
 
+    
     [Header("UI Images")] [SerializeField] private GameObject _attractImage;
     [SerializeField] private GameObject _repelImage;
     [SerializeField] private GameObject _defaultImage;
@@ -68,16 +73,14 @@ public class Magnet : MonoBehaviour
     }
 
     private bool _activateMagnet = false;
-
-    private bool _outOfFuel = false;
-
+    
     private void Update()
     {
         if (!_gameIsPaused.Value)
         {
             if (_flightDuration.Value <= 0f)
             {
-                _outOfFuel = true;
+                _outOfFuel.Value = true;
             }
 
             // When the player is holding right mouse button and holding space and has demons in hand and has fuel
@@ -85,7 +88,7 @@ public class Magnet : MonoBehaviour
                 _flightDuration.Value >= 0)
             {
                 // if player is not out of fuel make them fly
-                if (!_outOfFuel)
+                if (!_outOfFuel.Value)
                 {
                     transform.position = _footPosition.position;
                     _playerIsFlying.Value = true;
@@ -112,13 +115,13 @@ public class Magnet : MonoBehaviour
 
             if (_flightDuration.Value >= _minimumFuelAmount)
             {
-                _outOfFuel = false;
+                _outOfFuel.Value = false;
             }
 
             // if the player is out of fuel stop flying
             if (_flightDuration.Value <= 0)
             {
-                _outOfFuel = true;
+                _outOfFuel.Value = true;
                 transform.position = _handPosition.position;
                 _playerIsFlying.Value = false;
                 _audioManager.StopFlyingSound();

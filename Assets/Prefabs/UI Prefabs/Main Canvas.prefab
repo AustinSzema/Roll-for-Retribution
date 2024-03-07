@@ -1082,7 +1082,7 @@ GameObject:
   - component: {fileID: 6534456345237137591}
   - component: {fileID: 4197266111771837754}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: Fuel Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.174
+  m_Value: 0.136
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1301,6 +1301,8 @@ MonoBehaviour:
   _minimumFuelSlider: {fileID: 6265738102040155881}
   _fuelDefaultText: 'Levitation Energy: '
   _fuelTextMeshProUGUI: {fileID: 2692939902259730556}
+  _fuelFill: {fileID: 4197266111771837754}
+  _outOfFuel: {fileID: 11400000, guid: aa1e12afa2ee1654bbb5fd97862a57d3, type: 2}
 --- !u!1 &2895551712074839633
 GameObject:
   m_ObjectHideFlags: 0
