@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
+// TODO: Does this script need to be broken up? It has so many references
 public class Magnet : MonoBehaviour
 {
     private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
@@ -55,13 +54,7 @@ public class Magnet : MonoBehaviour
     {
         // caches the reference to the audio manager at start
         _audioManager = FindObjectOfType<AudioManager>();
-
-        /*for (int i = 0; i < 100; i++)
-        {
-            GameObject cube = Instantiate(_cubePrefab, transform.position + new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), Random.Range(-100f, 100f)), Quaternion.identity);
-            _magneticObjects.Add(cube.GetComponent<Rigidbody>());
-
-        }*/
+        
         _flightDuration.Value = _maxFlightDuration;
 
         Magnetic[] magneticObjects = FindObjectsOfType<Magnetic>();
@@ -157,11 +150,6 @@ public class Magnet : MonoBehaviour
             {
                 _activateMagnet = false;
                 _audioManager.StopPullingSound();
-                /*foreach (Rigidbody rb in _magneticObjects)
-                {
-                    transform.position = _explodePosition.position;
-                    rb.AddExplosionForce(20000f, transform.position, 100f, 0.0F);
-                }*/
                 _repelImage.SetActive(false);
                 _attractImage.SetActive(false);
                 _defaultImage.SetActive(true);
@@ -206,11 +194,16 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
-        
+        SetDemonsVelocityAndPosition();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
+    {
+        SetDemonsVelocityAndPosition();
+    }
+
+    private void SetDemonsVelocityAndPosition()
     {
         if (_activateMagnet)
         {
@@ -227,13 +220,9 @@ public class Magnet : MonoBehaviour
                 {
                     _audioManager.PlayObjectReachedSound();
                 }
-
-                /*// Calculate the direction from the current position to the target position
-                Vector3 direction = (transform.position - obj.position).normalized;
-
-                // Set the velocity of the Rigidbody in the calculated direction
-                obj.velocity = Time.fixedDeltaTime * 2000f * direction;*/
+                
             }
         }
     }
+    
 }
