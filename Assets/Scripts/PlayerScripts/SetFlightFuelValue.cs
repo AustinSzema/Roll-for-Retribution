@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,9 @@ public class SetFlightFuelValue : MonoBehaviour
     [SerializeField] private Magnet _magnet;
     
     [SerializeField] private Slider _minimumFuelSlider;
+
+    [SerializeField] private String _fuelDefaultText = "Levitation Energy: ";
+    [SerializeField] private TextMeshProUGUI _fuelTextMeshProUGUI;
     
     private void Start()
     {
@@ -55,6 +60,8 @@ public class SetFlightFuelValue : MonoBehaviour
 
         // Must go at end of update so it can be checked next frame
         _previousFuel = _flightDuration.Value;
+
+        _fuelTextMeshProUGUI.text = _fuelDefaultText + (int)(_flightFuelSlider.value / _flightFuelSlider.maxValue * 100) + "%";
     }
 
     public void EnableSliderVisual()

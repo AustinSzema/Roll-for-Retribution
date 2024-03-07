@@ -18,17 +18,25 @@ public class Magnet : MonoBehaviour
     [SerializeField] private GameObject _repelImage;
     [SerializeField] private GameObject _defaultImage;
 
-    [Header("Root Objects")] [SerializeField]
-    private GameObject _attractParticlesRoot;
-
+    [Header("Root Objects")]
+    [SerializeField] private GameObject _attractParticlesRoot;
     [SerializeField] private GameObject _repelParticlesRoot;
     [SerializeField] private GameObject _gravityParticlesRoot;
 
-    [Header("Particles")] [SerializeField] private ParticleSystem _repelParticles;
+    [Header("Particles")]
+    [SerializeField] private Renderer _attractParticlesRenderer;
+    [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private ParticleSystem _gravityParticles;
-
-    [Header("Weapon Values")] [SerializeField]
-    private float _pullSpeed;
+    [SerializeField] private MeshRenderer _centerSphere;
+    [SerializeField] private MeshRenderer _outerSphere;
+    [SerializeField] private Material _attractCenterMaterial;
+    [SerializeField] private Material _attractOuterMaterial;
+    [SerializeField] private Material _levitateCenterMaterial;
+    [SerializeField] private Material _levitateOuterMaterial;
+    
+    
+    [Header("Weapon Values")]
+    [SerializeField] private float _pullSpeed;
 
     [SerializeField] private float _slamSpeed;
     [SerializeField] private float _shotgunSpeed;
@@ -36,7 +44,7 @@ public class Magnet : MonoBehaviour
 
     [SerializeField] private AudioManager _audioManager;
 
-    [Header("Flight Ability")] public float _maxFlightDuration = 10;
+    [Header("Levitate Ability")] public float _maxFlightDuration = 10;
     [SerializeField] private float _fuelDecrementAmount = 1;
     [SerializeField] private floatVariable _flightDuration;
     [SerializeField] private boolVariable _demonInHand;
@@ -90,12 +98,20 @@ public class Magnet : MonoBehaviour
                     _playerIsFlying.Value = true;
                     _audioManager.StartFlyingSound();
                     _flightDuration.Value -= _fuelDecrementAmount;
+
+                    _attractParticlesRenderer.material = _levitateCenterMaterial;
+                    _centerSphere.material = _levitateCenterMaterial;
+                    _outerSphere.material = _levitateOuterMaterial;
                 }
             }
             else
             {
                 _playerIsFlying.Value = false;
                 transform.position = _handPosition.position;
+
+                _attractParticlesRenderer.material = _attractCenterMaterial;
+                _centerSphere.material = _attractCenterMaterial;
+                _outerSphere.material = _attractOuterMaterial;
             }
 
             // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
@@ -190,6 +206,7 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
+        
     }
 
     // Update is called once per frame

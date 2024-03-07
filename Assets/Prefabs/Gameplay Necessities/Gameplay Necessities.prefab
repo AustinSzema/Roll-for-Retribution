@@ -297,9 +297,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7581897038822610821}
     - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
+      propertyPath: _outerSphere
+      value: 
+      objectReference: {fileID: 2957725491529921388}
+    - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
       propertyPath: _attractImage
       value: 
       objectReference: {fileID: 7581897039012225447}
+    - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
+      propertyPath: _centerSphere
+      value: 
+      objectReference: {fileID: 7542086776728505148}
     - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
       propertyPath: _defaultImage
       value: 
@@ -308,6 +316,26 @@ PrefabInstance:
       propertyPath: _footPosition
       value: 
       objectReference: {fileID: 2531983784783651598}
+    - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
+      propertyPath: _attractOuterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 8bb7ca31026f7d843a9c4c36175a5322, type: 2}
+    - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
+      propertyPath: _attractCenterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: d4fd54d680316fd41a45467c4cdfe6f3, type: 2}
+    - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
+      propertyPath: _levitateOuterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 553fc31a7fc1ac340b30e18c010830bc, type: 2}
+    - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
+      propertyPath: _levitateCenterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7cef7f81657a63b46b61633da129173d, type: 2}
+    - target: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
+      propertyPath: _attractParticlesRenderer
+      value: 
+      objectReference: {fileID: 3812768228061716564}
     - target: {fileID: 3468056722852948538, guid: d822a961e824b3a43b1a29dd8c22a0eb,
         type: 3}
       propertyPath: m_Name
@@ -384,6 +412,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3349005106975813448}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2957725491529921388 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 536488897635490852, guid: d822a961e824b3a43b1a29dd8c22a0eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349005106975813448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3349005107288081743 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 312683015, guid: d822a961e824b3a43b1a29dd8c22a0eb,
@@ -396,6 +430,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef93bc52688b9640b6425864b96784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!199 &3812768228061716564 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 1915053375502716700, guid: d822a961e824b3a43b1a29dd8c22a0eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349005106975813448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7542086776728505148 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5102808794490070132, guid: d822a961e824b3a43b1a29dd8c22a0eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349005106975813448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4967821308366358723
 PrefabInstance:
   m_ObjectHideFlags: 0
