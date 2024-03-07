@@ -33,14 +33,11 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
 
     
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-
         readyToJump = true;
     }
 
