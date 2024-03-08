@@ -1,7 +1,7 @@
+#if UNITY_EDITOR
 using UnityEngine;
-using System.IO;
 using UnityEditor;
-
+using System.IO;
 public class SaveCameraImage : MonoBehaviour
 {
     [SerializeField] private Camera _mainCam;
@@ -49,3 +49,5 @@ public class SaveCameraImage : MonoBehaviour
     }
     
 }
+
+#endif
