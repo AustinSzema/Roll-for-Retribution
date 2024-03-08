@@ -27,7 +27,6 @@ public class SetFlightFuelValue : MonoBehaviour
 
     [SerializeField] private boolVariable _outOfFuel;
     
-    private float _previousFuel = 0;
 
     private Color _originalFillColor;
 
@@ -38,7 +37,6 @@ public class SetFlightFuelValue : MonoBehaviour
         _originalFillColor = _fuelFill.color;
     }
 
-    private bool _rechargingFuel = false;
     
     
     
@@ -72,19 +70,16 @@ public class SetFlightFuelValue : MonoBehaviour
         }*/
 
         // Must go at end of update so it can be checked next frame
-        _previousFuel = _flightDuration.Value;
 
 
         if (_outOfFuel.Value == true)
         {
             _fuelFill.color = _originalFillColor / 2;
-            _rechargingFuel = true;
         }
 
         if (_flightFuelSlider.value >= _flightFuelSlider.maxValue / 4f)
         {
             _fuelFill.color = _originalFillColor;
-            _rechargingFuel = false;
         }
 
         if (_outOfFuel.Value == false)
