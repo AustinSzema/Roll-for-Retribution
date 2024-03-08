@@ -50,6 +50,7 @@ public class Magnet : MonoBehaviour
 
     [Header("Levitate Ability")] public float _maxFlightDuration = 10;
     [SerializeField] private float _fuelDecrementAmount = 1;
+    [SerializeField] private float _fuelRechargeAmount = 1;
     [SerializeField] private floatVariable _flightDuration;
     [SerializeField] private boolVariable _demonInHand;
     [SerializeField] private boolVariable _playerIsFlying;
@@ -130,7 +131,7 @@ public class Magnet : MonoBehaviour
             // if the player's fuel is not full and the player is not flying, fill up their fuel
             if (_flightDuration.Value < _maxFlightDuration && !_playerIsFlying.Value)
             {
-                _flightDuration.Value += _fuelDecrementAmount / 3;
+                _flightDuration.Value += _fuelRechargeAmount;
             }
 
             // TODO: Consider renaming _flightDuration to _flightFuel
