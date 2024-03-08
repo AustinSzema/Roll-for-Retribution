@@ -107,15 +107,19 @@ MonoBehaviour:
   _attractParticlesRoot: {fileID: 1451311809702768337}
   _repelParticlesRoot: {fileID: 4868501334452338877}
   _gravityParticlesRoot: {fileID: 3030605421018085180}
-  _attractParticlesRenderer: {fileID: 0}
+  _attractParticlesRenderer: {fileID: 1915053375502716700}
   _repelParticles: {fileID: 2049163855307491643}
   _gravityParticles: {fileID: 5450375253094309412}
-  _centerSphere: {fileID: 0}
-  _outerSphere: {fileID: 0}
-  _attractCenterMaterial: {fileID: 0}
-  _attractOuterMaterial: {fileID: 0}
-  _levitateCenterMaterial: {fileID: 0}
-  _levitateOuterMaterial: {fileID: 0}
+  _centerSphere: {fileID: 5102808794490070132}
+  _outerSphere: {fileID: 536488897635490852}
+  _attractCenterMaterial: {fileID: 2100000, guid: d4fd54d680316fd41a45467c4cdfe6f3,
+    type: 2}
+  _attractOuterMaterial: {fileID: 2100000, guid: 8bb7ca31026f7d843a9c4c36175a5322,
+    type: 2}
+  _levitateCenterMaterial: {fileID: 2100000, guid: 7cef7f81657a63b46b61633da129173d,
+    type: 2}
+  _levitateOuterMaterial: {fileID: 2100000, guid: 553fc31a7fc1ac340b30e18c010830bc,
+    type: 2}
   _pullSpeed: 60
   _slamSpeed: 5500
   _shotgunSpeed: 6000
@@ -811,9 +815,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14316b86b6fa84d4ead1250f56ddd30a, type: 3}
+--- !u!23 &536488897635490852 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3985966013393532605, guid: 14316b86b6fa84d4ead1250f56ddd30a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468056723390524057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1451311809702768337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2595510798867579976, guid: 14316b86b6fa84d4ead1250f56ddd30a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468056723390524057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &1915053375502716700 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 3076699415245251973, guid: 14316b86b6fa84d4ead1250f56ddd30a,
     type: 3}
   m_PrefabInstance: {fileID: 3468056723390524057}
   m_PrefabAsset: {fileID: 0}
@@ -832,6 +848,12 @@ GameObject:
 --- !u!1 &4868501334452338877 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8336557757177326116, guid: 14316b86b6fa84d4ead1250f56ddd30a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3468056723390524057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5102808794490070132 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8570863181416173293, guid: 14316b86b6fa84d4ead1250f56ddd30a,
     type: 3}
   m_PrefabInstance: {fileID: 3468056723390524057}
   m_PrefabAsset: {fileID: 0}

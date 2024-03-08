@@ -176,7 +176,7 @@ RectTransform:
   m_GameObject: {fileID: 574598454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09, y: 0.09, z: 0.09}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8602792822618957282}
@@ -184,7 +184,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 1000}
+  m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &574598457
 CanvasRenderer:
@@ -231,13 +231,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574598454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 998fd79c1b0705842902da46eeb8eb36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crosshairImage: {fileID: 574598456}
-  _enemyDetectionColor: {r: 0, g: 1, b: 0, a: 1}
+  _crosshair: {fileID: 574598455}
+  _demonInHand: {fileID: 11400000, guid: 8b2969d4141c34744b756cfd1f495bb0, type: 2}
 --- !u!1 &617046111
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,7 +970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0023956299, y: -203.99272}
+  m_AnchoredPosition: {x: -0.0024414062, y: -203.99272}
   m_SizeDelta: {x: 0.0048, y: -407.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6051622489240590286
