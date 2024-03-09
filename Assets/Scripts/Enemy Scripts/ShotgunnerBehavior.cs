@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InitiateBehavior : MonoBehaviour
-{
+public class ShotgunnerBehavior : MonoBehaviour
+{    
     [SerializeField] private float aggroDistance;
     [SerializeField] private int shootForce;
+    [SerializeField] private int bulletCount;
     [SerializeField] private GameObject projectile;
     [SerializeField] private int shootCooldown;
     [SerializeField] private float moveSpeed;
@@ -40,4 +41,5 @@ public class InitiateBehavior : MonoBehaviour
       yield return new WaitForSeconds(shootCooldown);
       _shooting = false;
     }
+   
 }
