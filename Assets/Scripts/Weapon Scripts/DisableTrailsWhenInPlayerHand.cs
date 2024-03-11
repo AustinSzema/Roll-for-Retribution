@@ -12,7 +12,7 @@ public class DisableTrailsWhenInPlayerHand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, _handPosition.Value) <= 0.01f)
+        if (Vector3.Distance(transform.position, _handPosition.Value) <= 1f)
         {
             _trail.enabled = false;
         }
@@ -20,5 +20,6 @@ public class DisableTrailsWhenInPlayerHand : MonoBehaviour
         {
             _trail.enabled = true;
         }
+        //Debug.Log("Trail " + _trail.enabled);
     }
 }
