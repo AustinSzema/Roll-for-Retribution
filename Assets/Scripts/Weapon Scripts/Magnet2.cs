@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Magnet : MonoBehaviour
+public class Magnet2 : MonoBehaviour
 {
     private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
 
