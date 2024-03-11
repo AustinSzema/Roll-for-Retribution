@@ -154,6 +154,7 @@ public class Magnet : MonoBehaviour
             {
                 _activateMagnet = false;
                 _audioManager.StopPullingSound();
+                _audioManager.PlayPullingEndSound();
                 _repelImage.SetActive(false);
                 _attractImage.SetActive(false);
                 _defaultImage.SetActive(true);
@@ -198,7 +199,6 @@ public class Magnet : MonoBehaviour
                 }
             }
         }
-        SetDemonsVelocityAndPosition();
 
         else
         {
@@ -206,7 +206,7 @@ public class Magnet : MonoBehaviour
         }
         
         
-        Debug.Log("Flight Duration: " + _flightDuration.Value + ", is grounded: " + _playerIsGrounded.Value);
+        //Debug.Log("Flight Duration: " + _flightDuration.Value + ", is grounded: " + _playerIsGrounded.Value);
         
         if (Input.GetMouseButtonDown(1))
         {
