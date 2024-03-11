@@ -12,10 +12,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _flyingSource; // continuous flying sound
 
     [SerializeField] private AudioClip _pullingClip;
+    [SerializeField] private AudioClip _pullingEndClip;
     [SerializeField] private AudioClip _objectReachedClip; // Played when an object reaches the player
     [SerializeField] private AudioClip _shotgunClip;
     [SerializeField] private AudioClip _slamClip;
     [SerializeField] private AudioClip _flyingClip;
+    [SerializeField] private AudioClip _flyStartClip;
+    [SerializeField] private AudioClip _flyEndClip;
 
     [SerializeField] private AudioSource _audioSource;
 
@@ -95,6 +98,7 @@ public class AudioManager : MonoBehaviour
         _flyingSource.volume = 2.5f;
         if(!_flyingSource.isPlaying)
         {
+            PlayFlyStartSound();
             _flyingSource.clip = _flyingClip;
             _flyingSource.loop = true;
             _flyingSource.Play();
@@ -104,8 +108,12 @@ public class AudioManager : MonoBehaviour
     // stop the continuous flying sound
     public void StopFlyingSound()
     {
-        _flyingSource.Stop();
-        _flyingSource.loop = false;
+        if(_flyingSource.isPlaying)
+        {
+            _flyingSource.Stop();
+            _flyingSource.loop = false;
+            PlayFlyEndSound();
+        }
     }
 
     // plays the sound when an object reaches the player at random intervals and pitches
@@ -134,6 +142,21 @@ public class AudioManager : MonoBehaviour
     public void PlaySlamSound()
     {
         _sfxSource.PlayOneShot(_slamClip);
+    }
+
+    public void PlayPullingEndSound()
+    {
+        _sfxSource.PlayOneShot(_pullingEndClip);
+    }
+
+    public void PlayFlyStartSound()
+    {
+        _sfxSource.PlayOneShot(_flyStartClip);
+    }
+
+    public void PlayFlyEndSound()
+    {
+        _sfxSource.PlayOneShot(_flyEndClip);
     }
 
     // for playing background music
