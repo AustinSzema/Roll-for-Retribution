@@ -37,12 +37,12 @@ public class AudioManager : MonoBehaviour
         {
             _queue.Enqueue(_clip);
             _lastPosition = position;
-        }/*
+        }
         else
         {
             _queue.Enqueue(_bigHitClip);
             _lastPosition = position;
-        }*/
+        }
     }
 
 
@@ -66,10 +66,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayHitSound()
     {
-        /*
         _audioSource.pitch = Random.Range(0.8f, 1.2f);
         _audioSource.PlayOneShot(_queue.Dequeue());
-        */
     }
 
     // Will refactor the looping clips into one function when optimizing
