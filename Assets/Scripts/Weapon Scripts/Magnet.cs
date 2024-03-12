@@ -95,7 +95,6 @@ public class Magnet : MonoBehaviour
                     _playerIsFlying.Value = true;
                     _audioManager.StartFlyingSound();
                     _flightDuration.Value -= _fuelDecrementAmount;
-
                     _attractParticlesRenderer.material = _levitateCenterMaterial;
                     _centerSphere.material = _levitateCenterMaterial;
                     _outerSphere.material = _levitateOuterMaterial;
@@ -103,9 +102,11 @@ public class Magnet : MonoBehaviour
             }
             else
             {
+                if(_playerIsFlying.Value == true) {
+                    _audioManager.StopFlyingSound();
+                }
                 _playerIsFlying.Value = false;
                 transform.position = _handPosition.position;
-
                 _attractParticlesRenderer.material = _attractCenterMaterial;
                 _centerSphere.material = _attractCenterMaterial;
                 _outerSphere.material = _attractOuterMaterial;
