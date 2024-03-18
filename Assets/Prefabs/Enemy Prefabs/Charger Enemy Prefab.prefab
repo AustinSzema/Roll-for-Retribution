@@ -8,6 +8,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1508831378797881915, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508831378797881915, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508831378797881915, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508831378797881915, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1897845184038939654, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -140,14 +160,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[6]
       value: 
       objectReference: {fileID: 2100000, guid: 241d68cb16ee7434c829dbc2cb5a5a6b, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1379965579972467651, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
+    - {fileID: 3740967048369907039, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
+    - {fileID: 4828602825830905666, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2795715922027697219, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
-      insertIndex: 5
+      insertIndex: 3
       addedObject: {fileID: 6799522981868061318}
+    - targetCorrespondingSourceObject: {fileID: 2795715922027697219, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3722157591881799092}
     - targetCorrespondingSourceObject: {fileID: 8570961902809321445, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
       insertIndex: -1
@@ -177,6 +204,29 @@ MonoBehaviour:
   _rigidbody: {fileID: 3533898476467300609}
   moveInterval: 3
   targetDistanceBehindPlayer: 10
+--- !u!136 &3722157591881799092
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231652825317775225}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6783782
+  m_Height: 1.7060438
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.09357047, z: 0.23824733}
 --- !u!54 &3533898476467300609 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1508831378797881915, guid: 6a5fea37ba612a34783f2b6e26baff9c,
@@ -206,7 +256,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.6783782
   m_Height: 1.7060438

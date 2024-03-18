@@ -17,9 +17,9 @@ public class ChargerFollowPlayer : MonoBehaviour
 
     [SerializeField] private float targetDistanceBehindPlayer;
 
+    private Vector3 _movement;
     private bool _charging;
 
-    private Vector3 goalPosition;
 
     private void Awake()
     {
@@ -37,7 +37,8 @@ public class ChargerFollowPlayer : MonoBehaviour
         }
         else
         {
-          transform.position = Vector3.MoveTowards(transform.position, goalPosition, _moveSpeed * Time.deltaTime);
+          //transform.position = Vector3.MoveTowards(transform.position, goalPosition, _moveSpeed * Time.deltaTime);
+          _rigidbody.AddForce(_movement, ForceMode.Acceleration);
         }
       }
 
@@ -49,9 +50,11 @@ public class ChargerFollowPlayer : MonoBehaviour
       
       float distToPlayer = Vector3.Distance(transform.position, _playerPosition.Value);
       Vector3 moveDirection = (_playerPosition.Value - transform.position).normalized;
-      goalPosition = transform.position + moveDirection * (distToPlayer + targetDistanceBehindPlayer);
-      goalPosition.y = _playerPosition.Value.y;
+      _movement = moveDirection * _moveSpeed;
       yield return new WaitForSeconds(moveInterval);
+      _rigidbody.velocity = Vector3.zero;
       _charging = false;
     }
+    
+    
 }
