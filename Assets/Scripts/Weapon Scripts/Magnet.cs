@@ -37,10 +37,18 @@ public class Magnet : MonoBehaviour
     [SerializeField] private Material _attractOuterMaterial;
     [SerializeField] private Material _levitateCenterMaterial;
     [SerializeField] private Material _levitateOuterMaterial;
-    
-    
-    [Header("Weapon Values")]
+
+
+    [Header("Weapon Values")] 
+    [SerializeField] private GameObject _magneticObject;
+
     [SerializeField] private float _pullSpeed;
+
+    public float PullSpeed
+    {
+        get;
+        set;
+    }
 
     [SerializeField] private float _slamSpeed;
     [SerializeField] private float _shotgunSpeed;
@@ -303,5 +311,19 @@ public class Magnet : MonoBehaviour
             }
         }
     }
-    
+
+    public void AddMagneticCube()
+    {
+        GameObject magnet = Instantiate(_magneticObject);
+        _magneticObjects.Add(magnet.GetComponent<Rigidbody>());
+    }
+
+    public void IncreaseDiceWeight(float percentIncrease)
+    {
+       foreach (Rigidbody rb in _magneticObjects)
+       {
+           rb.mass += rb.mass * (percentIncrease / 100.0f);
+       } 
+    }
+
 }
