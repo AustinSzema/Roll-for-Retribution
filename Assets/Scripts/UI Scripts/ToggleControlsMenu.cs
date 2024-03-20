@@ -14,18 +14,18 @@ public class ToggleControlsMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             _toggleCanvas = !_toggleCanvas;
+            if (_toggleCanvas)
+            {
+                _controlsCanvas.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                _controlsCanvas.SetActive(false);
+                Time.timeScale = 1;
+            }
         }
 
-        if (_toggleCanvas)
-        {
-            _controlsCanvas.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else
-        {
-            _controlsCanvas.SetActive(false);
-            Time.timeScale = 1;
 
-        }
     }
 }
