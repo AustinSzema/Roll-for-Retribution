@@ -15,11 +15,13 @@ using UnityEngine;
                 if (_toggleCanvas)
                 {
                     _shopCanvas.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = 0;
                 }
                 else
                 { 
                     _shopCanvas.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
                     Time.timeScale = 1;
 
                 }

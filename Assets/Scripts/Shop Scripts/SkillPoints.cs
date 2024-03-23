@@ -57,9 +57,14 @@ public class SkillPoints : MonoBehaviour
     {
         if (killCount.Value > _thresholds[_thresholdIdx])
         {
-            skillPoints += _gainAtThreshold[_thresholdIdx];
+            skillPoints += _gainAtThreshold[_thresholds[_thresholdIdx]];
             _thresholdIdx++;
         } 
+    }
+
+    public void SpendSkillPoints(int cost)
+    {
+        skillPoints -= cost;
     }
 
     

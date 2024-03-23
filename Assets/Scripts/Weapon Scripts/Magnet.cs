@@ -326,4 +326,14 @@ public class Magnet : MonoBehaviour
        } 
     }
 
+    public int GetMagnetCount()
+    {
+        return _magneticObjects.Count;
+    }
+
+    public float GetDiceWeight()
+    {
+        return _magneticObjects[0].mass;
+    }
+
 }

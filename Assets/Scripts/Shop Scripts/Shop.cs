@@ -6,13 +6,14 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    private enum SkillsToLevel
+    public enum SkillsToLevel
     {
         PullForce = 0,
         DiceQuantity = 1,
         DiceWeight = 2
     }
 
+    [SerializeField]
     private SkillPoints _skillPoints;
 
     // this is the cost to upgrade a a skill when we are at a given level
@@ -68,7 +69,7 @@ public class Shop : MonoBehaviour
         return _skillPoints.skillPoints >= CostToLevel(skill) && CurrentLevel(skill) < _skillCosts.Length;
     }
 
-    void LevelUp(SkillsToLevel skill)
+    public void LevelUp(SkillsToLevel skill)
     {
         // if we cannot afford to level up the skill, we dont
         if (!CanLevelUp(skill))
@@ -93,5 +94,13 @@ public class Shop : MonoBehaviour
            default:
                throw new NotImplementedException();
         }
+
+        _skillPoints.SpendSkillPoints(CostToLevel(skill));
+        _skillLevels[(int)skill]++;
     }
+    
+    public void LevelQuantity() { LevelUp((SkillsToLevel.DiceQuantity));}
+    public void LevelWeight() { LevelUp((SkillsToLevel.DiceWeight));}
+    public void LevelPullForce() { LevelUp((SkillsToLevel.PullForce));}
+    
 }
