@@ -48,7 +48,7 @@ public class Shop : MonoBehaviour
         return _skillLevels[(int) skill];
     }
 
-    int CostToLevel(SkillsToLevel skill)
+    public int CostToLevel(SkillsToLevel skill)
     {
         int currentLevel = CurrentLevel(skill);
 
@@ -102,5 +102,10 @@ public class Shop : MonoBehaviour
     public void LevelQuantity() { LevelUp((SkillsToLevel.DiceQuantity));}
     public void LevelWeight() { LevelUp((SkillsToLevel.DiceWeight));}
     public void LevelPullForce() { LevelUp((SkillsToLevel.PullForce));}
+
+    public int CurrentSkillPoints()
+    {
+        return _skillPoints.skillPoints;
+    }
     
 }

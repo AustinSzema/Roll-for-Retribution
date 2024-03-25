@@ -15,8 +15,22 @@ public class DisplayCurrentShopLevels : MonoBehaviour
     
     [SerializeField]
     private TextMeshProUGUI pullForce;
+    
+    [SerializeField]
+    private TextMeshProUGUI diceQuantityCost;
+    
+    [SerializeField]
+    private TextMeshProUGUI diceWeightCost;
+    
+    [SerializeField]
+    private TextMeshProUGUI pullForceCost;
+
+
+    [SerializeField] private TextMeshProUGUI skillPoints;
 
     [SerializeField] private Magnet magnet;
+
+    [SerializeField] private Shop shop;
 
     private void Update()
     {
@@ -29,6 +43,10 @@ public class DisplayCurrentShopLevels : MonoBehaviour
         pullForce.text = magnet.PullSpeed.ToString();
         diceQuantity.text = magnet.GetMagnetCount().ToString();
         diceWeight.text = magnet.GetDiceWeight().ToString();
+        pullForceCost.text = shop.CostToLevel(Shop.SkillsToLevel.PullForce).ToString();
+        diceQuantityCost.text = shop.CostToLevel(Shop.SkillsToLevel.DiceQuantity).ToString();
+        diceWeightCost.text = shop.CostToLevel(Shop.SkillsToLevel.DiceWeight).ToString();
+        skillPoints.text = "Skill Points:"  + shop.CurrentSkillPoints().ToString();
     }
     
 }
