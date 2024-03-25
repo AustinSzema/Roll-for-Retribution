@@ -16,7 +16,8 @@ public class Magnet : MonoBehaviour
     [Header("SO Variables")]
     [SerializeField] private boolVariable _gameIsPaused;
     [SerializeField] private boolVariable _outOfFuel;
-
+    [SerializeField] private boolVariable _pullingInDemons;
+    
     
     [Header("UI Images")] [SerializeField] private GameObject _attractImage;
     [SerializeField] private GameObject _repelImage;
@@ -292,6 +293,8 @@ public class Magnet : MonoBehaviour
 
     private void SetDemonsVelocityAndPosition()
     {
+        _pullingInDemons.Value = _activateMagnet;
+
         if (_activateMagnet)
         {
             foreach (Rigidbody obj in _magneticObjects)
