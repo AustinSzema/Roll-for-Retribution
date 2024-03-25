@@ -51,7 +51,9 @@ public class Magnet : MonoBehaviour
     }
 
     [SerializeField] private float _slamSpeed;
+    [SerializeField] private float _slamCooldown = 3.0f;
     [SerializeField] private float _shotgunSpeed;
+    [SerializeField] private float _shotgunCooldown = 3.0f;
     [SerializeField] private float _reachThreshold = 1.0f;
 
     [SerializeField] private AudioManager _audioManager;
@@ -144,10 +146,6 @@ public class Magnet : MonoBehaviour
             }
 
             // TODO: Consider renaming _flightDuration to _flightFuel
-
-
-            // Debug.Log("Flight Duration: " + _flightDuration.Value + ", is grounded: " + _playerIsGrounded.Value);
-
             if (Input.GetMouseButtonDown(1))
             {
                 _activateMagnet = true;
@@ -173,39 +171,13 @@ public class Magnet : MonoBehaviour
             //shotgun push
             if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
             {
-                _audioManager.PlayShotgunSound();
-                foreach (Rigidbody rb in _magneticObjects)
-                {
-                    _attractImage.SetActive(false);
-                    _repelImage.SetActive(true);
-                    _defaultImage.SetActive(false);
-                    _attractParticlesRoot.SetActive(false);
-                    _repelParticlesRoot.SetActive(true);
-                    _repelParticles.Clear();
-                    _repelParticles.Play();
-                    rb.AddForce(transform.forward * _shotgunSpeed);
-                    _activateMagnet = false;
-                }
+                StartCoroutine(ShotgunAbility());
             }
 
             //slam 
             if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
             {
-                _audioManager.PlaySlamSound();
-                foreach (Rigidbody rb in _magneticObjects)
-                {
-                    _attractImage.SetActive(false);
-                    _repelImage.SetActive(true);
-                    _defaultImage.SetActive(false);
-                    _attractParticlesRoot.SetActive(false);
-                    _gravityParticlesRoot.SetActive(true);
-                    _gravityParticles.Clear();
-                    _gravityParticles.Play();
-
-                    rb.AddForce(Vector3.down * _slamSpeed);
-
-                    _activateMagnet = false;
-                }
+                StartCoroutine(SlamAbility());
             }
         }
 
@@ -243,10 +215,42 @@ public class Magnet : MonoBehaviour
             _attractParticlesRoot.SetActive(false);
 
         }
-        
-        //shotgun push
-        if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
+       
+    }
+    
+    
+    private bool _slamOnCooldown;
+    private IEnumerator SlamAbility()
+    {
+        if (!_slamOnCooldown)
         {
+            _slamOnCooldown = true;
+            _audioManager.PlaySlamSound();
+            foreach (Rigidbody rb in _magneticObjects)
+            {
+                _attractImage.SetActive(false);
+                _repelImage.SetActive(true);
+                _defaultImage.SetActive(false);
+                _attractParticlesRoot.SetActive(false);
+                _gravityParticlesRoot.SetActive(true);
+                _gravityParticles.Clear();
+                _gravityParticles.Play();
+
+                rb.AddForce(Vector3.down * _slamSpeed);
+                _activateMagnet = false;
+            }
+
+            yield return new WaitForSeconds(_slamCooldown);
+            _slamOnCooldown = false;
+        }
+    }
+
+    private bool _shotgunOnCooldown;
+    private IEnumerator ShotgunAbility()
+    {
+        if (!_shotgunOnCooldown)
+        {
+            _shotgunOnCooldown = true;
             _audioManager.PlayShotgunSound();
             foreach (Rigidbody rb in _magneticObjects)
             {
@@ -260,29 +264,12 @@ public class Magnet : MonoBehaviour
                 rb.AddForce(transform.forward * _shotgunSpeed);
                 _activateMagnet = false;
             }
+
+            yield return new WaitForSeconds(_shotgunCooldown);
+            _shotgunOnCooldown = false;
         }
-        
-        //slam 
-        if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
-        {
-            _audioManager.PlaySlamSound();
-            foreach (Rigidbody rb in _magneticObjects)
-            {
-                _attractImage.SetActive(false);
-                _repelImage.SetActive(true);
-                _defaultImage.SetActive(false);
-                _attractParticlesRoot.SetActive(false);
-                _gravityParticlesRoot.SetActive(true);
-                _gravityParticles.Clear();
-                _gravityParticles.Play();
-                
-                rb.AddForce(Vector3.down * _slamSpeed);
-                
-                _activateMagnet = false;
-            }
-        }
-        
     }
+    
 
     // Update is called once per frame
     private void FixedUpdate()
