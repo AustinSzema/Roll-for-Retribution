@@ -20,6 +20,7 @@ public class Shop : MonoBehaviour
     // e.g when we are at level 0, it costs 5 to go to level 1
     // e.g when we are at level 1, it costs 5 to go to level 2
     // e.g when we are at level 2, it costs 10 to go to level 3
+    [SerializeField]
     private int[] _skillCosts = { 5, 5, 10, 10, 15, 15, 20, 20, 25, 25 };
 
     // These are the current levels of our skills
@@ -28,10 +29,13 @@ public class Shop : MonoBehaviour
     // SkillsToLevel, pull force is assigned to zero
     private int[] _skillLevels = { 0, 0, 0 };
 
+    [SerializeField]
     private int[] _cubesToAddAtLevel = {1, 2, 3, 4, 5, 5, 6, 6, 8, 10 };
 
+    [SerializeField]
     private int[] _pullForceAtLevel = { 61, 62, 64, 66, 69, 72, 76, 80, 85, 90 };
 
+    [SerializeField]
     private float[] _percentIncreaseAtLevel = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, };
 
     private Magnet _playerMagnet;
