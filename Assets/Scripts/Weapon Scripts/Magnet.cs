@@ -186,37 +186,6 @@ public class Magnet : MonoBehaviour
         {
             transform.position = _handPosition.position;
         }
-        
-        
-        //Debug.Log("Flight Duration: " + _flightDuration.Value + ", is grounded: " + _playerIsGrounded.Value);
-        
-        if (Input.GetMouseButtonDown(1))
-        {
-            _activateMagnet = true;
-            _audioManager.StartPullingSound();
-            transform.position = _handPosition.position;
-            _repelImage.SetActive(false);
-            _attractImage.SetActive(true);
-            _defaultImage.SetActive(false);
-            _attractParticlesRoot.SetActive(true);
-        }
-        if(Input.GetMouseButtonUp(1))
-        {
-            _activateMagnet = false;
-            _audioManager.StopPullingSound();
-            _audioManager.PlayPullingEndSound();
-            /*foreach (Rigidbody rb in _magneticObjects)
-            {
-                transform.position = _explodePosition.position;
-                rb.AddExplosionForce(20000f, transform.position, 100f, 0.0F);
-            }*/
-            _repelImage.SetActive(false);
-            _attractImage.SetActive(false);
-            _defaultImage.SetActive(true);
-            _attractParticlesRoot.SetActive(false);
-
-        }
-       
     }
     
     
