@@ -89,7 +89,7 @@ public class Magnet : MonoBehaviour
     private void Update()
     {
         if (!_gameIsPaused.Value)
-        {
+        { 
             if (_flightDuration.Value <= 0f)
             {
                 _outOfFuel.Value = true;
@@ -186,6 +186,7 @@ public class Magnet : MonoBehaviour
         {
             transform.position = _handPosition.position;
         }
+        SetDemonsVelocityAndPosition();
     }
     
     
@@ -247,6 +248,7 @@ public class Magnet : MonoBehaviour
         SetDemonsVelocityAndPosition();
     }
 
+
     private void SetDemonsVelocityAndPosition()
     {
         _pullingInDemons.Value = _activateMagnet;
@@ -264,6 +266,7 @@ public class Magnet : MonoBehaviour
 
                 if (distance <= _reachThreshold)
                 {
+                    obj.position = transform.position;
                     _audioManager.PlayObjectReachedSound();
                 }
                 
