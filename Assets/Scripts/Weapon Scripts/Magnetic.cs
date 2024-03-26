@@ -10,16 +10,21 @@ public class Magnetic : MonoBehaviour
     
     [SerializeField] private AudioClip _hitClip;
     [SerializeField] private ParticleSystem _dustParticles;
+    [SerializeField] private float forceAmount = 30.0f;
+    private Rigidbody _rigidbody;
 
     private void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
         {
+            Vector3 dir = (transform.position - other.gameObject.transform.position).normalized;
+            _rigidbody.AddForce(dir * forceAmount, ForceMode.Impulse);
             //Debug.Log(other.gameObject.name);
             other.gameObject.GetComponent<IDamageable>().takeDamage(1);
             //_dustParticles.transform.position = other.contacts[0].point;
