@@ -54,6 +54,7 @@ public class SpawnEnemies : MonoBehaviour
       Debug.Log("Current spawn info is index " + _currentSpawnInfoIdx);
       StartCoroutine(SwapSpawnInfo());
     }
+    Debug.Log(EnemiesInScene + " enemies in scene");
   }
 
   IEnumerator SwapSpawnInfo()
