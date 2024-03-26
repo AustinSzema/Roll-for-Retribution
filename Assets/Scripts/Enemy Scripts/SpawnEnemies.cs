@@ -101,22 +101,51 @@ public class SpawnEnemies : MonoBehaviour
         {
           break;
         }
-        
+
         //GameObject enemyGameObject = Instantiate(spawnable.enemy);
         GameObject enemyGameObject = EnemyPool.Instance.GetPooledObject(_currentSpawnInfo.Spawnables[j].enemy.name);
-        float maxDistanceFromPlayer = 30f;
-        float minDistanceFromPlayer = 25f;
+        float maxDistanceFromPlayer = 60f;
+        float minDistanceFromPlayer = 40f;
 
-        float xOffset = Random.Range(minDistanceFromPlayer, maxDistanceFromPlayer) * Mathf.Sign(Random.Range(-1f, 1f));
-        float zOffset = Random.Range(minDistanceFromPlayer, maxDistanceFromPlayer) * Mathf.Sign(Random.Range(-1f, 1f));
+        float NoNoZoneDistance = 100f;
+        Vector3 behind = -playerTransform.forward;
+        Vector3 NoNoZoneLeft = Quaternion.AngleAxis(45, playerTransform.up) * behind * NoNoZoneDistance;
+        Vector3 NoNoZoneRight = Quaternion.AngleAxis(-45, playerTransform.up) * behind * NoNoZoneDistance;
 
-        enemyGameObject.transform.position = playerTransform.position + new Vector3(playerTransform.position.x + xOffset, 50f,
-          playerTransform.position.z + zOffset);
+        Vector3 enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
+        Vector3 playerPos = playerTransform.position;
+        while (InTriangle(enemyPosition, playerPos, NoNoZoneLeft + playerPos, NoNoZoneRight + playerPos))
+        {
+          enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
+        }
 
+        enemyGameObject.transform.position = enemyPosition;
 
         enemyGameObject.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
         EnemiesInScene++;
       }
     }
   }
+
+  bool SameSide(Vector3 p1, Vector3 p2, Vector3 a, Vector3 b)
+  {
+    Vector3 cp1 = Vector3.Cross(b - a, p1 - a);
+    Vector3 cp2 = Vector3.Cross(b - a, p2 - a);
+
+    return Vector3.Dot(cp1, cp2) >= 0;
+  }
+
+  bool InTriangle(Vector3 point, Vector3 a, Vector3 b, Vector3 c)
+  {
+    return SameSide(point,a, b,c) && SameSide(point,b, a,c) && SameSide(point, c, a, b);
+  }
+
+  Vector3 PickEnemyPosition(float minDistance, float maxDistance)
+  {
+    float xOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
+    float zOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
+    Vector3 enemyPosition = playerTransform.position + new Vector3(xOffset, 15.0f, zOffset);
+    return enemyPosition;
+  }
+   
 }
