@@ -36,7 +36,7 @@ public class DisableTrailsWhenInPlayerHand : MonoBehaviour
     {
         
 
-        if (Vector3.Distance(transform.position, _handPosition.Value) <= 3f)
+        if (Input.GetMouseButton(0) && Vector3.Distance(transform.position, _handPosition.Value) <= 3f)
         {
             transform.position = _handPosition.Value;
         }
