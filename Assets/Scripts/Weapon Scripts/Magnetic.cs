@@ -21,6 +21,16 @@ public class Magnetic : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        HitEnemy(other);
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        HitEnemy(other);
+    }
+
+    private void HitEnemy(Collision other)
+    {
         if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
         {
             Vector3 dir = (transform.position - other.gameObject.transform.position).normalized;
@@ -32,7 +42,6 @@ public class Magnetic : MonoBehaviour
             _audioManager.AddClipToQueue(_hitClip, transform.position);
         }
     }
-
 
     private void Update()
     {

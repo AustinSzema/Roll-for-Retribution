@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8286308055222471916}
   - component: {fileID: 1813110074824782765}
   - component: {fileID: 3264333727159514804}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Dice Demon Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -259,7 +259,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3248689125199883062}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -512,6 +512,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a272513abb25a9f42a5aeeffaeaab340,
         type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a272513abb25a9f42a5aeeffaeaab340,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -668,6 +673,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube Demon with Arms and Legs (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd5dc6188691b8946a0845d5b533b2cc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd5dc6188691b8946a0845d5b533b2cc,
         type: 3}

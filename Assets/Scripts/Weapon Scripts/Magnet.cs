@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // TODO: Does this script need to be broken up? It has so many references
 public class Magnet : MonoBehaviour
@@ -89,7 +90,29 @@ public class Magnet : MonoBehaviour
     private void Update()
     {
         if (!_gameIsPaused.Value)
-        { 
+        {
+
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _currentShotType = ShotType.Shotgun;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                _currentShotType = ShotType.Sniper;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                _currentShotType = ShotType.Spray;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                _currentShotType = ShotType.Beam;
+            }
+            
+            
+            
+            
             if (_flightDuration.Value <= 0f)
             {
                 _outOfFuel.Value = true;
@@ -217,6 +240,16 @@ public class Magnet : MonoBehaviour
     }
 
     private bool _shotgunOnCooldown;
+    
+    private enum ShotType
+    {
+        Shotgun,
+        Sniper,
+        Spray,
+        Beam
+    }
+
+    private ShotType _currentShotType;
     private IEnumerator ShotgunAbility()
     {
         if (!_shotgunOnCooldown)
@@ -232,7 +265,33 @@ public class Magnet : MonoBehaviour
                 _repelParticlesRoot.SetActive(true);
                 _repelParticles.Clear();
                 _repelParticles.Play();
-                rb.AddForce(transform.forward * _shotgunSpeed);
+                
+                //rb.AddExplosionForce(_shotgunSpeed, _handPosition.position, 10f);
+
+
+                Vector2 offsetDirection;
+                switch (_currentShotType)
+                {
+                    case ShotType.Shotgun:
+                        //transform.Rotate(Vector3.up, 1f * Time.deltaTime);
+                        rb.AddForce(transform.forward * _shotgunSpeed);
+                        break;
+                    case ShotType.Sniper:
+                        rb.AddForce(transform.forward * _shotgunSpeed);
+                        break;
+                    case ShotType.Spray:
+                        offsetDirection = Quaternion.Euler(0, Random.Range(-30, 30), 0) * transform.forward;
+                        rb.AddForce(offsetDirection * _shotgunSpeed);
+                        break;
+                    case ShotType.Beam:
+                        break;
+                    default:
+                        break;
+                }
+
+                
+
+
                 _activateMagnet = false;
             }
 
