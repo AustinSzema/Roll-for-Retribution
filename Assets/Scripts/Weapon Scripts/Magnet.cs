@@ -273,8 +273,16 @@ public class Magnet : MonoBehaviour
                 switch (_currentShotType)
                 {
                     case ShotType.Shotgun:
+                        /*float spreadAngle = 30f;
                         //transform.Rotate(Vector3.up, 1f * Time.deltaTime);
-                        rb.AddForce(transform.forward * _shotgunSpeed);
+                        Quaternion spreadRotation = Quaternion.Euler(Random.Range(-spreadAngle, spreadAngle), 
+                                                                                  Random.Range(-spreadAngle, spreadAngle), 
+                                                                                  0f);
+                        rb.AddForce(spreadRotation * transform.forward * _shotgunSpeed);*/
+
+                        rb.AddExplosionForce(50f, _handPosition.position, 0f);
+//                        rb.AddForce(transform.forward * _shotgunSpeed);
+
                         break;
                     case ShotType.Sniper:
                         rb.AddForce(transform.forward * _shotgunSpeed);
