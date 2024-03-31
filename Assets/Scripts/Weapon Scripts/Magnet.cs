@@ -121,6 +121,7 @@ public class Magnet : MonoBehaviour
             // When the player is holding right mouse button and holding space and has demons in hand and has fuel
             if (Input.GetMouseButton(1) && Input.GetKey(KeyCode.Space) && _demonInHand.Value &&
                 _flightDuration.Value >= 0)
+                
             {
                 // if player is not out of fuel make them fly
                 if (!_outOfFuel.Value)
