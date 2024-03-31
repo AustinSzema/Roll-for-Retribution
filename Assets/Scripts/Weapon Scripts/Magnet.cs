@@ -269,26 +269,33 @@ public class Magnet : MonoBehaviour
                 //rb.AddExplosionForce(_shotgunSpeed, _handPosition.position, 10f);
 
 
-                Vector2 offsetDirection;
+                Vector3 offsetDirection;
+                float deviationAngleX = 0f;
+                float deviationAngleY = 0f;
+                float deviationAngleZ = 0f;
+                
                 switch (_currentShotType)
                 {
                     case ShotType.Shotgun:
-                        /*float spreadAngle = 30f;
-                        //transform.Rotate(Vector3.up, 1f * Time.deltaTime);
-                        Quaternion spreadRotation = Quaternion.Euler(Random.Range(-spreadAngle, spreadAngle), 
-                                                                                  Random.Range(-spreadAngle, spreadAngle), 
-                                                                                  0f);
-                        rb.AddForce(spreadRotation * transform.forward * _shotgunSpeed);*/
 
-                        rb.AddExplosionForce(50f, _handPosition.position, 0f);
-//                        rb.AddForce(transform.forward * _shotgunSpeed);
+                        deviationAngleX = Random.Range(-20f, 20f);
+                        deviationAngleY = Random.Range(-20f, 20f);
+                        deviationAngleZ = Random.Range(-20f, 20f);
+                        
+                        offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) * transform.forward;
+                        
+                        Debug.Log("X:" + deviationAngleX + " Y:" + deviationAngleY + " Z:" + deviationAngleZ);
+                        
+                        rb.AddForce(offsetDirection * _shotgunSpeed);
+                        
 
                         break;
                     case ShotType.Sniper:
                         rb.AddForce(transform.forward * _shotgunSpeed);
                         break;
                     case ShotType.Spray:
-                        offsetDirection = Quaternion.Euler(0, Random.Range(-30, 30), 0) * transform.forward;
+                        deviationAngleY = Random.Range(-20f, 20f); // Adjust the range as needed
+                        offsetDirection = Quaternion.Euler(0, deviationAngleY, 0) * transform.forward;
                         rb.AddForce(offsetDirection * _shotgunSpeed);
                         break;
                     case ShotType.Beam:
