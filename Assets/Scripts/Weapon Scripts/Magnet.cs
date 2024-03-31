@@ -66,7 +66,11 @@ public class Magnet : MonoBehaviour
     [SerializeField] private floatVariable _flightDuration;
     [SerializeField] private boolVariable _demonInHand;
     [SerializeField] private boolVariable _playerIsFlying;
+    [Tooltip("Sets the Y value of player's velocity")] [SerializeField] private float _flightForce = 30f;
     public float _minimumFuelAmount { get; private set; }
+
+    [Header("Player")] [SerializeField] private Rigidbody _playerRigidbody;
+
 
     private void Start()
     {
@@ -117,11 +121,11 @@ public class Magnet : MonoBehaviour
             {
                 _outOfFuel.Value = true;
             }
+            
 
             // When the player is holding right mouse button and holding space and has demons in hand and has fuel
             if (Input.GetMouseButton(1) && Input.GetKey(KeyCode.Space) && _demonInHand.Value &&
                 _flightDuration.Value >= 0)
-                
             {
                 // if player is not out of fuel make them fly
                 if (!_outOfFuel.Value)
@@ -133,6 +137,7 @@ public class Magnet : MonoBehaviour
                     _attractParticlesRenderer.material = _levitateCenterMaterial;
                     _centerSphere.material = _levitateCenterMaterial;
                     _outerSphere.material = _levitateOuterMaterial;
+                    _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _flightForce, _playerRigidbody.velocity.z);
                 }
             }
             else
@@ -145,6 +150,7 @@ public class Magnet : MonoBehaviour
                 _attractParticlesRenderer.material = _attractCenterMaterial;
                 _centerSphere.material = _attractCenterMaterial;
                 _outerSphere.material = _attractOuterMaterial;
+                _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _playerRigidbody.velocity.y, _playerRigidbody.velocity.z);
             }
 
             // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
