@@ -5104,7 +5104,7 @@ PrefabInstance:
     - target: {fileID: 4828602825830905666, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5338497604070431482, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
@@ -5120,7 +5120,7 @@ PrefabInstance:
     - target: {fileID: 7475563400908805314, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
       propertyPath: m_Name
-      value: Boss Enemy
+      value: SummonerEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 7922623395717754416, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
@@ -5195,6 +5195,7 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 3740967048369907039, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
+    - {fileID: 2419325809902081766, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3280784904545963769, guid: 6a5fea37ba612a34783f2b6e26baff9c,
@@ -5202,11 +5203,41 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 4678329810276117393}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2795715922027697219, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 3476223274015497550}
     - targetCorrespondingSourceObject: {fileID: 8570961902809321445, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1212207697488540137}
   m_SourcePrefab: {fileID: 100100000, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
+--- !u!1 &2852763302788151289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2795715922027697219, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 97792532941398970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3476223274015497550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2852763302788151289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89857eca46d3ece43a84f2f826ea547c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  numEnemiesToSpawn: 5
+  spawnInterval: 5
+  playerPosition: {fileID: 11400000, guid: c75809fe4beace14ea3d870a515dfb52, type: 2}
+  gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
+  enemySpawner: {fileID: 0}
+  enemyToSpawn: {fileID: 7688580540974025677, guid: b0488291a59b2be41a9f626a810dca63,
+    type: 3}
 --- !u!4 &3232702412209089859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3280784904545963769, guid: 6a5fea37ba612a34783f2b6e26baff9c,

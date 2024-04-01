@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -146,6 +147,8 @@ public class SpawnEnemies : MonoBehaviour
 
     Vector3 enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
     Vector3 playerPos = playerTransform.position;
+    Debug.DrawLine(playerPos, NoNoZoneLeft + playerPos, Color.red, 5);
+    Debug.DrawLine(playerPos, NoNoZoneRight + playerPos, Color.red, 5);
     while (InTriangle(enemyPosition, playerPos, NoNoZoneLeft + playerPos, NoNoZoneRight + playerPos))
     {
       enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
