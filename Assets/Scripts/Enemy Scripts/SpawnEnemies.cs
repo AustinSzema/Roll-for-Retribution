@@ -55,10 +55,10 @@ public class SpawnEnemies : MonoBehaviour
   {
     if (_changeSpawnInfo)
     {
-      Debug.Log("Current spawn info is index " + _currentSpawnInfoIdx);
+      //Debug.Log("Current spawn info is index " + _currentSpawnInfoIdx);
       StartCoroutine(SwapSpawnInfo());
     }
-    Debug.Log(EnemiesInScene + " enemies in scene");
+    //Debug.Log(EnemiesInScene + " enemies in scene");
   }
 
   IEnumerator SwapSpawnInfo()
@@ -81,7 +81,7 @@ public class SpawnEnemies : MonoBehaviour
         // If it isn't time to swap yet, wait until it is time to swap
         // before checking again
         _changeSpawnInfo = false;
-        yield return new WaitForSeconds(timeUntilSwap);
+        yield return new WaitForSeconds(timeUntilSwap - .1f);
         _changeSpawnInfo = true;
       }
     }
@@ -99,7 +99,7 @@ public class SpawnEnemies : MonoBehaviour
     for (int j = 0; j < _currentSpawnInfo.Spawnables.Count; j++)
     {
       EnemyAndNumber spawnable = _currentSpawnInfo.Spawnables[j];
-      Debug.Log("I am about to spawn " + spawnable.number + " enemies");
+      //Debug.Log("I am about to spawn " + spawnable.number + " enemies");
       for (int i = 0; i < spawnable.number; i++)
       {
         if (EnemiesInScene >= _currentSpawnInfo.MaxEnemiesInScene && _currentSpawnInfo.MaxEnemiesInScene != -1)
