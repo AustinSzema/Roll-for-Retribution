@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class Summoner : MonoBehaviour
 {    
-    [SerializeField] private float _moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 2f;
 
-    [SerializeField] private Vector3Variable _playerPosition;
+    [SerializeField] private int numEnemiesToSpawn = 5;
 
-    [SerializeField] private boolVariable _gameIsPaused;
+    [SerializeField] private int spawnInterval = 5;
+    
+    [SerializeField] private Vector3Variable playerPosition;
+
+    [SerializeField] private boolVariable gameIsPaused;
 
     [SerializeField] private SpawnEnemies enemySpawner;
+
+    [SerializeField] private GameObject enemyToSpawn;
 
     private bool _summoning;
 
@@ -23,7 +29,7 @@ public class Summoner : MonoBehaviour
 
     private void FixedUpdate()
     {
-      if (_gameIsPaused.Value == false && this.gameObject.activeSelf)
+      if (gameIsPaused.Value == false && this.gameObject.activeSelf)
       {
         if (_summoning == false)
         {
@@ -31,7 +37,7 @@ public class Summoner : MonoBehaviour
         }
         else
         {
-          transform.position = Vector3.MoveTowards(transform.position,_playerPosition.Value, _moveSpeed * Time.deltaTime);
+          transform.position = Vector3.MoveTowards(transform.position,playerPosition.Value, moveSpeed * Time.deltaTime);
         }
       }
 
@@ -40,7 +46,11 @@ public class Summoner : MonoBehaviour
     IEnumerator Summon()
     {
       _summoning = true;
-      yield return new WaitForSeconds(3);
+      for (int i = 0; i < numEnemiesToSpawn; i++)
+      {
+        enemySpawner.SpawnEnemy(enemyToSpawn);
+      }
+      yield return new WaitForSeconds(spawnInterval);
       _summoning = false;
     }
     

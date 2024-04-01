@@ -106,9 +106,9 @@ public class SpawnEnemies : MonoBehaviour
         {
           break;
         }
+
+        SpawnEnemy(_currentSpawnInfo.Spawnables[j].enemy);
         
-        GameObject enemyGameObject = EnemyPool.Instance.GetPooledObject(_currentSpawnInfo.Spawnables[j].enemy.name);
-        SpawnEnemy(enemyGameObject);
       }
     }
   }
@@ -130,12 +130,13 @@ public class SpawnEnemies : MonoBehaviour
   {
     float xOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
     float zOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
-    Vector3 enemyPosition = playerTransform.position + new Vector3(xOffset, 15.0f, zOffset);
+    Vector3 enemyPosition = new Vector3(playerTransform.position.x + xOffset, 15.0f, playerTransform.position.z + zOffset);
     return enemyPosition;
   }
 
-  void SpawnEnemy(GameObject enemy)
+  public void SpawnEnemy(GameObject enemy)
   {
+    GameObject enemyInstance = EnemyPool.Instance.GetPooledObject(enemy.name);
     float maxDistanceFromPlayer = 60f;
     float minDistanceFromPlayer = 40f;
 
@@ -150,8 +151,8 @@ public class SpawnEnemies : MonoBehaviour
       enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
     }
 
-    enemy.transform.position = enemyPosition;
-    enemy.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
+    enemyInstance.transform.position = enemyPosition;
+    enemyInstance.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
     EnemiesInScene++;
   }
    
