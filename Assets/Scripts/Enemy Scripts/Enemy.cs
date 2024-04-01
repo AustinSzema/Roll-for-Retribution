@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (transform.position.y <=-5f)
         {
-            transform.position = new Vector3(transform.position.x, 50f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
         }
     }
 }
