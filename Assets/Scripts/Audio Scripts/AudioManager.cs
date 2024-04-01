@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
     private float objectReachedCooldown = 0.5f; // cooldown time in seconds for object reached sound
     private float lastObjectReachedTime = -1f; // last time the object reached sound was played
 
-    public void AddClipToQueue(AudioClip _clip, Vector3 position)
+    /*public void AddClipToQueue(AudioClip _clip, Vector3 position)
     {
         if (Vector3.Distance(_lastPosition, position) > 1)
         {
@@ -43,32 +43,19 @@ public class AudioManager : MonoBehaviour
             _queue.Enqueue(_bigHitClip);
             _lastPosition = position;
         }
-    }
+    }*/
 
 
     private void Update()
     {
-        if (_queue.Count > 0)
-        {
-            /*if (_queue.Dequeue().name == _bigHitClip.name)
-            {
-                _audioSource.pitch = 1f;
-                _audioSource.PlayOneShot(_queue.Dequeue());
-            }
-            else
-            {
-                _audioSource.pitch = Random.Range(0.5f, 1.5f);
-                _audioSource.PlayOneShot(_queue.Dequeue());
-            }*/
-            PlayHitSound();
-        }
+
     }
 
-    public void PlayHitSound()
+    /*public void PlayHitSound()
     {
         _audioSource.pitch = Random.Range(0.8f, 1.2f);
         _audioSource.PlayOneShot(_queue.Dequeue());
-    }
+    }*/
 
     // Will refactor the looping clips into one function when optimizing
 
@@ -169,5 +156,10 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         _sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlaySFXAtLocation(AudioClip clip, Vector3 position)
+    {
+        AudioSource.PlayClipAtPoint(clip, position);
     }
 }

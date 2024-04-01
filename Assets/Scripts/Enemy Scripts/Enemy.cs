@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private ParticleSystem _explosionParticles;
 
+    [SerializeField] private AudioClip _hitClip;
+
+    private static AudioManager _audioManager;
+
     private int _currentHealth;
 
     private bool _firstDisable = true;
@@ -22,6 +26,12 @@ public class Enemy : MonoBehaviour, IDamageable
         // this needs to be refactored when proper health system is in place
         // health should not be hard coded in awake
         _currentHealth = healthPoints;
+        _audioManager = FindObjectOfType<AudioManager>();
+
+        if (_hitClip == null)
+        {
+            _hitClip = Resources.Load<AudioClip>("Audio/Hit");
+        }
     }
 
     private void OnDisable()
@@ -50,9 +60,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Explode()
     {
+        if (_hitClip != null)
+        {
+            _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Hit clip is null in " + gameObject.name);
+        }
         _explosionParticles.Play();
         _enemy.SetActive(false);
-        
     }
 
     private void Update()
