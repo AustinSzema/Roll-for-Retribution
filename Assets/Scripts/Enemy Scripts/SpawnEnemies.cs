@@ -15,6 +15,10 @@ public class SpawnEnemies : MonoBehaviour
 
   [SerializeField] private Transform playerTransform;
 
+  [SerializeField] private float noNoZoneDistance = 100f;
+
+  [SerializeField] private float noNoZoneAngle = 45f;
+
   public static int EnemiesInScene = 0;
   
   private List<SpawnInfo> _spawnInfos;
@@ -102,28 +106,9 @@ public class SpawnEnemies : MonoBehaviour
         {
           break;
         }
-
-        //GameObject enemyGameObject = Instantiate(spawnable.enemy);
+        
         GameObject enemyGameObject = EnemyPool.Instance.GetPooledObject(_currentSpawnInfo.Spawnables[j].enemy.name);
-        float maxDistanceFromPlayer = 60f;
-        float minDistanceFromPlayer = 40f;
-
-        float NoNoZoneDistance = 100f;
-        Vector3 behind = -playerTransform.forward;
-        Vector3 NoNoZoneLeft = Quaternion.AngleAxis(45, playerTransform.up) * behind * NoNoZoneDistance;
-        Vector3 NoNoZoneRight = Quaternion.AngleAxis(-45, playerTransform.up) * behind * NoNoZoneDistance;
-
-        Vector3 enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
-        Vector3 playerPos = playerTransform.position;
-        while (InTriangle(enemyPosition, playerPos, NoNoZoneLeft + playerPos, NoNoZoneRight + playerPos))
-        {
-          enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
-        }
-
-        enemyGameObject.transform.position = enemyPosition;
-
-        enemyGameObject.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
-        EnemiesInScene++;
+        SpawnEnemy(enemyGameObject);
       }
     }
   }
@@ -141,12 +126,33 @@ public class SpawnEnemies : MonoBehaviour
     return SameSide(point,a, b,c) && SameSide(point,b, a,c) && SameSide(point, c, a, b);
   }
 
-  Vector3 PickEnemyPosition(float minDistance, float maxDistance)
+  Vector3 PickEnemyPosition(float minDistance = 40f, float maxDistance = 60f)
   {
     float xOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
     float zOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
     Vector3 enemyPosition = playerTransform.position + new Vector3(xOffset, 15.0f, zOffset);
     return enemyPosition;
+  }
+
+  void SpawnEnemy(GameObject enemy)
+  {
+    float maxDistanceFromPlayer = 60f;
+    float minDistanceFromPlayer = 40f;
+
+    Vector3 behind = -playerTransform.forward;
+    Vector3 NoNoZoneLeft = Quaternion.AngleAxis(noNoZoneAngle, playerTransform.up) * behind * noNoZoneDistance;
+    Vector3 NoNoZoneRight = Quaternion.AngleAxis(-noNoZoneAngle, playerTransform.up) * behind * noNoZoneDistance;
+
+    Vector3 enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
+    Vector3 playerPos = playerTransform.position;
+    while (InTriangle(enemyPosition, playerPos, NoNoZoneLeft + playerPos, NoNoZoneRight + playerPos))
+    {
+      enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
+    }
+
+    enemy.transform.position = enemyPosition;
+    enemy.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
+    EnemiesInScene++;
   }
    
 }
