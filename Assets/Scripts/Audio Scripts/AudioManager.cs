@@ -162,4 +162,18 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(clip, position);
     }
+
+    public void PlaySFXAtLocationWithPitch(AudioClip clip, Vector3 position, float pitch)
+    {
+        GameObject tempAudioObject = new GameObject("TempAudio");
+        tempAudioObject.transform.position = position;
+
+        AudioSource source = tempAudioObject.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.pitch = pitch;
+
+        source.Play();
+        GameObject.Destroy(tempAudioObject, clip.length);
+    }
+
 }

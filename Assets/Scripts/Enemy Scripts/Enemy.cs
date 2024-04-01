@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private AudioClip _hitClip;
 
+    [SerializeField] private AudioClip _enemyGruntClip;
+
     private static AudioManager _audioManager;
 
     private int _currentHealth;
@@ -31,6 +33,11 @@ public class Enemy : MonoBehaviour, IDamageable
         if (_hitClip == null)
         {
             _hitClip = Resources.Load<AudioClip>("Audio/Hit");
+        }
+
+        if(_enemyGruntClip == null)
+        {
+            _enemyGruntClip = Resources.Load<AudioClip>("Audio/EnemyGrunt");
         }
     }
 
@@ -77,6 +84,17 @@ public class Enemy : MonoBehaviour, IDamageable
         if (transform.position.y <=-5f)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+        }
+
+        TryPlayGruntSoundRandomly();
+    }
+
+    private void TryPlayGruntSoundRandomly()
+    {
+        float odds = 0.001f;
+        if (UnityEngine.Random.value < odds)
+        {
+            _audioManager.PlaySFXAtLocation(_enemyGruntClip, transform.position);
         }
     }
 }
