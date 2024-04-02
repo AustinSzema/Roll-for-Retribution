@@ -5,7 +5,7 @@ using UnityEngine;
         [SerializeField] private GameObject _shopCanvas;
 
         private bool _toggleCanvas = false;
-    
+
         // Update is called once per frame
         void Update()
         {

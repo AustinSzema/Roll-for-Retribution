@@ -19,6 +19,12 @@ public class PlayerDamage : MonoBehaviour, IDamageable
         _gameOverMenu.SetActive(false);
     }
 
+    private void Awake()
+    {
+        Time.timeScale = 1;
+        _gameOver = false;
+    }
+
     private void Update()
     {
         if (_gameOver)
