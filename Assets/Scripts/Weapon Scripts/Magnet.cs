@@ -262,24 +262,7 @@ public class Magnet : MonoBehaviour
         if (!_shotgunOnCooldown)
         {
             _shotgunOnCooldown = true;
-
-            switch (_currentShotType)
-            {
-                case ShotType.Shotgun:
-                    _audioManager.PlayShotgunSound();
-                    break;
-                case ShotType.Sniper:
-                    _audioManager.PlaySniperSound();
-                    break;
-                case ShotType.Spray:
-                    _audioManager.PlaySpraySound();
-                    break;
-                case ShotType.Beam:
-                    break;
-                default:
-                    break;
-            }
-
+            _audioManager.PlayShotgunSound();
             foreach (Rigidbody rb in _magneticObjects)
             {
                 _attractImage.SetActive(false);
