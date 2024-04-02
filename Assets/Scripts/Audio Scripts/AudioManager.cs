@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _musicSource; // dedicated to background music
     [SerializeField] private AudioSource _sfxSource; // dedicated to sound effects
+    [SerializeField] private AudioSource _invariableSFXSource; // dedicated to sound effects that should not be pitch changed
     [SerializeField] private AudioSource _pullingSource; // continuous pulling sound
     [SerializeField] private AudioSource _flyingSource; // continuous flying sound
 
@@ -168,6 +169,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         _sfxSource.PlayOneShot(clip);
+    }
+
+    public void PlayInvariableSFX(AudioClip clip)
+    {
+        _invariableSFXSource.PlayOneShot(clip);
     }
 
     public void PlaySFXAtLocation(AudioClip clip, Vector3 position)

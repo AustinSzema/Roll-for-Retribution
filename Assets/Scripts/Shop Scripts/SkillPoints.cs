@@ -7,6 +7,13 @@ public class SkillPoints : MonoBehaviour
 {
 
     [SerializeField] private intVariable killCount;
+    [SerializeField] private AudioClip _progressionClip1;
+    [SerializeField] private AudioClip _progressionClip2;
+    [SerializeField] private AudioClip _progressionClip3;
+    [SerializeField] private AudioClip _progressionClip4;
+    [SerializeField] private AudioClip _progressionClip5;
+
+    private static AudioManager _audioManager;
 
     public int skillPoints;
 
@@ -29,6 +36,7 @@ public class SkillPoints : MonoBehaviour
 
     private void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         if (_thresholds.Length > SkillPointsToGainAtThreshold.Length)
         {
             throw new ArgumentException("Each threshold must have a corresponding number of skill points to gain");
@@ -51,6 +59,18 @@ public class SkillPoints : MonoBehaviour
     {
         if (killCount.Value > _thresholds[_thresholdIdx])
         {
+            if(_thresholdIdx == 0) {
+                _audioManager.PlayInvariableSFX(_progressionClip1);
+            } else if (_thresholdIdx == 1) {
+                _audioManager.PlayInvariableSFX(_progressionClip2);
+            } else if (_thresholdIdx == 2) {
+                _audioManager.PlayInvariableSFX(_progressionClip3);
+            } else if (_thresholdIdx == 3) {
+                _audioManager.PlayInvariableSFX(_progressionClip4);
+            } else {
+                _audioManager.PlayInvariableSFX(_progressionClip5);
+            }
+
             skillPoints += _gainAtThreshold[_thresholds[_thresholdIdx]];
             _thresholdIdx++;
         } 
