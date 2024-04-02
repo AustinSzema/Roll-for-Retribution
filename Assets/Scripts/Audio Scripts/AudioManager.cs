@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _pullingEndClip;
     [SerializeField] private AudioClip _objectReachedClip; // Played when an object reaches the player
     [SerializeField] private AudioClip _shotgunClip;
+    [SerializeField] private AudioClip _sniperClip;
+    [SerializeField] private AudioClip _sprayClip;
     [SerializeField] private AudioClip _slamClip;
     [SerializeField] private AudioClip _flyingClip;
     [SerializeField] private AudioClip _flyStartClip;
@@ -127,6 +129,16 @@ public class AudioManager : MonoBehaviour
     public void PlaySlamSound()
     {
         _sfxSource.PlayOneShot(_slamClip);
+    }
+
+    public void PlaySniperSound()
+    {
+        _sfxSource.PlayOneShot(_sniperClip);
+    }
+
+    public void PlaySpraySound()
+    {
+        _sfxSource.PlayOneShot(_sprayClip);
     }
 
     public void PlayPullingEndSound()
