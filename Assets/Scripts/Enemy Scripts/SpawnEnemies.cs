@@ -108,7 +108,7 @@ public class SpawnEnemies : MonoBehaviour
           break;
         }
 
-        SpawnEnemy(_currentSpawnInfo.Spawnables[j].enemy);
+        SpawnEnemy(_currentSpawnInfo.Spawnables[j].enemy, playerTransform.position);
         
       }
     }
@@ -135,7 +135,7 @@ public class SpawnEnemies : MonoBehaviour
     return enemyPosition;
   }
 
-  public void SpawnEnemy(GameObject enemy)
+  public void SpawnEnemy(GameObject enemy, Vector3 centralLocation)
   {
     GameObject enemyInstance = EnemyPool.Instance.GetPooledObject(enemy.name);
     float maxDistanceFromPlayer = 60f;
@@ -146,10 +146,9 @@ public class SpawnEnemies : MonoBehaviour
     Vector3 NoNoZoneRight = Quaternion.AngleAxis(-noNoZoneAngle, playerTransform.up) * behind * noNoZoneDistance;
 
     Vector3 enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
-    Vector3 playerPos = playerTransform.position;
-    Debug.DrawLine(playerPos, NoNoZoneLeft + playerPos, Color.red, 5);
-    Debug.DrawLine(playerPos, NoNoZoneRight + playerPos, Color.red, 5);
-    while (InTriangle(enemyPosition, playerPos, NoNoZoneLeft + playerPos, NoNoZoneRight + playerPos))
+    Debug.DrawLine(centralLocation, NoNoZoneLeft + centralLocation, Color.red, 5);
+    Debug.DrawLine(centralLocation, NoNoZoneRight + centralLocation, Color.red, 5);
+    while (InTriangle(enemyPosition, centralLocation, NoNoZoneLeft + centralLocation, NoNoZoneRight + centralLocation))
     {
       enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
     }

@@ -49,7 +49,7 @@ public class Summoner : MonoBehaviour
       _summoning = true;
       for (int i = 0; i < numEnemiesToSpawn; i++)
       {
-        _enemySpawner.SpawnEnemy(enemyToSpawn);
+        _enemySpawner.SpawnEnemy(enemyToSpawn, this.transform.position);
       }
       yield return new WaitForSeconds(spawnInterval);
       _summoning = false;
