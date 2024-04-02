@@ -15,7 +15,7 @@ public class Summoner : MonoBehaviour
 
     [SerializeField] private boolVariable gameIsPaused;
 
-    [SerializeField] private SpawnEnemies enemySpawner;
+    private SpawnEnemies _enemySpawner;
 
     [SerializeField] private GameObject enemyToSpawn;
 
@@ -23,6 +23,7 @@ public class Summoner : MonoBehaviour
 
     private void Awake()
     {
+      _enemySpawner = GameObject.FindObjectOfType<SpawnEnemies>();   
       _summoning = false;
     }
 
@@ -48,7 +49,7 @@ public class Summoner : MonoBehaviour
       _summoning = true;
       for (int i = 0; i < numEnemiesToSpawn; i++)
       {
-        enemySpawner.SpawnEnemy(enemyToSpawn);
+        _enemySpawner.SpawnEnemy(enemyToSpawn);
       }
       yield return new WaitForSeconds(spawnInterval);
       _summoning = false;
