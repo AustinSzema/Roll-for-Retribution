@@ -1,45 +1,21 @@
 ﻿Roll for Retribution (name TBD) Design Document / idea notes
 
-// Right now the player can just stand inside a ring of demon dice and never die. We need a solution to this. Either the player's health is decreased if they stop moving for a certain period of time, or if their displacement is too low after a short period of time, or something.
-// Maybe dice can only kill enemies when they're moving or above a certain velocity? Idk that's probably not a great solution but we can't rely on the player's to keep moving.
-// There is no feedback when hitting enemies that have more than 1 hp. Need some flash or blood particles like vampire survivors or ultrakill
-// Enemies sometimes fall directly onto the player. Need to adjust spawning so that enemies always spawn at least ~30m from the player
-// TODO: fix flight limiter to be more intuitive for designer customization (possible refactor
 // TODO: abstract/cleanup the code for magnet.cs
-// TODO: fix colliders for the enemies
-// TODO: Export the demon enemy boss model
 // Player feels short. Should be looked into
 // We should track the number of cube demons in the player's hand like an ammo counter
 // TODO: Update the levitation ability UI to be more similar to splitgate's jetpack UI. (Make it so it only shows when using it, smaller, in center of screen, and a semi-circle
-// TODO: Explore these mechanics:
-                                  - Ball of death like hollow purple from JJK, attach a rigidbody to a second magnet and shoot it. Explodes demon dice on impact
-                                  - Dice/slot machine comeback mechanic
 
-// FOR FUTURE REFERENCE:
-// Experiment with colors and color theory
-// One possible solution:
-// Environment and enemies are warm colors
-// Player and weapons are colors
+// TODO: Change colors of enemies to contrast with the terrain and skybox.
 
-1. Use 1 and 2 to switch between the magnets.
+// TODO: Overhaul visuals for hand UI. Does not fit the game's color palette
+
 2. Cubes and player need impact when hitting the ground.
-3. Trail renderers on the cubes.
-4. Make the cubes dice.
-5. Piano music.
-6. Speed upgrades, base speed 20f.
 
 Possible upgrades:
-- Move speed
 - Rock shoot speed
 - Rock follow/attract speed
-- Bigger rocks
 - More rocks
 - Heavier cubes (cubes fall faster)
-
-Possible abilities:
-- Rock floating ability (magnet goes under player when pressing space)
-- Double jump
-- Explosive rocks (rocks explode on impact)
 
 Look at BTD6 and Vampire survivors for upgrade and ability references/examples.
 
@@ -48,20 +24,6 @@ Smaller cubes are faster and easier to control. Maybe smaller is just a straight
 2x cubes take up the entire screen.
 
 Bigger cubes tumble more like dice while smaller cubes bounce like bullets.
-
-What kind of vibe are we going for?
-
-BUG: When the cubes are all collected in front of the player, they can block the player because the player is walking into them. Consider turning off the cubes' collider when in front of the player (this opens up a lot more problems).
-
-Trails look really cool but block most of the screen.
-
-Better looking pistol position: Vector3(1.5,-0.300000012,1.41199994).
-
-Add blue sphere when cubes are being pulled in.
-
-Make a state machine and booleans that updated scriptable object variables so any object can access when you are attracting or repelling.
-
-If you kill all the cows, none of them respawn. Also, the kill counter keeps counting up for some reason. TODO: Rework enemy spawning and fix bugs.
 
 
 
