@@ -1,7 +1,6 @@
 ﻿Roll for Retribution (name TBD) Design Document / idea notes
 
-// Player feels short. Should be looked into
-// We should track the number of cube demons in the player's hand like an ammo counter
+//TODO: Change the Game's title to properly reflect the current game.
 
 // TODO: abstract/cleanup the code for magnet.cs
 
@@ -9,11 +8,14 @@
 
 // TODO: Change colors of enemies to contrast with the terrain and skybox.
 
-// TODO: Overhaul visuals for hand UI. Does not fit the game's color palette
+// TODO: Overhaul visuals for the UI. UI images need more texture and the colors do not fit the game's color palette or theme.
 
 // TODO: The game is lacking in feedback.
 // - Whenever anything collides with anything, there needs to be particles at the point of collision.
 // - Enemy deaths are not as satisfying because there is not enough feedback when they are hit. Enemies should flash white when hit and have particles and other visuals to indicate that they took damage.
+
+// The player feels short. The camera is low to the ground relative to the terrain. This isn't necessarily a problem but it makes the player feel small and weak when on the ground.
+// We should track the number of cube demons in the player's hand like an ammo counter if needed for certain weapon types or abiltiies. For example, more cubes in hand means more powerful jump boost (flight ability).
 
 Possible upgrades:
 - Rock shoot speed
