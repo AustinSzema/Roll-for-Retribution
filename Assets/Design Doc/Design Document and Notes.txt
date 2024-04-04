@@ -1,15 +1,19 @@
 ﻿Roll for Retribution (name TBD) Design Document / idea notes
 
-// TODO: abstract/cleanup the code for magnet.cs
 // Player feels short. Should be looked into
 // We should track the number of cube demons in the player's hand like an ammo counter
+
+// TODO: abstract/cleanup the code for magnet.cs
+
 // TODO: Update the levitation ability UI to be more similar to splitgate's jetpack UI. (Make it so it only shows when using it, smaller, in center of screen, and a semi-circle
 
 // TODO: Change colors of enemies to contrast with the terrain and skybox.
 
 // TODO: Overhaul visuals for hand UI. Does not fit the game's color palette
 
-2. Cubes and player need impact when hitting the ground.
+// TODO: The game is lacking in feedback.
+// - Whenever anything collides with anything, there needs to be particles at the point of collision.
+// - Enemy deaths are not as satisfying because there is not enough feedback when they are hit. Enemies should flash white when hit and have particles and other visuals to indicate that they took damage.
 
 Possible upgrades:
 - Rock shoot speed
@@ -24,7 +28,4 @@ Smaller cubes are faster and easier to control. Maybe smaller is just a straight
 2x cubes take up the entire screen.
 
 Bigger cubes tumble more like dice while smaller cubes bounce like bullets.
-
-
-
 
