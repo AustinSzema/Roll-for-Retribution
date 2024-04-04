@@ -15,6 +15,10 @@ public class Summoner : MonoBehaviour
 
     [SerializeField] private boolVariable gameIsPaused;
 
+    [SerializeField] private AudioClip _summonClip;
+
+    private static AudioManager _audioManager;
+
     private SpawnEnemies _enemySpawner;
 
     [SerializeField] private GameObject enemyToSpawn;
@@ -23,6 +27,12 @@ public class Summoner : MonoBehaviour
 
     private void Awake()
     {
+      if(_summonClip == null)
+      {
+          _summonClip = Resources.Load<AudioClip>("Audio/SummonClip");
+      }
+
+      _audioManager = FindObjectOfType<AudioManager>();
       _enemySpawner = GameObject.FindObjectOfType<SpawnEnemies>();   
       _summoning = false;
     }
@@ -47,6 +57,14 @@ public class Summoner : MonoBehaviour
     IEnumerator Summon()
     {
       _summoning = true;
+      if (_summonClip != null)
+      {
+          _audioManager.PlaySFXAtLocation(_summonClip, transform.position);
+      }
+      else
+      {
+          Debug.LogWarning("Summon clip is null in " + gameObject.name);
+      }
       for (int i = 0; i < numEnemiesToSpawn; i++)
       {
         _enemySpawner.SpawnEnemy(enemyToSpawn, this.transform.position);
