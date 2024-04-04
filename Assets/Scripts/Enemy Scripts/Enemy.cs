@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private intVariable _killCount;
 
     [SerializeField] private ParticleSystem _explosionParticles;
+    
+    [SerializeField] private ParticleSystem _hitParticles;
 
     [SerializeField] private AudioClip _hitClip;
 
@@ -58,6 +60,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void takeDamage(int hitPoints)
     {
         _currentHealth -= hitPoints;
+        EnemyHit();
         if (_currentHealth <= 0)
         {
             Explode();
@@ -65,6 +68,20 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    private void EnemyHit()
+    {
+        if (_hitClip != null)
+        {
+            _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Hit clip is null in " + gameObject.name);
+        }
+        _hitParticles.Play();
+    }
+
+    
     private void Explode()
     {
         if (_hitClip != null)
