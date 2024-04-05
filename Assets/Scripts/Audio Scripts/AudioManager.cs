@@ -149,12 +149,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFlyStartSound()
     {
-        _sfxSource.PlayOneShot(_flyStartClip);
+        PlayInvariableSFX(_flyStartClip);
     }
 
     public void PlayFlyEndSound()
     {
-        _sfxSource.PlayOneShot(_flyEndClip);
+        PlayInvariableSFX(_flyEndClip);
     }
 
     // for playing background music
@@ -179,6 +179,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySFXAtLocation(AudioClip clip, Vector3 position)
     {
         AudioSource.PlayClipAtPoint(clip, position);
+    }
+
+    public void PlaySFXAtLocationWithVolume(AudioClip clip, Vector3 position, float volume)
+    {
+        AudioSource.PlayClipAtPoint(clip, position, volume);
     }
 
     public void PlaySFXAtLocationWithPitch(AudioClip clip, Vector3 position, float pitch)

@@ -57,16 +57,12 @@ public class Summoner : MonoBehaviour
     IEnumerator Summon()
     {
       _summoning = true;
-      if (_summonClip != null)
-      {
-          _audioManager.PlaySFXAtLocation(_summonClip, transform.position);
-      }
-      else
-      {
-          Debug.LogWarning("Summon clip is null in " + gameObject.name);
-      }
       for (int i = 0; i < numEnemiesToSpawn; i++)
       {
+        if(i == 0 && _summonClip != null)
+        {
+            _audioManager.PlaySFXAtLocationWithVolume(_summonClip, transform.position, 800.0f);
+        }
         _enemySpawner.SpawnEnemy(enemyToSpawn, this.transform.position);
       }
       yield return new WaitForSeconds(spawnInterval);
