@@ -18,6 +18,7 @@ public class Magnet : MonoBehaviour
     [SerializeField] private boolVariable _gameIsPaused;
     [SerializeField] private boolVariable _outOfFuel;
     [SerializeField] private boolVariable _pullingInDemons;
+    [SerializeField] private ShotTypeSO _activeShotTypeSO;
     
     
     [Header("UI Images")] [SerializeField] private GameObject _attractImage;
@@ -96,23 +97,24 @@ public class Magnet : MonoBehaviour
         if (!_gameIsPaused.Value)
         {
 
+            _activeShotTypeSO.activeShotType = _currentShotType;
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                _currentShotType = ShotType.Shotgun;
+                _currentShotType = ShotTypeSO.ShotType.Shotgun;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                _currentShotType = ShotType.Sniper;
+                _currentShotType = ShotTypeSO.ShotType.Sniper;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                _currentShotType = ShotType.Spray;
+                _currentShotType = ShotTypeSO.ShotType.Spray;
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                _currentShotType = ShotType.Beam;
-            }
+            // else if (Input.GetKeyDown(KeyCode.Alpha4))
+            // {
+            //     _currentShotType = ShotTypeSO.ShotType.Beam;
+            // }
             
             
             
@@ -248,15 +250,8 @@ public class Magnet : MonoBehaviour
 
     private bool _shotgunOnCooldown;
     
-    private enum ShotType
-    {
-        Shotgun,
-        Sniper,
-        Spray,
-        Beam
-    }
-
-    private ShotType _currentShotType;
+    private ShotTypeSO.ShotType _currentShotType;
+    
     private IEnumerator ShotgunAbility()
     {
         if (!_shotgunOnCooldown)
@@ -265,16 +260,16 @@ public class Magnet : MonoBehaviour
 
             switch (_currentShotType)
             {
-                case ShotType.Shotgun:
+                case ShotTypeSO.ShotType.Shotgun:
                     _audioManager.PlayShotgunSound();
                     break;
-                case ShotType.Sniper:
+                case ShotTypeSO.ShotType.Sniper:
                     _audioManager.PlaySniperSound();
                     break;
-                case ShotType.Spray:
+                case ShotTypeSO.ShotType.Spray:
                     _audioManager.PlaySpraySound();
                     break;
-                case ShotType.Beam:
+                case ShotTypeSO.ShotType.Beam:
                     break;
                 default:
                     break;
@@ -300,7 +295,7 @@ public class Magnet : MonoBehaviour
                 
                 switch (_currentShotType)
                 {
-                    case ShotType.Shotgun:
+                    case ShotTypeSO.ShotType.Shotgun:
 
                         deviationAngleX = Random.Range(-20f, 20f);
                         deviationAngleY = Random.Range(-20f, 20f);
@@ -314,15 +309,15 @@ public class Magnet : MonoBehaviour
                         
 
                         break;
-                    case ShotType.Sniper:
+                    case ShotTypeSO.ShotType.Sniper:
                         rb.AddForce(transform.forward * _shotgunSpeed);
                         break;
-                    case ShotType.Spray:
+                    case ShotTypeSO.ShotType.Spray:
                         deviationAngleY = Random.Range(-20f, 20f); // Adjust the range as needed
                         offsetDirection = Quaternion.Euler(0, deviationAngleY, 0) * transform.forward;
                         rb.AddForce(offsetDirection * _shotgunSpeed);
                         break;
-                    case ShotType.Beam:
+                    case ShotTypeSO.ShotType.Beam:
                         break;
                     default:
                         break;
