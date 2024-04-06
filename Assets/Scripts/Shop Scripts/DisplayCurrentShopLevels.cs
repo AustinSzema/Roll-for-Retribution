@@ -46,7 +46,7 @@ public class DisplayCurrentShopLevels : MonoBehaviour
         pullForceCost.text = shop.CostToLevel(Shop.SkillsToLevel.PullForce).ToString();
         diceQuantityCost.text = shop.CostToLevel(Shop.SkillsToLevel.DiceQuantity).ToString();
         diceWeightCost.text = shop.CostToLevel(Shop.SkillsToLevel.DiceWeight).ToString();
-        skillPoints.text = "Skill Points:"  + shop.CurrentSkillPoints().ToString();
+        skillPoints.text = "Skill Points: "  + shop.CurrentSkillPoints().ToString();
     }
     
 }
