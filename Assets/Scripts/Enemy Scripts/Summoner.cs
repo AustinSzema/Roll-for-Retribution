@@ -24,6 +24,7 @@ public class Summoner : MonoBehaviour
     [SerializeField] private GameObject enemyToSpawn;
 
     private bool _summoning;
+    private bool delaying;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class Summoner : MonoBehaviour
       _audioManager = FindObjectOfType<AudioManager>();
       _enemySpawner = GameObject.FindObjectOfType<SpawnEnemies>();   
       _summoning = false;
+      StartCoroutine(InitialDelay());
     }
 
 
@@ -42,7 +44,7 @@ public class Summoner : MonoBehaviour
     {
       if (gameIsPaused.Value == false && this.gameObject.activeSelf)
       {
-        if (_summoning == false)
+        if (!_summoning && !delaying)
         {
           StartCoroutine(Summon());
         }
@@ -67,6 +69,13 @@ public class Summoner : MonoBehaviour
       }
       yield return new WaitForSeconds(spawnInterval);
       _summoning = false;
+    }
+
+    IEnumerator InitialDelay()
+    {
+      delaying = true;
+      yield return new WaitForSeconds(spawnInterval);
+      delaying = false;
     }
     
     
