@@ -36,7 +36,7 @@ public class Shop : MonoBehaviour
     private int[] _pullForceAtLevel = { 61, 62, 64, 66, 69, 72, 76, 80, 85, 90 };
 
     [SerializeField]
-    private float[] _percentIncreaseAtLevel = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, };
+    private float[] _percentDecreaseAtLevel = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, };
 
     private Magnet _playerMagnet;
     
@@ -90,7 +90,7 @@ public class Shop : MonoBehaviour
                }
                break;
            case SkillsToLevel.DiceWeight:
-               _playerMagnet.IncreaseDiceWeight(_percentIncreaseAtLevel[CurrentLevel(skill)]);
+               _playerMagnet.DecreaseDiceWeight(_percentDecreaseAtLevel[CurrentLevel(skill)]);
                break;
            case SkillsToLevel.PullForce:
                _playerMagnet.PullSpeed = _pullForceAtLevel[CurrentLevel(skill)];
