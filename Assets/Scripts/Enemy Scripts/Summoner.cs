@@ -65,7 +65,7 @@ public class Summoner : MonoBehaviour
         {
             _audioManager.PlaySFXAtLocationWithVolume(_summonClip, transform.position, 800.0f);
         }
-        _enemySpawner.SpawnEnemy(enemyToSpawn, this.transform.position);
+        _enemySpawner.SpawnEnemy(enemyToSpawn, this.transform.position, 5f, 15f);
       }
       yield return new WaitForSeconds(spawnInterval);
       _summoning = false;

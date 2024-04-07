@@ -134,22 +134,20 @@ public class SpawnEnemies : MonoBehaviour
     return enemyPosition;
   }
 
-  public void SpawnEnemy(GameObject enemy, Vector3 centralLocation)
+  public void SpawnEnemy(GameObject enemy, Vector3 centralLocation, float minRange = 40f, float maxRange = 60f)
   {
     GameObject enemyInstance = EnemyPool.Instance.GetPooledObject(enemy.name);
-    float maxDistanceFromPlayer = 60f;
-    float minDistanceFromPlayer = 40f;
 
     Vector3 behind = -playerTransform.forward;
     Vector3 NoNoZoneLeft = Quaternion.AngleAxis(noNoZoneAngle, playerTransform.up) * behind * noNoZoneDistance;
     Vector3 NoNoZoneRight = Quaternion.AngleAxis(-noNoZoneAngle, playerTransform.up) * behind * noNoZoneDistance;
 
-    Vector3 enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
+    Vector3 enemyPosition = PickEnemyPosition(minRange, maxRange);
     Debug.DrawLine(centralLocation, NoNoZoneLeft + centralLocation, Color.red, 5);
     Debug.DrawLine(centralLocation, NoNoZoneRight + centralLocation, Color.red, 5);
     while (InTriangle(enemyPosition, centralLocation, NoNoZoneLeft + centralLocation, NoNoZoneRight + centralLocation))
     {
-      enemyPosition = PickEnemyPosition(minDistanceFromPlayer, maxDistanceFromPlayer);
+      enemyPosition = PickEnemyPosition(minRange, maxRange);
     }
 
     enemyInstance.transform.position = enemyPosition;
