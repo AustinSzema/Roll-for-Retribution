@@ -168,6 +168,7 @@ public class Magnet : MonoBehaviour
                 _outOfFuel.Value = true;
                 transform.position = _handPosition.position;
                 _playerIsFlying.Value = false;
+                currentFlyCooldown = flyCooldown;
                 _audioManager.StopFlyingSound();
             }
 
