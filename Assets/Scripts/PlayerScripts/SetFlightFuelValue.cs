@@ -25,7 +25,6 @@ public class SetFlightFuelValue : MonoBehaviour
 
     [SerializeField] private boolVariable _outOfFuel;
     
-    [SerializeField] private float _fuelDepletionThreshold = 1f;
 
     private Color _originalFillColor;
 
@@ -44,7 +43,7 @@ public class SetFlightFuelValue : MonoBehaviour
     {
         // Set the slider value
         _flightFuelSlider.value = _flightDuration.Value;
-        _minimumFuelSlider.value = _magnet._minimumFuelAmount;
+        _minimumFuelSlider.value = _magnet._fuelPenaltyThreshold;
 
 
         
@@ -76,8 +75,9 @@ public class SetFlightFuelValue : MonoBehaviour
             _fuelFill.color = _originalFillColor / 2;
         }
 
-        if (_flightFuelSlider.value >= _fuelDepletionThreshold)
+        if (_flightFuelSlider.value >= _magnet._fuelPenaltyThreshold)
         {
+            Debug.Log("Flight Fuel Slider Value: " + _flightFuelSlider.value);
             _fuelFill.color = _originalFillColor;
         }
 
