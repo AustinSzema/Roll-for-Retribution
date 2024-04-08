@@ -126,11 +126,11 @@ public class SpawnEnemies : MonoBehaviour
     return SameSide(point,a, b,c) && SameSide(point,b, a,c) && SameSide(point, c, a, b);
   }
 
-  Vector3 PickEnemyPosition(float minDistance = 40f, float maxDistance = 60f)
+  Vector3 PickEnemyPosition(Vector3 centralLocation, float minDistance = 40f, float maxDistance = 60f)
   {
     float xOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
     float zOffset = Random.Range(minDistance, maxDistance) * Mathf.Sign(Random.Range(-1f, 1f));
-    Vector3 enemyPosition = new Vector3(playerTransform.position.x + xOffset, 15.0f, playerTransform.position.z + zOffset);
+    Vector3 enemyPosition = new Vector3(centralLocation.x + xOffset, 15.0f,centralLocation.z + zOffset);
     return enemyPosition;
   }
 
@@ -142,12 +142,12 @@ public class SpawnEnemies : MonoBehaviour
     Vector3 NoNoZoneLeft = Quaternion.AngleAxis(noNoZoneAngle, playerTransform.up) * behind * noNoZoneDistance;
     Vector3 NoNoZoneRight = Quaternion.AngleAxis(-noNoZoneAngle, playerTransform.up) * behind * noNoZoneDistance;
 
-    Vector3 enemyPosition = PickEnemyPosition(minRange, maxRange);
+    Vector3 enemyPosition = PickEnemyPosition(centralLocation, minRange, maxRange);
     Debug.DrawLine(centralLocation, NoNoZoneLeft + centralLocation, Color.red, 5);
     Debug.DrawLine(centralLocation, NoNoZoneRight + centralLocation, Color.red, 5);
     while (InTriangle(enemyPosition, centralLocation, NoNoZoneLeft + centralLocation, NoNoZoneRight + centralLocation))
     {
-      enemyPosition = PickEnemyPosition(minRange, maxRange);
+      enemyPosition = PickEnemyPosition(centralLocation, minRange, maxRange);
     }
 
     enemyInstance.transform.position = enemyPosition;
