@@ -45,9 +45,6 @@ public class Magnet : MonoBehaviour
     [Header("Weapon Values")] 
     [SerializeField] private GameObject _magneticObject;
 
-    [SerializeField] private float flyCooldown = 3;
-    private float currentFlyCooldown;
-
     [SerializeField] private float _pullSpeed;
 
     public float PullSpeed
@@ -91,7 +88,6 @@ public class Magnet : MonoBehaviour
         }
 
         _minimumFuelAmount = _maxFlightDuration / 4;
-        currentFlyCooldown = 0;
     }
 
     private bool _activateMagnet = false;
@@ -124,7 +120,7 @@ public class Magnet : MonoBehaviour
 
             // When the player is holding right mouse button and holding space and has demons in hand and has fuel
             if (Input.GetMouseButton(1) && Input.GetKey(KeyCode.Space) && _demonInHand.Value &&
-                _flightDuration.Value >= 0 && currentFlyCooldown <= 0)
+                _flightDuration.Value >= 0)
             {
                 // if player is not out of fuel make them fly
                 if (!_outOfFuel.Value)
@@ -143,10 +139,8 @@ public class Magnet : MonoBehaviour
             {
                 if(_playerIsFlying.Value == true) {
                     _audioManager.StopFlyingSound();
-                    currentFlyCooldown = flyCooldown;
                 }
                 _playerIsFlying.Value = false;
-                currentFlyCooldown -= Time.deltaTime;
                 transform.position = _handPosition.position;
                 _attractParticlesRenderer.material = _attractCenterMaterial;
                 _centerSphere.material = _attractCenterMaterial;
@@ -168,7 +162,6 @@ public class Magnet : MonoBehaviour
                 _outOfFuel.Value = true;
                 transform.position = _handPosition.position;
                 _playerIsFlying.Value = false;
-                currentFlyCooldown = flyCooldown;
                 _audioManager.StopFlyingSound();
             }
 
