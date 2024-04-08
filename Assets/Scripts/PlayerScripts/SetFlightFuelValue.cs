@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SetFlightFuelValue : MonoBehaviour
@@ -27,6 +25,7 @@ public class SetFlightFuelValue : MonoBehaviour
 
     [SerializeField] private boolVariable _outOfFuel;
     
+    [SerializeField] private float _fuelDepletionThreshold = 1f;
 
     private Color _originalFillColor;
 
@@ -77,7 +76,7 @@ public class SetFlightFuelValue : MonoBehaviour
             _fuelFill.color = _originalFillColor / 2;
         }
 
-        if (_flightFuelSlider.value >= _flightFuelSlider.maxValue / 4f)
+        if (_flightFuelSlider.value >= _fuelDepletionThreshold)
         {
             _fuelFill.color = _originalFillColor;
         }
