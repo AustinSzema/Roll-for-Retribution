@@ -12,6 +12,9 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     [SerializeField] private intVariable _playerCurrentHealth;
 
     [SerializeField] private GameObject _gameOverMenu;
+
+    [SerializeField] private AudioClip _playerDamagedClip;
+
     private bool _gameOver;
     private void Start()
     {

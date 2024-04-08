@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private AudioClip _enemyGruntClip;
 
+    [SerializeField] private AudioClip _enemyDamagedClip;
+
     private static AudioManager _audioManager;
 
     private int _currentHealth;
@@ -40,6 +42,11 @@ public class Enemy : MonoBehaviour, IDamageable
         if(_enemyGruntClip == null)
         {
             _enemyGruntClip = Resources.Load<AudioClip>("Audio/EnemyGrunt");
+        }
+
+        if(_enemyDamagedClip == null)
+        {
+            _enemyDamagedClip = Resources.Load<AudioClip>("Audio/SummonerHit");
         }
     }
 
@@ -65,6 +72,8 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             Explode();
             _currentHealth = healthPoints;
+        } else {
+            _audioManager.PlaySFXAtLocation(_enemyDamagedClip, transform.position);
         }
     }
 
