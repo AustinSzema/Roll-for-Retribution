@@ -24,8 +24,10 @@ public class SetFlightFuelValue : MonoBehaviour
 
 
     [SerializeField] private boolVariable _outOfFuel;
-    
 
+
+    [SerializeField] private boolVariable _gameIsPaused;
+    
     private Color _originalFillColor;
 
     private void Start()
@@ -41,55 +43,35 @@ public class SetFlightFuelValue : MonoBehaviour
     
     private void Update()
     {
-        // Set the slider value
-        _flightFuelSlider.value = _flightDuration.Value;
-        _minimumFuelSlider.value = _magnet._fuelPenaltyThreshold;
-
-
-        
-        // if the slider's value is not changing, do not show the slider. Else, show it
-        /*if (_flightDuration.Value - _previousFuel <= 0.001f)
+        if (!_gameIsPaused.Value)
         {
-            _flightSliderBackground.SetActive(false);
+            // Set the slider value
+            _flightFuelSlider.value = _flightDuration.Value;
+            _minimumFuelSlider.value = _magnet._fuelPenaltyThreshold;
+
+            if (_outOfFuel.Value == true)
+            {
+                _fuelFill.color = _originalFillColor / 2;
+            }
+
+            if (_flightFuelSlider.value >= _magnet._fuelPenaltyThreshold)
+            {
+                Debug.Log("Flight Fuel Slider Value: " + _flightFuelSlider.value);
+                _fuelFill.color = _originalFillColor;
+            }
+
+            if (_outOfFuel.Value == false)
+            {
+                _fuelTextMeshProUGUI.text = _fuelDefaultText + (int)(_flightFuelSlider.value / _flightFuelSlider.maxValue * 100) + "%";
+            }
+            else
+            {
+                _fuelTextMeshProUGUI.text = "Recharging...";
+            }
+
+
+            
         }
-        else
-        {
-            _flightSliderBackground.SetActive(true);
-        }*/
-        /*
-        if (_playerIsFlying.Value && _flightDuration.Value < _magnet._maxFlightDuration)
-        {
-            _flightSliderBackground.SetActive(true);
-        }
-        */
-        /*if(_flightDuration.Value - _magnet._maxFlightDuration <= 0.001f)
-        {
-            _flightSliderBackground.SetActive(false);
-        }*/
-
-        // Must go at end of update so it can be checked next frame
-
-
-        if (_outOfFuel.Value == true)
-        {
-            _fuelFill.color = _originalFillColor / 2;
-        }
-
-        if (_flightFuelSlider.value >= _magnet._fuelPenaltyThreshold)
-        {
-            Debug.Log("Flight Fuel Slider Value: " + _flightFuelSlider.value);
-            _fuelFill.color = _originalFillColor;
-        }
-
-        if (_outOfFuel.Value == false)
-        {
-            _fuelTextMeshProUGUI.text = _fuelDefaultText + (int)(_flightFuelSlider.value / _flightFuelSlider.maxValue * 100) + "%";
-        }
-        else
-        {
-            _fuelTextMeshProUGUI.text = "Recharging...";
-        }
-        
 
     }
 

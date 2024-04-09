@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Jump Boost: 100%'
+  m_text: 'Levitate: 100%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.75
+  m_fontSize: 21.7
   m_fontSizeBase: 13.98
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1374,10 +1374,11 @@ MonoBehaviour:
   _flightSliderBackground: {fileID: 7192824417055707643}
   _magnet: {fileID: 0}
   _minimumFuelSlider: {fileID: 6265738102040155881}
-  _fuelDefaultText: 'Jump Boost:'
+  _fuelDefaultText: Levitate
   _fuelTextMeshProUGUI: {fileID: 2692939902259730556}
   _fuelFill: {fileID: 4197266111771837754}
   _outOfFuel: {fileID: 11400000, guid: aa1e12afa2ee1654bbb5fd97862a57d3, type: 2}
+  _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
 --- !u!1 &2737845965260036178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,6 +2482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shopCanvas: {fileID: 0}
+  _gameIsPaused: {fileID: 0}
 --- !u!114 &7661485083997498476
 MonoBehaviour:
   m_ObjectHideFlags: 0
