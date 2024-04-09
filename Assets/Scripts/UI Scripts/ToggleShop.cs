@@ -4,6 +4,8 @@ using UnityEngine;
     {
         [SerializeField] private GameObject _shopCanvas;
 
+        [SerializeField] private boolVariable _gameIsPaused;
+        
         private bool _toggleCanvas = false;
 
         // Update is called once per frame
@@ -11,6 +13,7 @@ using UnityEngine;
         {
             if (Input.GetKeyDown(KeyCode.P))
             {
+                _gameIsPaused.Value = !_gameIsPaused.Value;
                 _toggleCanvas = !_toggleCanvas;
                 if (_toggleCanvas)
                 {
