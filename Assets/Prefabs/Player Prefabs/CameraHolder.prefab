@@ -102,7 +102,7 @@ MonoBehaviour:
   _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
   _outOfFuel: {fileID: 11400000, guid: aa1e12afa2ee1654bbb5fd97862a57d3, type: 2}
   _pullingInDemons: {fileID: 11400000, guid: 4c3914f913d63264486dadaad8fb1c31, type: 2}
-  _activeShotTypeSO: {fileID: 0}
+  _activeShotTypeSO: {fileID: 11400000, guid: 9b64c51592ce3b74c8eaa5222e17b710, type: 2}
   _attractImage: {fileID: 0}
   _repelImage: {fileID: 0}
   _defaultImage: {fileID: 0}
@@ -128,9 +128,10 @@ MonoBehaviour:
   _slamSpeed: 5500
   _slamCooldown: 0.5
   _shotgunSpeed: 6000
-  _shotgunCooldown: 0.25
+  _shotgunCooldown: 0.5
   _reachThreshold: 1
   _audioManager: {fileID: 0}
+  _outOfBreathClip: {fileID: 0}
   _maxFlightDuration: 100
   _fuelDecrementAmount: 2
   _fuelRechargeAmount: 0.5
@@ -880,6 +881,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e7ff6a2347ad63248bca4084a5b91af8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

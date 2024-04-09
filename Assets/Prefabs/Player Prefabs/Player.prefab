@@ -53,6 +53,10 @@ MonoBehaviour:
     number: 500
   - enemy: {fileID: 7688580540974025677, guid: b0488291a59b2be41a9f626a810dca63, type: 3}
     number: 500
+  - enemy: {fileID: 7414583617872787320, guid: d3e2a0e7c0dbd404aba49bb2387b963c, type: 3}
+    number: 500
+  - enemy: {fileID: 7688580540974025677, guid: 452ee40f3e17d604780e96dec4382996, type: 3}
+    number: 500
 --- !u!1 &1991907602
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +513,9 @@ MonoBehaviour:
   _playerCurrentHealth: {fileID: 11400000, guid: 852666a7f8747244f819501a8cb0edbd,
     type: 2}
   _gameOverMenu: {fileID: 0}
+  _playerDamagedClip: {fileID: 0}
+  score: {fileID: 11400000, guid: 73f58ac34ede0124a8c089afa3bdb9dd, type: 2}
+  displayHighScore: {fileID: 0}
 --- !u!114 &4002532168671568275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,8 +545,8 @@ MonoBehaviour:
   _progressionClip1: {fileID: 8300000, guid: ad218edfd8e2d40b7aab591a57502f41, type: 3}
   _progressionClip2: {fileID: 8300000, guid: 825f8e689dc804023ae34f39628ad4de, type: 3}
   _progressionClip3: {fileID: 8300000, guid: 0936cf76287ba4232b066fbefccbbe7a, type: 3}
-  _progressionClip4: {fileID: 8300000, guid: 947a90f4879a947a3a198c5865c40d13, type: 3}
-  _progressionClip5: {fileID: 8300000, guid: d3b09292bca5d439e9e1a786f5c36a60, type: 3}
+  _progressionClip4: {fileID: 8300000, guid: 06581a7e2a4784034949e2dbefb6d5fa, type: 3}
+  _progressionClip5: {fileID: 8300000, guid: c2773e14dea9a4c769b9558529f8e461, type: 3}
   skillPoints: 0
   _thresholds: 96000000dc000000680100003a02000052030000b0040000540600003e0800006e0a0000e40c0000
   SkillPointsToGainAtThreshold: 1400000014000000280000003c0000005000000078000000a0000000d20000000e0100004a010000

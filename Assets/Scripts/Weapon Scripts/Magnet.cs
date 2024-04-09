@@ -302,8 +302,6 @@ public class Magnet : MonoBehaviour
                         
                         offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) * transform.forward;
                         
-                        Debug.Log("X:" + deviationAngleX + " Y:" + deviationAngleY + " Z:" + deviationAngleZ);
-                        
                         rb.AddForce(offsetDirection * _shotgunSpeed);
                         
 
