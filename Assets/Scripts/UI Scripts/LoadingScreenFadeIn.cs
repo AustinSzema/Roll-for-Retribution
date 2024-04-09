@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 public class LoadingScreenFadeIn : MonoBehaviour
 {
     [SerializeField] private Image _backgroundImage;
+
+    private void Start()
+    {
+        _backgroundImage.color =
+        new Color(_backgroundImage.color.r, _backgroundImage.color.g, _backgroundImage.color.b, 1f);
+    }
+
     private void Update()
     {
         if (_backgroundImage.color.a <= 0.5f)
