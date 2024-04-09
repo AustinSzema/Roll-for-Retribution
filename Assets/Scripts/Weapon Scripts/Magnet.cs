@@ -61,6 +61,7 @@ public class Magnet : MonoBehaviour
     [SerializeField] private float _reachThreshold = 1.0f;
 
     [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private AudioClip _outOfBreathClip;
 
     [Header("Levitate Ability")] public float _maxFlightDuration = 10;
     [SerializeField] private float _fuelDecrementAmount = 1;
@@ -78,6 +79,11 @@ public class Magnet : MonoBehaviour
     {
         // caches the reference to the audio manager at start
         _audioManager = FindObjectOfType<AudioManager>();
+
+        if (_outOfBreathClip == null)
+        {
+            _outOfBreathClip = Resources.Load<AudioClip>("Audio/OutOfBreathSFX2");
+        }
         
         _flightDuration.Value = _maxFlightDuration;
 
@@ -90,6 +96,8 @@ public class Magnet : MonoBehaviour
     }
 
     private bool _activateMagnet = false;
+
+    private bool _outOfBreathClipPlayed = false;
     
     private void Update()
     {
@@ -124,6 +132,7 @@ public class Magnet : MonoBehaviour
                 // if player is not out of fuel make them fly
                 if (!_outOfFuel.Value)
                 {
+                    _outOfBreathClipPlayed = false;
                     transform.position = _footPosition.position;
                     _playerIsFlying.Value = true;
                     _audioManager.StartFlyingSound();
@@ -132,6 +141,9 @@ public class Magnet : MonoBehaviour
                     _centerSphere.material = _levitateCenterMaterial;
                     _outerSphere.material = _levitateOuterMaterial;
                     _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _flightForce, _playerRigidbody.velocity.z);
+                } else if (!_outOfBreathClipPlayed) {
+                    _audioManager.PlayInvariableSFX(_outOfBreathClip);
+                    _outOfBreathClipPlayed = true;
                 }
             }
             else
