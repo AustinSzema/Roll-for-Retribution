@@ -43,7 +43,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private AudioClip _shopPurchaseClip;
 
     private static AudioManager _audioManager;
-    
+
     // Start is called before the first frame update
     void Start()
     {

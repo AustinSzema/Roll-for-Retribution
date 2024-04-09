@@ -15,11 +15,20 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     [SerializeField] private AudioClip _playerDamagedClip;
 
+    private static AudioManager _audioManager;
+
     private bool _gameOver;
     private void Start()
     {
         _playerCurrentHealth.Value = _playerHealth.Value;
         _gameOverMenu.SetActive(false);
+
+        _audioManager = FindObjectOfType<AudioManager>();
+
+        if (_playerDamagedClip == null)
+        {
+            _playerDamagedClip = Resources.Load<AudioClip>("Audio/PlayerHit");
+        }
     }
 
     private void Awake()
@@ -57,6 +66,8 @@ public class PlayerDamage : MonoBehaviour, IDamageable
         if (_playerCurrentHealth.Value <= 0)
         {
             Die();
+        } else {
+            _audioManager.PlayInvariableSFX(_playerDamagedClip);
         }
         Debug.Log("player took 1 damage, currently at " + _playerCurrentHealth.Value + " health");
     }
