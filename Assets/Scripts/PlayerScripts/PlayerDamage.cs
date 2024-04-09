@@ -15,11 +15,16 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     [SerializeField] private AudioClip _playerDamagedClip;
 
+    [SerializeField] private intVariable score;
+
+    private HighScore _highScore;
+
     private bool _gameOver;
     private void Start()
     {
         _playerCurrentHealth.Value = _playerHealth.Value;
         _gameOverMenu.SetActive(false);
+        _highScore = new HighScore();
     }
 
     private void Awake()
@@ -69,6 +74,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        // menu popup
        Cursor.lockState = CursorLockMode.None;
        Cursor.visible = true;
+       _highScore.WriteHighScore(score.Value);
        _gameOverMenu.SetActive(true);
     }
 }
