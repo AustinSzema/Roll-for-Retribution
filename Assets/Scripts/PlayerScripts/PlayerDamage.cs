@@ -24,6 +24,8 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     private static AudioManager _audioManager;
 
     private bool _gameOver;
+
+    [SerializeField] private boolVariable _gameIsPaused;
     private void Start()
     {
         _playerCurrentHealth.Value = _playerHealth.Value;
@@ -89,5 +91,6 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        _highScore.WriteHighScore(score.Value + 1);
        _gameOverMenu.SetActive(true);
        displayHighScore.text = "High Score: " + _highScore.GetHighScore();
+       _gameIsPaused.Value = true;
     }
 }
