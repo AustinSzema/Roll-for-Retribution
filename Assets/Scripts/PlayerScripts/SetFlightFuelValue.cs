@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SetFlightFuelValue : MonoBehaviour
@@ -45,7 +43,7 @@ public class SetFlightFuelValue : MonoBehaviour
     {
         // Set the slider value
         _flightFuelSlider.value = _flightDuration.Value;
-        _minimumFuelSlider.value = _magnet._minimumFuelAmount;
+        _minimumFuelSlider.value = _magnet._fuelPenaltyThreshold;
 
 
         
@@ -77,8 +75,9 @@ public class SetFlightFuelValue : MonoBehaviour
             _fuelFill.color = _originalFillColor / 2;
         }
 
-        if (_flightFuelSlider.value >= _flightFuelSlider.maxValue / 4f)
+        if (_flightFuelSlider.value >= _magnet._fuelPenaltyThreshold)
         {
+            Debug.Log("Flight Fuel Slider Value: " + _flightFuelSlider.value);
             _fuelFill.color = _originalFillColor;
         }
 

@@ -39,12 +39,21 @@ public class Shop : MonoBehaviour
     private float[] _percentDecreaseAtLevel = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, };
 
     private Magnet _playerMagnet;
-    
+
+    [SerializeField] private AudioClip _shopPurchaseClip;
+
+    private static AudioManager _audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         _playerMagnet = GameObject.FindObjectOfType<Magnet>();
+        _audioManager = FindObjectOfType<AudioManager>();
+
+        if (_shopPurchaseClip == null)
+        {
+            _shopPurchaseClip = Resources.Load<AudioClip>("Audio/PurchaseSFX");
+        }
     }
 
     int CurrentLevel(SkillsToLevel skill)
@@ -99,6 +108,7 @@ public class Shop : MonoBehaviour
                throw new NotImplementedException();
         }
 
+        _audioManager.PlayInvariableSFX(_shopPurchaseClip);
         _skillPoints.SpendSkillPoints(CostToLevel(skill));
         _skillLevels[(int)skill]++;
     }

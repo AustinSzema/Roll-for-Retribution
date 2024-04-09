@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 // TODO: Does this script need to be broken up? It has so many references
@@ -68,7 +69,7 @@ public class Magnet : MonoBehaviour
     [SerializeField] private boolVariable _demonInHand;
     [SerializeField] private boolVariable _playerIsFlying;
     [Tooltip("Sets the Y value of player's velocity")] [SerializeField] private float _flightForce = 30f;
-    public float _minimumFuelAmount { get; private set; }
+    [FormerlySerializedAs("_minimumFuelAmount")] public float _fuelPenaltyThreshold = 1;
 
     [Header("Player")] [SerializeField] private Rigidbody _playerRigidbody;
 
@@ -86,8 +87,6 @@ public class Magnet : MonoBehaviour
         {
             _magneticObjects.Add(magneticObject.GetComponent<Rigidbody>());
         }
-
-        _minimumFuelAmount = _maxFlightDuration / 4;
     }
 
     private bool _activateMagnet = false;
@@ -151,7 +150,7 @@ public class Magnet : MonoBehaviour
             // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
             // Makes it so the fuel must regenerate a bit before the player can use flight again 
 
-            if (_flightDuration.Value >= _minimumFuelAmount)
+            if (_flightDuration.Value >= _fuelPenaltyThreshold)
             {
                 _outOfFuel.Value = false;
             }
