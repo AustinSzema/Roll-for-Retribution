@@ -9,6 +9,8 @@ public class LoadDimension : MonoBehaviour
 
     [SerializeField] private intVariable _overworldDimensionSceneIndex;
 
+    [SerializeField] private GameObject _loadingScreen;
+    
     private void Start()
     {
         _overworldDimensionSceneIndex.Value = SceneManager.GetActiveScene().buildIndex;
@@ -20,10 +22,12 @@ public class LoadDimension : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex != _dimensionToLoadSceneIndex)
             {
+                _loadingScreen.SetActive(true);
                 SceneManager.LoadScene(_dimensionToLoadSceneIndex);
             }
             else
             {
+                _loadingScreen.SetActive(true);
                 SceneManager.LoadScene(_overworldDimensionSceneIndex.Value);
             }
         }
