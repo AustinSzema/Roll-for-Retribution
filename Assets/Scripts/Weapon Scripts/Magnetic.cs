@@ -13,6 +13,7 @@ public class Magnetic : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.AddForce(Random.onUnitSphere * 100f);
     }
 
     private void OnCollisionEnter(Collision other)

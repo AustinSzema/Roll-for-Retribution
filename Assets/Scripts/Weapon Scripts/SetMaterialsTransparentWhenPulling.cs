@@ -11,13 +11,15 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
     
     private Material[] _demonMaterials;
 
-
+    private void Start()
+    {
+        _demonMaterials = _meshRenderer.materials;
+    }
 
     private void Update()
     {
         if (_pullingInDemons.Value == true)
         {
-            _demonMaterials = _meshRenderer.materials;
             foreach (Material mat in _demonMaterials)
             {
                 mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 0f);
@@ -25,7 +27,6 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
         }
         else
         {
-            _demonMaterials = _meshRenderer.materials;
             foreach (Material mat in _demonMaterials)
             {
                 mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 1f);

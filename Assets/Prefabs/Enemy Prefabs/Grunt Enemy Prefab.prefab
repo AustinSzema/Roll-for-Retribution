@@ -143,7 +143,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1897845184038939654}
@@ -5278,6 +5278,11 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334612509446014873, guid: bd19533bedd9d394497da02e0e9e64ce,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: afc8ad91ceaf85a499423a8eee75aacb, type: 2}
     - target: {fileID: 8334612509446014874, guid: bd19533bedd9d394497da02e0e9e64ce,
         type: 3}
       propertyPath: m_Name
