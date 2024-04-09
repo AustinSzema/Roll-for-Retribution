@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,8 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip _playerDamagedClip;
 
     [SerializeField] private intVariable score;
+
+    [SerializeField] private TextMeshProUGUI displayHighScore;
 
     private HighScore _highScore;
     
@@ -83,7 +86,8 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        // menu popup
        Cursor.lockState = CursorLockMode.None;
        Cursor.visible = true;
-       _highScore.WriteHighScore(score.Value);
+       _highScore.WriteHighScore(score.Value + 1);
        _gameOverMenu.SetActive(true);
+       displayHighScore.text = "High Score: " + _highScore.GetHighScore();
     }
 }
