@@ -51,7 +51,7 @@ public class LoadDimension : MonoBehaviour
 
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f); // 0.9f is the maximum progress value
+            float progress = Mathf.Clamp01(operation.progress / 0.9f - 0.01f); // 0.9f is the maximum progress value
             //Debug.Log("Progress: " + progress);
             _loadingSlider.value = progress;
             _loadingText.text = "Loading " + (progress * 100f).ToString("0") + "%";
