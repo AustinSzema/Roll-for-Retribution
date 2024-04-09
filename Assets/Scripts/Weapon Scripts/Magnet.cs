@@ -216,13 +216,8 @@ public class Magnet : MonoBehaviour
             {
                 StartCoroutine(SlamAbility());
             }
+            SetDemonsVelocityAndPosition();
         }
-
-        else
-        {
-            transform.position = _handPosition.position;
-        }
-        SetDemonsVelocityAndPosition();
     }
     
     

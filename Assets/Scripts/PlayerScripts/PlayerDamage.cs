@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDamage : MonoBehaviour, IDamageable
 {
-
     [SerializeField] private intVariable _playerHealth;
 
     [SerializeField] private intVariable _playerCurrentHealth;
@@ -15,6 +14,10 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     [SerializeField] private AudioClip _playerDamagedClip;
 
+    [SerializeField] private intVariable score;
+
+    private HighScore _highScore;
+    
     private static AudioManager _audioManager;
 
     private bool _gameOver;
@@ -22,7 +25,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     {
         _playerCurrentHealth.Value = _playerHealth.Value;
         _gameOverMenu.SetActive(false);
-
+        _highScore = new HighScore();
         _audioManager = FindObjectOfType<AudioManager>();
 
         if (_playerDamagedClip == null)
@@ -80,6 +83,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        // menu popup
        Cursor.lockState = CursorLockMode.None;
        Cursor.visible = true;
+       _highScore.WriteHighScore(score.Value);
        _gameOverMenu.SetActive(true);
     }
 }
