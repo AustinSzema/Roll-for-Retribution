@@ -19,12 +19,14 @@ using UnityEngine;
                 {
                     _shopCanvas.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     Time.timeScale = 0;
                 }
                 else
                 { 
                     _shopCanvas.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                     Time.timeScale = 1;
 
                 }
