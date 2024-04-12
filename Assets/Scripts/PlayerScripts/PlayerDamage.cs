@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerDamage : MonoBehaviour, IDamageable
 {
@@ -19,6 +20,8 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     [SerializeField] private TextMeshProUGUI displayHighScore;
 
+    [SerializeField] private GameObject _mainCanvas;
+    
     private HighScore _highScore;
     
     private static AudioManager _audioManager;
@@ -49,7 +52,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     {
         if (_gameOver)
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
         }
         
     }
@@ -90,7 +93,24 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        Cursor.visible = true;
        _highScore.WriteHighScore(score.Value + 1);
        _gameOverMenu.SetActive(true);
+
+       InvokeRepeating("fadeOutMainCanvas", 0f, 0.1f);
        displayHighScore.text = "High Score: " + _highScore.GetHighScore();
        _gameIsPaused.Value = true;
+    }
+    
+    
+    //TODO: put this on maincanvas instead of on player damage 
+    private void fadeOutMainCanvas()
+    {
+        RawImage mainCanvasImage = _mainCanvas.GetComponentInChildren<RawImage>();
+        mainCanvasImage.color = new Color(mainCanvasImage.color.r, mainCanvasImage.color.g, mainCanvasImage.color.b,
+            mainCanvasImage.color.a - 0.1f);
+        if (mainCanvasImage.color.a <= 0f)
+        {
+            _mainCanvas.SetActive(false);
+            CancelInvoke();
+            Time.timeScale = 0f;
+        }
     }
 }
