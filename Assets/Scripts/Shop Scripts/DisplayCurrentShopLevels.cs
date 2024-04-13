@@ -42,7 +42,7 @@ public class DisplayCurrentShopLevels : MonoBehaviour
     {
         pullForce.text = magnet.PullSpeed.ToString();
         diceQuantity.text = magnet.GetMagnetCount().ToString();
-        diceWeight.text = magnet.GetDiceWeight().ToString();
+        diceWeight.text = Math.Round(magnet.GetDiceWeight(), 2).ToString();
         pullForceCost.text = shop.CostToLevel(Shop.SkillsToLevel.PullForce).ToString();
         diceQuantityCost.text = shop.CostToLevel(Shop.SkillsToLevel.DiceQuantity).ToString();
         diceWeightCost.text = shop.CostToLevel(Shop.SkillsToLevel.DiceWeight).ToString();
