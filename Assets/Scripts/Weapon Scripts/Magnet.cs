@@ -46,13 +46,7 @@ public class Magnet : MonoBehaviour
     [Header("Weapon Values")] 
     [SerializeField] private GameObject _magneticObject;
 
-    [SerializeField] private float _pullSpeed;
-
-    public float PullSpeed
-    {
-        get;
-        set;
-    }
+    public float _pullSpeed;
 
     [SerializeField] private float _slamSpeed;
     [SerializeField] private float _slamCooldown = 3.0f;

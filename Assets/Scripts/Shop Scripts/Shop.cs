@@ -102,7 +102,7 @@ public class Shop : MonoBehaviour
                _playerMagnet.DecreaseDiceWeight(_percentDecreaseAtLevel[CurrentLevel(skill)]);
                break;
            case SkillsToLevel.PullForce:
-               _playerMagnet.PullSpeed = _pullForceAtLevel[CurrentLevel(skill)];
+               _playerMagnet._pullSpeed = _pullForceAtLevel[CurrentLevel(skill)];
                break;
            default:
                throw new NotImplementedException();
