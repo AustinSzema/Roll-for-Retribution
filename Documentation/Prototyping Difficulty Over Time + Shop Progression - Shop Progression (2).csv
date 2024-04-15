@@ -1,0 +1,59 @@
+Currency Based Progression System,,,,,,,,,,,,,,,,,,,,,
+"In this system, as the player kills enemies they reach kill Checkpoints. When a Checkpoint is reached, the player recieves some amount of Skill Points (SP). At the same time, the Shop window opens.",,,,,,,,,,,,,,,,,,,,,
+"In this Shop, the player can upgrade one of three values: Pull Speed, Dice Quantity, and Dice Weight. Each upgrade has a distinct SP cost and each subsequent upgrade costs more SP. There is no limit to how many upgrades the player can purchase if they have the required SP.",,,,,,,,,,,,,,,,,,,,,
+"Also in the Shop, the player can spend SP to unlock a new ability. Instead of making a single purchase, the player can contribute SP in their posession to the total cost of an ability.  ",,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,2,7,
+,Checkpoints,50 Kills:1 SP,8,Increase,70,,Stat Upgrades,RP Costs,2,,,,,,Stat Changes,(+-)50%,1.5,0.5,Dice Percent Decrease,,0.067
+Additives,Checkpoint #,Total Kill Count,SP Gain,Accumulated SP,Match Mod,,Upgrade #,Pull Force,Dice Quantity,Dice Weight,,,,,Upgrade #,,Pull Force,,Dice Quantity,,Dice Weight
+,1,150,20,20,,,0,,,,,,,,0,,60,,100,,1
+70,2,220,30,50,,,1,5,5,5,,,,,1,1,61,30,130,,0.93
+140,3,360,50,100,,,2,10,10,10,,,,,2,3,64,30,160,,0.87
+210,4,570,70,170,,,3,15,15,15,,,,,3,5,69,30,190,,0.81
+280,5,850,110,280,,,4,20,20,20,,,,,4,7,76,30,220,,0.76
+350,6,1200,150,430,,,5,25,25,25,,,,,5,9,85,30,250,,0.71
+420,7,1620,200,630,,,6,30,30,30,,,,,6,11,96,30,280,,0.66
+490,8,2110,260,890,,,7,35,35,35,,,,,7,13,109,30,310,,0.62
+560,9,2670,330,1220,,,8,40,40,40,,,,,8,15,124,30,340,,0.58
+630,10,3300,410,1630,,,9,45,45,45,,,,,9,17,141,30,370,,0.54
+700,11,,,,,,10,50,50,50,Unlock Ability 1,Unlock Ability 2,Unlock Ability 3,,10,19,160,30,400,,0.5
+770,12,,,,,,Total Cost Per Skill,275,275,275,75,150,300,,,,120,,500,,0.5
+840,13,,,,,,Total RP Cost,825,,,,,525,,,,,,,,
+910,14,,,,,,,825,5,,,,,,,,,,,,
+980,15,,,,,,,165,,,,,,,,,,,,,
+1050,16,,,,,,,5,5,,,,,,,,,,,,
+1120,17,,,,,,,,,,,,,,,,,,,,
+1190,18,,,,,,,,,,,,,,,,,,,,
+1260,19,,,,,,,,,,,,,,,,,,,,
+1330,20,,,,,,,,,,,,,,,,,,,,
+Total SP,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Round,Total Enemies,Duration,Total Enemies,,,,,,,,,,,,,,,,,,
+1,300,60,300,,,,,,,,,,,,,,,,,,
+2,375,75,675,,,,,,,,,,,,,,,,,,
+3,470,96.42857143,1145,,,,,,,,,,,,,,,,,,
+4,590,126.5,1735,,,,,,,,,,,,,,,,,,
+5,740,168.6666667,2475,All Max Upgrades Purchased,,,,,,,,,,,,,,,,,
+6,925,227.7,3400,,,,,,,,,,,,,,,,,,
+7,,,,,,,,,,,,,,,,,,,,,
+8,,,,,,,,,,,,,,,,,,,,,
+9,,,,,,,,,,,,,,,,,,,,,
+10,,,,,,,,,,,,,,,,,,,,,
+Total,3400,754.2952381,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Total Time,,,,,,,,,,,,,,,,,,,,,
+Round ,Time in Seconds,,,,,,,,,,,,,,,,,,,,
+1,60,,,,,,,,,,,,,,,,,,,,
+2,60,,,,,,,,,,,,,,,,,,,,
+3,70,,,,,,,,,,,,,,,,,,,,
+4,70,,,,,,,,,,,,,,,,,,,,
+5,80,,,,,,,,,,,,,,,,,,,,
+6,100,,,,,,,,,,,,,,,,,,,,
+7,,,,,,,,,,,,,,,,,,,,,
+8,,,,,,,,,,,,,,,,,,,,,
+9,,,,,,,,,,,,,,,,,,,,,
+10,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Total,440,,,,,,,,,,,,,,,,,,,,
+,7.333333333,,,,,,,,,,,,,,,,,,,,
