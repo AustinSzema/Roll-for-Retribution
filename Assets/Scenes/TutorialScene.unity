@@ -6460,18 +6460,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!114 &548234230 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8292558410122809163, guid: 0961b8ace76ede6428ac9b719f68f4e6,
-    type: 3}
-  m_PrefabInstance: {fileID: 568862280}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &549333459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7069,6 +7057,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0961b8ace76ede6428ac9b719f68f4e6, type: 3}
+--- !u!114 &568862281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7007212378440034468, guid: 0961b8ace76ede6428ac9b719f68f4e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 568862280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638ee05b809708f468462206dd8d2f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &578166591
 GameObject:
   m_ObjectHideFlags: 0
@@ -11524,12 +11524,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _loadingText
       value: 
-      objectReference: {fileID: 1633694191}
+      objectReference: {fileID: 0}
     - target: {fileID: 3193773942382021386, guid: cd830c0048bdfee4983dae16d3c8d507,
         type: 3}
       propertyPath: _loadingScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 568862281}
     - target: {fileID: 3193773942382021386, guid: cd830c0048bdfee4983dae16d3c8d507,
         type: 3}
       propertyPath: _loadingSlider
@@ -11539,7 +11539,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _backgroundImage
       value: 
-      objectReference: {fileID: 548234230}
+      objectReference: {fileID: 0}
     - target: {fileID: 3193773942382021386, guid: cd830c0048bdfee4983dae16d3c8d507,
         type: 3}
       propertyPath: _dimensionToLoadSceneIndex
@@ -13926,18 +13926,6 @@ Transform:
   - {fileID: 1799537773}
   m_Father: {fileID: 1741031230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1633694191 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7576270297875241698, guid: 0961b8ace76ede6428ac9b719f68f4e6,
-    type: 3}
-  m_PrefabInstance: {fileID: 568862280}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1638483156 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6396270416480677413, guid: ef4ec04d6f92a4543bf8ee3630dce397,
@@ -18297,7 +18285,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 6e-44, z: 1.42e-43, w: 6.9359e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
