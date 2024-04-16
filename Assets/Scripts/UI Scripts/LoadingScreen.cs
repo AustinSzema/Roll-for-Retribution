@@ -13,6 +13,8 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _loadingText;
     [SerializeField] public Slider _loadingSlider;
 
+    [SerializeField] private GameObject[] _otherCanvases;
+    
     private void Start()
     {
         _backgroundImage.color =
@@ -23,7 +25,11 @@ public class LoadingScreen : MonoBehaviour
 
     public void MainRestart()
     {
-        GameObject.Find("GameOverMenu").SetActive(false);
+
+        foreach (GameObject c in _otherCanvases)
+        {
+            c.SetActive(false);
+        }
         _loadingSlider.gameObject.SetActive(true);
         FadeIn();
         StartCoroutine(LoadSceneAsync(2));   
