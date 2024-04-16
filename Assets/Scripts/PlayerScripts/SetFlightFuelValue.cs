@@ -16,6 +16,7 @@ public class SetFlightFuelValue : MonoBehaviour
     
     [SerializeField] private Slider _minimumFuelSlider;
 
+    [Multiline]
     [SerializeField] private String _fuelDefaultText = "Levitation Energy: ";
     [SerializeField] private TextMeshProUGUI _fuelTextMeshProUGUI;
 
