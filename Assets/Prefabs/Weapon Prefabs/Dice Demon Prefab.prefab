@@ -41,6 +41,7 @@ Transform:
   m_Children:
   - {fileID: 1078652890488806790}
   - {fileID: 1776726748375464761}
+  - {fileID: 2205122103233079802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &968907054798690902
@@ -405,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pullingInDemons: {fileID: 11400000, guid: 4c3914f913d63264486dadaad8fb1c31, type: 2}
-  _meshRenderer: {fileID: 2212122606928619241}
+  _meshRenderer: {fileID: 159715784265253309}
   _trailRenderer: {fileID: 8286308055222471916}
   _solidTrailMaterial: {fileID: 2100000, guid: 2825bbde6bf065d4f987b81795db2602, type: 2}
   _transparentTrailMaterial: {fileID: 2100000, guid: efcb0bbb102d64f40acb70e32183a08b,
@@ -569,11 +570,90 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 680778480202676845}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &2212122606928619241 stripped
+--- !u!1001 &1712367213575157783
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6396270416480677413}
+    m_Modifications:
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583907831281040203, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_Name
+      value: Cube Demon Optimized
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583907831281040203, guid: 234f45de29143d04ba88d3253838d48a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 234f45de29143d04ba88d3253838d48a, type: 3}
+--- !u!23 &159715784265253309 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: a272513abb25a9f42a5aeeffaeaab340,
+  m_CorrespondingSourceObject: {fileID: 1582135936073562538, guid: 234f45de29143d04ba88d3253838d48a,
     type: 3}
-  m_PrefabInstance: {fileID: 680778480202676845}
+  m_PrefabInstance: {fileID: 1712367213575157783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2205122103233079802 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 673752370726687213, guid: 234f45de29143d04ba88d3253838d48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1712367213575157783}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2243508315254938834
 PrefabInstance:
