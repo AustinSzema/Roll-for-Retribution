@@ -8,6 +8,7 @@ public class LoadingScreenFadeIn : MonoBehaviour
 
     private void Start()
     {
+        _backgroundImage.enabled = true;
         _backgroundImage.color =
         new Color(_backgroundImage.color.r, _backgroundImage.color.g, _backgroundImage.color.b, 1f);
     }
@@ -27,7 +28,7 @@ public class LoadingScreenFadeIn : MonoBehaviour
 
         if (_backgroundImage.color.a >= 1f)
         {
-            gameObject.SetActive(false);
+            _backgroundImage.enabled = false;
         }
     }
 }
