@@ -56,7 +56,7 @@ public class SetFlightFuelValue : MonoBehaviour
 
             if (_flightFuelSlider.value >= _magnet._fuelPenaltyThreshold)
             {
-                Debug.Log("Flight Fuel Slider Value: " + _flightFuelSlider.value);
+                //Debug.Log("Flight Fuel Slider Value: " + _flightFuelSlider.value);
                 _fuelFill.color = _originalFillColor;
             }
 

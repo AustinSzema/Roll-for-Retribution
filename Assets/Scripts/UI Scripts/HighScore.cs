@@ -53,6 +53,7 @@ public class HighScore
        }
        catch (Exception e)
        {
+          Debug.Log(e);
           throw new Exception("couldnt open file");
        }
 

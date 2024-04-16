@@ -21,6 +21,8 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     [SerializeField] private TextMeshProUGUI displayHighScore;
 
     [SerializeField] private GameObject _mainCanvas;
+
+    [SerializeField] private CameraShake _cameraShake;
     
     private HighScore _highScore;
     
@@ -73,6 +75,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     public void takeDamage(int hitPoints)
     {
+        StartCoroutine(_cameraShake.Shake(0.2f, 1f));
         _playerCurrentHealth.Value -= hitPoints;
         if (_playerCurrentHealth.Value <= 0)
         {
@@ -81,6 +84,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
             _audioManager.PlayInvariableSFX(_playerDamagedClip);
         }
         Debug.Log("player took 1 damage, currently at " + _playerCurrentHealth.Value + " health");
+        
     }
 
     public void Die()
