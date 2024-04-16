@@ -13,7 +13,6 @@ using UnityEngine;
         {
             if (Input.GetKeyDown(KeyCode.P))
             {
-                _gameIsPaused.Value = !_gameIsPaused.Value;
                 _toggleCanvas = !_toggleCanvas;
                 if (_toggleCanvas)
                 {
@@ -21,6 +20,7 @@ using UnityEngine;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                     Time.timeScale = 0;
+                    _gameIsPaused.Value = true;
                 }
                 else
                 { 
@@ -28,7 +28,7 @@ using UnityEngine;
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                     Time.timeScale = 1;
-
+                    _gameIsPaused.Value = false;
                 }
             }
         }

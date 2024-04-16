@@ -14,15 +14,22 @@ public class SetHealthBar : MonoBehaviour
     [SerializeField] private Slider _slider;
 
     [SerializeField] private TextMeshProUGUI _healthText;
-    
-    private void Start()
-    {
-    }
 
+    private float _currentHealth;
+    
     // Update is called once per frame
     void Update()
     {
-        _slider.value = (float) _entityHealth.Value / _entityMaxHp.Value;
-        _healthText.text = "Health: " + (float)_entityHealth.Value / _entityMaxHp.Value * 100f + "%";
+
+        _currentHealth = (float)_entityHealth.Value / _entityMaxHp.Value;
+        _slider.value = _currentHealth;
+        if (_currentHealth >= 0f)
+        {
+            _healthText.text = "Health: " + _currentHealth * 100f + "%";
+        }
+        else
+        {
+            _healthText.text = "Health: 0%";
+        }
     }
 }

@@ -1186,7 +1186,6 @@ GameObject:
   - component: {fileID: 9099437021691879078}
   - component: {fileID: 8135819861837232803}
   - component: {fileID: 3977359583939617104}
-  - component: {fileID: 2944791307455643204}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -1296,10 +1295,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2944791307455643204}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadNewScene
-        m_Mode: 3
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: LoadingScreen, Assembly-CSharp
+        m_MethodName: MainRestart
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1308,18 +1307,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2944791307455643204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8726861233767706458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2702e8f3a465fc148ab53a4d05b5a932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8944442854972243031
 GameObject:
   m_ObjectHideFlags: 0
