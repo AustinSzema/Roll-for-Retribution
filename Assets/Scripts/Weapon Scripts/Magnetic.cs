@@ -8,11 +8,10 @@ public class Magnetic : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _dustParticles;
     [SerializeField] private float forceAmount = 30.0f;
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.AddForce(Random.onUnitSphere * 100f);
     }
 

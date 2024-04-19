@@ -62,6 +62,8 @@ public class Enemy : MonoBehaviour, IDamageable
         _originalMaterials = _meshRenderer.materials;
     }
 
+
+
     private void OnDisable()
     {
         if (_firstDisable)
@@ -100,10 +102,10 @@ public class Enemy : MonoBehaviour, IDamageable
         EnemyHit();
         if (_currentHealth <= 0)
         {
+            UnpauseEnemy();
             Explode();
             _currentHealth = healthPoints;
-        } else
-        {
+        } else {
             _audioManager.PlaySFXAtLocation(_enemyDamagedClip, transform.position);
 
             if (gameObject.activeSelf)
@@ -117,10 +119,15 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         enemyShouldMove = false;
         _meshRenderer.material = _enemyPauseMaterial;
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitTime); 
+        UnpauseEnemy();
+        yield return null;
+    }
+
+    private void UnpauseEnemy()
+    {
         enemyShouldMove = true;
         _meshRenderer.materials = _originalMaterials;
-        yield return null;
     }
     
     private void EnemyHit()
