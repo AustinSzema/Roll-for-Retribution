@@ -11,7 +11,7 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private boolVariable _gameIsPaused;
 
     [SerializeField] private Rigidbody _rigidbody;
-
+    
     // Update is called once per frame
     private void FixedUpdate()
     {

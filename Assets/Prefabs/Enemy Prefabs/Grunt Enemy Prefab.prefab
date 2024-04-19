@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3280784904545963769}
   - component: {fileID: 2419325809902081766}
   - component: {fileID: 6594461547093632004}
-  - component: {fileID: 4828602825830905666}
   - component: {fileID: 1508831378797881915}
   m_Layer: 0
   m_Name: Enemy
@@ -57,6 +56,14 @@ MonoBehaviour:
   _hitClip: {fileID: 0}
   _enemyGruntClip: {fileID: 0}
   _enemyDamagedClip: {fileID: 0}
+  _meshRenderer: {fileID: 7922623395717754416}
+  _enemyPauseMaterial: {fileID: 2100000, guid: 9b8a50e949e1de14d8b43a66875685e3, type: 2}
+  _hitPauseTime: 1
+  enemyShouldMove: 1
+  _moveSpeed: 12.5
+  _playerPosition: {fileID: 11400000, guid: c75809fe4beace14ea3d870a515dfb52, type: 2}
+  _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
+  _rigidbody: {fileID: 1508831378797881915}
 --- !u!114 &6594461547093632004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,22 +78,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 11400000, guid: c75809fe4beace14ea3d870a515dfb52, type: 2}
   rotationSpeed: 5
---- !u!114 &4828602825830905666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2795715922027697219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e211fd16bccc2a43bcf794a38fd895a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 12.5
-  _playerPosition: {fileID: 11400000, guid: c75809fe4beace14ea3d870a515dfb52, type: 2}
-  _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
-  _rigidbody: {fileID: 1508831378797881915}
 --- !u!54 &1508831378797881915
 Rigidbody:
   m_ObjectHideFlags: 0

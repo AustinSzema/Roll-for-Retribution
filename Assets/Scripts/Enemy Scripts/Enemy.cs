@@ -23,6 +23,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private static AudioManager _audioManager;
 
+    [Header("Enemy Hit Values")]
+    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private Material _enemyPauseMaterial;
+    [SerializeField] private float _hitPauseTime = 2f;
+    private bool enemyShouldMove = true;
+    private Material[] _originalMaterials;
+    
     private int _currentHealth;
 
     private bool _firstDisable = true;
@@ -50,6 +57,11 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    private void Start()
+    {
+        _originalMaterials = _meshRenderer.materials;
+    }
+
     private void OnDisable()
     {
         if (_firstDisable)
@@ -64,6 +76,24 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
 
+    [SerializeField] private float _moveSpeed = 2f;
+
+    [SerializeField] private Vector3Variable _playerPosition;
+
+    [SerializeField] private boolVariable _gameIsPaused;
+
+    [SerializeField] private Rigidbody _rigidbody;
+
+    
+    // Update is called once per frame
+    private void FixedUpdate()
+    {
+        if (_gameIsPaused.Value == false && enemyShouldMove)
+        {
+            _rigidbody.position = Vector3.MoveTowards(transform.position, _playerPosition.Value, _moveSpeed * Time.deltaTime);
+        }
+    }
+    
     public void takeDamage(int hitPoints)
     {
         _currentHealth -= hitPoints;
@@ -72,11 +102,27 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             Explode();
             _currentHealth = healthPoints;
-        } else {
+        } else
+        {
             _audioManager.PlaySFXAtLocation(_enemyDamagedClip, transform.position);
+
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(PauseEnemy(_hitPauseTime));
+            }
         }
     }
 
+    private IEnumerator PauseEnemy(float waitTime)
+    {
+        enemyShouldMove = false;
+        _meshRenderer.material = _enemyPauseMaterial;
+        yield return new WaitForSeconds(waitTime);
+        enemyShouldMove = true;
+        _meshRenderer.materials = _originalMaterials;
+        yield return null;
+    }
+    
     private void EnemyHit()
     {
         if (_hitClip != null)

@@ -26,7 +26,30 @@ public class Magnetic : MonoBehaviour
         HitEnemy(other);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        HitEnemy(other);
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        HitEnemy(other);
+    }
+
     private void HitEnemy(Collision other)
+    {
+        if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
+        {
+            Vector3 dir = (transform.position - other.gameObject.transform.position).normalized;
+            _rigidbody.AddForce(dir * forceAmount, ForceMode.Impulse);
+            //Debug.Log(other.gameObject.name);
+            other.gameObject.GetComponent<IDamageable>().takeDamage(1);
+            //_dustParticles.transform.position = other.contacts[0].point;
+            //_dustParticles.Play();
+        }
+    }
+    
+    private void HitEnemy(Collider other)
     {
         if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
         {
