@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_gameIsPaused.Value == false && enemyShouldMove)
         {
-            _rigidbody.position = Vector3.MoveTowards(transform.position, _playerPosition.Value, _moveSpeed * Time.deltaTime);
+            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _playerPosition.Value, _moveSpeed * Time.deltaTime));
         }
     }
     

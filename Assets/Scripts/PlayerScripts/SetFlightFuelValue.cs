@@ -67,7 +67,7 @@ public class SetFlightFuelValue : MonoBehaviour
             }
             else
             {
-                _fuelTextMeshProUGUI.text = "Recharging...";
+                _fuelTextMeshProUGUI.text = "Brewing...";
             }
 
 
