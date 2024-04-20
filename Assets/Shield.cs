@@ -23,7 +23,7 @@ public class Shield : MonoBehaviour
     {
         rb.rotation = Camera.main.transform.rotation; // Replace Camera.main with a serialized reference for better performance
         rb.velocity = rb.transform.forward * moveSpeed;
-        RemoveShield(shieldDuration);
+        StartCoroutine(RemoveShield(shieldDuration));
     }
 
     private IEnumerator RemoveShield(float waitTime)
