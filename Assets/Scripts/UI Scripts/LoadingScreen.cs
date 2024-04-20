@@ -25,7 +25,6 @@ public class LoadingScreen : MonoBehaviour
 
     public void MainRestart()
     {
-
         foreach (GameObject c in _otherCanvases)
         {
             c.SetActive(false);
