@@ -4,6 +4,51 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // Static reference to the GameManager instance
+    private static GameManager _instance;
+
+    // Property to access the GameManager instance
+    public static GameManager Instance
+    {
+        get
+        {
+            // If instance hasn't been set yet, try to find it in the scene
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameManager>();
+
+                // If it still hasn't been found, create a new GameObject and add GameManager to it
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameManager");
+                    _instance = singletonObject.AddComponent<GameManager>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    // Optional: Add GameManager properties and methods here
+
+    // Ensure GameManager instance is not destroyed when loading new scenes
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // If an instance already exists and it's not this instance, destroy this one
+            if (this != _instance)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    
     // Player Fields
     [Header("Player")]
     [Tooltip("The position of the player in the game world.")]
@@ -60,6 +105,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         
     }
 
