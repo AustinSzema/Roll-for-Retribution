@@ -125,7 +125,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1433373329708315377, guid: 6fa84033e4f75a64996351ee0998e10c,
+      objectReference: {fileID: 1286394173786142629, guid: 6fa84033e4f75a64996351ee0998e10c,
         type: 3}
     - target: {fileID: 6460260744829967329, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
@@ -234,9 +234,14 @@ PrefabInstance:
     - {fileID: 180498003203410995, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
     - {fileID: 878657908888797633, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
     - {fileID: 9028540013113348906, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
+    - {fileID: 4625299877721218472, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2795715922027697219, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8087042496887286750}
   m_SourcePrefab: {fileID: 100100000, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
 --- !u!54 &5841465205911654271 stripped
 Rigidbody:
@@ -244,3 +249,32 @@ Rigidbody:
     type: 3}
   m_PrefabInstance: {fileID: 5035446058207864132}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7146402626261987591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2795715922027697219, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5035446058207864132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &8087042496887286750
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7146402626261987591}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.045608
+  m_Height: 10.37726
+  m_Direction: 1
+  m_Center: {x: -0.33205652, y: -0.342762, z: -0.20406246}
