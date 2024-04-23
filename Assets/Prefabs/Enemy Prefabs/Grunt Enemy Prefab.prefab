@@ -307,8 +307,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5090188616763205952, guid: b51fe66c3ab201f48ab238a66a22f5e7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7847910094634734652}
   m_SourcePrefab: {fileID: 100100000, guid: b51fe66c3ab201f48ab238a66a22f5e7, type: 3}
+--- !u!1 &6888430217163691853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5090188616763205952, guid: b51fe66c3ab201f48ab238a66a22f5e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1818158315284446733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1818360609 &7847910094634734652
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888430217163691853}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources: []
 --- !u!4 &7197773304491600763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8852042726136436086, guid: b51fe66c3ab201f48ab238a66a22f5e7,
