@@ -1,18 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] private int healthPoints = 1; 
-    
+    [SerializeField] private int healthPoints = 1;
+
     [SerializeField] private GameObject _enemy;
 
     [SerializeField] private intVariable _killCount;
 
     [SerializeField] private ParticleSystem _explosionParticles;
-    
+
     [SerializeField] private ParticleSystem _hitParticles;
 
     [SerializeField] private AudioClip _hitClip;
@@ -23,17 +24,19 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private static AudioManager _audioManager;
 
-    [Header("Enemy Hit Values")]
-    [SerializeField] private MeshRenderer _meshRenderer;
+    [Header("Enemy Hit Values")] [SerializeField]
+    private MeshRenderer _meshRenderer;
+
     [SerializeField] private Material _enemyPauseMaterial;
     [SerializeField] private float _hitPauseTime = 2f;
     private bool enemyShouldMove = true;
     private Material[] _originalMaterials;
-    
+    private Material[] _pausedMaterials;
+
     private int _currentHealth;
 
     private bool _firstDisable = true;
-    
+
     private void Awake()
     {
         // this needs to be refactored when proper health system is in place
@@ -46,12 +49,12 @@ public class Enemy : MonoBehaviour, IDamageable
             _hitClip = Resources.Load<AudioClip>("Audio/Hit");
         }
 
-        if(_enemyGruntClip == null)
+        if (_enemyGruntClip == null)
         {
             _enemyGruntClip = Resources.Load<AudioClip>("Audio/EnemyGrunt");
         }
 
-        if(_enemyDamagedClip == null)
+        if (_enemyDamagedClip == null)
         {
             _enemyDamagedClip = Resources.Load<AudioClip>("Audio/SummonerHit");
         }
@@ -60,9 +63,13 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Start()
     {
         _originalMaterials = _meshRenderer.materials;
+        _pausedMaterials = new Material[_originalMaterials.Length];
+
+        for (int i = 0; i < _pausedMaterials.Length; i++)
+        {
+            _pausedMaterials[i] = _enemyPauseMaterial;
+        }
     }
-
-
 
     private void OnDisable()
     {
@@ -77,7 +84,6 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-
     [SerializeField] private float _moveSpeed = 2f;
 
     [SerializeField] private Vector3Variable _playerPosition;
@@ -86,16 +92,16 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private Rigidbody _rigidbody;
 
-    
     // Update is called once per frame
     private void FixedUpdate()
     {
         if (_gameIsPaused.Value == false && enemyShouldMove)
         {
-            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _playerPosition.Value, _moveSpeed * Time.deltaTime));
+            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _playerPosition.Value,
+                _moveSpeed * Time.deltaTime));
         }
     }
-    
+
     public void takeDamage(int hitPoints)
     {
         _currentHealth -= hitPoints;
@@ -105,7 +111,9 @@ public class Enemy : MonoBehaviour, IDamageable
             UnpauseEnemy();
             Explode();
             _currentHealth = healthPoints;
-        } else {
+        }
+        else
+        {
             _audioManager.PlaySFXAtLocation(_enemyDamagedClip, transform.position);
 
             if (gameObject.activeSelf)
@@ -118,8 +126,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private IEnumerator PauseEnemy(float waitTime)
     {
         enemyShouldMove = false;
-        _meshRenderer.material = _enemyPauseMaterial;
-        yield return new WaitForSeconds(waitTime); 
+        _meshRenderer.materials = _pausedMaterials;
+        yield return new WaitForSeconds(waitTime);
         UnpauseEnemy();
         yield return null;
     }
@@ -129,7 +137,7 @@ public class Enemy : MonoBehaviour, IDamageable
         enemyShouldMove = true;
         _meshRenderer.materials = _originalMaterials;
     }
-    
+
     private void EnemyHit()
     {
         if (_hitClip != null)
@@ -140,10 +148,10 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             Debug.LogWarning("Hit clip is null in " + gameObject.name);
         }
+
         _hitParticles.Play();
     }
 
-    
     private void Explode()
     {
         if (_hitClip != null)
@@ -154,13 +162,14 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             Debug.LogWarning("Hit clip is null in " + gameObject.name);
         }
+
         _explosionParticles.Play();
         _enemy.SetActive(false);
     }
 
     private void Update()
     {
-        if (transform.position.y <=-5f)
+        if (transform.position.y <= -5f)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
         }
