@@ -1,0 +1,1 @@
+Based on a bitmapped lettering found in PC-98 Touhou Project games. Oatmeal-processed. Includes many of QWERTY keyboard characters, some foreign/special characters and some non-ANSI characters. There are 5 Kanji characters in this font.
