@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1508831378797881915}
   - component: {fileID: 5428920006574119385}
   - component: {fileID: 8770711399284639415}
-  - component: {fileID: 4625299877721218472}
   - component: {fileID: 4499812661188234374}
+  - component: {fileID: 2878838912690868769}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -114,7 +114,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2795715922027697219}
-  m_Mesh: {fileID: 842028241145420258, guid: 81fb21bd0b89ef243a9010b0d1b6505a, type: 3}
+  m_Mesh: {fileID: -2184312514862829629, guid: 24bb89f8ed5971941a13840d0472ccdd, type: 3}
 --- !u!23 &8770711399284639415
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -135,11 +135,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 04370312195122a4493fbadd8ae77b80, type: 2}
-  - {fileID: 2100000, guid: 00ed9644a308db44d967ea17c34a2369, type: 2}
-  - {fileID: 2100000, guid: 706c2296d79399a4bae938ee985fd7e8, type: 2}
-  - {fileID: 2100000, guid: afc8ad91ceaf85a499423a8eee75aacb, type: 2}
-  - {fileID: 2100000, guid: 8d1413b259cd85c4a9adb7638da98170, type: 2}
+  - {fileID: 2100000, guid: a15d942e9dbc2334f8f5ab29099b28b8, type: 2}
+  - {fileID: 2100000, guid: a15d942e9dbc2334f8f5ab29099b28b8, type: 2}
+  - {fileID: 2100000, guid: a15d942e9dbc2334f8f5ab29099b28b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -161,7 +159,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4625299877721218472
+--- !u!1818360609 &4499812661188234374
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795715922027697219}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources: []
+--- !u!64 &2878838912690868769
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,25 +198,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 842028241145420258, guid: 81fb21bd0b89ef243a9010b0d1b6505a, type: 3}
---- !u!1818360609 &4499812661188234374
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2795715922027697219}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 0
-  m_AffectRotationZ: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources: []
+  m_Mesh: {fileID: -2184312514862829629, guid: 24bb89f8ed5971941a13840d0472ccdd, type: 3}
 --- !u!1 &7475563400908805314
 GameObject:
   m_ObjectHideFlags: 0
