@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
+
+    
     // Static reference to the GameManager instance
     private static GameManager _instance;
 
@@ -112,6 +115,33 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("Can Use Super: " + _canUseSuper);
+        if (Input.GetKeyDown(KeyCode.Return) && _canUseSuper)
+        {
+            Enemy[] enemies = FindObjectsOfType<Enemy>();
+            foreach (Enemy e in enemies)
+            {
+                if (e.gameObject.activeInHierarchy)
+                {
+                    e.takeDamage(1);
+                }
+            }
+            Debug.Log("used Super");
+            _playerHits = 0;
+            _canUseSuper = false;
+        }
+    }
+    
+    private int _playerHits = 0;
+
+    private bool _canUseSuper = false;
+    
+    public void IncreaseSuperMeter()
+    {
+        _playerHits++;
+        if (_playerHits >= 100)
+        {
+            _canUseSuper = true;
+        }
     }
 }

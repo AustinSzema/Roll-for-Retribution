@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool _firstDisable = true;
 
+    private GameManager _gameManager;
+    
     private void Awake()
     {
         // this needs to be refactored when proper health system is in place
@@ -62,6 +64,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        _gameManager = GameManager.Instance;
         _originalMaterials = _meshRenderer.materials;
         _pausedMaterials = new Material[_originalMaterials.Length];
 
@@ -119,6 +122,7 @@ public class Enemy : MonoBehaviour, IDamageable
             if (gameObject.activeSelf)
             {
                 StartCoroutine(PauseEnemy(_hitPauseTime));
+                _gameManager.IncreaseSuperMeter();
             }
         }
     }

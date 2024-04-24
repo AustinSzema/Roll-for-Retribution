@@ -31,8 +31,12 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     private bool _gameOver;
 
     [SerializeField] private boolVariable _gameIsPaused;
+
+    private GameManager _gameManager;
+    
     private void Start()
     {
+        _gameManager = GameManager.Instance;
         _playerCurrentHealth.Value = _playerHealth.Value;
         _gameOverMenu.SetActive(false);
         _highScore = new HighScore();
@@ -82,6 +86,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
             Die();
         } else {
             _audioManager.PlayInvariableSFX(_playerDamagedClip);
+            _gameManager.IncreaseSuperMeter();
         }
         Debug.Log("player took 1 damage, currently at " + _playerCurrentHealth.Value + " health");
         
