@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 // TODO: Does this script need to be broken up? It has so many references
@@ -22,10 +23,20 @@ public class Magnet : MonoBehaviour
     [SerializeField] private ShotTypeSO _activeShotTypeSO;
     
     
-    [Header("UI Images")] [SerializeField] private GameObject _attractImage;
-    [SerializeField] private GameObject _repelImage;
-    [SerializeField] private GameObject _defaultImage;
+    [Header("UI Images")] [SerializeField] private Image _attractImage;
+    [SerializeField] private Image _repelImage;
+    [SerializeField] private Image _defaultImage;
 
+    [SerializeField] private Sprite _shotgunAttractSprite;
+    [SerializeField] private Sprite _shotgunRepelSprite;
+    [SerializeField] private Sprite _shotgunDefaultSprite;
+
+    [SerializeField] private Sprite _rocketAttractSprite;
+    [SerializeField] private Sprite _rocketRepelSprite;
+    [SerializeField] private Sprite _rocketDefaultSprite;
+    
+    
+    
     [Header("Root Objects")]
     [SerializeField] private GameObject _attractParticlesRoot;
     [SerializeField] private GameObject _repelParticlesRoot;
@@ -92,6 +103,8 @@ public class Magnet : MonoBehaviour
     private bool _activateMagnet = false;
 
     private bool _outOfBreathClipPlayed = false;
+
+    private bool _usingShotgun = true;
     
     private void Update()
     {
@@ -100,18 +113,36 @@ public class Magnet : MonoBehaviour
 
             _activeShotTypeSO.activeShotType = _currentShotType;
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                _currentShotType = ShotTypeSO.ShotType.Shotgun;
+                _usingShotgun = !_usingShotgun;
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+
+            if (_usingShotgun)
+            {
+                _currentShotType = _currentShotType = ShotTypeSO.ShotType.Shotgun;
+
+
+            }
+            else
             {
                 _currentShotType = ShotTypeSO.ShotType.Sniper;
+
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                _currentShotType = ShotTypeSO.ShotType.Spray;
-            }
+            
+            // if (Input.GetKeyDown(KeyCode.Alpha1))
+            // {
+            //     _currentShotType = ShotTypeSO.ShotType.Shotgun;
+            // }
+            // else if (Input.GetKeyDown(KeyCode.Alpha2))
+            // {
+            //     _currentShotType = ShotTypeSO.ShotType.Sniper;
+            // }
+            // else if (Input.GetKeyDown(KeyCode.Alpha3))
+            // {
+            //     _currentShotType = ShotTypeSO.ShotType.Spray;
+            // }
            
             if (_flightDuration.Value <= 0f)
             {
@@ -129,6 +160,13 @@ public class Magnet : MonoBehaviour
                     _outOfBreathClipPlayed = false;
                     transform.position = _footPosition.position;
                     _playerIsFlying.Value = true;
+
+                    // Set Sprites
+                    _attractImage.sprite = _rocketAttractSprite;
+                    _repelImage.sprite = _rocketRepelSprite;
+                    _defaultImage.sprite = _rocketDefaultSprite;
+                    
+                    
                     _audioManager.StartFlyingSound();
                     _flightDuration.Value -= _fuelDecrementAmount;
                     _attractParticlesRenderer.material = _levitateCenterMaterial;
@@ -138,6 +176,7 @@ public class Magnet : MonoBehaviour
                 } else if (!_outOfBreathClipPlayed) {
                     _audioManager.PlayInvariableSFX(_outOfBreathClip);
                     _outOfBreathClipPlayed = true;
+                    
                 }
             }
             else
@@ -151,6 +190,10 @@ public class Magnet : MonoBehaviour
                 _centerSphere.material = _attractCenterMaterial;
                 _outerSphere.material = _attractOuterMaterial;
                 _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _playerRigidbody.velocity.y, _playerRigidbody.velocity.z);
+                // Set sprites
+                _attractImage.sprite = _shotgunAttractSprite;
+                _repelImage.sprite = _shotgunRepelSprite;
+                _defaultImage.sprite = _shotgunDefaultSprite;
             }
 
             // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
@@ -182,9 +225,9 @@ public class Magnet : MonoBehaviour
                 _activateMagnet = true;
                 _audioManager.StartPullingSound();
                 transform.position = _handPosition.position;
-                _repelImage.SetActive(false);
-                _attractImage.SetActive(true);
-                _defaultImage.SetActive(false);
+                _repelImage.gameObject.SetActive(false);
+                _attractImage.gameObject.SetActive(true);
+                _defaultImage.gameObject.SetActive(false);
                 _attractParticlesRoot.SetActive(true);
             }
 
@@ -193,9 +236,9 @@ public class Magnet : MonoBehaviour
                 _activateMagnet = false;
                 _audioManager.StopPullingSound();
                 _audioManager.PlayPullingEndSound();
-                _repelImage.SetActive(false);
-                _attractImage.SetActive(false);
-                _defaultImage.SetActive(true);
+                _repelImage.gameObject.SetActive(false);
+                _attractImage.gameObject.SetActive(false);
+                _defaultImage.gameObject.SetActive(true);
                 _attractParticlesRoot.SetActive(false);
             }
 
@@ -224,9 +267,9 @@ public class Magnet : MonoBehaviour
             _audioManager.PlaySlamSound();
             foreach (Rigidbody rb in _magneticObjects)
             {
-                _attractImage.SetActive(false);
-                _repelImage.SetActive(true);
-                _defaultImage.SetActive(false);
+                _attractImage.gameObject.SetActive(false);
+                _repelImage.gameObject.SetActive(true);
+                _defaultImage.gameObject.SetActive(false);
                 _attractParticlesRoot.SetActive(false);
                 _gravityParticlesRoot.SetActive(true);
                 _gravityParticles.Clear();
@@ -270,9 +313,9 @@ public class Magnet : MonoBehaviour
 
             foreach (Rigidbody rb in _magneticObjects)
             {
-                _attractImage.SetActive(false);
-                _repelImage.SetActive(true);
-                _defaultImage.SetActive(false);
+                _attractImage.gameObject.SetActive(false);
+                _repelImage.gameObject.SetActive(true);
+                _defaultImage.gameObject.SetActive(false);
                 _attractParticlesRoot.SetActive(false);
                 _repelParticlesRoot.SetActive(true);
                 _repelParticles.Clear();
