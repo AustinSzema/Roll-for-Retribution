@@ -100,11 +100,12 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        // menu popup
        Cursor.lockState = CursorLockMode.None;
        Cursor.visible = true;
-       _highScore.WriteHighScore(score.Value + 1);
+       int currentScore = score.Value + 1;
+       _highScore.WriteHighScore(currentScore);
        _gameOverMenu.SetActive(true);
 
        InvokeRepeating("fadeOutMainCanvas", 0f, 0.1f);
-       displayHighScore.text = "High Score: " + _highScore.GetHighScore();
+       displayHighScore.text = "High Score: " + _highScore.GetHighScore() + "\n Current Score: " + currentScore;
        _gameIsPaused.Value = true;
     }
     
