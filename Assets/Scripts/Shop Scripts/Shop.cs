@@ -122,4 +122,5 @@ public class Shop : MonoBehaviour
         return _skillPoints.skillPoints;
     }
     
+    
 }

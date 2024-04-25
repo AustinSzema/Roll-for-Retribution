@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private Material _enemyPauseMaterial;
     [SerializeField] private float _hitPauseTime = 2f;
-    private bool enemyShouldMove = true;
+    public bool enemyShouldMove = true;
     private Material[] _originalMaterials;
     private Material[] _pausedMaterials;
 
