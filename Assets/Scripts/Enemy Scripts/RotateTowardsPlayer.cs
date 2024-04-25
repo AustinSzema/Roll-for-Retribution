@@ -13,10 +13,14 @@ public class RotateTowardsPlayer : MonoBehaviour
         Vector3 directionToPlayer = playerPos.Value - transform.position;
         directionToPlayer.y = 0f; // Ignore the y-axis
 
-        // Calculate the desired rotation based on the direction
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+        // Check if the direction is non-zero before attempting rotation
+        if (directionToPlayer != Vector3.zero)
+        {
+            // Calculate the desired rotation based on the direction
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
-        // Smoothly rotate the enemy towards the player only on the Y axis
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            // Smoothly rotate the enemy towards the player only on the Y axis
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 }
