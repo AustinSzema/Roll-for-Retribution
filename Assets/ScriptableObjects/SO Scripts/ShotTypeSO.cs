@@ -6,7 +6,7 @@ public class ShotTypeSO : ScriptableObject
     public enum ShotType
     {
         Shotgun,
-        Sniper,
+        Rocket,
         Spray,
         Beam
     }

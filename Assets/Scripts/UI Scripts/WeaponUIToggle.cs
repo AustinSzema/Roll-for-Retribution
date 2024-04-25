@@ -22,7 +22,7 @@ public class WeaponUIToggle : MonoBehaviour
             case ShotTypeSO.ShotType.Shotgun:
                 EnableActive(0);
                 break;
-            case ShotTypeSO.ShotType.Sniper:
+            case ShotTypeSO.ShotType.Rocket:
                 EnableActive(1);
                 break;
             case ShotTypeSO.ShotType.Spray:
@@ -39,10 +39,10 @@ public class WeaponUIToggle : MonoBehaviour
         foreach (GameObject obj in shotTypeUIParents)
         {
             obj.GetComponent<Image>().color = _disabledColor;
-            obj.GetComponentInChildren<TextMeshProUGUI>().color = _disabledColor;
+            //obj.GetComponentInChildren<TextMeshProUGUI>().color = _disabledColor;
         }   
         shotTypeUIParents[index].GetComponent<Image>().color = _enabledColor;
-        shotTypeUIParents[index].GetComponentInChildren<TextMeshProUGUI>().color = _enabledColor;
-
+        //shotTypeUIParents[index].GetComponentInChildren<TextMeshProUGUI>().color = _enabledColor;
+        
     }
 }

@@ -5,19 +5,40 @@ using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
-    [SerializeField] private RectTransform _crosshair;
+    [SerializeField] private Image _crosshairImage;
 
-    [SerializeField] private boolVariable _demonInHand;
+    [SerializeField] private Sprite _shotgunCrosshairSprite;
+    [SerializeField] private Sprite _rocketCrosshairSprite;
     
-    private Camera _mainCam;
+    [SerializeField] private ShotTypeSO _shotTypeSO;
 
-    private void Start()
+    private void Update()
     {
-        _mainCam = Camera.main;
+        switch (_shotTypeSO.activeShotType)
+        {
+            case ShotTypeSO.ShotType.Shotgun:
+                _crosshairImage.sprite = _shotgunCrosshairSprite;
+                _crosshairImage.rectTransform.sizeDelta = new Vector2(150, 100); // bad dumb code
+                break;
+            case ShotTypeSO.ShotType.Rocket:
+                _crosshairImage.sprite = _rocketCrosshairSprite;
+                _crosshairImage.rectTransform.sizeDelta = new Vector2(100, 100); // bad dumb code
+                break;
+        }
     }
 
+
+    //[SerializeField] private boolVariable _demonInHand;
     
-    private void Update()
+    //private Camera _mainCam;
+
+    /*private void Start()
+    {
+        _mainCam = Camera.main;
+    }*/
+
+    
+    /*private void Update()
     {
         if (_demonInHand.Value)
         {
@@ -58,6 +79,6 @@ public class Crosshair : MonoBehaviour
             // _crosshair.localScale = Vector3.one;
         }
 
-    }
+    }*/
 
 }

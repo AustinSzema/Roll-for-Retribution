@@ -121,14 +121,13 @@ public class Magnet : MonoBehaviour
 
             if (_usingShotgun)
             {
-                _currentShotType = _currentShotType = ShotTypeSO.ShotType.Shotgun;
+                _currentShotType = ShotTypeSO.ShotType.Shotgun;
 
 
             }
             else
             {
-                _currentShotType = ShotTypeSO.ShotType.Sniper;
-
+                _currentShotType = ShotTypeSO.ShotType.Rocket;
             }
             
             // if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -299,7 +298,7 @@ public class Magnet : MonoBehaviour
                 case ShotTypeSO.ShotType.Shotgun:
                     _audioManager.PlayShotgunSound();
                     break;
-                case ShotTypeSO.ShotType.Sniper:
+                case ShotTypeSO.ShotType.Rocket:
                     _audioManager.PlaySniperSound();
                     break;
                 case ShotTypeSO.ShotType.Spray:
@@ -343,7 +342,7 @@ public class Magnet : MonoBehaviour
                         
 
                         break;
-                    case ShotTypeSO.ShotType.Sniper:
+                    case ShotTypeSO.ShotType.Rocket:
                         rb.AddForce(transform.forward * _shotgunSpeed);
                         break;
                     case ShotTypeSO.ShotType.Spray:
