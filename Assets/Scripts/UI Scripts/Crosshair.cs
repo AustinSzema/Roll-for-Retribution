@@ -18,11 +18,11 @@ public class Crosshair : MonoBehaviour
         {
             case ShotTypeSO.ShotType.Shotgun:
                 _crosshairImage.sprite = _shotgunCrosshairSprite;
-                _crosshairImage.rectTransform.sizeDelta = new Vector2(150, 100); // bad dumb code
+                _crosshairImage.rectTransform.sizeDelta = new Vector2(75, 50); // bad dumb code
                 break;
             case ShotTypeSO.ShotType.Rocket:
                 _crosshairImage.sprite = _rocketCrosshairSprite;
-                _crosshairImage.rectTransform.sizeDelta = new Vector2(100, 100); // bad dumb code
+                _crosshairImage.rectTransform.sizeDelta = new Vector2(50, 50); // bad dumb code
                 break;
         }
     }
