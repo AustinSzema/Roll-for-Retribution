@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerDamage : MonoBehaviour, IDamageable
@@ -22,8 +21,6 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     private HighScore _highScore;
     
     private static AudioManager _audioManager;
-
-    private bool _gameOver;
     
     private GameManager _gameManager;
     
@@ -35,29 +32,10 @@ public class PlayerDamage : MonoBehaviour, IDamageable
         
         _gameOverMenu.SetActive(false);
         _highScore = new HighScore();
-        _audioManager = FindObjectOfType<AudioManager>();
-
-        if (_playerDamagedClip == null)
-        {
-            _playerDamagedClip = Resources.Load<AudioClip>("Audio/PlayerHit");
-        }
-    }
-
-    private void Awake()
-    {
-        Time.timeScale = 1;
-        _gameOver = false;
-    }
-
-    private void Update()
-    {
-        if (_gameOver)
-        {
-            //Time.timeScale = 0;
-        }
+        _audioManager = AudioManager.Instance;
         
     }
-
+    
 
     private void OnCollisionEnter(Collision other)
     {
@@ -89,9 +67,6 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     public void Die()
     {
-       // freeze the game
-       _gameOver = true;
-       
        // menu popup
        Cursor.lockState = CursorLockMode.None;
        Cursor.visible = true;

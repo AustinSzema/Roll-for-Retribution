@@ -37,32 +37,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private GameManager _gameManager;
     
-    private void Awake()
-    {
-        // this needs to be refactored when proper health system is in place
-        // health should not be hard coded in awake
-        _currentHealth = healthPoints;
-        _audioManager = FindObjectOfType<AudioManager>();
-
-        if (_hitClip == null)
-        {
-            _hitClip = Resources.Load<AudioClip>("Audio/Hit");
-        }
-
-        if (_enemyGruntClip == null)
-        {
-            _enemyGruntClip = Resources.Load<AudioClip>("Audio/EnemyGrunt");
-        }
-
-        if (_enemyDamagedClip == null)
-        {
-            _enemyDamagedClip = Resources.Load<AudioClip>("Audio/SummonerHit");
-        }
-    }
-
     private void Start()
     {
         _gameManager = GameManager.Instance;
+        
+        _currentHealth = healthPoints;
+        _audioManager = AudioManager.Instance;
+
         _originalMaterials = _meshRenderer.materials;
         _pausedMaterials = new Material[_originalMaterials.Length];
 
@@ -140,28 +121,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void EnemyHit()
     {
-        if (_hitClip != null)
-        {
-            _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-        }
-        else
-        {
-            Debug.LogWarning("Hit clip is null in " + gameObject.name);
-        }
-
+        _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
+        
         _hitParticles.Play();
     }
 
     private void Explode()
     {
-        if (_hitClip != null)
-        {
-            _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-        }
-        else
-        {
-            Debug.LogWarning("Hit clip is null in " + gameObject.name);
-        }
+        _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
 
         _explosionParticles.Play();
         _enemy.SetActive(false);

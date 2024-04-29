@@ -29,21 +29,12 @@ public class Summoner : MonoBehaviour
     private void Start()
     {
       _gameManager = GameManager.Instance;
-    }
-
-    private void Awake()
-    {
-      if(_summonClip == null)
-      {
-          _summonClip = Resources.Load<AudioClip>("Audio/SummonClip");
-      }
-
-      _audioManager = FindObjectOfType<AudioManager>();
+      _audioManager = AudioManager.Instance;
       _enemySpawner = GameObject.FindObjectOfType<SpawnEnemies>();   
       _summoning = false;
       _delaying = true;
     }
-
+    
     private void OnEnable()
     {
       StartCoroutine(InitialDelay());
@@ -70,12 +61,12 @@ public class Summoner : MonoBehaviour
       _summoning = true;
       for (int i = 0; i < numEnemiesToSpawn; i++)
       {
-        if(i == 0 && _summonClip != null)
+        if(i == 0)
         {
             _audioManager.PlaySFXAtLocationWithVolume(_summonClip, transform.position, 800.0f);
         }
         summoningParticles.Play();
-        yield return new WaitForSeconds(summoningParticles.duration / 2);
+        yield return new WaitForSeconds(summoningParticles.main.duration / 2);
         _enemySpawner.SpawnEnemy(enemyToSpawn, transform.position, -0.1f, 0.1f);
         
       }

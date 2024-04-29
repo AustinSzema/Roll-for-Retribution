@@ -74,18 +74,56 @@ public class Magnet : MonoBehaviour
     private GameManager _gameManager;
     
     
+    // Static reference to the GameManager instance
+    private static Magnet _instance;
+
+    // Property to access the GameManager instance
+    public static Magnet Instance
+    {
+        get
+        {
+            // If instance hasn't been set yet, try to find it in the scene
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Magnet>();
+
+                // If it still hasn't been found, create a new GameObject and add GameManager to it
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameManager");
+                    _instance = singletonObject.AddComponent<Magnet>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    // Optional: Add GameManager properties and methods here
+
+    // Ensure GameManager instance is not destroyed when loading new scenes
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // If an instance already exists and it's not this instance, destroy this one
+            if (this != _instance)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
     
     private void Start()
     {
         _gameManager = GameManager.Instance;
         
         // caches the reference to the audio manager at start
-        _audioManager = FindObjectOfType<AudioManager>();
-
-        if (_outOfBreathClip == null)
-        {
-            _outOfBreathClip = Resources.Load<AudioClip>("Audio/OutOfBreathSFX2");
-        }
+        _audioManager = AudioManager.Instance;
         
         _gameManager.flightDuration = _maxFlightDuration;
 

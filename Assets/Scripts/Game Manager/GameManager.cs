@@ -31,9 +31,7 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-
-    // Optional: Add GameManager properties and methods here
-
+    
     // Ensure GameManager instance is not destroyed when loading new scenes
     private void Awake()
     {
@@ -100,6 +98,7 @@ public class GameManager : MonoBehaviour
         Spray,
         Beam
     }
+    
     
 
     // Update is called once per frame

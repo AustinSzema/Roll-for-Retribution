@@ -47,13 +47,8 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerMagnet = GameObject.FindObjectOfType<Magnet>();
-        _audioManager = FindObjectOfType<AudioManager>();
-
-        if (_shopPurchaseClip == null)
-        {
-            _shopPurchaseClip = Resources.Load<AudioClip>("Audio/PurchaseSFX");
-        }
+        _playerMagnet = Magnet.Instance;
+        _audioManager = AudioManager.Instance;
     }
 
     int CurrentLevel(SkillsToLevel skill)

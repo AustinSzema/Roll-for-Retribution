@@ -34,6 +34,50 @@ public class AudioManager : MonoBehaviour
     private float objectReachedCooldown = 0.5f; // cooldown time in seconds for object reached sound
     private float lastObjectReachedTime = -1f; // last time the object reached sound was played
 
+    
+    
+    // Static reference to the GameManager instance
+    private static AudioManager _instance;
+
+    // Property to access the GameManager instance
+    public static AudioManager Instance
+    {
+        get
+        {
+            // If instance hasn't been set yet, try to find it in the scene
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<AudioManager>();
+
+                // If it still hasn't been found, create a new GameObject and add GameManager to it
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("AudioManager");
+                    _instance = singletonObject.AddComponent<AudioManager>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    // Ensure AudioManager instance is not destroyed when loading new scenes
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // If an instance already exists and it's not this instance, destroy this one
+            if (this != _instance)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+    
     /*public void AddClipToQueue(AudioClip _clip, Vector3 position)
     {
         if (Vector3.Distance(_lastPosition, position) > 1)
@@ -48,12 +92,7 @@ public class AudioManager : MonoBehaviour
         }
     }*/
 
-
-    private void Update()
-    {
-
-    }
-
+    
     /*public void PlayHitSound()
     {
         _audioSource.pitch = Random.Range(0.8f, 1.2f);

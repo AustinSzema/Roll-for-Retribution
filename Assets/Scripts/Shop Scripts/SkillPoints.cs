@@ -39,7 +39,7 @@ public class SkillPoints : MonoBehaviour
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        _audioManager = FindObjectOfType<AudioManager>();
+        _audioManager = AudioManager.Instance;
         if (_thresholds.Length > SkillPointsToGainAtThreshold.Length)
         {
             throw new ArgumentException("Each threshold must have a corresponding number of skill points to gain");
