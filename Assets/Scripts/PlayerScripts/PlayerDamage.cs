@@ -70,7 +70,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        // menu popup
        Cursor.lockState = CursorLockMode.None;
        Cursor.visible = true;
-       int currentScore = _gameManager.score + 1;
+       int currentScore = _gameManager.killCount + 1;
        _highScore.WriteHighScore(currentScore);
        _gameOverMenu.SetActive(true);
 

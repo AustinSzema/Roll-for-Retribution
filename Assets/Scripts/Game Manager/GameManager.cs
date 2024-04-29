@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,8 +71,6 @@ public class GameManager : MonoBehaviour
     public int killCount;
     [HideInInspector]
     public bool gameIsPaused;
-    [HideInInspector]
-    public int score;
 
     // Enemy Fields
     [HideInInspector]
@@ -108,7 +107,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Can Use Super: " + _canUseSuper);
+        Debug.Log("Kill Count: " + killCount);
         if (Input.GetKeyDown(KeyCode.Return) && _canUseSuper)
         {
             Enemy[] enemies = FindObjectsOfType<Enemy>();
@@ -123,6 +122,7 @@ public class GameManager : MonoBehaviour
             _playerHits = 0;
             _canUseSuper = false;
         }
+        
     }
     
     private int _playerHits = 0;
