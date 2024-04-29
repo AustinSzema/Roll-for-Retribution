@@ -6,13 +6,15 @@ using UnityEngine;
 public class SkillPoints : MonoBehaviour
 {
 
-    [SerializeField] private intVariable killCount;
     [SerializeField] private AudioClip _progressionClip1;
     [SerializeField] private AudioClip _progressionClip2;
     [SerializeField] private AudioClip _progressionClip3;
     [SerializeField] private AudioClip _progressionClip4;
     [SerializeField] private AudioClip _progressionClip5;
 
+
+    private GameManager _gameManager;
+    
     private static AudioManager _audioManager;
 
     public int skillPoints;
@@ -36,6 +38,7 @@ public class SkillPoints : MonoBehaviour
 
     private void Start()
     {
+        _gameManager = GameManager.Instance;
         _audioManager = FindObjectOfType<AudioManager>();
         if (_thresholds.Length > SkillPointsToGainAtThreshold.Length)
         {
@@ -57,7 +60,7 @@ public class SkillPoints : MonoBehaviour
 
     void GiveSkillPoints()
     {
-        if (killCount.Value > _thresholds[_thresholdIdx])
+        if (_gameManager.killCount > _thresholds[_thresholdIdx])
         {
             if(_thresholdIdx == 0) {
                 _audioManager.PlayInvariableSFX(_progressionClip1);

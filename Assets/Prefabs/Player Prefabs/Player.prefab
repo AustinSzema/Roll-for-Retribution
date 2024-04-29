@@ -280,7 +280,6 @@ GameObject:
   - component: {fileID: 1285920073}
   - component: {fileID: 1285920093}
   - component: {fileID: 1285920081}
-  - component: {fileID: 1285920087}
   - component: {fileID: 1285920094}
   - component: {fileID: 4002532168671568275}
   - component: {fileID: 6459316057966864080}
@@ -485,19 +484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gravityMultiplier: 2
   rb: {fileID: 4429400766943435831}
---- !u!114 &1285920087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429400766943435828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c912c611a5ffee428c4f0ffcd3470e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _killCount: {fileID: 11400000, guid: 73f58ac34ede0124a8c089afa3bdb9dd, type: 2}
 --- !u!114 &1285920094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67942022186e2ba4e966d1323876654e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killCount: {fileID: 11400000, guid: 73f58ac34ede0124a8c089afa3bdb9dd, type: 2}
   _progressionClip1: {fileID: 8300000, guid: ad218edfd8e2d40b7aab591a57502f41, type: 3}
   _progressionClip2: {fileID: 8300000, guid: 825f8e689dc804023ae34f39628ad4de, type: 3}
   _progressionClip3: {fileID: 8300000, guid: 0936cf76287ba4232b066fbefccbbe7a, type: 3}

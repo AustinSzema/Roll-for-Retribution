@@ -10,8 +10,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private GameObject _enemy;
 
-    [SerializeField] private intVariable _killCount;
-
     [SerializeField] private ParticleSystem _explosionParticles;
 
     [SerializeField] private ParticleSystem _hitParticles;
@@ -21,7 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip _enemyGruntClip;
 
     [SerializeField] private AudioClip _enemyDamagedClip;
-
+    
     private static AudioManager _audioManager;
 
     [Header("Enemy Hit Values")] [SerializeField]
@@ -83,7 +81,7 @@ public class Enemy : MonoBehaviour, IDamageable
         else
         {
             SpawnEnemies.EnemiesInScene--;
-            _killCount.Value++;
+            _gameManager.killCount++;
         }
     }
 
