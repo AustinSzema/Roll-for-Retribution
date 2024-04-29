@@ -19,6 +19,8 @@ public class Summoner : MonoBehaviour
 
     [SerializeField] private GameObject enemyToSpawn;
 
+    [SerializeField] private ParticleSystem summoningParticles;
+
     private bool _summoning;
     private bool _delaying;
 
@@ -72,7 +74,10 @@ public class Summoner : MonoBehaviour
         {
             _audioManager.PlaySFXAtLocationWithVolume(_summonClip, transform.position, 800.0f);
         }
-        _enemySpawner.SpawnEnemy(enemyToSpawn, transform.position, .5f, 1f);
+        summoningParticles.Play();
+        yield return new WaitForSeconds(summoningParticles.duration / 2);
+        _enemySpawner.SpawnEnemy(enemyToSpawn, transform.position, -0.1f, 0.1f);
+        
       }
       yield return new WaitForSeconds(spawnInterval);
       _summoning = false;
