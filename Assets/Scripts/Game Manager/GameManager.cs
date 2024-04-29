@@ -1,8 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -98,8 +97,13 @@ public class GameManager : MonoBehaviour
         Spray,
         Beam
     }
-    
-    
+
+
+    private void Start()
+    {
+        gameIsPaused = false;
+        Time.timeScale = 1f;
+    }
 
     // Update is called once per frame
     void Update()

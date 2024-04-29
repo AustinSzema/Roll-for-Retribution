@@ -99,10 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _footPosition: {fileID: 0}
   _handPosition: {fileID: 617065203251911269}
-  _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
-  _outOfFuel: {fileID: 11400000, guid: aa1e12afa2ee1654bbb5fd97862a57d3, type: 2}
-  _pullingInDemons: {fileID: 11400000, guid: 4c3914f913d63264486dadaad8fb1c31, type: 2}
-  _activeShotTypeSO: {fileID: 11400000, guid: 9b64c51592ce3b74c8eaa5222e17b710, type: 2}
   _attractImage: {fileID: 0}
   _repelImage: {fileID: 0}
   _defaultImage: {fileID: 0}
@@ -142,13 +138,10 @@ MonoBehaviour:
   _shotgunCooldown: 0.5
   _reachThreshold: 1
   _audioManager: {fileID: 0}
-  _outOfBreathClip: {fileID: 0}
+  _outOfBreathClip: {fileID: 8300000, guid: db206465fa36b40a2925783e19b8241d, type: 3}
   _maxFlightDuration: 100
   _fuelDecrementAmount: 2
   _fuelRechargeAmount: 0.5
-  _flightDuration: {fileID: 11400000, guid: 06b7df4e672a03e42beef3eec031d9e5, type: 2}
-  _demonInHand: {fileID: 11400000, guid: 8b2969d4141c34744b756cfd1f495bb0, type: 2}
-  _playerIsFlying: {fileID: 11400000, guid: d0f342f38685d264b99838834c8e5bb3, type: 2}
   _flightForce: 17.5
   _fuelPenaltyThreshold: 75
   _playerRigidbody: {fileID: 0}
@@ -581,7 +574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8305713ea71407e4fb8bcb1ac1ec4b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handPosition: {fileID: 11400000, guid: 3c8be7cf4cad9134db56c471402a6ba8, type: 2}
 --- !u!1 &6061961651548557962
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f7347bca9a1c340a9ead7a644b4e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _demonInHand: {fileID: 11400000, guid: 8b2969d4141c34744b756cfd1f495bb0, type: 2}
 --- !u!1001 &1573339950572134269
 PrefabInstance:
   m_ObjectHideFlags: 0

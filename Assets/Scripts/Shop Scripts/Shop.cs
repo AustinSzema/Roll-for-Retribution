@@ -38,7 +38,7 @@ public class Shop : MonoBehaviour
     [SerializeField]
     private float[] _percentDecreaseAtLevel = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, };
 
-    private Magnet _playerMagnet;
+    [SerializeField] private Magnet _playerMagnet;
 
     [SerializeField] private AudioClip _shopPurchaseClip;
 
@@ -47,7 +47,6 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerMagnet = Magnet.Instance;
         _audioManager = AudioManager.Instance;
     }
 
