@@ -21,8 +21,8 @@ public class SetSkillPointsSlider : MonoBehaviour
     void Update()
     {
         _pullForceCost = int.Parse(_shop.CostToLevel(Shop.SkillsToLevel.PullForce).ToString());
-        _diceQuantityCost = int.Parse(_shop.CostToLevel(Shop.SkillsToLevel.DiceQuantity).ToString());
-        _diceWeightCost = int.Parse(_shop.CostToLevel(Shop.SkillsToLevel.DiceWeight).ToString());
+        _diceQuantityCost = int.Parse(_shop.CostToLevel(Shop.SkillsToLevel.DemonQuantity).ToString());
+        _diceWeightCost = int.Parse(_shop.CostToLevel(Shop.SkillsToLevel.DemonWeight).ToString());
 
         _costs.Clear(); // Clear the list before adding new costs
         _costs.Add(_pullForceCost);

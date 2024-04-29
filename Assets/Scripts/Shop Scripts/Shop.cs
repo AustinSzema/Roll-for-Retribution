@@ -9,8 +9,8 @@ public class Shop : MonoBehaviour
     public enum SkillsToLevel
     {
         PullForce = 0,
-        DiceQuantity = 1,
-        DiceWeight = 2
+        DemonQuantity = 1,
+        DemonWeight = 2
     }
 
     [SerializeField]
@@ -92,13 +92,13 @@ public class Shop : MonoBehaviour
 
         switch (skill)
         {
-           case SkillsToLevel.DiceQuantity:
+           case SkillsToLevel.DemonQuantity:
                for (int i = 0; i < _cubesToAddAtLevel[CurrentLevel(skill)]; i++)
                {
                    _playerMagnet.AddMagneticCube();
                }
                break;
-           case SkillsToLevel.DiceWeight:
+           case SkillsToLevel.DemonWeight:
                _playerMagnet.DecreaseDemonWeight(_percentDecreaseAtLevel[CurrentLevel(skill)]);
                break;
            case SkillsToLevel.PullForce:
@@ -113,8 +113,8 @@ public class Shop : MonoBehaviour
         _skillLevels[(int)skill]++;
     }
     
-    public void LevelQuantity() { LevelUp((SkillsToLevel.DiceQuantity));}
-    public void LevelWeight() { LevelUp((SkillsToLevel.DiceWeight));}
+    public void LevelQuantity() { LevelUp((SkillsToLevel.DemonQuantity));}
+    public void LevelWeight() { LevelUp((SkillsToLevel.DemonWeight));}
     public void LevelPullForce() { LevelUp((SkillsToLevel.PullForce));}
 
     public int CurrentSkillPoints()
