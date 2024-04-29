@@ -8,16 +8,11 @@ using UnityEngine.UI;
 
 public class PlayerDamage : MonoBehaviour, IDamageable
 {
-    [SerializeField] private intVariable _playerHealth;
-
-    [SerializeField] private intVariable _playerCurrentHealth;
 
     [SerializeField] private GameObject _gameOverMenu;
 
     [SerializeField] private AudioClip _playerDamagedClip;
-
-    [SerializeField] private intVariable score;
-
+    
     [SerializeField] private TextMeshProUGUI displayHighScore;
 
     [SerializeField] private GameObject _mainCanvas;
@@ -29,15 +24,15 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     private static AudioManager _audioManager;
 
     private bool _gameOver;
-
-    [SerializeField] private boolVariable _gameIsPaused;
-
+    
     private GameManager _gameManager;
     
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        _playerCurrentHealth.Value = _playerHealth.Value;
+
+        _gameManager.playerCurrentHealth = _gameManager.playerMaxHealth;
+        
         _gameOverMenu.SetActive(false);
         _highScore = new HighScore();
         _audioManager = FindObjectOfType<AudioManager>();
@@ -80,15 +75,15 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     public void takeDamage(int hitPoints)
     {
         StartCoroutine(_cameraShake.Shake(0.2f, 1f));
-        _playerCurrentHealth.Value -= hitPoints;
-        if (_playerCurrentHealth.Value <= 0)
+        _gameManager.playerCurrentHealth -= hitPoints;
+        if (_gameManager.playerCurrentHealth <= 0)
         {
             Die();
         } else {
             _audioManager.PlayInvariableSFX(_playerDamagedClip);
             _gameManager.IncreaseSuperMeter();
         }
-        Debug.Log("player took 1 damage, currently at " + _playerCurrentHealth.Value + " health");
+        Debug.Log("player took 1 damage, currently at " + _gameManager.playerCurrentHealth + " health");
         
     }
 
@@ -100,13 +95,13 @@ public class PlayerDamage : MonoBehaviour, IDamageable
        // menu popup
        Cursor.lockState = CursorLockMode.None;
        Cursor.visible = true;
-       int currentScore = score.Value + 1;
+       int currentScore = _gameManager.score + 1;
        _highScore.WriteHighScore(currentScore);
        _gameOverMenu.SetActive(true);
 
        InvokeRepeating("fadeOutMainCanvas", 0f, 0.1f);
        displayHighScore.text = "High Score: " + _highScore.GetHighScore() + "\n Current Score: " + currentScore;
-       _gameIsPaused.Value = true;
+       _gameManager.gameIsPaused = true;
     }
     
     

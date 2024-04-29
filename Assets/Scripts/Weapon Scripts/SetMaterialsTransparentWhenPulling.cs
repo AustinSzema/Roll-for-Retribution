@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class SetMaterialsTransparentWhenPulling : MonoBehaviour
 {
-    [SerializeField] private boolVariable _pullingInDemons;
-
     [SerializeField] private MeshRenderer _meshRenderer;
 
     [SerializeField] private TrailRenderer _trailRenderer;
@@ -19,9 +17,12 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
 
     private Material[] _transparentMaterials;
     private Material[] _solidMaterials;
+
+    private GameManager _gameManager;
     
     private void Start()
     {
+        _gameManager = GameManager.Instance;;
         _demonMaterials = _meshRenderer.materials;
         _transparentMaterials = new[] { new Material(_transparentTrailMaterial) };
         _solidMaterials = new[] { new Material(_solidTrailMaterial) };
@@ -29,7 +30,7 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
 
     private void Update()
     {
-        if (_pullingInDemons.Value)
+        if (_gameManager.pullingInDemons)
         {
             foreach (Material mat in _demonMaterials)
             {

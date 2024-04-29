@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,13 @@ public class ShieldCaster : MonoBehaviour
 {
     [SerializeField] private GameObject _shieldPrefab;
 
-    [SerializeField] private Vector3Variable _playerPos;
-    // Start is called before the first frame update
-    
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +26,6 @@ public class ShieldCaster : MonoBehaviour
 
     private void CastShield()
     {
-        GameObject shield = Instantiate(_shieldPrefab, _playerPos.Value + Camera.main.transform.forward * 10f,  Camera.main.transform.rotation);
+        GameObject shield = Instantiate(_shieldPrefab, _gameManager.playerPosition + Camera.main.transform.forward * 10f,  Camera.main.transform.rotation);
      }
 }

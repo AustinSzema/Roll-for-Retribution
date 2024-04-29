@@ -1,12 +1,19 @@
+using System;
 using UnityEngine;
 
     public class ToggleShop : MonoBehaviour
     {
         [SerializeField] private GameObject _shopCanvas;
 
-        [SerializeField] private boolVariable _gameIsPaused;
+        private GameManager _gameManager;
         
         private bool _toggleCanvas = false;
+
+
+        private void Start()
+        {
+            _gameManager = GameManager.Instance;
+        }
 
         // Update is called once per frame
         void Update()
@@ -20,7 +27,7 @@ using UnityEngine;
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                     Time.timeScale = 0;
-                    _gameIsPaused.Value = true;
+                    _gameManager.gameIsPaused = true;
                 }
                 else
                 { 
@@ -28,7 +35,7 @@ using UnityEngine;
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                     Time.timeScale = 1;
-                    _gameIsPaused.Value = false;
+                    _gameManager.gameIsPaused = false;
                 }
             }
         }

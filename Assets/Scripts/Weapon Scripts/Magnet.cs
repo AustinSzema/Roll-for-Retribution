@@ -15,13 +15,6 @@ public class Magnet : MonoBehaviour
     [Header("Magnet Positions")]
     [SerializeField] private Transform _footPosition;
     [SerializeField] private Transform _handPosition;
-
-    [Header("SO Variables")]
-    [SerializeField] private boolVariable _gameIsPaused;
-    [SerializeField] private boolVariable _outOfFuel;
-    [SerializeField] private boolVariable _pullingInDemons;
-    [SerializeField] private ShotTypeSO _activeShotTypeSO;
-    
     
     [Header("UI Images")] [SerializeField] private Image _attractImage;
     [SerializeField] private Image _repelImage;
@@ -71,17 +64,21 @@ public class Magnet : MonoBehaviour
     [Header("Levitate Ability")] public float _maxFlightDuration = 10;
     [SerializeField] private float _fuelDecrementAmount = 1;
     [SerializeField] private float _fuelRechargeAmount = 1;
-    [SerializeField] private floatVariable _flightDuration;
-    [SerializeField] private boolVariable _demonInHand;
-    [SerializeField] private boolVariable _playerIsFlying;
+    
     [Tooltip("Sets the Y value of player's velocity")] [SerializeField] private float _flightForce = 30f;
     [FormerlySerializedAs("_minimumFuelAmount")] public float _fuelPenaltyThreshold = 1;
 
     [Header("Player")] [SerializeField] private Rigidbody _playerRigidbody;
 
 
+    private GameManager _gameManager;
+    
+    
+    
     private void Start()
     {
+        _gameManager = GameManager.Instance;
+        
         // caches the reference to the audio manager at start
         _audioManager = FindObjectOfType<AudioManager>();
 
@@ -90,7 +87,7 @@ public class Magnet : MonoBehaviour
             _outOfBreathClip = Resources.Load<AudioClip>("Audio/OutOfBreathSFX2");
         }
         
-        _flightDuration.Value = _maxFlightDuration;
+        _gameManager.flightDuration = _maxFlightDuration;
 
         Magnetic[] magneticObjects = FindObjectsOfType<Magnetic>();
 
@@ -108,10 +105,10 @@ public class Magnet : MonoBehaviour
     
     private void Update()
     {
-        if (!_gameIsPaused.Value)
+        if (!_gameManager.gameIsPaused)
         {
 
-            _activeShotTypeSO.activeShotType = _currentShotType;
+            _gameManager.activeShot = _currentShotType;
 
 
             if (Input.GetKeyDown(KeyCode.Q))
@@ -121,44 +118,44 @@ public class Magnet : MonoBehaviour
 
             if (_usingShotgun)
             {
-                _currentShotType = ShotTypeSO.ShotType.Shotgun;
+                _currentShotType = GameManager.ActiveShotType.Shotgun;
 
 
             }
             else
             {
-                _currentShotType = ShotTypeSO.ShotType.Rocket;
+                _currentShotType = GameManager.ActiveShotType.Rocket;
             }
             
             // if (Input.GetKeyDown(KeyCode.Alpha1))
             // {
-            //     _currentShotType = ShotTypeSO.ShotType.Shotgun;
+            //     _currentShotType = GameManager.ActiveShotType.Shotgun;
             // }
             // else if (Input.GetKeyDown(KeyCode.Alpha2))
             // {
-            //     _currentShotType = ShotTypeSO.ShotType.Sniper;
+            //     _currentShotType = GameManager.ActiveShotType.Sniper;
             // }
             // else if (Input.GetKeyDown(KeyCode.Alpha3))
             // {
-            //     _currentShotType = ShotTypeSO.ShotType.Spray;
+            //     _currentShotType = GameManager.ActiveShotType.Spray;
             // }
            
-            if (_flightDuration.Value <= 0f)
+            if (_gameManager.flightDuration <= 0f)
             {
-                _outOfFuel.Value = true;
+                _gameManager.outOfFuel = true;
             }
             
 
             // When the player is holding right mouse button and holding space and has demons in hand and has fuel
-            if (Input.GetMouseButton(1) && Input.GetKey(KeyCode.Space) && _demonInHand.Value &&
-                _flightDuration.Value >= 0)
+            if (Input.GetMouseButton(1) && Input.GetKey(KeyCode.Space) && _gameManager.demonInHand &&
+                _gameManager.flightDuration >= 0)
             {
                 // if player is not out of fuel make them fly
-                if (!_outOfFuel.Value)
+                if (!_gameManager.outOfFuel)
                 {
                     _outOfBreathClipPlayed = false;
                     transform.position = _footPosition.position;
-                    _playerIsFlying.Value = true;
+                    _gameManager.playerIsFlying = true;
 
                     // Set Sprites
                     _attractImage.sprite = _rocketAttractSprite;
@@ -167,7 +164,7 @@ public class Magnet : MonoBehaviour
                     
                     
                     _audioManager.StartFlyingSound();
-                    _flightDuration.Value -= _fuelDecrementAmount;
+                    _gameManager.flightDuration -= _fuelDecrementAmount;
                     _attractParticlesRenderer.material = _levitateCenterMaterial;
                     _centerSphere.material = _levitateCenterMaterial;
                     _outerSphere.material = _levitateOuterMaterial;
@@ -180,10 +177,10 @@ public class Magnet : MonoBehaviour
             }
             else
             {
-                if(_playerIsFlying.Value == true) {
+                if(_gameManager.playerIsFlying == true) {
                     _audioManager.StopFlyingSound();
                 }
-                _playerIsFlying.Value = false;
+                _gameManager.playerIsFlying = false;
                 transform.position = _handPosition.position;
                 _attractParticlesRenderer.material = _attractCenterMaterial;
                 _centerSphere.material = _attractCenterMaterial;
@@ -198,24 +195,24 @@ public class Magnet : MonoBehaviour
             // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
             // Makes it so the fuel must regenerate a bit before the player can use flight again 
 
-            if (_flightDuration.Value >= _fuelPenaltyThreshold)
+            if (_gameManager.flightDuration >= _fuelPenaltyThreshold)
             {
-                _outOfFuel.Value = false;
+                _gameManager.outOfFuel = false;
             }
 
             // if the player is out of fuel stop flying
-            if (_flightDuration.Value <= 0)
+            if (_gameManager.flightDuration <= 0)
             {
-                _outOfFuel.Value = true;
+                _gameManager.outOfFuel = true;
                 transform.position = _handPosition.position;
-                _playerIsFlying.Value = false;
+                _gameManager.playerIsFlying = false;
                 _audioManager.StopFlyingSound();
             }
 
             // if the player's fuel is not full and the player is not flying, fill up their fuel
-            if (_flightDuration.Value < _maxFlightDuration && !_playerIsFlying.Value)
+            if (_gameManager.flightDuration < _maxFlightDuration && !_gameManager.playerIsFlying)
             {
-                _flightDuration.Value += _fuelRechargeAmount;
+                _gameManager.flightDuration += _fuelRechargeAmount;
             }
 
             // TODO: Consider renaming _flightDuration to _flightFuel
@@ -285,7 +282,7 @@ public class Magnet : MonoBehaviour
 
     private bool _shotgunOnCooldown;
     
-    private ShotTypeSO.ShotType _currentShotType;
+    private GameManager.ActiveShotType _currentShotType;
     
     private IEnumerator ShotgunAbility()
     {
@@ -295,16 +292,16 @@ public class Magnet : MonoBehaviour
 
             switch (_currentShotType)
             {
-                case ShotTypeSO.ShotType.Shotgun:
+                case GameManager.ActiveShotType.Shotgun:
                     _audioManager.PlayShotgunSound();
                     break;
-                case ShotTypeSO.ShotType.Rocket:
+                case GameManager.ActiveShotType.Rocket:
                     _audioManager.PlaySniperSound();
                     break;
-                case ShotTypeSO.ShotType.Spray:
+                case GameManager.ActiveShotType.Spray:
                     _audioManager.PlaySpraySound();
                     break;
-                case ShotTypeSO.ShotType.Beam:
+                case GameManager.ActiveShotType.Beam:
                     break;
                 default:
                     break;
@@ -330,7 +327,7 @@ public class Magnet : MonoBehaviour
                 
                 switch (_currentShotType)
                 {
-                    case ShotTypeSO.ShotType.Shotgun:
+                    case GameManager.ActiveShotType.Shotgun:
 
                         deviationAngleX = Random.Range(-20f, 20f);
                         deviationAngleY = Random.Range(-20f, 20f);
@@ -342,15 +339,15 @@ public class Magnet : MonoBehaviour
                         
 
                         break;
-                    case ShotTypeSO.ShotType.Rocket:
+                    case GameManager.ActiveShotType.Rocket:
                         rb.AddForce(transform.forward * _shotgunSpeed);
                         break;
-                    case ShotTypeSO.ShotType.Spray:
+                    case GameManager.ActiveShotType.Spray:
                         deviationAngleY = Random.Range(-20f, 20f); // Adjust the range as needed
                         offsetDirection = Quaternion.Euler(0, deviationAngleY, 0) * transform.forward;
                         rb.AddForce(offsetDirection * _shotgunSpeed);
                         break;
-                    case ShotTypeSO.ShotType.Beam:
+                    case GameManager.ActiveShotType.Beam:
                         break;
                     default:
                         break;
@@ -377,7 +374,7 @@ public class Magnet : MonoBehaviour
 
     private void SetDemonsVelocityAndPosition()
     {
-        _pullingInDemons.Value = _activateMagnet;
+        _gameManager.pullingInDemons = _activateMagnet;
 
         if (_activateMagnet)
         {

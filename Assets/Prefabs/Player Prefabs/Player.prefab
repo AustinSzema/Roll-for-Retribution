@@ -277,12 +277,12 @@ GameObject:
   - component: {fileID: 4429400766943435831}
   - component: {fileID: 4429400766943435830}
   - component: {fileID: 4429400766943435825}
-  - component: {fileID: 1285920073}
   - component: {fileID: 1285920093}
   - component: {fileID: 1285920081}
   - component: {fileID: 1285920094}
   - component: {fileID: 4002532168671568275}
   - component: {fileID: 6459316057966864080}
+  - component: {fileID: 7815982920914401407}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -434,19 +434,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 4429400766943435829}
   rb: {fileID: 4429400766943435831}
---- !u!114 &1285920073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429400766943435828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e79ab5ba57287f49a5e20754522eb8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPos: {fileID: 11400000, guid: c75809fe4beace14ea3d870a515dfb52, type: 2}
 --- !u!136 &1285920093
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -496,16 +483,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5322d4bc4b292b4e821f7ec5dbf24c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerHealth: {fileID: 11400000, guid: 949cbe3b130ef7548af788acef95f83e, type: 2}
-  _playerCurrentHealth: {fileID: 11400000, guid: 852666a7f8747244f819501a8cb0edbd,
-    type: 2}
   _gameOverMenu: {fileID: 0}
   _playerDamagedClip: {fileID: 0}
-  score: {fileID: 11400000, guid: 73f58ac34ede0124a8c089afa3bdb9dd, type: 2}
   displayHighScore: {fileID: 0}
   _mainCanvas: {fileID: 0}
   _cameraShake: {fileID: 0}
-  _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
 --- !u!114 &4002532168671568275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c93927340b7762429d629f4afe3c98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerIsGrounded: {fileID: 11400000, guid: 6454fad791ddb8a4ebe84528dc865cdd, type: 2}
 --- !u!114 &6459316057966864080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,6 +520,18 @@ MonoBehaviour:
   skillPoints: 0
   _thresholds: 96000000dc000000680100003a02000052030000b0040000540600003e0800006e0a0000e40c0000
   SkillPointsToGainAtThreshold: 140000001e00000032000000460000006e00000096000000c8000000040100004a0100009a010000
+--- !u!114 &7815982920914401407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4429400766943435828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e79ab5ba57287f49a5e20754522eb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4429400767039744802
 GameObject:
   m_ObjectHideFlags: 0

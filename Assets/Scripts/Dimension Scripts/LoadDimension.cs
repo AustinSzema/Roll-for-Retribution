@@ -9,14 +9,15 @@ using UnityEngine.UI;
 public class LoadDimension : MonoBehaviour
 {
     [SerializeField] private int _dimensionToLoadSceneIndex;
-
-    [SerializeField] private intVariable _overworldDimensionSceneIndex;
-
-    [SerializeField] private LoadingScreen _loadingScreen;
     
+    [SerializeField] private LoadingScreen _loadingScreen;
+
+    private GameManager _gameManager;
+
     private void Start()
     {
-        _overworldDimensionSceneIndex.Value = SceneManager.GetActiveScene().buildIndex;
+        _gameManager = GameManager.Instance;
+        _gameManager.overworldDimensionSceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +33,7 @@ public class LoadDimension : MonoBehaviour
             else
             {
                 _loadingScreen.FadeOut();
-                StartCoroutine(_loadingScreen.LoadSceneAsync(_overworldDimensionSceneIndex.Value));   
+                StartCoroutine(_loadingScreen.LoadSceneAsync(_gameManager.overworldDimensionSceneIndex));   
             }
         }
     }

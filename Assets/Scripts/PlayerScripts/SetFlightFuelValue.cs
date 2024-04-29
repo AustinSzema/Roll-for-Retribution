@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class SetFlightFuelValue : MonoBehaviour
 {
     [SerializeField] private Slider _flightFuelSlider;
-    [SerializeField] private floatVariable _flightDuration;
     
     [SerializeField] private GameObject _flightSliderBackground;
 
@@ -23,16 +22,14 @@ public class SetFlightFuelValue : MonoBehaviour
 
     [SerializeField] private Image _fuelFill;
 
-
-    [SerializeField] private boolVariable _outOfFuel;
-
-
-    [SerializeField] private boolVariable _gameIsPaused;
+    
+    private GameManager _gameManager;
     
     private Color _originalFillColor;
 
     private void Start()
     {
+        _gameManager = GameManager.Instance;;
         _flightFuelSlider.maxValue = _magnet._maxFlightDuration;
         _minimumFuelSlider.maxValue = _magnet._maxFlightDuration;
         _originalFillColor = _fuelFill.color;
@@ -44,13 +41,13 @@ public class SetFlightFuelValue : MonoBehaviour
     
     private void Update()
     {
-        if (!_gameIsPaused.Value)
+        if (!_gameManager.gameIsPaused)
         {
             // Set the slider value
-            _flightFuelSlider.value = _flightDuration.Value;
+            _flightFuelSlider.value = _gameManager.flightDuration;
             _minimumFuelSlider.value = _magnet._fuelPenaltyThreshold;
 
-            if (_outOfFuel.Value == true)
+            if (_gameManager.outOfFuel == true)
             {
                 _fuelFill.color = _originalFillColor / 2;
             }
@@ -61,7 +58,7 @@ public class SetFlightFuelValue : MonoBehaviour
                 _fuelFill.color = _originalFillColor;
             }
 
-            if (_outOfFuel.Value == false)
+            if (_gameManager.outOfFuel == false)
             {
                 _fuelTextMeshProUGUI.text = _fuelDefaultText + (int)(_flightFuelSlider.value / _flightFuelSlider.maxValue * 100) + "%";
             }

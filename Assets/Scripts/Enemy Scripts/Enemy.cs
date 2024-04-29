@@ -86,19 +86,17 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     [SerializeField] private float _moveSpeed = 2f;
-
-    [SerializeField] private Vector3Variable _playerPosition;
-
-    [SerializeField] private boolVariable _gameIsPaused;
+    
 
     [SerializeField] private Rigidbody _rigidbody;
 
+    
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (_gameIsPaused.Value == false && enemyShouldMove)
+        if (_gameManager.gameIsPaused == false && enemyShouldMove)
         {
-            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _playerPosition.Value,
+            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition,
                 _moveSpeed * Time.deltaTime));
         }
     }

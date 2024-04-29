@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Indicates whether the player is currently flying.")]
     public bool playerIsFlying;
     [Tooltip("The maximum health of the player.")]
-    public int playerHealth;
+    public int playerMaxHealth;
     [Tooltip("The current health of the player.")]
     public int playerCurrentHealth;
 
@@ -75,6 +76,8 @@ public class GameManager : MonoBehaviour
     public int killCount;
     [Tooltip("Indicates whether the game is currently paused.")]
     public bool gameIsPaused;
+    [Tooltip("The player's current score")]
+    public int score;
 
     // Enemy Fields
     [Header("Enemies")]

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,13 @@ public class ToggleControlsMenu : MonoBehaviour
 
     private bool _toggleCanvas = false;
 
-    [SerializeField] private boolVariable _gameIsPaused;
-    
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -18,13 +24,13 @@ public class ToggleControlsMenu : MonoBehaviour
             _toggleCanvas = !_toggleCanvas;
             if (_toggleCanvas)
             {
-                _gameIsPaused.Value = true;
+                _gameManager.gameIsPaused = true;
                 _controlsCanvas.SetActive(true);
                 Time.timeScale = 0;
             }
             else
             {
-                _gameIsPaused.Value = false;
+                _gameManager.gameIsPaused = false;
                 _controlsCanvas.SetActive(false);
                 Time.timeScale = 1;
             }

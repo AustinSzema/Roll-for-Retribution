@@ -6,11 +6,7 @@ using UnityEngine;
 public class JumperFollowPlayer : MonoBehaviour
 {    
     [SerializeField] private float _moveSpeed = 2f;
-
-    [SerializeField] private Vector3Variable _playerPosition;
-
-    [SerializeField] private boolVariable _gameIsPaused;
-
+    
     [SerializeField] private Rigidbody _rigidbody;
 
     [SerializeField] private int moveInterval;
@@ -21,15 +17,22 @@ public class JumperFollowPlayer : MonoBehaviour
 
     private Vector3 goalPosition;
 
+    private GameManager _gameManager;
+    
     private void Awake()
     {
         _charging = false;
     }
 
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;;
+    }
+
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (_gameIsPaused.Value == false)
+        if (_gameManager.gameIsPaused == false)
         {
             if (_charging == false)
             {
@@ -45,10 +48,10 @@ public class JumperFollowPlayer : MonoBehaviour
     {
         _charging = true;
       
-        float distToPlayer = Vector3.Distance(transform.position, _playerPosition.Value);
-        Vector3 moveDirection = (_playerPosition.Value - transform.position).normalized;
+        float distToPlayer = Vector3.Distance(transform.position, _gameManager.playerPosition);
+        Vector3 moveDirection = (_gameManager.playerPosition - transform.position).normalized;
         goalPosition = transform.position + moveDirection * (distToPlayer + targetDistanceBehindPlayer);
-        goalPosition.y = _playerPosition.Value.y;
+        goalPosition.y = _gameManager.playerPosition.y;
         yield return new WaitForSeconds(moveInterval);
         _charging = false;
     }

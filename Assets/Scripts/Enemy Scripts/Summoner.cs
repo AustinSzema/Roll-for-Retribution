@@ -10,10 +10,6 @@ public class Summoner : MonoBehaviour
     [SerializeField] private int numEnemiesToSpawn = 5;
 
     [SerializeField] private int spawnInterval = 5;
-    
-    [SerializeField] private Vector3Variable playerPosition;
-
-    [SerializeField] private boolVariable gameIsPaused;
 
     [SerializeField] private AudioClip _summonClip;
 
@@ -25,6 +21,13 @@ public class Summoner : MonoBehaviour
 
     private bool _summoning;
     private bool _delaying;
+
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+      _gameManager = GameManager.Instance;
+    }
 
     private void Awake()
     {
@@ -46,7 +49,7 @@ public class Summoner : MonoBehaviour
 
     private void FixedUpdate()
     {
-      if (gameIsPaused.Value == false && this.gameObject.activeSelf)
+      if (_gameManager.gameIsPaused == false && this.gameObject.activeSelf)
       {
         if (!_summoning && !_delaying)
         {
@@ -54,7 +57,7 @@ public class Summoner : MonoBehaviour
         }
         else
         {
-          transform.position = Vector3.MoveTowards(transform.position,playerPosition.Value, moveSpeed * Time.deltaTime);
+          transform.position = Vector3.MoveTowards(transform.position,_gameManager.playerPosition, moveSpeed * Time.deltaTime);
         }
       }
 

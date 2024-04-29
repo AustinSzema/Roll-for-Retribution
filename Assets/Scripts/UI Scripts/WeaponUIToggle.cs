@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,29 +7,34 @@ using UnityEngine.UI;
 
 public class WeaponUIToggle : MonoBehaviour
 {
-    [SerializeField] private ShotTypeSO _activeShotTypeSO;
-
 
     [SerializeField] private Color _enabledColor = Color.white;
     [SerializeField] private Color _disabledColor = Color.grey;
 
     [SerializeField] private List<GameObject> shotTypeUIParents = new List<GameObject>();
 
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
+
     void Update()
     {
 
-        switch (_activeShotTypeSO.activeShotType)
+        switch (_gameManager.activeShot)
         {
-            case ShotTypeSO.ShotType.Shotgun:
+            case GameManager.ActiveShotType.Shotgun:
                 EnableActive(0);
                 break;
-            case ShotTypeSO.ShotType.Rocket:
+            case GameManager.ActiveShotType.Rocket:
                 EnableActive(1);
                 break;
-            case ShotTypeSO.ShotType.Spray:
+            case GameManager.ActiveShotType.Spray:
                 EnableActive(2);
                 break;
-            case ShotTypeSO.ShotType.Beam:
+            case GameManager.ActiveShotType.Beam:
                 EnableActive(3);
                 break;
         }

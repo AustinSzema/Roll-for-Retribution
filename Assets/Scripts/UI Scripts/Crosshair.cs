@@ -1,4 +1,5 @@
 using System;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -9,18 +10,23 @@ public class Crosshair : MonoBehaviour
 
     [SerializeField] private Sprite _shotgunCrosshairSprite;
     [SerializeField] private Sprite _rocketCrosshairSprite;
-    
-    [SerializeField] private ShotTypeSO _shotTypeSO;
+
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
 
     private void Update()
     {
-        switch (_shotTypeSO.activeShotType)
+        switch (_gameManager.activeShot)
         {
-            case ShotTypeSO.ShotType.Shotgun:
+            case GameManager.ActiveShotType.Shotgun:
                 _crosshairImage.sprite = _shotgunCrosshairSprite;
                 _crosshairImage.rectTransform.sizeDelta = new Vector2(75, 50); // bad dumb code
                 break;
-            case ShotTypeSO.ShotType.Rocket:
+            case GameManager.ActiveShotType.Rocket:
                 _crosshairImage.sprite = _rocketCrosshairSprite;
                 _crosshairImage.rectTransform.sizeDelta = new Vector2(50, 50); // bad dumb code
                 break;

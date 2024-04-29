@@ -6,11 +6,7 @@ using UnityEngine;
 public class ChargerFollowPlayer : MonoBehaviour
 {    
     [SerializeField] private float _moveSpeed = 2f;
-
-    [SerializeField] private Vector3Variable _playerPosition;
-
-    [SerializeField] private boolVariable _gameIsPaused;
-
+    
     [SerializeField] private Rigidbody _rigidbody;
 
     [SerializeField] private int moveInterval;
@@ -20,16 +16,22 @@ public class ChargerFollowPlayer : MonoBehaviour
     private Vector3 _movement;
     private bool _charging;
 
+    private GameManager _gameManager;
 
     private void Awake()
     {
       _charging = false;
     }
 
+    private void Start()
+    {
+      _gameManager = GameManager.Instance;
+    }
+
 
     private void FixedUpdate()
     {
-      if (_gameIsPaused.Value == false && this.gameObject.activeSelf)
+      if (_gameManager.gameIsPaused == false && this.gameObject.activeSelf)
       {
         if (_charging == false)
         {
@@ -48,8 +50,8 @@ public class ChargerFollowPlayer : MonoBehaviour
     {
       _charging = true;
       
-      float distToPlayer = Vector3.Distance(transform.position, _playerPosition.Value);
-      Vector3 moveDirection = (_playerPosition.Value - transform.position).normalized;
+      float distToPlayer = Vector3.Distance(transform.position, _gameManager.playerPosition);
+      Vector3 moveDirection = (_gameManager.playerPosition - transform.position).normalized;
       _movement = moveDirection * _moveSpeed;
       yield return new WaitForSeconds(moveInterval);
       _rigidbody.velocity = Vector3.zero;

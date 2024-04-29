@@ -1,16 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateTowardsPlayer : MonoBehaviour
 {
-    [SerializeField] private Vector3Variable playerPos;
     [SerializeField] private float rotationSpeed = 5f;
+
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
 
     private void Update()
     {
         // Get the direction from the enemy to the player
-        Vector3 directionToPlayer = playerPos.Value - transform.position;
+        Vector3 directionToPlayer = _gameManager.playerPosition - transform.position;
         directionToPlayer.y = 0f; // Ignore the y-axis
 
         // Check if the direction is non-zero before attempting rotation
