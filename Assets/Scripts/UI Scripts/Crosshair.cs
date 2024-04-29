@@ -1,7 +1,4 @@
-using System;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
