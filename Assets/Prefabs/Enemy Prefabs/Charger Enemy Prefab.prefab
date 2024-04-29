@@ -148,6 +148,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5755197145248551033, guid: 2357cf455f20b2341b6e3043ca124c12,
         type: 3}
+    - target: {fileID: 6278628745250300111, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 69638e61ab70d2048b6cceb8a560176f, type: 2}
     - target: {fileID: 6460260744829967335, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -280,8 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 30
-  _playerPosition: {fileID: 11400000, guid: c75809fe4beace14ea3d870a515dfb52, type: 2}
-  _gameIsPaused: {fileID: 11400000, guid: 6f7d4d2a0d3f46e41b0d9944638c9167, type: 2}
   _rigidbody: {fileID: 3533898476467300609}
   moveInterval: 3
   targetDistanceBehindPlayer: 10
