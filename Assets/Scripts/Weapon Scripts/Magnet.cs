@@ -403,7 +403,7 @@ public class Magnet : MonoBehaviour
         _magneticObjects.Add(magnet.GetComponent<Rigidbody>());
     }
 
-    public void DecreaseDiceWeight(float percentDecrease)
+    public void DecreaseDemonWeight(float percentDecrease)
     {
        foreach (Rigidbody rb in _magneticObjects)
        {
@@ -416,7 +416,7 @@ public class Magnet : MonoBehaviour
         return _magneticObjects.Count;
     }
 
-    public float GetDiceWeight()
+    public float GetDemonWeight()
     {
         return _magneticObjects[0].mass;
     }
