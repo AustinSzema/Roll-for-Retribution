@@ -3,24 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DisplayCurrentShopLevels : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI diceQuantity;
+    [SerializeField] private TextMeshProUGUI demonQuantity;
     
-    [SerializeField]
-    private TextMeshProUGUI diceWeight;
+    [SerializeField] private TextMeshProUGUI demonWeight;
     
     [SerializeField]
     private TextMeshProUGUI pullForce;
     
-    [SerializeField]
-    private TextMeshProUGUI diceQuantityCost;
+    [SerializeField] private TextMeshProUGUI demonQuantityCost;
     
-    [SerializeField]
-    private TextMeshProUGUI diceWeightCost;
+    [SerializeField] private TextMeshProUGUI demonWeightCost;
     
     [SerializeField]
     private TextMeshProUGUI pullForceCost;
@@ -41,11 +38,11 @@ public class DisplayCurrentShopLevels : MonoBehaviour
     public void UpdateFields()
     {
         pullForce.text = magnet._pullSpeed.ToString();
-        diceQuantity.text = magnet.GetMagnetCount().ToString();
-        diceWeight.text = Math.Round(magnet.GetDemonWeight(), 2).ToString();
+        demonQuantity.text = magnet.GetMagnetCount().ToString();
+        demonWeight.text = Math.Round(magnet.GetDemonWeight(), 2).ToString();
         pullForceCost.text = shop.CostToLevel(Shop.SkillsToLevel.PullForce).ToString();
-        diceQuantityCost.text = shop.CostToLevel(Shop.SkillsToLevel.DemonQuantity).ToString();
-        diceWeightCost.text = shop.CostToLevel(Shop.SkillsToLevel.DemonWeight).ToString();
+        demonQuantityCost.text = shop.CostToLevel(Shop.SkillsToLevel.DemonQuantity).ToString();
+        demonWeightCost.text = shop.CostToLevel(Shop.SkillsToLevel.DemonWeight).ToString();
         // Debug.Log(pullForceCost.text);
         // Debug.Log(diceQuantityCost.text);
         // Debug.Log(diceWeight.text);
