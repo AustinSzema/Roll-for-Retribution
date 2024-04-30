@@ -6,24 +6,35 @@ using UnityEngine;
 
 public class SetMaterialsTransparentWhenPulling : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer _meshRenderer;
 
+    [Header("Trail")]
     [SerializeField] private TrailRenderer _trailRenderer;
-
     [SerializeField] private Material _solidTrailMaterial;
     [SerializeField] private Material _transparentTrailMaterial;
 
-    private Material[] _demonMaterials;
+    [Header("Attract Demon")]
+    [SerializeField] private GameObject _attractDemonVisual;
+    [SerializeField] private MeshRenderer _attractMeshRenderer;
+    private Material[] _attractDemonMaterials;
+    private Material[] _repelDemonMaterials;
 
+    [Header("Repel Demon")]
+    [SerializeField] private GameObject _repelDemonVisual;
+    [SerializeField] private MeshRenderer _repelMeshRenderer;
     private Material[] _transparentMaterials;
     private Material[] _solidMaterials;
 
+    [Space]
+    
     private GameManager _gameManager;
+    
     
     private void Start()
     {
         _gameManager = GameManager.Instance;;
-        _demonMaterials = _meshRenderer.materials;
+        _attractDemonMaterials = _attractMeshRenderer.materials;
+        _repelDemonMaterials = _repelMeshRenderer.materials;
+
         _transparentMaterials = new[] { new Material(_transparentTrailMaterial) };
         _solidMaterials = new[] { new Material(_solidTrailMaterial) };
     }
@@ -32,18 +43,24 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
     {
         if (_gameManager.pullingInDemons)
         {
-            foreach (Material mat in _demonMaterials)
+            foreach (Material mat in _attractDemonMaterials)
             {
                 mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 0f);
             }
+            // _attractDemonVisual.SetActive(true);
+            // _repelDemonVisual.SetActive(false);
+
             _trailRenderer.materials = _transparentMaterials;
         }
         else
         {
-            foreach (Material mat in _demonMaterials)
+            foreach (Material mat in _attractDemonMaterials)
             {
                 mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 1f);
             }
+            // _attractDemonVisual.SetActive(false);
+            // _repelDemonVisual.SetActive(true);
+
             _trailRenderer.materials = _solidMaterials;
 
         }

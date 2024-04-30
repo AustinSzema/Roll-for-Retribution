@@ -235,7 +235,8 @@ public class AudioManager : MonoBehaviour
         source.pitch = pitch;
 
         source.Play();
-        GameObject.Destroy(tempAudioObject, clip.length);
+        GameObject.Destroy(tempAudioObject, clip.length); // instantiating and destroying objects this often is bad for performance
+        // TODO: find an object pooled or more performant solution for audio
     }
 
 }
