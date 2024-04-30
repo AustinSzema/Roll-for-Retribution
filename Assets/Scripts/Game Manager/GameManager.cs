@@ -6,8 +6,6 @@ using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
-
-    
     // Static reference to the GameManager instance
     private static GameManager _instance;
 
@@ -28,10 +26,11 @@ public class GameManager : MonoBehaviour
                     _instance = singletonObject.AddComponent<GameManager>();
                 }
             }
+
             return _instance;
         }
     }
-    
+
     // Ensure GameManager instance is not destroyed when loading new scenes
     private void Awake()
     {
@@ -49,46 +48,38 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
     // Player Fields
-    [HideInInspector]
-    public Vector3 playerPosition;
-    [HideInInspector]
-    public bool playerIsGrounded;
-    [HideInInspector]
-    public bool playerIsFlying;
+    [HideInInspector] public Vector3 playerPosition;
+    [HideInInspector] public bool playerIsGrounded;
+    [HideInInspector] public bool playerIsFlying;
 
-    public int playerMaxHealth;
+    [field: SerializeField] public int playerMaxHealth { get; private set; } = 20;
 
-    [HideInInspector]
-    public int playerCurrentHealth;
+    [HideInInspector] public int playerCurrentHealth;
 
     // Game State Fields
-    [HideInInspector]
-    public int overworldDimensionSceneIndex;
-    [HideInInspector]
-    public bool outOfFuel;
-    [HideInInspector]
-    public int killCount;
-    [HideInInspector]
-    public bool gameIsPaused;
+    [HideInInspector] public int overworldDimensionSceneIndex;
+    [HideInInspector] public bool outOfFuel;
+
+
+    [HideInInspector] public int killCount;
+
+    [HideInInspector] public bool gameIsPaused;
 
     // Enemy Fields
-    [HideInInspector]
-    public int enemyCount;
-    [HideInInspector]
-    public bool demonInHand;
-    [HideInInspector]
-    public bool pullingInDemons;
+    [HideInInspector] public int enemyCount;
+
+    [HideInInspector] public bool demonInHand;
+    [HideInInspector] public bool pullingInDemons;
 
     // Weapon Fields
-    [HideInInspector]
-    public ActiveShotType activeShot;
-    [HideInInspector]
-    public Vector3 handPosition;
+    [HideInInspector] public ActiveShotType activeShot;
+    [HideInInspector] public Vector3 handPosition;
 
     // Flight Fields
-    [HideInInspector]
-    public float flightDuration;
+    [HideInInspector] public float flightDuration;
+
     public enum ActiveShotType
     {
         Shotgun,
@@ -118,17 +109,17 @@ public class GameManager : MonoBehaviour
                     e.takeDamage(1);
                 }
             }
+
             Debug.Log("used Super");
             _playerHits = 0;
             _canUseSuper = false;
         }
-        
     }
-    
+
     private int _playerHits = 0;
 
     private bool _canUseSuper = false;
-    
+
     public void IncreaseSuperMeter()
     {
         _playerHits++;
