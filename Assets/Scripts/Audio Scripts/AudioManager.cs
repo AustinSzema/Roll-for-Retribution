@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -217,7 +218,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFXAtLocation(AudioClip clip, Vector3 position)
     {
-        AudioSource.PlayClipAtPoint(clip, position);
+        AudioSource.PlayClipAtPoint(clip, position); // this instantiates and then destroys an audio object. Not ideal for performance
+        Debug.Log(clip.name + " " + position);
     }
 
     public void PlaySFXAtLocationWithVolume(AudioClip clip, Vector3 position, float volume)
