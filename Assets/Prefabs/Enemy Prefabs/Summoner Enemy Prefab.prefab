@@ -343,7 +343,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2795715922027697219, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4076507341349196497}
+      addedObject: {fileID: 2695602824076773353}
   m_SourcePrefab: {fileID: 100100000, guid: 6a5fea37ba612a34783f2b6e26baff9c, type: 3}
 --- !u!1 &2852763302788151289 stripped
 GameObject:
@@ -370,8 +370,8 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 7688580540974025677, guid: 452ee40f3e17d604780e96dec4382996,
     type: 3}
   summoningParticles: {fileID: 8541478722758167694}
---- !u!64 &4076507341349196497
-MeshCollider:
+--- !u!136 &2695602824076773353
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -388,10 +388,11 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3031952829836877880, guid: 4e865a1b2efe26f42bc7ca2cb8cea86f, type: 3}
+  serializedVersion: 2
+  m_Radius: 4.0248795
+  m_Height: 8.81664
+  m_Direction: 1
+  m_Center: {x: -0.00034451485, y: 0.19277096, z: -0.64596975}
 --- !u!198 &8541478722758167694 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8633963910839840564, guid: 6a5fea37ba612a34783f2b6e26baff9c,

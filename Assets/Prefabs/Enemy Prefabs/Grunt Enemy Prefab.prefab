@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5428920006574119385}
   - component: {fileID: 8770711399284639415}
   - component: {fileID: 4499812661188234374}
-  - component: {fileID: 2878838912690868769}
   - component: {fileID: 6991645098486616776}
   m_Layer: 0
   m_Name: Enemy
@@ -176,28 +175,6 @@ RotationConstraint:
   m_Active: 1
   m_IsLocked: 1
   m_Sources: []
---- !u!64 &2878838912690868769
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2795715922027697219}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4078891176389831500, guid: 923c6065510987c4d9e4fabc1a9e515e, type: 3}
 --- !u!136 &6991645098486616776
 CapsuleCollider:
   m_ObjectHideFlags: 0
