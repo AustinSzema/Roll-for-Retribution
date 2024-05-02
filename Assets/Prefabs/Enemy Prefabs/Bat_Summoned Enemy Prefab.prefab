@@ -75,6 +75,11 @@ PrefabInstance:
       objectReference: {fileID: 5632499846988954522}
     - target: {fileID: 2419325809902081766, guid: 6a5fea37ba612a34783f2b6e26baff9c,
         type: 3}
+      propertyPath: _activeMeshRenderer
+      value: 
+      objectReference: {fileID: 2414202434995801395}
+    - target: {fileID: 2419325809902081766, guid: 6a5fea37ba612a34783f2b6e26baff9c,
+        type: 3}
       propertyPath: _meshRenderers.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -345,6 +350,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat LOD
       objectReference: {fileID: 0}
+    - target: {fileID: 8011580316259617573, guid: b5faa83340de6a845afd52cae96da667,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8011580316259617573, guid: b5faa83340de6a845afd52cae96da667,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.data[1].renderer
+      value: 
+      objectReference: {fileID: 124342995605994641}
+    - target: {fileID: 8011580316259617573, guid: b5faa83340de6a845afd52cae96da667,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.data[2].renderer
+      value: 
+      objectReference: {fileID: 2414202434995801395}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
