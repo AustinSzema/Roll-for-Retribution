@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -19,11 +21,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip _enemyGruntClip;
 
     [SerializeField] private AudioClip _enemyDamagedClip;
-    
+
     private static AudioManager _audioManager;
 
     [Header("Enemy Hit Values")] [SerializeField]
-    private MeshRenderer _meshRenderer;
+    private LODGroup _lodGroup;
+
+    private MeshRenderer _activeMeshRenderer;
 
     [SerializeField] private Material _enemyPauseMaterial;
     [SerializeField] private float _hitPauseTime = 2f;
@@ -36,15 +40,16 @@ public class Enemy : MonoBehaviour, IDamageable
     private bool _firstDisable = true;
 
     private GameManager _gameManager;
-    
+
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        
+
         _currentHealth = healthPoints;
         _audioManager = AudioManager.Instance;
 
-        _originalMaterials = _meshRenderer.materials;
+        _activeMeshRenderer = GetCurrentLODRenderer();
+        _originalMaterials = _activeMeshRenderer.materials;
         _pausedMaterials = new Material[_originalMaterials.Length];
 
         for (int i = 0; i < _pausedMaterials.Length; i++)
@@ -52,6 +57,33 @@ public class Enemy : MonoBehaviour, IDamageable
             _pausedMaterials[i] = _enemyPauseMaterial;
         }
     }
+
+    private MeshRenderer GetCurrentLODRenderer()
+    {
+        LOD[] lods = _lodGroup.GetLODs();
+
+        // Loop through each LOD
+        foreach (LOD lod in lods)
+        {
+            // Check if this LOD is active
+            if (lod.screenRelativeTransitionHeight < 1.0f)
+            {
+                // Get the mesh renderers of the active LOD
+                Renderer[] renderers = lod.renderers;
+
+                // Print the name of the first renderer (assuming there's at least one)
+                if (renderers.Length > 0)
+                {
+                    Debug.Log("Active Mesh Renderer: " + renderers[0].gameObject.name);
+                    // You can access other properties or methods of the renderer as needed
+                    return renderers[0] as MeshRenderer;
+                }
+            }
+        }
+
+        throw new NullReferenceException("No mesh renderer on " + transform.parent.name);
+    }
+
 
     private void OnDisable()
     {
@@ -67,11 +99,11 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     [SerializeField] private float _moveSpeed = 2f;
-    
+
 
     [SerializeField] private Rigidbody _rigidbody;
 
-    
+
     // Update is called once per frame
     private void FixedUpdate()
     {
@@ -107,7 +139,9 @@ public class Enemy : MonoBehaviour, IDamageable
     private IEnumerator PauseEnemy(float waitTime)
     {
         enemyShouldMove = false;
-        _meshRenderer.materials = _pausedMaterials;
+        _activeMeshRenderer = GetCurrentLODRenderer();
+        _activeMeshRenderer.materials = _pausedMaterials;
+        Debug.Log("Active mesh renderer " + _activeMeshRenderer.name);
         yield return new WaitForSeconds(waitTime);
         UnpauseEnemy();
         yield return null;
@@ -116,13 +150,14 @@ public class Enemy : MonoBehaviour, IDamageable
     private void UnpauseEnemy()
     {
         enemyShouldMove = true;
-        _meshRenderer.materials = _originalMaterials;
+        _activeMeshRenderer = GetCurrentLODRenderer();
+        _activeMeshRenderer.materials = _originalMaterials;
     }
 
     private void EnemyHit()
     {
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-        
+
         _hitParticles.Play();
     }
 
