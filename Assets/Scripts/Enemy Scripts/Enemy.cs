@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour, IDamageable
     
     private MeshRenderer _activeMeshRenderer;
 
-    [SerializeField] private MeshRenderer[] _meshRenderers;
+    private MeshRenderer[] _meshRenderers;
 
     [SerializeField] private Material _enemyPauseMaterial;
     [SerializeField] private float _hitPauseTime = 2f;
@@ -49,6 +49,8 @@ public class Enemy : MonoBehaviour, IDamageable
         _currentHealth = healthPoints;
         _audioManager = AudioManager.Instance;
 
+        _meshRenderers = GetComponentInChildren<LODGroup>().GetComponentsInChildren<MeshRenderer>(); // not performant but makes editing way easier
+        
         _activeMeshRenderer = _meshRenderers[0];
         _originalMaterials = _activeMeshRenderer.materials;
         _pausedMaterials = new Material[_originalMaterials.Length];

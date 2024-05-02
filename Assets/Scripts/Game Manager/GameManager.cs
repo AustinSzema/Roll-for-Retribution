@@ -31,13 +31,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Ensure GameManager instance is not destroyed when loading new scenes
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

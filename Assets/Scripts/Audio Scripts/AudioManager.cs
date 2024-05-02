@@ -60,14 +60,12 @@ public class AudioManager : MonoBehaviour
             return _instance;
         }
     }
-
-    // Ensure AudioManager instance is not destroyed when loading new scenes
+    
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
