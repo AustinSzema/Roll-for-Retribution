@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -12,10 +13,11 @@ public class Magnet : MonoBehaviour
     // Stores a reference to all of the demon dice
     private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
 
-    [Header("Magnet Positions")]
-    [SerializeField] private Transform _footPosition;
+    [Header("Magnet Positions")] [SerializeField]
+    private Transform _footPosition;
+
     [SerializeField] private Transform _handPosition;
-    
+
     [Header("UI Images")] [SerializeField] private Image _attractImage;
     [SerializeField] private Image _repelImage;
     [SerializeField] private Image _defaultImage;
@@ -27,16 +29,15 @@ public class Magnet : MonoBehaviour
     [SerializeField] private Sprite _rocketAttractSprite;
     [SerializeField] private Sprite _rocketRepelSprite;
     [SerializeField] private Sprite _rocketDefaultSprite;
-    
-    
-    
-    [Header("Root Objects")]
-    [SerializeField] private GameObject _attractParticlesRoot;
+
+
+    [Header("Root Objects")] [SerializeField]
+    private GameObject _attractParticlesRoot;
+
     [SerializeField] private GameObject _repelParticlesRoot;
     [SerializeField] private GameObject _gravityParticlesRoot;
 
-    [Header("Particles")]
-    [SerializeField] private Renderer _attractParticlesRenderer;
+    [Header("Particles")] [SerializeField] private Renderer _attractParticlesRenderer;
     [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private ParticleSystem _gravityParticles;
     [SerializeField] private MeshRenderer _centerSphere;
@@ -47,8 +48,8 @@ public class Magnet : MonoBehaviour
     [SerializeField] private Material _levitateOuterMaterial;
 
 
-    [Header("Weapon Values")] 
-    [SerializeField] private GameObject _magneticObject;
+    [Header("Weapon Values")] [SerializeField]
+    private GameObject _magneticObject;
 
     public float _pullSpeed;
 
@@ -64,30 +65,33 @@ public class Magnet : MonoBehaviour
     [Header("Levitate Ability")] public float _maxFlightDuration = 10;
     [SerializeField] private float _fuelDecrementAmount = 1;
     [SerializeField] private float _fuelRechargeAmount = 1;
-    
-    [Tooltip("Sets the Y value of player's velocity")] [SerializeField] private float _flightForce = 30f;
-    [FormerlySerializedAs("_minimumFuelAmount")] public float _fuelPenaltyThreshold = 1;
+
+    [Tooltip("Sets the Y value of player's velocity")] [SerializeField]
+    private float _flightForce = 30f;
+
+    [FormerlySerializedAs("_minimumFuelAmount")]
+    public float _fuelPenaltyThreshold = 1;
 
     [Header("Player")] [SerializeField] private Rigidbody _playerRigidbody;
 
 
     private GameManager _gameManager;
-    
+
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        
+
         // caches the reference to the audio manager at start
         _audioManager = AudioManager.Instance;
-        
+
         _gameManager.flightDuration = _maxFlightDuration;
 
         Magnetic[] magneticObjects = FindObjectsOfType<Magnetic>();
 
-        foreach (Magnetic magneticObject in magneticObjects)
-        {
-            _magneticObjects.Add(magneticObject.GetComponent<Rigidbody>());
-        }
+        // Using LINQ to replace the foreach loop
+        magneticObjects.Select(magneticObject => magneticObject.GetComponent<Rigidbody>())
+            .ToList()
+            .ForEach(rb => _magneticObjects.Add(rb));
     }
 
     private bool _activateMagnet = false;
@@ -95,16 +99,14 @@ public class Magnet : MonoBehaviour
     private bool _outOfBreathClipPlayed = false;
 
     private bool _usingShotgun = true;
-    
-    
+
+
     private void Update()
     {
         if (!_gameManager.gameIsPaused)
         {
-
-
             if (Input.GetKeyDown(KeyCode.Q)) // TODO: Make this event based instead of in update
-            {   
+            {
                 _usingShotgun = !_usingShotgun;
                 if (_usingShotgun)
                 {
@@ -114,10 +116,11 @@ public class Magnet : MonoBehaviour
                 {
                     _currentShotType = GameManager.ActiveShotType.Rocket;
                 }
+
                 _gameManager.activeShot = _currentShotType;
             }
-            
-            
+
+
             // if (Input.GetKeyDown(KeyCode.Alpha1))
             // {
             //     _currentShotType = GameManager.ActiveShotType.Shotgun;
@@ -130,12 +133,12 @@ public class Magnet : MonoBehaviour
             // {
             //     _currentShotType = GameManager.ActiveShotType.Spray;
             // }
-           
+
             if (_gameManager.flightDuration <= 0f)
             {
                 _gameManager.outOfFuel = true;
             }
-            
+
 
             // When the player is holding right mouse button and holding space and has demons in hand and has fuel
             if (Input.GetMouseButton(1) && Input.GetKey(KeyCode.Space) && _gameManager.demonInHand &&
@@ -152,31 +155,36 @@ public class Magnet : MonoBehaviour
                     _attractImage.sprite = _rocketAttractSprite;
                     _repelImage.sprite = _rocketRepelSprite;
                     _defaultImage.sprite = _rocketDefaultSprite;
-                    
-                    
+
+
                     _audioManager.StartFlyingSound();
                     _gameManager.flightDuration -= _fuelDecrementAmount;
                     _attractParticlesRenderer.material = _levitateCenterMaterial;
                     _centerSphere.material = _levitateCenterMaterial;
                     _outerSphere.material = _levitateOuterMaterial;
-                    _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _flightForce, _playerRigidbody.velocity.z);
-                } else if (!_outOfBreathClipPlayed) {
+                    _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _flightForce,
+                        _playerRigidbody.velocity.z);
+                }
+                else if (!_outOfBreathClipPlayed)
+                {
                     _audioManager.PlayInvariableSFX(_outOfBreathClip);
                     _outOfBreathClipPlayed = true;
-                    
                 }
             }
             else
             {
-                if(_gameManager.playerIsFlying == true) {
+                if (_gameManager.playerIsFlying == true)
+                {
                     _audioManager.StopFlyingSound();
                 }
+
                 _gameManager.playerIsFlying = false;
                 transform.position = _handPosition.position;
                 _attractParticlesRenderer.material = _attractCenterMaterial;
                 _centerSphere.material = _attractCenterMaterial;
                 _outerSphere.material = _attractOuterMaterial;
-                _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _playerRigidbody.velocity.y, _playerRigidbody.velocity.z);
+                _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _playerRigidbody.velocity.y,
+                    _playerRigidbody.velocity.z);
                 // Set sprites
                 _attractImage.sprite = _shotgunAttractSprite;
                 _repelImage.sprite = _shotgunRepelSprite;
@@ -240,19 +248,22 @@ public class Magnet : MonoBehaviour
             {
                 StartCoroutine(SlamAbility());
             }
+
             SetDemonsVelocityAndPosition();
         }
     }
-    
-    
+
+
     private bool _slamOnCooldown;
+
     private IEnumerator SlamAbility()
     {
         if (!_slamOnCooldown)
         {
             _slamOnCooldown = true;
             _audioManager.PlaySlamSound();
-            foreach (Rigidbody rb in _magneticObjects)
+// Using LINQ to replace the foreach loop
+            _magneticObjects.ForEach(rb =>
             {
                 _attractImage.gameObject.SetActive(false);
                 _repelImage.gameObject.SetActive(true);
@@ -264,7 +275,8 @@ public class Magnet : MonoBehaviour
 
                 rb.AddForce(Vector3.down * _slamSpeed);
                 _activateMagnet = false;
-            }
+            });
+
 
             yield return new WaitForSeconds(_slamCooldown);
             _slamOnCooldown = false;
@@ -272,9 +284,9 @@ public class Magnet : MonoBehaviour
     }
 
     private bool _shotgunOnCooldown;
-    
+
     private GameManager.ActiveShotType _currentShotType;
-    
+
     private IEnumerator ShotgunAbility()
     {
         if (!_shotgunOnCooldown)
@@ -298,7 +310,7 @@ public class Magnet : MonoBehaviour
                     break;
             }
 
-            foreach (Rigidbody rb in _magneticObjects)
+            _magneticObjects.ForEach(rb =>
             {
                 _attractImage.gameObject.SetActive(false);
                 _repelImage.gameObject.SetActive(true);
@@ -307,34 +319,27 @@ public class Magnet : MonoBehaviour
                 _repelParticlesRoot.SetActive(true);
                 _repelParticles.Clear();
                 _repelParticles.Play();
-                
-                //rb.AddExplosionForce(_shotgunSpeed, _handPosition.position, 10f);
-
 
                 Vector3 offsetDirection;
                 float deviationAngleX = 0f;
                 float deviationAngleY = 0f;
                 float deviationAngleZ = 0f;
-                
+
                 switch (_currentShotType)
                 {
                     case GameManager.ActiveShotType.Shotgun:
-
                         deviationAngleX = Random.Range(-20f, 20f);
                         deviationAngleY = Random.Range(-20f, 20f);
                         deviationAngleZ = Random.Range(-20f, 20f);
-                        
-                        offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) * transform.forward;
-                        
+                        offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
+                                          transform.forward;
                         rb.AddForce(offsetDirection * _shotgunSpeed);
-                        
-
                         break;
                     case GameManager.ActiveShotType.Rocket:
                         rb.AddForce(transform.forward * _shotgunSpeed);
                         break;
                     case GameManager.ActiveShotType.Spray:
-                        deviationAngleY = Random.Range(-20f, 20f); // Adjust the range as needed
+                        deviationAngleY = Random.Range(-20f, 20f);
                         offsetDirection = Quaternion.Euler(0, deviationAngleY, 0) * transform.forward;
                         rb.AddForce(offsetDirection * _shotgunSpeed);
                         break;
@@ -344,17 +349,15 @@ public class Magnet : MonoBehaviour
                         break;
                 }
 
-                
-
-
                 _activateMagnet = false;
-            }
+            });
+
 
             yield return new WaitForSeconds(_shotgunCooldown);
             _shotgunOnCooldown = false;
         }
     }
-    
+
 
     // Update is called once per frame
     private void FixedUpdate()
@@ -369,9 +372,9 @@ public class Magnet : MonoBehaviour
 
         if (_activateMagnet)
         {
-            foreach (Rigidbody obj in _magneticObjects)
+            _magneticObjects.ForEach(obj =>
             {
-                // calculate distance from object
+                // Calculate distance from object
                 float distance = Vector3.Distance(obj.position, transform.position);
 
                 obj.velocity = Vector3.zero;
@@ -383,8 +386,7 @@ public class Magnet : MonoBehaviour
                     obj.position = transform.position;
                     _audioManager.PlayObjectReachedSound();
                 }
-                
-            }
+            });
         }
     }
 
@@ -396,10 +398,7 @@ public class Magnet : MonoBehaviour
 
     public void DecreaseDemonWeight(float percentDecrease)
     {
-       foreach (Rigidbody rb in _magneticObjects)
-       {
-           rb.mass -= (rb.mass * percentDecrease);
-       } 
+        _magneticObjects.ForEach(rb => { rb.mass -= (rb.mass * percentDecrease); });
     }
 
     public int GetMagnetCount()
@@ -411,5 +410,4 @@ public class Magnet : MonoBehaviour
     {
         return _magneticObjects[0].mass;
     }
-
 }
