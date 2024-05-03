@@ -8,8 +8,13 @@ using UnityEngine.UI;
 public class WeaponUIToggle : MonoBehaviour
 {
 
-    [SerializeField] private Color _enabledColor = Color.white;
-    [SerializeField] private Color _disabledColor = Color.grey;
+    private Color _shotgunEnabledColor = Color.white;
+    private Color _shotgunDisabledColor = Color.grey;
+    
+    private Color _rocketEnabledColor = Color.white;
+    private Color _rocketDisabledColor = Color.grey;
+
+    private bool useShotgunColor = true; // Indicates whether shotgun color is currently being used
 
     [SerializeField] private List<GameObject> shotTypeUIParents = new List<GameObject>();
 
@@ -18,17 +23,26 @@ public class WeaponUIToggle : MonoBehaviour
     private void Start()
     {
         _gameManager = GameManager.Instance;
+
+        _shotgunEnabledColor = shotTypeUIParents[0].GetComponent<Image>().color;
+        _shotgunDisabledColor = _shotgunEnabledColor * 0.5f; // Darken the color by multiplying by a factor (0.5 here)
+        _shotgunDisabledColor.a = 1f; // Ensure alpha remains 1
+
+        _rocketEnabledColor = shotTypeUIParents[1].GetComponent<Image>().color;
+        _rocketDisabledColor = _rocketEnabledColor * 0.5f; // Darken the color by multiplying by a factor (0.5 here)
+        _rocketDisabledColor.a = 1f; // Ensure alpha remains 1
     }
 
     void Update()
     {
-
         switch (_gameManager.activeShot)
         {
             case GameManager.ActiveShotType.Shotgun:
+                useShotgunColor = true;
                 EnableActive(0);
                 break;
             case GameManager.ActiveShotType.Rocket:
+                useShotgunColor = false;
                 EnableActive(1);
                 break;
             case GameManager.ActiveShotType.Spray:
@@ -44,11 +58,26 @@ public class WeaponUIToggle : MonoBehaviour
     {
         foreach (GameObject obj in shotTypeUIParents)
         {
-            obj.GetComponent<Image>().color = _disabledColor;
-            //obj.GetComponentInChildren<TextMeshProUGUI>().color = _disabledColor;
-        }   
-        shotTypeUIParents[index].GetComponent<Image>().color = _enabledColor;
-        //shotTypeUIParents[index].GetComponentInChildren<TextMeshProUGUI>().color = _enabledColor;
-        
+            Image img = obj.GetComponent<Image>();
+            if (useShotgunColor)
+            {
+                img.color = _rocketDisabledColor;
+
+            }
+            else
+            {
+                img.color = _shotgunDisabledColor;
+            }
+        }
+
+        Image activeWeaponImage = shotTypeUIParents[index].GetComponent<Image>();
+        if (useShotgunColor)
+        {
+            activeWeaponImage.color = _shotgunEnabledColor;
+        }
+        else
+        {
+            activeWeaponImage.color = _rocketEnabledColor;
+        }
     }
 }
