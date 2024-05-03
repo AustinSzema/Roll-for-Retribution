@@ -1773,14 +1773,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5019608, g: 0.9960785, b: 0.9960785, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e7836d7789a44544e849738c44406068, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a059c457685cabd4783b1bff38499305, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2211,14 +2211,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 1, b: 0.5019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c4fbe33b7a761c7409fc4d32d6bfa05f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45edde7bb2b62cb43ba1c5648856962f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2456,8 +2456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d5959d49c9aba49a5ea53778a3bbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enabledColor: {r: 1, g: 1, b: 1, a: 1}
-  _disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   shotTypeUIParents:
   - {fileID: 2169527407868732402}
   - {fileID: 3376792254763938737}
@@ -4907,7 +4905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 3, y: 3}
+  m_EffectDistance: {x: -15, y: 15}
   m_UseGraphicAlpha: 1
 --- !u!114 &8566823130471431670
 MonoBehaviour:
@@ -5032,71 +5030,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2483085923445911574, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483085923445911574, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483085923445911574, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483085923445911574, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483085923445911574, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2483085923445911574, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586242116522215990, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c62d71d54b0e93f42a538a027789b690,
-        type: 3}
-    - target: {fileID: 6586242116522215990, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586242116522215990, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586242116522215990, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586242116522215990, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7591109170072367918, guid: 46bee70daa724084b9f1ae56dfd7c684,
         type: 3}
       propertyPath: m_Name
       value: Fade In Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8381610871654694875, guid: 46bee70daa724084b9f1ae56dfd7c684,
-        type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
