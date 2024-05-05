@@ -46,7 +46,7 @@ public class SetSkillPointsSlider : MonoBehaviour
         {
             _outline.enabled = false;
             _pulseOutline.enabled = false;
-            //_upgradeNotification.SetActive(false);
+            _upgradeNotification.SetActive(false);
 
         }
     }
