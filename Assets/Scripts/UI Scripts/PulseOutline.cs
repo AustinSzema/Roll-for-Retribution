@@ -18,13 +18,6 @@ public class PulseOutline : MonoBehaviour
         _maxEffectDistanceY = _outline.effectDistance.y;
     }
 
-    private void OnEnable()
-    {
-        _maxEffectDistanceX = _outline.effectDistance.x;
-        _maxEffectDistanceY = _outline.effectDistance.y;
-        _outline.effectDistance = Vector2.zero;        
-    }
-
     void Update()
     {
         // Calculate pulse using sine function for smooth oscillation

@@ -17,6 +17,9 @@ public class SetSkillPointsSlider : MonoBehaviour
 
     [SerializeField] private Outline _outline;
     [SerializeField] private PulseOutline _pulseOutline;
+
+    [SerializeField] private GameObject _upgradeNotification;
+
     
     void Update()
     {
@@ -37,11 +40,14 @@ public class SetSkillPointsSlider : MonoBehaviour
         {
             _outline.enabled = true;
             _pulseOutline.enabled = true;
+            _upgradeNotification.SetActive(true);
         }
         else
         {
             _outline.enabled = false;
             _pulseOutline.enabled = false;
+            //_upgradeNotification.SetActive(false);
+
         }
     }
 }
