@@ -45,7 +45,7 @@ public class MainMenuFadeIn : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime; // Increment timer
+        timer += Time.deltaTime * 2; // Increment timer
 
         // Calculate alpha value based on time elapsed
         float alpha = Mathf.Clamp01(timer / fadeInTime);
@@ -69,13 +69,14 @@ public class MainMenuFadeIn : MonoBehaviour
             colors.normalColor = new Color(colors.normalColor.r, colors.normalColor.g, colors.normalColor.b, alpha);
             button.colors = colors;
 
-            button.interactable = alpha < 0.5f;
+            button.interactable = alpha > 0.5f;
 
         }
 
         // Disable the script when the fading is complete
         if (timer >= fadeInTime)
         {
+            Time.timeScale = 0f;
             enabled = false;
         }
     }
