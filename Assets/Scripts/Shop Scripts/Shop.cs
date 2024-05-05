@@ -61,7 +61,7 @@ public class Shop : MonoBehaviour
 
         // if we have reached the maximum level for this skill
         // return maxval for int
-        if (currentLevel > _skillCosts.Length)
+        if (currentLevel >= _skillCosts.Length)
         {
             return Int32.MaxValue;
         }
