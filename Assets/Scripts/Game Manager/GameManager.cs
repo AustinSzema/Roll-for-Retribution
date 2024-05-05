@@ -78,6 +78,9 @@ public class GameManager : MonoBehaviour
     // Flight Fields
     [HideInInspector] public float flightDuration;
 
+
+    [HideInInspector] public bool enemiesShouldMove = true;
+    
     public enum ActiveShotType
     {
         Shotgun,

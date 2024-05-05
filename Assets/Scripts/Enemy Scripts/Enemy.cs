@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private Material _enemyPauseMaterial;
     [SerializeField] private float _hitPauseTime = 2f;
-    public bool enemyShouldMove = true;
+
+    private bool enemyShouldMove = true;
     private Material[] _originalMaterials;
     private Material[] _pausedMaterials;
 
@@ -59,6 +60,8 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             _pausedMaterials[i] = _enemyPauseMaterial;
         }
+
+        enemyShouldMove = _gameManager.enemiesShouldMove;
     }
     
 

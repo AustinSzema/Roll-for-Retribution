@@ -90,7 +90,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
         {
             _mainCanvas.SetActive(false);
             CancelInvoke();
-            Time.timeScale = 0f;
-        }
+            _gameManager.enemiesShouldMove = false;
+       }
     }
 }
