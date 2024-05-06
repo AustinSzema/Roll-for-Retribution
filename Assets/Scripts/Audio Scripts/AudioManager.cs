@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _hitClip;
     [SerializeField] private AudioClip _bigHitClip;
 
+    [SerializeField] private AudioClip _clickClip;
 
     private Queue<AudioClip> _queue = new Queue<AudioClip>();
     private Vector3 _lastPosition;
@@ -194,7 +196,12 @@ public class AudioManager : MonoBehaviour
     {
         PlayInvariableSFX(_flyEndClip);
     }
-
+    
+    public void PlayClickSound()
+    {
+        _sfxSource.PlayOneShot(_clickClip);
+    }
+    
     // for playing background music
     public void PlayMusic(AudioClip musicClip)
     {

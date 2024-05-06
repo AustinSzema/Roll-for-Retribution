@@ -9,11 +9,14 @@ using UnityEngine;
         
         private bool _toggleCanvas = false;
 
+        private AudioManager _audioManager;
 
         private void Start()
         {
             _gameManager = GameManager.Instance;
+            _audioManager = AudioManager.Instance;
         }
+        
 
         // Update is called once per frame
         void Update()
@@ -37,6 +40,8 @@ using UnityEngine;
                     Time.timeScale = 1;
                     _gameManager.gameIsPaused = false;
                 }
+                _audioManager.PlayClickSound();
+
             }
         }
     }
