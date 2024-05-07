@@ -51,7 +51,7 @@ public class DisplayCurrentShopLevels : MonoBehaviour
         UpdateCostField(Shop.SkillsToLevel.DemonQuantity, demonQuantityCost);
         UpdateCostField(Shop.SkillsToLevel.DemonWeight, demonWeightCost);
 
-        skillPoints.text = "Skill Points: " + shop.CurrentSkillPoints().ToString();
+        skillPoints.text = "Soul Power: " + shop.CurrentSkillPoints().ToString(); // TODO: abstract this so that the string is easily modifiable and not hard coded. maybe put it in gamemanager
     }
     
     private void UpdateCostField(Shop.SkillsToLevel skill, TextMeshProUGUI text)
