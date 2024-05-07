@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     private int _playerHits = 0;
 
     [HideInInspector] public bool canUseSuper { get; private set; } = false;
+    [HideInInspector] public int superMeterActivationAmount { get; private set; } = 20;
 
 
     public enum ActiveShotType
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour
             }
 
             Debug.Log("used Super");
-            _playerHits = 0;
+            _playerHits -= superMeterActivationAmount;
             canUseSuper = false;
         }
     }
@@ -127,7 +128,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseSuperMeter()
     {
         _playerHits++;
-        if (_playerHits >= 100)
+        if (_playerHits >= superMeterActivationAmount)
         {
             canUseSuper = true;
         }

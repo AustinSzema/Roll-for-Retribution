@@ -15,6 +15,8 @@ public class SuperMeter : MonoBehaviour
     private void Start()
     {
         _gameManager = GameManager.Instance;
+        _slider.minValue = _gameManager.superMeterActivationAmount;
+        _slider.maxValue = _gameManager.superMeterActivationAmount;
     }
 
     private void Update()
@@ -25,7 +27,7 @@ public class SuperMeter : MonoBehaviour
         }
         else
         {
-            _slider.value = _gameManager.killCount % 100f / 100f;
+            _slider.value = _gameManager.killCount % _gameManager.superMeterActivationAmount;
         }
         
         if (_gameManager.canUseSuper)
