@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public int killCount;
 
+
     [HideInInspector] public bool gameIsPaused;
 
     // Enemy Fields
@@ -82,12 +84,14 @@ public class GameManager : MonoBehaviour
     public bool enemiesShouldMove = true;
     
     
-    private int _playerHits = 0;
+    [HideInInspector] public int enemiesHit = 0;
 
     [HideInInspector] public bool canUseSuper { get; private set; } = false;
-    [HideInInspector] public int superMeterActivationAmount { get; private set; } = 20;
+    [HideInInspector] public int superMeterActivationAmount { get; private set; } = 500;
 
 
+    public bool shopActive = false;
+    
     public enum ActiveShotType
     {
         Shotgun,
@@ -119,18 +123,16 @@ public class GameManager : MonoBehaviour
             }
 
             Debug.Log("used Super");
-            _playerHits -= superMeterActivationAmount;
-            canUseSuper = false;
+            enemiesHit -= superMeterActivationAmount;
         }
+        
+        canUseSuper = enemiesHit >= superMeterActivationAmount;
     }
 
 
     public void IncreaseSuperMeter()
     {
-        _playerHits++;
-        if (_playerHits >= superMeterActivationAmount)
-        {
-            canUseSuper = true;
-        }
+        enemiesHit++;
+        Debug.Log("Player hits fr: " + enemiesHit);
     }
 }

@@ -6,8 +6,6 @@ using UnityEngine;
         [SerializeField] private GameObject _shopCanvas;
 
         private GameManager _gameManager;
-        
-        private bool _toggleCanvas = false;
 
         private AudioManager _audioManager;
 
@@ -23,8 +21,8 @@ using UnityEngine;
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                _toggleCanvas = !_toggleCanvas;
-                if (_toggleCanvas)
+                _gameManager.shopActive = !_gameManager.shopActive;
+                if (_gameManager.shopActive)
                 {
                     _shopCanvas.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;

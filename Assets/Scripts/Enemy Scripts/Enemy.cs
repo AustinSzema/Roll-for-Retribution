@@ -111,9 +111,9 @@ public class Enemy : MonoBehaviour, IDamageable
             if (gameObject.activeSelf)
             {
                 StartCoroutine(PauseEnemy(_hitPauseTime));
-                _gameManager.IncreaseSuperMeter();
             }
         }
+        _gameManager.IncreaseSuperMeter();
     }
 
     private IEnumerator PauseEnemy(float waitTime)

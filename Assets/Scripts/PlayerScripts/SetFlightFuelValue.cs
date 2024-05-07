@@ -15,8 +15,6 @@ public class SetFlightFuelValue : MonoBehaviour
     
     [SerializeField] private Slider _minimumFuelSlider;
 
-    [Multiline]
-    [SerializeField] private String _fuelDefaultText = "Levitation Energy: ";
     [SerializeField] private TextMeshProUGUI _fuelTextMeshProUGUI;
 
 
@@ -60,7 +58,7 @@ public class SetFlightFuelValue : MonoBehaviour
 
             if (_gameManager.outOfFuel == false)
             {
-                _fuelTextMeshProUGUI.text = _fuelDefaultText + (int)(_flightFuelSlider.value / _flightFuelSlider.maxValue * 100) + "%";
+                _fuelTextMeshProUGUI.text = (int)(_flightFuelSlider.value / _flightFuelSlider.maxValue * 100) + "%";
             }
             else
             {

@@ -15,7 +15,7 @@ public class SuperMeter : MonoBehaviour
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        _slider.minValue = _gameManager.superMeterActivationAmount;
+        _slider.minValue = 0;
         _slider.maxValue = _gameManager.superMeterActivationAmount;
     }
 
@@ -27,7 +27,7 @@ public class SuperMeter : MonoBehaviour
         }
         else
         {
-            _slider.value = _gameManager.killCount % _gameManager.superMeterActivationAmount;
+            _slider.value = _gameManager.enemiesHit;
         }
         
         if (_gameManager.canUseSuper)
@@ -38,5 +38,6 @@ public class SuperMeter : MonoBehaviour
         {
             _pulseOutline.enabled = false;
         }
+        Debug.Log("PlayerHits: " + _gameManager.enemiesHit);
     }
 }

@@ -20,7 +20,13 @@ public class SetSkillPointsSlider : MonoBehaviour
 
     [SerializeField] private GameObject _upgradeNotification;
 
-    
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameManager.Instance;
+    }
+
     void Update()
     {
         _pullForceCost = int.Parse(_shop.CostToLevel(Shop.SkillsToLevel.PullForce).ToString());
@@ -36,18 +42,23 @@ public class SetSkillPointsSlider : MonoBehaviour
         // So when the player can purchase an upgrade in the shop, the slider is full.
         _slider.maxValue = _costs.Min();
         _slider.value = _shop.CurrentSkillPoints();
-        if (_slider.value >= _slider.maxValue && _slider.maxValue >= 0)
+        
+        
+        if (_gameManager.shopActive || _slider.value < _slider.maxValue || _slider.maxValue < 0)
         {
-            _outline.enabled = true;
-            _pulseOutline.enabled = true;
-            _upgradeNotification.SetActive(true);
+            NotificationEnabled(false);
         }
         else
         {
-            _outline.enabled = false;
-            _pulseOutline.enabled = false;
-            _upgradeNotification.SetActive(false);
-
+            NotificationEnabled(true);
         }
+
+    }
+
+    private void NotificationEnabled(bool active)
+    {
+        _outline.enabled = active;
+        _pulseOutline.enabled = active;
+        _upgradeNotification.SetActive(active);
     }
 }

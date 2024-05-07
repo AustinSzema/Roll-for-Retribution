@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PulseOutline : MonoBehaviour
 {
     [SerializeField] private Outline _outline;
-    [SerializeField] private float _pulseSpeed = 1.0f;
+    private float _pulseSpeed = 10f;
     private float _maxEffectDistanceX = -15.0f;
     private float _maxEffectDistanceY = 15.0f;
 
