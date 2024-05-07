@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] private int healthPoints = 1;
+    [SerializeField] public int healthPoints { get; private set;} = 1;
 
     [SerializeField] private GameObject _enemy;
 

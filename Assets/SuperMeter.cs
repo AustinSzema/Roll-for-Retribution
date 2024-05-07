@@ -11,9 +11,12 @@ public class SuperMeter : MonoBehaviour
     [SerializeField] private Slider _slider;
 
     [SerializeField] private PulseOutline _pulseOutline;
-    
+
+    [SerializeField] private Outline _outline;
+
     private void Start()
     {
+        _outline.enabled = false;
         _gameManager = GameManager.Instance;
         _slider.minValue = 0;
         _slider.maxValue = _gameManager.superMeterActivationAmount;
@@ -29,15 +32,10 @@ public class SuperMeter : MonoBehaviour
         {
             _slider.value = _gameManager.enemiesHit;
         }
+
+        _outline.enabled = _gameManager.canUseSuper;
+        _pulseOutline.enabled = _gameManager.canUseSuper;
         
-        if (_gameManager.canUseSuper)
-        {
-            _pulseOutline.enabled = true;
-        }
-        else
-        {
-            _pulseOutline.enabled = false;
-        }
         Debug.Log("PlayerHits: " + _gameManager.enemiesHit);
     }
 }

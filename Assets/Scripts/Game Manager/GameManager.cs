@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int enemiesHit = 0;
 
     [HideInInspector] public bool canUseSuper { get; private set; } = false;
-    [HideInInspector] public int superMeterActivationAmount { get; private set; } = 500;
+    [HideInInspector] public int superMeterActivationAmount { get; private set; } = 1000;
 
 
     public bool shopActive = false;
@@ -108,17 +108,18 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() // This entire thing should be in the super meter not in the game manager. Probably
     {
         Debug.Log("Kill Count: " + killCount);
-        if (Input.GetKeyDown(KeyCode.Return) && canUseSuper)
+        if (canUseSuper && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)))
         {
+            FindObjectOfType<DomainExpansion>().ExpandDomain(); // temporary hack
             Enemy[] enemies = FindObjectsOfType<Enemy>();
             foreach (Enemy e in enemies)
             {
                 if (e.gameObject.activeInHierarchy)
                 {
-                    e.takeDamage(1);
+                    e.takeDamage(e.healthPoints);
                 }
             }
 
