@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float flightDuration;
 
 
-    [HideInInspector] public bool enemiesShouldMove = true;
+    public bool enemiesShouldMove = true;
     
     
     private int _playerHits = 0;
