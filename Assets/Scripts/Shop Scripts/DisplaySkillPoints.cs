@@ -18,6 +18,6 @@ public class DisplaySkillPoints : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        skillPointsText.text = "Skill Points: " + _skillPoints.skillPoints.ToString();
+        skillPointsText.text = "Soul Points: " + _skillPoints.skillPoints.ToString();
     }
 }

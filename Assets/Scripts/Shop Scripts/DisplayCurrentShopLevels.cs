@@ -29,7 +29,7 @@ public class DisplayCurrentShopLevels : MonoBehaviour
 
     [SerializeField] private Shop shop;
 
-    private string _soldOut = "Sold Out";
+    private string _soldOut = "MAX";
     
     private void Update()
     {
