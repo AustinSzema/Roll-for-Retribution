@@ -81,6 +81,12 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public bool enemiesShouldMove = true;
     
+    
+    private int _playerHits = 0;
+
+    [HideInInspector] public bool canUseSuper { get; private set; } = false;
+
+
     public enum ActiveShotType
     {
         Shotgun,
@@ -100,7 +106,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Debug.Log("Kill Count: " + killCount);
-        if (Input.GetKeyDown(KeyCode.Return) && _canUseSuper)
+        if (Input.GetKeyDown(KeyCode.Return) && canUseSuper)
         {
             Enemy[] enemies = FindObjectsOfType<Enemy>();
             foreach (Enemy e in enemies)
@@ -113,20 +119,17 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("used Super");
             _playerHits = 0;
-            _canUseSuper = false;
+            canUseSuper = false;
         }
     }
 
-    private int _playerHits = 0;
-
-    private bool _canUseSuper = false;
 
     public void IncreaseSuperMeter()
     {
         _playerHits++;
         if (_playerHits >= 100)
         {
-            _canUseSuper = true;
+            canUseSuper = true;
         }
     }
 }
