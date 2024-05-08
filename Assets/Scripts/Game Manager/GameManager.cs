@@ -101,10 +101,15 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private AudioManager _audioManager;
+    
     private void Start()
     {
         gameIsPaused = false;
         Time.timeScale = 1f;
+        _audioManager = AudioManager.Instance;
+        _audioManager.PlayMainMusic();
+        
     }
 
     // Update is called once per frame

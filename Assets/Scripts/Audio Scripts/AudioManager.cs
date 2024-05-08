@@ -32,6 +32,8 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioClip _clickClip;
 
+    [SerializeField] private AudioClip _mainMusic;
+    
     private Queue<AudioClip> _queue = new Queue<AudioClip>();
     private Vector3 _lastPosition;
     private float objectReachedCooldown = 0.5f; // cooldown time in seconds for object reached sound
@@ -246,4 +248,8 @@ public class AudioManager : MonoBehaviour
         // TODO: find an object pooled or more performant solution for audio
     }
 
+    public void PlayMainMusic()
+    {
+        PlayMusic(_mainMusic);
+    }
 }
