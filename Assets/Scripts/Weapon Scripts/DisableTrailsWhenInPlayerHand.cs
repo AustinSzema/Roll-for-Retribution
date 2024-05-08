@@ -21,7 +21,7 @@ public class DisableTrailsWhenInPlayerHand : MonoBehaviour
     void Update()
     {
 
-        _trail.enabled = Vector3.Distance(transform.position, _gameManager.handPosition) ! <= 1f;
+        _trail.enabled = Vector3.Distance(transform.position, _gameManager.handPosition) > 1f;
         
         float distance = Mathf.Clamp(Vector3.Distance(transform.position, _gameManager.handPosition), 0.5f, 1f);
         transform.localScale = new Vector3(distance, distance, distance);
