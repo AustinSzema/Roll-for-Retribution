@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool canUseSuper { get; private set; } = false;
     [HideInInspector] public int superMeterActivationAmount { get; private set; } = 2000;
 
+    [HideInInspector] public int soulCount = 0;
 
     public bool shopActive = false;
     

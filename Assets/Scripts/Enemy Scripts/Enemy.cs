@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
@@ -43,6 +44,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private GameManager _gameManager;
 
+    [SerializeField] private GameObject _soulPrefab;
+    
     private void Start()
     {
         _gameManager = GameManager.Instance;
@@ -100,6 +103,7 @@ public class Enemy : MonoBehaviour, IDamageable
         EnemyHit();
         if (_currentHealth <= 0)
         {
+            Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
             UnpauseEnemy();
             Explode();
             _currentHealth = healthPoints;
