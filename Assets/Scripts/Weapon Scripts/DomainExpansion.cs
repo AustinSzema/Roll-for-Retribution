@@ -77,6 +77,14 @@ public class DomainExpansion : MonoBehaviour
         }
     }
 
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
+    //     {
+    //         other.gameObject.GetComponent<IDamageable>().takeDamage(1);
+    //     }
+    // }
+
     /*private void OnParticleCollision(GameObject other)
     {
         if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
