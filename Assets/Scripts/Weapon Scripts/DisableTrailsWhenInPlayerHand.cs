@@ -15,33 +15,21 @@ public class DisableTrailsWhenInPlayerHand : MonoBehaviour
         _gameManager = GameManager.Instance;
     }
 
+    
+    // TODO: This code probably needs a refactor or does not need to be its own script
     // Update is called once per frame
     void Update()
     {
 
-        
-        if (Vector3.Distance(transform.position, _gameManager.handPosition) <= 1f)
-        {
-            _trail.enabled = false;
-        }
-        else
-        {
-            _trail.enabled = true;
-        }
-
-        
+        _trail.enabled = Vector3.Distance(transform.position, _gameManager.handPosition) ! <= 1f;
         
         float distance = Mathf.Clamp(Vector3.Distance(transform.position, _gameManager.handPosition), 0.5f, 1f);
         transform.localScale = new Vector3(distance, distance, distance);
-
-        //Debug.Log("Trail " + _trail.enabled);
     }
 
     private void LateUpdate()
     {
-        
-
-        if (Input.GetMouseButton(0) && Vector3.Distance(transform.position, _gameManager.handPosition) <= 3f)
+        if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0) && Vector3.Distance(transform.position, _gameManager.handPosition) <= 3f)
         {
             transform.position = _gameManager.handPosition;
         }
