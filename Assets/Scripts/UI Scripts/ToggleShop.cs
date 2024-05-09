@@ -19,7 +19,7 @@ using UnityEngine;
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _gameManager.shopActive = !_gameManager.shopActive;
                 if (_gameManager.shopActive)
