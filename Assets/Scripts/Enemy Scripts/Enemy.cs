@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -103,7 +104,12 @@ public class Enemy : MonoBehaviour, IDamageable
         EnemyHit();
         if (_currentHealth <= 0)
         {
-            Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
+
+            // if (Random.value >= 0.5f)
+            // {
+            // }
+            //Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
+
             UnpauseEnemy();
             Explode();
             _currentHealth = healthPoints;
