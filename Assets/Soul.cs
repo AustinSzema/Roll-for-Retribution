@@ -22,7 +22,7 @@ public class Soul : MonoBehaviour
         //{
 
         //}
-        transform.position = Vector3.MoveTowards(transform.position, _gameManager.playerPosition, Time.deltaTime * 10f);
+        transform.position = Vector3.MoveTowards(transform.position, _gameManager.playerPosition, Time.deltaTime * 100f);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour, IDamageable
             // if (Random.value >= 0.5f)
             // {
             // }
-            //Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
+            Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
 
             UnpauseEnemy();
             Explode();
