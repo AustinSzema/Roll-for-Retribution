@@ -45,7 +45,7 @@ public class DomainExpansion : MonoBehaviour
         if (_domainSizeValue - transformAverage <= 0)
         {
             StartCoroutine(ShrinkDomain(1f));
-            Debug.Log("Begun shrinking domain");
+            EZDebug.Log("Begun shrinking domain");
 
         }
 
@@ -96,7 +96,7 @@ public class DomainExpansion : MonoBehaviour
     private IEnumerator ShrinkDomain(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        Debug.Log("shrunk domain");
+        EZDebug.Log("shrunk domain");
         transform.localScale = _originalSize;
         _expandDomain = false;
         _meshRenderer.enabled = false;

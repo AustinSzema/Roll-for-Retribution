@@ -108,7 +108,7 @@ public class Enemy : MonoBehaviour, IDamageable
             // if (Random.value >= 0.5f)
             // {
             // }
-            Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
+            //Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
 
             UnpauseEnemy();
             Explode();
@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour, IDamageable
         
         _activeMeshRenderer.materials = _pausedMaterials;
         SetRendererMaterials(true);
-        Debug.Log("Active mesh renderer " + _activeMeshRenderer.name);
+        EZDebug.Log("Active mesh renderer " + _activeMeshRenderer.name);
         yield return new WaitForSeconds(waitTime);
         UnpauseEnemy();
         yield return null;

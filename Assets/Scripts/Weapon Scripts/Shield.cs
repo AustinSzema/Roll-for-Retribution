@@ -69,7 +69,7 @@ public class Shield : MonoBehaviour
     {
         if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
         {
-            Debug.Log("Hit: " + other.gameObject.name);
+            EZDebug.Log("Hit: " + other.gameObject.name);
             other.gameObject.GetComponent<IDamageable>().takeDamage(1);
             _enemyHitCount++;
             if (_enemyHitCount >= shieldHealth)

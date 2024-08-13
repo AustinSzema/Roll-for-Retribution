@@ -30,7 +30,7 @@ public class HighScore
       }
       catch (Exception exp)
       {
-         Debug.Log(exp.Message);
+         EZDebug.Log(exp.Message);
          using (StreamWriter writer = new StreamWriter(highScoreFile))
          {
             writer.Write(score);

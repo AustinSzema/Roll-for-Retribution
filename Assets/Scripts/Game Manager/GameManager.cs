@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update() // This entire thing should be in the super meter not in the game manager. Probably
     {
-        Debug.Log("Kill Count: " + killCount);
+        EZDebug.Log("Kill Count: " + killCount);
         if (canUseSuper && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)))
         {
             FindObjectOfType<DomainExpansion>().ExpandDomain(); // TODO: temporary hack, dont use find object
@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            Debug.Log("used Super");
+            EZDebug.Log("used Super");
             enemiesHit -= superMeterActivationAmount;
         }
         
@@ -140,6 +140,6 @@ public class GameManager : MonoBehaviour
     public void IncreaseSuperMeter()
     {
         enemiesHit++;
-        Debug.Log("Player hits fr: " + enemiesHit);
+        EZDebug.Log("Player hits fr: " + enemiesHit);
     }
 }

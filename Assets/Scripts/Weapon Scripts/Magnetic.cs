@@ -41,7 +41,7 @@ public class Magnetic : MonoBehaviour
         {
             Vector3 dir = (transform.position - other.gameObject.transform.position).normalized;
             _rigidbody.AddForce(dir * forceAmount, ForceMode.Impulse);
-            //Debug.Log(other.gameObject.name);
+            //EZDebug.Log(other.gameObject.name);
             other.gameObject.GetComponent<IDamageable>().takeDamage(1);
             //_dustParticles.transform.position = other.contacts[0].point;
             //_dustParticles.Play();
@@ -54,7 +54,7 @@ public class Magnetic : MonoBehaviour
         {
             Vector3 dir = (transform.position - other.gameObject.transform.position).normalized;
             _rigidbody.AddForce(dir * forceAmount, ForceMode.Impulse);
-            //Debug.Log(other.gameObject.name);
+            //EZDebug.Log(other.gameObject.name);
             other.gameObject.GetComponent<IDamageable>().takeDamage(1);
             //_dustParticles.transform.position = other.contacts[0].point;
             //_dustParticles.Play();

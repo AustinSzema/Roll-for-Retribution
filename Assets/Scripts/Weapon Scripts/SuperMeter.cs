@@ -36,6 +36,6 @@ public class SuperMeter : MonoBehaviour
         _outline.enabled = _gameManager.canUseSuper;
         _pulseOutline.enabled = _gameManager.canUseSuper;
         
-        Debug.Log("PlayerHits: " + _gameManager.enemiesHit);
+        EZDebug.Log("PlayerHits: " + _gameManager.enemiesHit);
     }
 }

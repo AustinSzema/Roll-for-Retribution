@@ -41,7 +41,7 @@ public class LoadingScreen : MonoBehaviour
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f - 0.01f); // 0.9f is the maximum progress value
-            //Debug.Log("Progress: " + progress);
+            EZDebug.Log("Progress: " + progress);
             _loadingSlider.value = progress;
             _loadingText.text = "Loading " + (progress * 100f).ToString("0") + "%";
 
@@ -66,7 +66,7 @@ public class LoadingScreen : MonoBehaviour
             new Color(_backgroundImage.color.r, _backgroundImage.color.g, _backgroundImage.color.b, _backgroundImage.color.a + 1);
         _loadingText.color = new Color(_loadingText.color.r, _loadingText.color.g, _loadingText.color.b, _loadingText.color.a + 1);
 
-        Debug.Log("Fading In");
+        EZDebug.Log("Fading In");
 
         if (_backgroundImage.color.a >= 255 && _loadingText.color.a >= 255)
         {
@@ -89,7 +89,7 @@ public class LoadingScreen : MonoBehaviour
             new Color(_backgroundImage.color.r, _backgroundImage.color.g, _backgroundImage.color.b, _backgroundImage.color.a - 1);
         _loadingText.color = new Color(_loadingText.color.r, _loadingText.color.g, _loadingText.color.b, _loadingText.color.a - 1);
         
-        Debug.Log("Fading Out");
+        EZDebug.Log("Fading Out");
         
         if (_backgroundImage.color.a <= 0 && _loadingText.color.a <= 0)
         {

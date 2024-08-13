@@ -45,7 +45,7 @@ public class SaveCameraImage : MonoBehaviour
         AssetDatabase.Refresh();
 
 
-        Debug.Log("Screenshot saved to: " + assetPath);
+        EZDebug.Log("Screenshot saved to: " + assetPath);
     }
     
 }

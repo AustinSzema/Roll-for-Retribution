@@ -13,7 +13,7 @@ public class TakeScreenshot : MonoBehaviour
             string time = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             string fileName = "Assets/Screenshots/DemonTimeScreenshot_" + time + ".png";
 
-            Debug.Log("Screenshot saved as: " + fileName);
+            EZDebug.Log("Screenshot saved as: " + fileName);
             
             ScreenCapture.CaptureScreenshot(fileName);
         }
