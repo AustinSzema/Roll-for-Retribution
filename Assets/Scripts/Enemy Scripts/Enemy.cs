@@ -25,6 +25,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip _enemyDamagedClip;
 
     private static AudioManager _audioManager;
+    
+    
+    [SerializeField] private float rotationSpeed = 5f;
 
     [Header("Enemy Hit Values")]
     
@@ -166,20 +169,35 @@ public class Enemy : MonoBehaviour, IDamageable
     private void EnemyHit()
     {
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-
+        _hitParticles.transform.position = transform.position;
         _hitParticles.Play();
     }
 
     private void Explode()
     {
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-
+        _hitParticles.transform.position = transform.position;
         _explosionParticles.Play();
         _enemy.SetActive(false);
     }
 
     private void Update()
     {
+        
+        // Get the direction from the enemy to the player
+        Vector3 directionToPlayer = _gameManager.playerPosition - transform.position;
+        directionToPlayer.y = 0f; // Ignore the y-axis
+
+        // Check if the direction is non-zero before attempting rotation
+        if (directionToPlayer != Vector3.zero)
+        {
+            // Calculate the desired rotation based on the direction
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Smoothly rotate the enemy towards the player only on the Y axis
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+        
         if (transform.position.y <= -5f)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
