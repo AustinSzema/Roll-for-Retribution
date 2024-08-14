@@ -83,14 +83,17 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     //TODO: put this on maincanvas instead of on player damage 
     private void fadeOutMainCanvas()
     {
-        RawImage mainCanvasImage = _mainCanvas.GetComponentInChildren<RawImage>();
-        mainCanvasImage.color = new Color(mainCanvasImage.color.r, mainCanvasImage.color.g, mainCanvasImage.color.b,
-            mainCanvasImage.color.a - 0.1f);
-        if (mainCanvasImage.color.a <= 0f)
-        {
-            _mainCanvas.SetActive(false);
-            CancelInvoke();
-            _gameManager.enemiesShouldMove = false;
-       }
+        _mainCanvas.SetActive(false);
+        CancelInvoke();
+        _gameManager.enemiesShouldMove = false;
+
+       //  RawImage mainCanvasImage = _mainCanvas.GetComponentInChildren<RawImage>();
+       //  mainCanvasImage.color = new Color(mainCanvasImage.color.r, mainCanvasImage.color.g, mainCanvasImage.color.b, mainCanvasImage.color.a - 0.1f);
+       //  if (mainCanvasImage.color.a <= 0f)
+       //  {
+       //      _mainCanvas.SetActive(false);
+       //      CancelInvoke();
+       //      _gameManager.enemiesShouldMove = false;
+       // }
     }
 }
