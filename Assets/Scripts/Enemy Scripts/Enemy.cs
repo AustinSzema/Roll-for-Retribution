@@ -171,12 +171,13 @@ public class Enemy : MonoBehaviour, IDamageable
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
         _hitParticles.transform.position = transform.position;
         _hitParticles.Play();
+        EZDebug.Log(_hitParticles.transform.position + "particles  enemy" + transform.position);
     }
 
     private void Explode()
     {
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-        _hitParticles.transform.position = transform.position;
+        _explosionParticles.transform.position = transform.position;
         _explosionParticles.Play();
         _enemy.SetActive(false);
     }

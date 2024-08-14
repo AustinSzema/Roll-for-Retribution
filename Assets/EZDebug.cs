@@ -7,7 +7,7 @@ public static class EZDebug
     
     public static void Log(string msg)
     {
-    #if  UNITY_EDTIOR
+    #if  UNITY_EDITOR
             Debug.Log(msg);        
     #endif
     }    
