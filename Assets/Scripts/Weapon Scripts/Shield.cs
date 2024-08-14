@@ -17,13 +17,19 @@ public class Shield : MonoBehaviour
     private int _enemyHitCount = 0;
 
     [SerializeField] private float shieldDuration = 5f;
-    
+
+    private Vector3 startRotation = Vector3.forward;
 
     private void Start()
     {
         rb.rotation = Camera.main.transform.rotation; // Replace Camera.main with a serialized reference for better performance
-        rb.velocity = rb.transform.forward * moveSpeed;
+        startRotation = rb.transform.forward;
         StartCoroutine(RemoveShield(shieldDuration));
+    }
+
+    private void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, startRotation * 100f, Time.deltaTime);
     }
 
     private IEnumerator RemoveShield(float waitTime)
