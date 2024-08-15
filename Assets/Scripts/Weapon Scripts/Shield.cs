@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb;
 
     [SerializeField] private ParticleSystem _shieldParticles;
     [SerializeField] private Transform _shieldParticlesTransform;
@@ -21,9 +20,8 @@ public class Shield : MonoBehaviour
     private Vector3 startRotation = Vector3.forward;
 
     private void Start()
-    {
-        rb.rotation = Camera.main.transform.rotation; // Replace Camera.main with a serialized reference for better performance
-        startRotation = rb.transform.forward;
+    { 
+        startRotation = transform.forward;
         StartCoroutine(RemoveShield(shieldDuration));
     }
 
