@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Shield : MonoBehaviour
 {
@@ -12,23 +13,34 @@ public class Shield : MonoBehaviour
     
     [SerializeField] private float moveSpeed = 20f;
 
-    [SerializeField] private int shieldHealth = 200;
+    private int shieldHealth = 10;
     private int _enemyHitCount = 0;
 
-    [SerializeField] private float shieldDuration = 5f;
+    private float shieldDuration = 0.8f;
 
     private Vector3 startRotation = Vector3.forward;
+
+    [SerializeField] private Rigidbody rb;
 
     private void Start()
     { 
         startRotation = transform.forward;
+        rb.velocity = transform.forward * 100f;
+        StartCoroutine(RotateCard(0.005f));
         StartCoroutine(RemoveShield(shieldDuration));
     }
 
-    private void Update()
+    private IEnumerator RotateCard(float delay)
     {
-        transform.position = Vector3.MoveTowards(transform.position, startRotation * 100f, Time.deltaTime);
+        yield return new WaitForSeconds(delay);
+        rb.AddTorque(500f * Random.Range(-1f, 1f) * transform.right);
+        rb.AddTorque(100f * Random.Range(-1f, 1f) * transform.up);
     }
+
+    // private void Update()
+    // {
+    //     transform.position = Vector3.MoveTowards(transform.position, startRotation * 100f, Time.deltaTime);
+    // }
 
     private IEnumerator RemoveShield(float waitTime)
     {
