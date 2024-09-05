@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb;
 
     [SerializeField] private ParticleSystem _shieldParticles;
     [SerializeField] private Transform _shieldParticlesTransform;
@@ -17,13 +16,18 @@ public class Shield : MonoBehaviour
     private int _enemyHitCount = 0;
 
     [SerializeField] private float shieldDuration = 5f;
-    
+
+    private Vector3 startRotation = Vector3.forward;
 
     private void Start()
-    {
-        rb.rotation = Camera.main.transform.rotation; // Replace Camera.main with a serialized reference for better performance
-        rb.velocity = rb.transform.forward * moveSpeed;
+    { 
+        startRotation = transform.forward;
         StartCoroutine(RemoveShield(shieldDuration));
+    }
+
+    private void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, startRotation * 100f, Time.deltaTime);
     }
 
     private IEnumerator RemoveShield(float waitTime)
@@ -69,7 +73,7 @@ public class Shield : MonoBehaviour
     {
         if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
         {
-            Debug.Log("Hit: " + other.gameObject.name);
+            EZDebug.Log("Hit: " + other.gameObject.name);
             other.gameObject.GetComponent<IDamageable>().takeDamage(1);
             _enemyHitCount++;
             if (_enemyHitCount >= shieldHealth)
