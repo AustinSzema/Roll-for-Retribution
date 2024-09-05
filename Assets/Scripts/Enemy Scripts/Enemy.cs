@@ -191,11 +191,17 @@ public class Enemy : MonoBehaviour, IDamageable
     private void TryPlayGruntSoundRandomly()
     {
         float odds = 0.001f;
-        if (UnityEngine.Random.value < odds)
+        if (Random.value < odds)
         {
             _audioManager.PlaySFXAtLocation(_enemyGruntClip, transform.position);
         }
     }
-    
-    
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Shield"))
+        {
+            takeDamage(1);
+        }
+    }
 }

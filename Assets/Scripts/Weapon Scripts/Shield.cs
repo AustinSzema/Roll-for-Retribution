@@ -33,8 +33,13 @@ public class Shield : MonoBehaviour
     private IEnumerator RotateCard(float delay)
     {
         yield return new WaitForSeconds(delay);
-        rb.AddTorque(500f * Random.Range(-1f, 1f) * transform.right);
-        rb.AddTorque(100f * Random.Range(-1f, 1f) * transform.up);
+        rb.AddTorque(500f * NegOnePosOne() * transform.right);
+        rb.AddTorque(100f * NegOnePosOne() * transform.up);
+    }
+
+    private int NegOnePosOne() // returns -1 or 1
+    {
+        return Random.Range(0, 1) * 2 - 1;
     }
 
     // private void Update()

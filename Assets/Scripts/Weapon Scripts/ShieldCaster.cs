@@ -9,6 +9,8 @@ public class ShieldCaster : MonoBehaviour
 
     private GameManager _gameManager;
 
+    private bool canShoot = true;
+    
     private void Start()
     {
         _gameManager = GameManager.Instance;
@@ -17,7 +19,7 @@ public class ShieldCaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && canShoot)
         {
             CastShield();
         }
@@ -27,5 +29,14 @@ public class ShieldCaster : MonoBehaviour
     private void CastShield()
     {
         GameObject shield = Instantiate(_shieldPrefab, _gameManager.playerPosition + Camera.main.transform.forward * 10f,  Camera.main.transform.rotation);
-     }
+        canShoot = false;
+        StartCoroutine(ShieldCooldown(0.5f));
+    }
+
+
+    private IEnumerator ShieldCooldown(float cooldown)
+    {
+        yield return new WaitForSeconds(cooldown);
+        canShoot = true;
+    }
 }
