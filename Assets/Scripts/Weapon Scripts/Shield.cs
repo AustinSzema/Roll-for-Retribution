@@ -84,6 +84,11 @@ public class Shield : MonoBehaviour
                 DestroyShield();
             }
         }
+
+        if (other.gameObject.CompareTag("Cage"))
+        {
+            DestroyShield();
+        }
     }
     
     private void HitEnemy(Collider other)
@@ -96,6 +101,10 @@ public class Shield : MonoBehaviour
             {
                 DestroyShield();
             }
+        }
+        if (other.gameObject.CompareTag("Cage"))
+        {
+            DestroyShield();
         }
     }
 
