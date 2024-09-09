@@ -28,11 +28,19 @@ public class ShieldCaster : MonoBehaviour
 
     private void CastShield()
     {
-        GameObject shield = Instantiate(_shieldPrefab, _gameManager.playerPosition + Camera.main.transform.forward * 10f,  Camera.main.transform.rotation);
+        StartCoroutine(CastMultipleShields(3));
+    }
+
+    private IEnumerator CastMultipleShields(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject shield = Instantiate(_shieldPrefab, _gameManager.playerPosition + Camera.main.transform.forward * 10f,  Camera.main.transform.rotation);
+            yield return new WaitForSeconds(0.3f);
+        }
         canShoot = false;
         StartCoroutine(ShieldCooldown(0.5f));
     }
-
 
     private IEnumerator ShieldCooldown(float cooldown)
     {
