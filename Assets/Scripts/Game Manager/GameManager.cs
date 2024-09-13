@@ -114,27 +114,27 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() // This entire thing should be in the super meter not in the game manager. Probably
-    {
-        Debug.Log("Kill Count: " + killCount);
-        if (canUseSuper && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)))
-        {
-            FindObjectOfType<DomainExpansion>().ExpandDomain(); // TODO: temporary hack, dont use find object
-            Enemy[] enemies = FindObjectsOfType<Enemy>(); // TODO: Instead of doing this we should have an enemy manager that keeps track of all of the enemies and then call takeDamage on all of the active ones.
-            foreach (Enemy e in enemies)
-            {
-                if (e.gameObject.activeInHierarchy)
-                {
-                    e.takeDamage(e.healthPoints);
-                }
-            }
-
-            Debug.Log("used Super");
-            enemiesHit -= superMeterActivationAmount;
-        }
-        
-        canUseSuper = enemiesHit >= superMeterActivationAmount;
-    }
+    // void Update() // This entire thing should be in the super meter not in the game manager. Probably
+    // {
+    // Debug.Log("Kill Count: " + killCount);
+    // if (canUseSuper && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)))
+    // {
+    //     FindObjectOfType<DomainExpansion>().ExpandDomain(); // TODO: temporary hack, dont use find object
+    //     Enemy[] enemies = FindObjectsOfType<Enemy>(); // TODO: Instead of doing this we should have an enemy manager that keeps track of all of the enemies and then call takeDamage on all of the active ones.
+    //     foreach (Enemy e in enemies)
+    //     {
+    //         if (e.gameObject.activeInHierarchy)
+    //         {
+    //             e.takeDamage(e.healthPoints);
+    //         }
+    //     }
+    //
+    //     Debug.Log("used Super");
+    //     enemiesHit -= superMeterActivationAmount;
+    // }
+    //
+    // canUseSuper = enemiesHit >= superMeterActivationAmount;
+    // }
 
 
     public void IncreaseSuperMeter()
