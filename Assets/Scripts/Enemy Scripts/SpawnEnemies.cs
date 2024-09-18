@@ -24,7 +24,7 @@ public class SpawnEnemies : MonoBehaviour
 
   public static int EnemiesInScene = 0;
   
-  private List<SpawnInfo> _spawnInfos;
+  private List<SpawnInfo> _spawnInfos = new List<SpawnInfo>();
 
   private SpawnInfo _currentSpawnInfo;
   
@@ -37,7 +37,8 @@ public class SpawnEnemies : MonoBehaviour
   
   void Start()
   {
-    currentSpawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
+    Debug.Log("Current Round " + GameManager.Instance.currentRound);
+    
     if (_roundSpawnConfig == null)
     {
       throw new ArgumentNullException("_roundSpawnConfig must be non null");
@@ -45,11 +46,15 @@ public class SpawnEnemies : MonoBehaviour
 
     _roundSpawns = _roundSpawnConfig.Value;
     
+    
     if (_roundSpawns == null)
     {
       throw new ArgumentNullException("roundSpawns must contain a valid list of spawnInfoVariables");
     }
     
+    currentSpawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
+
+
     
     if (currentSpawnInfoVariable == null)
     {
@@ -67,6 +72,7 @@ public class SpawnEnemies : MonoBehaviour
     _currentSpawnInfoIdx = 0;
     _changeSpawnInfo = true;
 
+
     InvokeRepeating("SpawnCurrentEnemies", 0f, secondsBetweenSpawn);
   }
 
@@ -83,6 +89,7 @@ public class SpawnEnemies : MonoBehaviour
       if (_currentSpawnInfo.StartTime <= Time.timeSinceLevelLoad) // mfw I nest an if statement
       {
         GameManager.Instance.currentRound++;
+        Debug.Log("Currentround before repawns" + GameManager.Instance.currentRound);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
       }
     }

@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +36,7 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject); // Prevent destruction on scene load
         }
         else
         {
