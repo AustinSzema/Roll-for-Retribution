@@ -81,6 +81,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float flightDuration;
 
 
+    // Flight Fields
+    [HideInInspector] public int currentRound = 0;
+    
+    
     public bool enemiesShouldMove = true;
     
     
@@ -110,7 +114,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         _audioManager = AudioManager.Instance;
         _audioManager.PlayMainMusic();
-        
+        Debug.Log("Game Manager Start");
     }
 
     // Update is called once per frame
@@ -140,6 +144,5 @@ public class GameManager : MonoBehaviour
     public void IncreaseSuperMeter()
     {
         enemiesHit++;
-        Debug.Log("Player hits fr: " + enemiesHit);
     }
 }

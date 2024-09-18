@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class SpawnEnemies : MonoBehaviour
@@ -58,7 +59,17 @@ public class SpawnEnemies : MonoBehaviour
       //Debug.Log("Current spawn info is index " + _currentSpawnInfoIdx);
       StartCoroutine(SwapSpawnInfo());
     }
+
+    if (_currentSpawnInfoIdx >= _spawnInfos.Count-1) // if we are on the last spawn info and there are no enemies in the scene
+    {
+      if (_currentSpawnInfo.StartTime <= Time.timeSinceLevelLoad) // mfw I nest an if statement
+      {
+        GameManager.Instance.currentRound++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      }
+    }
     //Debug.Log(EnemiesInScene + " enemies in scene");
+    Debug.Log("Current Spawn Info Index" + _currentSpawnInfoIdx + "   Count of spawn infos" + _spawnInfos.Count);
   }
 
   IEnumerator SwapSpawnInfo()
@@ -151,7 +162,7 @@ public class SpawnEnemies : MonoBehaviour
     }
 
     enemyInstance.transform.position = enemyPosition;
-    enemyInstance.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true);
+    enemyInstance.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true); // TODO: we can probably optimize this
     EnemiesInScene++;
   }
    
