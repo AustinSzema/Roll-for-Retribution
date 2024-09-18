@@ -14,7 +14,7 @@ public class SpawnEnemies : MonoBehaviour
   
   // Spawn Info is a scriptable object that contains a list of 
   // SpawnInfos, which are rules for spawning at different times
-  private spawnInfoVariable spawnInfo;
+  private spawnInfoVariable currentSpawnInfoVariable;
 
   [SerializeField] private Transform playerTransform;
 
@@ -27,18 +27,17 @@ public class SpawnEnemies : MonoBehaviour
   private List<SpawnInfo> _spawnInfos;
 
   private SpawnInfo _currentSpawnInfo;
-
-  private List<spawnInfoVariable> _roundSpawns;
-
   
   private int _currentSpawnInfoIdx;
 
   private bool _changeSpawnInfo;
-  
 
+  private List<spawnInfoVariable> _roundSpawns;
+
+  
   void Start()
   {
-    
+    currentSpawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
     if (_roundSpawnConfig == null)
     {
       throw new ArgumentNullException("_roundSpawnConfig must be non null");
@@ -52,12 +51,12 @@ public class SpawnEnemies : MonoBehaviour
     }
     
     
-    if (spawnInfo == null)
+    if (currentSpawnInfoVariable == null)
     {
       throw new ArgumentNullException("spawnInfo must be non null");
     }
 
-    _spawnInfos = spawnInfo.Value;
+    _spawnInfos = currentSpawnInfoVariable.Value;
     
     if (_spawnInfos == null)
     {
