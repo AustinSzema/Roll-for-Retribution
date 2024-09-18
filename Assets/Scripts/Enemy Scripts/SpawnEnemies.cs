@@ -10,9 +10,11 @@ public class SpawnEnemies : MonoBehaviour
   // the seconds between spawns
   [SerializeField] private int secondsBetweenSpawn;
 
+  [SerializeField] private RoundSpawnConfig _roundSpawnConfig;
+  
   // Spawn Info is a scriptable object that contains a list of 
   // SpawnInfos, which are rules for spawning at different times
-  [SerializeField] private spawnInfoVariable spawnInfo;
+  private spawnInfoVariable spawnInfo;
 
   [SerializeField] private Transform playerTransform;
 
@@ -26,6 +28,9 @@ public class SpawnEnemies : MonoBehaviour
 
   private SpawnInfo _currentSpawnInfo;
 
+  private List<spawnInfoVariable> _roundSpawns;
+
+  
   private int _currentSpawnInfoIdx;
 
   private bool _changeSpawnInfo;
@@ -33,6 +38,20 @@ public class SpawnEnemies : MonoBehaviour
 
   void Start()
   {
+    
+    if (_roundSpawnConfig == null)
+    {
+      throw new ArgumentNullException("_roundSpawnConfig must be non null");
+    }
+
+    _roundSpawns = _roundSpawnConfig.Value;
+    
+    if (_roundSpawns == null)
+    {
+      throw new ArgumentNullException("roundSpawns must contain a valid list of spawnInfoVariables");
+    }
+    
+    
     if (spawnInfo == null)
     {
       throw new ArgumentNullException("spawnInfo must be non null");
