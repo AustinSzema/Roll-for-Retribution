@@ -51,8 +51,15 @@ public class SpawnEnemies : MonoBehaviour
     {
       throw new ArgumentNullException("roundSpawns must contain a valid list of spawnInfoVariables");
     }
-    
-    currentSpawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
+
+    if (GameManager.Instance.currentRound >= _roundSpawnConfig.Value.Count)
+    {
+      currentSpawnInfoVariable = _roundSpawnConfig.Value[_roundSpawnConfig.Value.Count-1];      
+    }
+    else
+    {
+      currentSpawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
+    }
 
 
     
