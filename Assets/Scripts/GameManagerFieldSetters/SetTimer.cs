@@ -7,6 +7,8 @@ public class SetTimer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private RoundSpawnConfig _roundSpawnConfig;
 
+    [SerializeField] private TextMeshProUGUI fiveSecondCountdown;
+    
     private float countdown;
 
     private void Start()
@@ -42,6 +44,15 @@ public class SetTimer : MonoBehaviour
             timeSpan.Minutes,
             timeSpan.Seconds);
 
+        if (timeSpan.Minutes < 1 && timeSpan.Seconds <= 5)
+        {
+            fiveSecondCountdown.gameObject.SetActive(true);
+            _timerText.enabled = false;
+            fiveSecondCountdown.text = timeSpan.Seconds.ToString();
+        }
+        
         _timerText.text = timerString;
     }
+    
+    
 }
