@@ -49,6 +49,13 @@ public class SetTimer : MonoBehaviour
             fiveSecondCountdown.gameObject.SetActive(true);
             _timerText.enabled = false;
             fiveSecondCountdown.text = timeSpan.Seconds.ToString();
+            if (timeSpan.Seconds <= 1)
+            {
+                //TODO: fix this hard coded garbage
+                fiveSecondCountdown.rectTransform.sizeDelta = new Vector2(1600f,fiveSecondCountdown.rectTransform.sizeDelta.y);
+                fiveSecondCountdown.fontSize = 300;
+                fiveSecondCountdown.text = "Round " + GameManager.Instance.currentRound + 1 + " Complete";
+            }
         }
         
         _timerText.text = timerString;
