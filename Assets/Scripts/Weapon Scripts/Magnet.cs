@@ -105,20 +105,20 @@ public class Magnet : MonoBehaviour
     {
         if (!_gameManager.gameIsPaused)
         {
-            if (Input.GetKeyDown(KeyCode.Q)) // TODO: Make this event based instead of in update
-            {
-                _usingShotgun = !_usingShotgun;
-                if (_usingShotgun)
-                {
-                    _currentShotType = GameManager.ActiveShotType.Shotgun;
-                }
-                else
-                {
-                    _currentShotType = GameManager.ActiveShotType.Rocket;
-                }
-
-                _gameManager.activeShot = _currentShotType;
-            }
+            // if (Input.GetKeyDown(KeyCode.Q)) // TODO: Make this event based instead of in update
+            // {
+            //     _usingShotgun = !_usingShotgun;
+            //     if (_usingShotgun)
+            //     {
+            //         _currentShotType = GameManager.ActiveShotType.Shotgun;
+            //     }
+            //     else
+            //     {
+            //         _currentShotType = GameManager.ActiveShotType.Rocket;
+            //     }
+            //
+            //     _gameManager.activeShot = _currentShotType;
+            // }
 
 
             // if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -216,7 +216,7 @@ public class Magnet : MonoBehaviour
             }
 
             // TODO: Consider renaming _flightDuration to _flightFuel
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0))
             {
                 _activateMagnet = true;
                 _audioManager.StartPullingSound();
@@ -227,7 +227,7 @@ public class Magnet : MonoBehaviour
                 _attractParticlesRoot.SetActive(true);
             }
 
-            if (Input.GetMouseButtonUp(1))
+            if (Input.GetMouseButtonUp(0))
             {
                 _activateMagnet = false;
                 _audioManager.StopPullingSound();
@@ -236,19 +236,20 @@ public class Magnet : MonoBehaviour
                 _attractImage.gameObject.SetActive(false);
                 _defaultImage.gameObject.SetActive(true);
                 _attractParticlesRoot.SetActive(false);
-            }
-
-            //shotgun push
-            if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
-            {
                 StartCoroutine(ShotgunAbility());
             }
 
-            //slam 
-            if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
-            {
-                StartCoroutine(SlamAbility());
-            }
+            // //shotgun push
+            // if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
+            // {
+            //     StartCoroutine(ShotgunAbility());
+            // }
+
+            // //slam 
+            // if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
+            // {
+            //     StartCoroutine(SlamAbility());
+            // }
 
             SetDemonsVelocityAndPosition();
         }
