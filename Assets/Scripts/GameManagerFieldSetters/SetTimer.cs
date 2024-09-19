@@ -54,7 +54,7 @@ public class SetTimer : MonoBehaviour
                 //TODO: fix this hard coded garbage
                 fiveSecondCountdown.rectTransform.sizeDelta = new Vector2(1600f,fiveSecondCountdown.rectTransform.sizeDelta.y);
                 fiveSecondCountdown.fontSize = 300;
-                fiveSecondCountdown.text = "Round " + GameManager.Instance.currentRound + 1 + " Complete";
+                fiveSecondCountdown.text = "Round " + (GameManager.Instance.currentRound + 1) + " Complete";
             }
         }
         

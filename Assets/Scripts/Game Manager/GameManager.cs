@@ -110,11 +110,21 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+        Setup();
+    }
+
+    private void OnEnable()
+    {
+        Setup();
+    }
+
+    private void Setup()
+    {
         gameIsPaused = false;
         Time.timeScale = 1f;
         _audioManager = AudioManager.Instance;
         _audioManager.PlayMainMusic();
-        Debug.Log("Game Manager Start");
+        Debug.Log("Game Manager Start");        
     }
 
     // Update is called once per frame

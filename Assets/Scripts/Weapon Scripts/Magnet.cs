@@ -26,9 +26,9 @@ public class Magnet : MonoBehaviour
     [SerializeField] private Sprite _shotgunRepelSprite;
     [SerializeField] private Sprite _shotgunDefaultSprite;
 
-    [SerializeField] private Sprite _rocketAttractSprite;
-    [SerializeField] private Sprite _rocketRepelSprite;
-    [SerializeField] private Sprite _rocketDefaultSprite;
+    // [SerializeField] private Sprite _rocketAttractSprite;
+    // [SerializeField] private Sprite _rocketRepelSprite;
+    // [SerializeField] private Sprite _rocketDefaultSprite;
 
 
     [Header("Root Objects")] [SerializeField]
@@ -42,10 +42,10 @@ public class Magnet : MonoBehaviour
     [SerializeField] private ParticleSystem _gravityParticles;
     [SerializeField] private MeshRenderer _centerSphere;
     [SerializeField] private MeshRenderer _outerSphere;
-    [SerializeField] private Material _attractCenterMaterial;
-    [SerializeField] private Material _attractOuterMaterial;
-    [SerializeField] private Material _levitateCenterMaterial;
-    [SerializeField] private Material _levitateOuterMaterial;
+    // [SerializeField] private Material _attractCenterMaterial;
+    // [SerializeField] private Material _attractOuterMaterial;
+    // [SerializeField] private Material _levitateCenterMaterial;
+    // [SerializeField] private Material _levitateOuterMaterial;
 
 
     [Header("Weapon Values")] [SerializeField]
@@ -141,27 +141,28 @@ public class Magnet : MonoBehaviour
 
 
             // When the player is holding right mouse button and holding space and has demons in hand and has fuel
-            if (Input.GetMouseButton(1) && Input.GetKey(KeyCode.Space) && _gameManager.demonInHand &&
+            if (Input.GetKey(KeyCode.Space) &&
                 _gameManager.flightDuration >= 0)
             {
                 // if player is not out of fuel make them fly
                 if (!_gameManager.outOfFuel)
                 {
                     _outOfBreathClipPlayed = false;
-                    transform.position = _footPosition.position;
+                    _playerRigidbody.AddForce(Vector3.up * 10f);
+                    //transform.position = _footPosition.position;
                     _gameManager.playerIsFlying = true;
 
-                    // Set Sprites
-                    _attractImage.sprite = _rocketAttractSprite;
-                    _repelImage.sprite = _rocketRepelSprite;
-                    _defaultImage.sprite = _rocketDefaultSprite;
+                    // // Set Sprites
+                    // _attractImage.sprite = _rocketAttractSprite;
+                    // _repelImage.sprite = _rocketRepelSprite;
+                    // _defaultImage.sprite = _rocketDefaultSprite;
 
 
                     _audioManager.StartFlyingSound();
                     _gameManager.flightDuration -= _fuelDecrementAmount;
-                    _attractParticlesRenderer.material = _levitateCenterMaterial;
-                    _centerSphere.material = _levitateCenterMaterial;
-                    _outerSphere.material = _levitateOuterMaterial;
+                    // _attractParticlesRenderer.material = _levitateCenterMaterial;
+                    // _centerSphere.material = _levitateCenterMaterial;
+                    // _outerSphere.material = _levitateOuterMaterial;
                     _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _flightForce,
                         _playerRigidbody.velocity.z);
                 }
@@ -180,9 +181,9 @@ public class Magnet : MonoBehaviour
 
                 _gameManager.playerIsFlying = false;
                 transform.position = _handPosition.position;
-                _attractParticlesRenderer.material = _attractCenterMaterial;
-                _centerSphere.material = _attractCenterMaterial;
-                _outerSphere.material = _attractOuterMaterial;
+                // _attractParticlesRenderer.material = _attractCenterMaterial;
+                // _centerSphere.material = _attractCenterMaterial;
+                // _outerSphere.material = _attractOuterMaterial;
                 _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _playerRigidbody.velocity.y,
                     _playerRigidbody.velocity.z);
                 // Set sprites
@@ -274,7 +275,6 @@ public class Magnet : MonoBehaviour
                 _gravityParticles.Play();
 
                 rb.AddForce(Vector3.down * _slamSpeed);
-                _activateMagnet = false;
             });
 
 
