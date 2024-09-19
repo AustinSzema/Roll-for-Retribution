@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
 
     // Player Fields
@@ -116,6 +118,27 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         Setup();
+    }
+    
+    // Example function that you want to call at the start of each scene
+    public void OnSceneStart()
+    {
+        Debug.Log("Scene has started!");
+        Setup();
+        // Add the logic you want to execute at the start of each scene
+    }
+
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from the sceneLoaded event when this object is destroyed
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // This function is called when a new scene is loaded
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        OnSceneStart();
     }
 
     private void Setup()
