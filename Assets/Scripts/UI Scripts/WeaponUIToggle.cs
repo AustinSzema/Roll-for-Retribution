@@ -33,26 +33,26 @@ public class WeaponUIToggle : MonoBehaviour
         _rocketDisabledColor.a = 1f; // Ensure alpha remains 1
     }
 
-    void Update()
-    {
-        switch (_gameManager.activeShot)
-        {
-            case GameManager.ActiveShotType.Shotgun:
-                useShotgunColor = true;
-                EnableActive(0);
-                break;
-            case GameManager.ActiveShotType.Rocket:
-                useShotgunColor = false;
-                EnableActive(1);
-                break;
-            case GameManager.ActiveShotType.Spray:
-                EnableActive(2);
-                break;
-            case GameManager.ActiveShotType.Beam:
-                EnableActive(3);
-                break;
-        }
-    }
+    // void Update()
+    // {
+    //     switch (_gameManager.activeShot)
+    //     {
+    //         case GameManager.ActiveShotType.Shotgun:
+    //             useShotgunColor = true;
+    //             EnableActive(0);
+    //             break;
+    //         case GameManager.ActiveShotType.Rocket:
+    //             useShotgunColor = false;
+    //             EnableActive(1);
+    //             break;
+    //         case GameManager.ActiveShotType.Spray:
+    //             EnableActive(2);
+    //             break;
+    //         case GameManager.ActiveShotType.Beam:
+    //             EnableActive(3);
+    //             break;
+    //     }
+    // }
 
     void EnableActive(int index)
     {

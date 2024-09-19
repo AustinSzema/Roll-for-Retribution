@@ -15,20 +15,20 @@ public class Crosshair : MonoBehaviour
         _gameManager = GameManager.Instance;
     }
 
-    private void Update()
-    {
-        switch (_gameManager.activeShot)
-        {
-            case GameManager.ActiveShotType.Shotgun:
-                _crosshairImage.sprite = _shotgunCrosshairSprite;
-                _crosshairImage.rectTransform.sizeDelta = new Vector2(75, 50); // bad dumb code
-                break;
-            case GameManager.ActiveShotType.Rocket:
-                _crosshairImage.sprite = _rocketCrosshairSprite;
-                _crosshairImage.rectTransform.sizeDelta = new Vector2(50, 50); // bad dumb code
-                break;
-        }
-    }
+    // private void Update()
+    // {
+    //     switch (_gameManager.activeShot)
+    //     {
+    //         case GameManager.ActiveShotType.Shotgun:
+    //             _crosshairImage.sprite = _shotgunCrosshairSprite;
+    //             _crosshairImage.rectTransform.sizeDelta = new Vector2(75, 50); // bad dumb code
+    //             break;
+    //         case GameManager.ActiveShotType.Rocket:
+    //             _crosshairImage.sprite = _rocketCrosshairSprite;
+    //             _crosshairImage.rectTransform.sizeDelta = new Vector2(50, 50); // bad dumb code
+    //             break;
+    //     }
+    // }
 
 
     //[SerializeField] private boolVariable _demonInHand;

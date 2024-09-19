@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool pullingInDemons;
 
     // Weapon Fields
-    [HideInInspector] public ActiveShotType activeShot;
+    //[HideInInspector] public ActiveShotType activeShot;
     [HideInInspector] public Vector3 handPosition;
 
     // Flight Fields
@@ -97,13 +97,13 @@ public class GameManager : MonoBehaviour
 
     public bool shopActive = false;
     
-    public enum ActiveShotType
-    {
-        Shotgun,
-        Rocket,
-        Spray,
-        Beam
-    }
+    // public enum ActiveShotType
+    // {
+    //     Shotgun,
+    //     Rocket,
+    //     Spray,
+    //     Beam
+    // }
 
 
     private AudioManager _audioManager;

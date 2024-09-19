@@ -13,8 +13,8 @@ public class Magnet : MonoBehaviour
     // Stores a reference to all of the demon dice
     private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
 
-    [Header("Magnet Positions")] [SerializeField]
-    private Transform _footPosition;
+    [Header("Magnet Positions")]
+    //[SerializeField] private Transform _footPosition;
 
     [SerializeField] private Transform _handPosition;
 
@@ -35,13 +35,13 @@ public class Magnet : MonoBehaviour
     private GameObject _attractParticlesRoot;
 
     [SerializeField] private GameObject _repelParticlesRoot;
-    [SerializeField] private GameObject _gravityParticlesRoot;
+    //[SerializeField] private GameObject _gravityParticlesRoot;
 
     [Header("Particles")] [SerializeField] private Renderer _attractParticlesRenderer;
     [SerializeField] private ParticleSystem _repelParticles;
-    [SerializeField] private ParticleSystem _gravityParticles;
-    [SerializeField] private MeshRenderer _centerSphere;
-    [SerializeField] private MeshRenderer _outerSphere;
+    //[SerializeField] private ParticleSystem _gravityParticles;
+    //[SerializeField] private MeshRenderer _centerSphere;
+    //[SerializeField] private MeshRenderer _outerSphere;
     // [SerializeField] private Material _attractCenterMaterial;
     // [SerializeField] private Material _attractOuterMaterial;
     // [SerializeField] private Material _levitateCenterMaterial;
@@ -100,6 +100,7 @@ public class Magnet : MonoBehaviour
 
     private bool _usingShotgun = true;
 
+    private bool canAttractWeapon = true;
 
     private void Update()
     {
@@ -216,7 +217,7 @@ public class Magnet : MonoBehaviour
             }
 
             // TODO: Consider renaming _flightDuration to _flightFuel
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0) && canAttractWeapon)
             {
                 _activateMagnet = true;
                 _audioManager.StartPullingSound();
@@ -232,12 +233,14 @@ public class Magnet : MonoBehaviour
                 _activateMagnet = false;
                 _audioManager.StopPullingSound();
                 _audioManager.PlayPullingEndSound();
-                _repelImage.gameObject.SetActive(false);
+                _repelImage.gameObject.SetActive(true);
                 _attractImage.gameObject.SetActive(false);
-                _defaultImage.gameObject.SetActive(true);
+                _defaultImage.gameObject.SetActive(false);
                 _attractParticlesRoot.SetActive(false);
+                StartCoroutine(ResetHandVisual());
                 StartCoroutine(ShotgunAbility());
             }
+
 
             // //shotgun push
             // if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
@@ -255,38 +258,48 @@ public class Magnet : MonoBehaviour
         }
     }
 
-
-    private bool _slamOnCooldown;
-
-    private IEnumerator SlamAbility()
+    private IEnumerator ResetHandVisual()
     {
-        if (!_slamOnCooldown)
-        {
-            _slamOnCooldown = true;
-            _audioManager.PlaySlamSound();
-// Using LINQ to replace the foreach loop
-            _magneticObjects.ForEach(rb =>
-            {
-                _attractImage.gameObject.SetActive(false);
-                _repelImage.gameObject.SetActive(true);
-                _defaultImage.gameObject.SetActive(false);
-                _attractParticlesRoot.SetActive(false);
-                _gravityParticlesRoot.SetActive(true);
-                _gravityParticles.Clear();
-                _gravityParticles.Play();
+        canAttractWeapon = false;
+        yield return new WaitForSeconds(0.2f);
+        _repelImage.gameObject.SetActive(false);
+        _attractImage.gameObject.SetActive(false);
+        _defaultImage.gameObject.SetActive(true);
+        canAttractWeapon = true;
 
-                rb.AddForce(Vector3.down * _slamSpeed);
-            });
-
-
-            yield return new WaitForSeconds(_slamCooldown);
-            _slamOnCooldown = false;
-        }
     }
+
+    // private bool _slamOnCooldown;
+
+//     private IEnumerator SlamAbility()
+//     {
+//         if (!_slamOnCooldown)
+//         {
+//             _slamOnCooldown = true;
+//             _audioManager.PlaySlamSound();
+// // Using LINQ to replace the foreach loop
+//             _magneticObjects.ForEach(rb =>
+//             {
+//                 _attractImage.gameObject.SetActive(false);
+//                 _repelImage.gameObject.SetActive(true);
+//                 _defaultImage.gameObject.SetActive(false);
+//                 _attractParticlesRoot.SetActive(false);
+//                 _gravityParticlesRoot.SetActive(true);
+//                 _gravityParticles.Clear();
+//                 _gravityParticles.Play();
+//
+//                 rb.AddForce(Vector3.down * _slamSpeed);
+//             });
+//
+//
+//             yield return new WaitForSeconds(_slamCooldown);
+//             _slamOnCooldown = false;
+//         }
+//     }
 
     private bool _shotgunOnCooldown;
 
-    private GameManager.ActiveShotType _currentShotType;
+    //private GameManager.ActiveShotType _currentShotType;
 
     private IEnumerator ShotgunAbility()
     {
@@ -294,22 +307,24 @@ public class Magnet : MonoBehaviour
         {
             _shotgunOnCooldown = true;
 
-            switch (_currentShotType)
-            {
-                case GameManager.ActiveShotType.Shotgun:
-                    _audioManager.PlayShotgunSound();
-                    break;
-                case GameManager.ActiveShotType.Rocket:
-                    _audioManager.PlaySniperSound();
-                    break;
-                case GameManager.ActiveShotType.Spray:
-                    _audioManager.PlaySpraySound();
-                    break;
-                case GameManager.ActiveShotType.Beam:
-                    break;
-                default:
-                    break;
-            }
+            _audioManager.PlayShotgunSound();
+
+            // switch (_currentShotType)
+            // {
+            //     case GameManager.ActiveShotType.Shotgun:
+            //         _audioManager.PlayShotgunSound();
+            //         break;
+            //     case GameManager.ActiveShotType.Rocket:
+            //         _audioManager.PlaySniperSound();
+            //         break;
+            //     case GameManager.ActiveShotType.Spray:
+            //         _audioManager.PlaySpraySound();
+            //         break;
+            //     case GameManager.ActiveShotType.Beam:
+            //         break;
+            //     default:
+            //         break;
+            // }
 
             _magneticObjects.ForEach(rb =>
             {
@@ -326,29 +341,37 @@ public class Magnet : MonoBehaviour
                 float deviationAngleY = 0f;
                 float deviationAngleZ = 0f;
 
-                switch (_currentShotType)
-                {
-                    case GameManager.ActiveShotType.Shotgun:
-                        deviationAngleX = Random.Range(-20f, 20f);
-                        deviationAngleY = Random.Range(-20f, 20f);
-                        deviationAngleZ = Random.Range(-20f, 20f);
-                        offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
-                                          transform.forward;
-                        rb.AddForce(offsetDirection * _shotgunSpeed);
-                        break;
-                    case GameManager.ActiveShotType.Rocket:
-                        rb.AddForce(transform.forward * _shotgunSpeed);
-                        break;
-                    case GameManager.ActiveShotType.Spray:
-                        deviationAngleY = Random.Range(-20f, 20f);
-                        offsetDirection = Quaternion.Euler(0, deviationAngleY, 0) * transform.forward;
-                        rb.AddForce(offsetDirection * _shotgunSpeed);
-                        break;
-                    case GameManager.ActiveShotType.Beam:
-                        break;
-                    default:
-                        break;
-                }
+                
+                deviationAngleX = Random.Range(-20f, 20f);
+                deviationAngleY = Random.Range(-20f, 20f);
+                deviationAngleZ = Random.Range(-20f, 20f);
+                offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
+                                  transform.forward;
+                rb.AddForce(offsetDirection * _shotgunSpeed);
+                
+                // switch (_currentShotType)
+                // {
+                //     case GameManager.ActiveShotType.Shotgun:
+                //         deviationAngleX = Random.Range(-20f, 20f);
+                //         deviationAngleY = Random.Range(-20f, 20f);
+                //         deviationAngleZ = Random.Range(-20f, 20f);
+                //         offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
+                //                           transform.forward;
+                //         rb.AddForce(offsetDirection * _shotgunSpeed);
+                //         break;
+                //     case GameManager.ActiveShotType.Rocket:
+                //         rb.AddForce(transform.forward * _shotgunSpeed);
+                //         break;
+                //     case GameManager.ActiveShotType.Spray:
+                //         deviationAngleY = Random.Range(-20f, 20f);
+                //         offsetDirection = Quaternion.Euler(0, deviationAngleY, 0) * transform.forward;
+                //         rb.AddForce(offsetDirection * _shotgunSpeed);
+                //         break;
+                //     case GameManager.ActiveShotType.Beam:
+                //         break;
+                //     default:
+                //         break;
+                // }
 
                 _activateMagnet = false;
             });
