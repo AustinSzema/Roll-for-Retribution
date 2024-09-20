@@ -35,11 +35,11 @@ public class Magnet : MonoBehaviour
     private GameObject _attractParticlesRoot;
 
     [SerializeField] private GameObject _repelParticlesRoot;
-    //[SerializeField] private GameObject _gravityParticlesRoot;
+    [SerializeField] private GameObject _gravityParticlesRoot;
 
     [Header("Particles")] [SerializeField] private Renderer _attractParticlesRenderer;
     [SerializeField] private ParticleSystem _repelParticles;
-    //[SerializeField] private ParticleSystem _gravityParticles;
+    [SerializeField] private ParticleSystem _gravityParticles;
     //[SerializeField] private MeshRenderer _centerSphere;
     //[SerializeField] private MeshRenderer _outerSphere;
     // [SerializeField] private Material _attractCenterMaterial;
@@ -248,11 +248,11 @@ public class Magnet : MonoBehaviour
             //     StartCoroutine(ShotgunAbility());
             // }
 
-            // //slam 
-            // if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
-            // {
-            //     StartCoroutine(SlamAbility());
-            // }
+            //slam 
+            if (Input.GetMouseButtonDown(1))
+            {
+                StartCoroutine(SlamAbility());
+            }
 
             SetDemonsVelocityAndPosition();
         }
@@ -269,33 +269,33 @@ public class Magnet : MonoBehaviour
 
     }
 
-    // private bool _slamOnCooldown;
+    private bool _slamOnCooldown;
 
-//     private IEnumerator SlamAbility()
-//     {
-//         if (!_slamOnCooldown)
-//         {
-//             _slamOnCooldown = true;
-//             _audioManager.PlaySlamSound();
-// // Using LINQ to replace the foreach loop
-//             _magneticObjects.ForEach(rb =>
-//             {
-//                 _attractImage.gameObject.SetActive(false);
-//                 _repelImage.gameObject.SetActive(true);
-//                 _defaultImage.gameObject.SetActive(false);
-//                 _attractParticlesRoot.SetActive(false);
-//                 _gravityParticlesRoot.SetActive(true);
-//                 _gravityParticles.Clear();
-//                 _gravityParticles.Play();
-//
-//                 rb.AddForce(Vector3.down * _slamSpeed);
-//             });
-//
-//
-//             yield return new WaitForSeconds(_slamCooldown);
-//             _slamOnCooldown = false;
-//         }
-//     }
+    private IEnumerator SlamAbility()
+    {
+        if (!_slamOnCooldown)
+        {
+            _slamOnCooldown = true;
+            _audioManager.PlaySlamSound();
+// Using LINQ to replace the foreach loop
+            _magneticObjects.ForEach(rb =>
+            {
+                _attractImage.gameObject.SetActive(false);
+                _repelImage.gameObject.SetActive(true);
+                _defaultImage.gameObject.SetActive(false);
+                _attractParticlesRoot.SetActive(false);
+                _gravityParticlesRoot.SetActive(true);
+                _gravityParticles.Clear();
+                _gravityParticles.Play();
+
+                rb.AddForce(Vector3.down * _slamSpeed);
+            });
+
+
+            yield return new WaitForSeconds(_slamCooldown);
+            _slamOnCooldown = false;
+        }
+    }
 
     private bool _shotgunOnCooldown;
 

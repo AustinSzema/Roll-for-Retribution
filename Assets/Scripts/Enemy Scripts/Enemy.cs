@@ -1,37 +1,20 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] public int healthPoints = 1;
-
     [SerializeField] private GameObject _enemy;
-
     [SerializeField] private ParticleSystem _explosionParticles;
-
     [SerializeField] private ParticleSystem _hitParticles;
-
     [SerializeField] private AudioClip _hitClip;
-
     [SerializeField] private AudioClip _enemyGruntClip;
-
     [SerializeField] private AudioClip _enemyDamagedClip;
 
     private static AudioManager _audioManager;
 
     [Header("Enemy Hit Values")]
-    
-    private MeshRenderer _activeMeshRenderer;
-
     private MeshRenderer[] _meshRenderers;
-
     [SerializeField] private Material _enemyPauseMaterial;
     [SerializeField] private float _hitPauseTime = 2f;
 
@@ -40,24 +23,29 @@ public class Enemy : MonoBehaviour, IDamageable
     private Material[] _pausedMaterials;
 
     private int _currentHealth;
-
     private bool _firstDisable = true;
 
     private GameManager _gameManager;
-
     [SerializeField] private GameObject _soulPrefab;
-    
+
     private void Start()
     {
         _gameManager = GameManager.Instance;
-
         _currentHealth = healthPoints;
         _audioManager = AudioManager.Instance;
 
-        _meshRenderers = GetComponentInChildren<LODGroup>().GetComponentsInChildren<MeshRenderer>(); // not performant but makes editing way easier
-        
-        _activeMeshRenderer = _meshRenderers[0];
-        _originalMaterials = _activeMeshRenderer.materials;
+        // Get all MeshRenderers in children without using LODGroup
+        _meshRenderers = GetComponentsInChildren<MeshRenderer>();
+
+        // If there are no mesh renderers, log a warning
+        if (_meshRenderers.Length == 0)
+        {
+            Debug.LogWarning("No MeshRenderers found in child objects.");
+            return;
+        }
+
+        // Assume all mesh renderers share the same material setup
+        _originalMaterials = _meshRenderers[0].materials;
         _pausedMaterials = new Material[_originalMaterials.Length];
 
         for (int i = 0; i < _pausedMaterials.Length; i++)
@@ -67,7 +55,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
         enemyShouldMove = _gameManager.enemiesShouldMove;
     }
-    
 
     private void OnDisable()
     {
@@ -83,18 +70,13 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     [SerializeField] private float _moveSpeed = 2f;
-
-
     [SerializeField] private Rigidbody _rigidbody;
 
-
-    // Update is called once per frame
     private void FixedUpdate()
     {
-        if (_gameManager.gameIsPaused == false && enemyShouldMove)
+        if (!_gameManager.gameIsPaused && enemyShouldMove)
         {
-            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition,
-                _moveSpeed * Time.deltaTime));
+            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition, _moveSpeed * Time.deltaTime));
         }
     }
 
@@ -104,12 +86,6 @@ public class Enemy : MonoBehaviour, IDamageable
         EnemyHit();
         if (_currentHealth <= 0)
         {
-
-            // if (Random.value >= 0.5f)
-            // {
-            // }
-            //Instantiate(_soulPrefab, transform.position, Quaternion.identity); // TODO: dont instantiate at runtime, object pool
-
             UnpauseEnemy();
             Explode();
             _currentHealth = healthPoints;
@@ -129,11 +105,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private IEnumerator PauseEnemy(float waitTime)
     {
         enemyShouldMove = false;
-
-        
-        _activeMeshRenderer.materials = _pausedMaterials;
         SetRendererMaterials(true);
-        Debug.Log("Active mesh renderer " + _activeMeshRenderer.name);
         yield return new WaitForSeconds(waitTime);
         UnpauseEnemy();
         yield return null;
@@ -141,39 +113,27 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void SetRendererMaterials(bool pause)
     {
-
         foreach (MeshRenderer mr in _meshRenderers)
         {
-            if (pause)
-            {
-                mr.materials = _pausedMaterials;
-            }
-            else
-            {
-                mr.materials = _originalMaterials;
-            }
-            
+            mr.materials = pause ? _pausedMaterials : _originalMaterials;
         }
     }
 
     private void UnpauseEnemy()
     {
         enemyShouldMove = true;
-        _activeMeshRenderer.materials = _originalMaterials;
         SetRendererMaterials(false);
     }
 
     private void EnemyHit()
     {
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-
         _hitParticles.Play();
     }
 
     private void Explode()
     {
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-
         _explosionParticles.Play();
         _enemy.SetActive(false);
     }
