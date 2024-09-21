@@ -78,8 +78,8 @@ public abstract class Magnetic : MonoBehaviour
         // Check if the target has IDamageable and is not the player
         if (target.TryGetComponent<IDamageable>(out IDamageable damageable) && !target.TryGetComponent<PlayerController>(out _))
         {
-            Vector3 direction = (transform.position - target.transform.position).normalized;
-            rb.AddForce(direction * shootForce, ForceMode.Impulse);
+            //Vector3 direction = (transform.position - target.transform.position).normalized;
+            //rb.AddForce(direction * shootForce, ForceMode.Impulse);
             damageable.takeDamage(damage);
         }
     }
