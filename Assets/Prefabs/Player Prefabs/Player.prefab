@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1934430320}
   - component: {fileID: 5616478367047515945}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ObjectPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1991907603}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: FootPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8339817651169649129}
   - component: {fileID: 3733423499158778882}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: CubeGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3065476549965514092}
   - component: {fileID: 2224751838763947684}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: FlyingSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,8 +283,7 @@ GameObject:
   - component: {fileID: 4002532168671568275}
   - component: {fileID: 6459316057966864080}
   - component: {fileID: 7815982920914401407}
-  - component: {fileID: 2509947060474526658}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -407,11 +406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705e09a14b5442d468185093b2cffed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 30
   groundDrag: 5
-  jumpForce: 12
+  jumpForce: 30
   jumpCooldown: 0.25
-  airMultiplier: 0.9
+  airMultiplier: 1.5
   walkSpeed: 0
   sprintSpeed: 0
   jumpKey: 32
@@ -470,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba5664fc4da8ad428ff097d7ddb0372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gravityMultiplier: 2
+  _gravityMultiplier: 3
   rb: {fileID: 4429400766943435831}
 --- !u!114 &1285920094
 MonoBehaviour:
@@ -533,20 +532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e79ab5ba57287f49a5e20754522eb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2509947060474526658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429400766943435828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c98429a5b2003f649ba932b6439819c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shieldPrefab: {fileID: 6915325307152980146, guid: a7ab8321e8a128649b5d937426cc2d60,
-    type: 3}
 --- !u!1 &4429400767039744802
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4429400767039744803}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: CameraPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4429400767078327401}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7943381171771102694}
   - component: {fileID: 1022084723202676763}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: SFXSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +734,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6344145247904706558}
   - component: {fileID: 6289089765859564661}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: GenerateEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -784,7 +769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsBetweenSpawn: 10
-  spawnInfo: {fileID: 11400000, guid: 7e256e8d46e39aa49bdecc6b9c260ac6, type: 2}
+  _roundSpawnConfig: {fileID: 11400000, guid: 5cc6ec459907ba545a05cc0046128fc4, type: 2}
   playerTransform: {fileID: 4429400766943435829}
   noNoZoneDistance: 100
   noNoZoneAngle: 45
@@ -798,7 +783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1358318768450208741}
   - component: {fileID: 8550399924345214777}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: InvariableSFXSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -927,7 +912,7 @@ GameObject:
   - component: {fileID: 4545392535244794763}
   - component: {fileID: 988223471116467788}
   - component: {fileID: 1500857784804451651}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: Minimap Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5473279257712082279}
   - component: {fileID: 4213568172819350950}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: PullingSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1182,7 +1167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1007786170527508490}
   - component: {fileID: 8406810812384457753}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: MusicSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1317,6 +1302,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Basic Magic Circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812242662650841091, guid: 64498c58f02be244fa6f18e8f856ac90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3812242662650841091, guid: 64498c58f02be244fa6f18e8f856ac90,
         type: 3}
@@ -1522,8 +1512,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2706280513135616460, guid: 5511579077f94e84ab68c2d6448e9c68,
         type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706280513135616460, guid: 5511579077f94e84ab68c2d6448e9c68,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136050176345534751, guid: 5511579077f94e84ab68c2d6448e9c68,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
