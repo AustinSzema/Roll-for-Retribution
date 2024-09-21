@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Magnetic : MonoBehaviour
 {
     [SerializeField] protected float shootForce = 6000f;
@@ -9,7 +10,7 @@ public abstract class Magnetic : MonoBehaviour
     
     
     
-    [SerializeField] protected int damage = 1;
+    [SerializeField] protected float damage = 1;
 
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
 
@@ -47,6 +48,7 @@ public abstract class Magnetic : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.down * slamForce);
     }
+
 
     public virtual void Shoot(Vector3 magnetForwardDirection)
     {

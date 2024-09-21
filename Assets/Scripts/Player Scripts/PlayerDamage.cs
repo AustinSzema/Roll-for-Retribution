@@ -50,7 +50,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
         }
     }
 
-    public void takeDamage(int hitPoints)
+    public void takeDamage(float hitPoints)
     {
         StartCoroutine(_cameraShake.Shake(0.2f, 1f));
         _gameManager.playerCurrentHealth -= hitPoints;

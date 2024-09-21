@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private Material[] _originalMaterials;
     private Material[] _pausedMaterials;
 
-    private int _currentHealth;
+    private float _currentHealth;
     private bool _firstDisable = true;
 
     private GameManager _gameManager;
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void takeDamage(int hitPoints)
+    public void takeDamage(float hitPoints)
     {
         _currentHealth -= hitPoints;
         EnemyHit();

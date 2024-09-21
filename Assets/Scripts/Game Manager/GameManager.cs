@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     [field: SerializeField] public int playerMaxHealth { get; private set; } = 20;
 
-    [HideInInspector] public int playerCurrentHealth;
+    [HideInInspector] public float playerCurrentHealth;
 
     // Game State Fields
     [HideInInspector] public int overworldDimensionSceneIndex;
