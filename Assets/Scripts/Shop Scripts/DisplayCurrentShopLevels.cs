@@ -39,13 +39,13 @@ public class DisplayCurrentShopLevels : MonoBehaviour
     // Update is called once per frame
     public void UpdateFields()
     {
-        pullForce.text = magnet._pullSpeed.ToString();
-        demonQuantity.text = magnet.GetMagnetCount().ToString();
-        demonWeight.text = Math.Round(magnet.GetDemonWeight(), 2).ToString();
-        
-        pullForce.text = magnet._pullSpeed.ToString();
-        demonQuantity.text = magnet.GetMagnetCount().ToString();
-        demonWeight.text = Math.Round(magnet.GetDemonWeight(), 2).ToString();
+        // pullForce.text = magnet._pullSpeed.ToString();
+        // demonQuantity.text = magnet.GetMagnetCount().ToString();
+        // demonWeight.text = Math.Round(magnet.GetDemonWeight(), 2).ToString();
+        //
+        // pullForce.text = magnet._pullSpeed.ToString();
+        // demonQuantity.text = magnet.GetMagnetCount().ToString();
+        // demonWeight.text = Math.Round(magnet.GetDemonWeight(), 2).ToString();
 
         UpdateCostField(Shop.SkillsToLevel.PullForce, pullForceCost);
         UpdateCostField(Shop.SkillsToLevel.DemonQuantity, demonQuantityCost);

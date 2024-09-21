@@ -85,15 +85,15 @@ public class Shop : MonoBehaviour
 
         switch (skill)
         {
-           case SkillsToLevel.DemonQuantity:
-               for (int i = 0; i < _cubesToAddAtLevel[CurrentLevel(skill)]; i++)
-               {
-                   _playerMagnet.AddMagneticCube();
-               }
-               break;
-           case SkillsToLevel.DemonWeight:
-               _playerMagnet.DecreaseDemonWeight(_percentDecreaseAtLevel[CurrentLevel(skill)]);
-               break;
+           // case SkillsToLevel.DemonQuantity:
+           //     for (int i = 0; i < _cubesToAddAtLevel[CurrentLevel(skill)]; i++)
+           //     {
+           //         _playerMagnet.AddMagneticCube();
+           //     }
+           //     break;
+           // case SkillsToLevel.DemonWeight:
+           //     _playerMagnet.DecreaseDemonWeight(_percentDecreaseAtLevel[CurrentLevel(skill)]);
+           //     break;
            case SkillsToLevel.PullForce:
                _playerMagnet._pullSpeed = _pullForceAtLevel[CurrentLevel(skill)];
                break;

@@ -3,17 +3,24 @@ using UnityEngine.Serialization;
 
 public abstract class Magnetic : MonoBehaviour
 {
-    [SerializeField] protected float shootForce = 30.0f;
+    [SerializeField] protected float shootForce = 6000f;
+    [SerializeField] protected float slamForce = 5500f;
+    [SerializeField] protected float pullSpeed = 60f;
+    
+    
+    
     [SerializeField] protected int damage = 1;
 
-    [SerializeField] protected Rigidbody _rigidbody;
-
-    protected virtual void Start()
-    {
-        _rigidbody.AddForce(Random.onUnitSphere * 100f); // Common initialization
-    }
+    [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
 
     
+    
+    protected virtual void Start()
+    {
+        rb.AddForce(Random.onUnitSphere * 100f); // Common initialization
+    }
+
+
     private void OnCollisionEnter(Collision other)
     {
         HitEnemy(other.gameObject);
@@ -35,15 +42,44 @@ public abstract class Magnetic : MonoBehaviour
     }
 
 
+    public virtual void Slam()
+    {
+        rb.velocity = Vector3.zero;
+        rb.AddForce(Vector3.down * slamForce);
+    }
 
-    // Unified method to handle hitting an enemy
+    public virtual void Shoot(Vector3 magnetForwardDirection)
+    {
+        Vector3 offsetDirection;
+        float deviationAngleX = 0f;
+        float deviationAngleY = 0f;
+        float deviationAngleZ = 0f;
+        
+        deviationAngleX = Random.Range(-20f, 20f);
+        deviationAngleY = Random.Range(-20f, 20f);
+        deviationAngleZ = Random.Range(-20f, 20f);
+        offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
+                          magnetForwardDirection;
+        rb.AddForce(offsetDirection * shootForce);
+
+    }
+
+    public virtual void Attract(Vector3 magnetPosition)
+    {
+        rb.velocity = Vector3.zero;
+        rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
+            Time.deltaTime * pullSpeed);
+    }
+
+
+// Unified method to handle hitting an enemy
     protected void HitEnemy(GameObject target)
     {
         // Check if the target has IDamageable and is not the player
         if (target.TryGetComponent<IDamageable>(out IDamageable damageable) && !target.TryGetComponent<PlayerController>(out _))
         {
             Vector3 direction = (transform.position - target.transform.position).normalized;
-            _rigidbody.AddForce(direction * shootForce, ForceMode.Impulse);
+            rb.AddForce(direction * shootForce, ForceMode.Impulse);
             damageable.takeDamage(damage);
         }
     }

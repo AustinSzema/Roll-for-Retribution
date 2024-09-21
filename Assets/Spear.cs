@@ -12,8 +12,25 @@ public class Spear : Magnetic
 
         // Apply the rotation to the spear and its Rigidbody
         transform.rotation = targetRotation;
-        _rigidbody.rotation = targetRotation;
+        rb.rotation = targetRotation;
 
         Debug.Log("ROTATION CAMERA " + targetRotation);
+    }
+    
+    public override void Slam()
+    {
+        rb.velocity = Vector3.zero;
+        // Use Quaternion.Euler to specify the rotation in degrees
+        Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
+        transform.rotation = rotation;
+        rb.rotation = rotation;
+        rb.AddForce(slamForce * Vector3.down);
+    }
+
+
+    public override void Shoot(Vector3 magnetForwardDirection)
+    {
+        rb.AddForce(shootForce * magnetForwardDirection);
+
     }
 }

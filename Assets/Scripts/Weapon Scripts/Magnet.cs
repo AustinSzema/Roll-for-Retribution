@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class Magnet : MonoBehaviour
 {
     // Stores a reference to all of the demon dice
-    private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
+    private List<Magnetic> magneticObjects = new List<Magnetic>();
 
     [Header("Magnet Positions")]
     //[SerializeField] private Transform _footPosition;
@@ -86,12 +86,8 @@ public class Magnet : MonoBehaviour
 
         _gameManager.flightDuration = _maxFlightDuration;
 
-        Magnetic[] magneticObjects = FindObjectsOfType<Magnetic>();
-
-        // Using LINQ to replace the foreach loop
-        magneticObjects.Select(magneticObject => magneticObject.GetComponent<Rigidbody>())
-            .ToList()
-            .ForEach(rb => _magneticObjects.Add(rb));
+        magneticObjects = FindObjectsOfType<Magnetic>(true).ToList();
+        
     }
 
     private bool _activateMagnet = false;
@@ -238,7 +234,7 @@ public class Magnet : MonoBehaviour
                 _defaultImage.gameObject.SetActive(false);
                 _attractParticlesRoot.SetActive(false);
                 StartCoroutine(ResetHandVisual());
-                StartCoroutine(ShotgunAbility());
+                StartCoroutine(Shoot());
             }
 
 
@@ -251,10 +247,10 @@ public class Magnet : MonoBehaviour
             //slam 
             if (Input.GetMouseButtonDown(1))
             {
-                StartCoroutine(SlamAbility());
+                StartCoroutine(Slam());
             }
 
-            SetDemonsVelocityAndPosition();
+            SetWeaponsVelocityAndPosition();
         }
     }
 
@@ -271,27 +267,26 @@ public class Magnet : MonoBehaviour
 
     private bool _slamOnCooldown;
 
-    private IEnumerator SlamAbility()
+    private IEnumerator Slam()
     {
         if (!_slamOnCooldown)
         {
             _slamOnCooldown = true;
             _audioManager.PlaySlamSound();
-// Using LINQ to replace the foreach loop
-            _magneticObjects.ForEach(rb =>
+
+            _attractImage.gameObject.SetActive(false);
+            _repelImage.gameObject.SetActive(true);
+            _defaultImage.gameObject.SetActive(false);
+            _attractParticlesRoot.SetActive(false);
+            _gravityParticlesRoot.SetActive(true);
+            _gravityParticles.Clear();
+            _gravityParticles.Play();
+            
+            foreach (Magnetic magnetic in magneticObjects)
             {
-                _attractImage.gameObject.SetActive(false);
-                _repelImage.gameObject.SetActive(true);
-                _defaultImage.gameObject.SetActive(false);
-                _attractParticlesRoot.SetActive(false);
-                _gravityParticlesRoot.SetActive(true);
-                _gravityParticles.Clear();
-                _gravityParticles.Play();
-
-                rb.AddForce(Vector3.down * _slamSpeed);
-            });
-
-
+                magnetic.Slam();
+            }
+            
             yield return new WaitForSeconds(_slamCooldown);
             _slamOnCooldown = false;
         }
@@ -301,7 +296,7 @@ public class Magnet : MonoBehaviour
 
     //private GameManager.ActiveShotType _currentShotType;
 
-    private IEnumerator ShotgunAbility()
+    private IEnumerator Shoot()
     {
         if (!_shotgunOnCooldown)
         {
@@ -326,112 +321,43 @@ public class Magnet : MonoBehaviour
             //         break;
             // }
 
-            _magneticObjects.ForEach(rb =>
+            _attractImage.gameObject.SetActive(false);
+            _repelImage.gameObject.SetActive(true);
+            _defaultImage.gameObject.SetActive(false);
+            _attractParticlesRoot.SetActive(false);
+            _repelParticlesRoot.SetActive(true);
+            _repelParticles.Clear();
+            _repelParticles.Play();
+                        
+            foreach (Magnetic magnetic in magneticObjects)
             {
-                _attractImage.gameObject.SetActive(false);
-                _repelImage.gameObject.SetActive(true);
-                _defaultImage.gameObject.SetActive(false);
-                _attractParticlesRoot.SetActive(false);
-                _repelParticlesRoot.SetActive(true);
-                _repelParticles.Clear();
-                _repelParticles.Play();
-
-                Vector3 offsetDirection;
-                float deviationAngleX = 0f;
-                float deviationAngleY = 0f;
-                float deviationAngleZ = 0f;
-
+                magnetic.Shoot(transform.forward);
+            }
+            
                 
-                deviationAngleX = Random.Range(-20f, 20f);
-                deviationAngleY = Random.Range(-20f, 20f);
-                deviationAngleZ = Random.Range(-20f, 20f);
-                offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
-                                  transform.forward;
-                rb.AddForce(offsetDirection * _shotgunSpeed);
-                
-                // switch (_currentShotType)
-                // {
-                //     case GameManager.ActiveShotType.Shotgun:
-                //         deviationAngleX = Random.Range(-20f, 20f);
-                //         deviationAngleY = Random.Range(-20f, 20f);
-                //         deviationAngleZ = Random.Range(-20f, 20f);
-                //         offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
-                //                           transform.forward;
-                //         rb.AddForce(offsetDirection * _shotgunSpeed);
-                //         break;
-                //     case GameManager.ActiveShotType.Rocket:
-                //         rb.AddForce(transform.forward * _shotgunSpeed);
-                //         break;
-                //     case GameManager.ActiveShotType.Spray:
-                //         deviationAngleY = Random.Range(-20f, 20f);
-                //         offsetDirection = Quaternion.Euler(0, deviationAngleY, 0) * transform.forward;
-                //         rb.AddForce(offsetDirection * _shotgunSpeed);
-                //         break;
-                //     case GameManager.ActiveShotType.Beam:
-                //         break;
-                //     default:
-                //         break;
-                // }
-
-                _activateMagnet = false;
-            });
-
+            _activateMagnet = false;
 
             yield return new WaitForSeconds(_shotgunCooldown);
             _shotgunOnCooldown = false;
         }
     }
 
-
-    // Update is called once per frame
     private void FixedUpdate()
     {
-        SetDemonsVelocityAndPosition();
+        SetWeaponsVelocityAndPosition();
     }
 
 
-    private void SetDemonsVelocityAndPosition()
+    private void SetWeaponsVelocityAndPosition()
     {
         _gameManager.pullingInDemons = _activateMagnet;
 
         if (_activateMagnet)
         {
-            _magneticObjects.ForEach(obj =>
+            foreach (Magnetic magnetic in magneticObjects)
             {
-                // Calculate distance from object
-                float distance = Vector3.Distance(obj.position, transform.position);
-
-                obj.velocity = Vector3.zero;
-                obj.position = Vector3.MoveTowards(obj.transform.position, transform.position,
-                    Time.deltaTime * _pullSpeed);
-
-                if (distance <= _reachThreshold)
-                {
-                    obj.position = transform.position;
-                    _audioManager.PlayObjectReachedSound();
-                }
-            });
+                magnetic.Attract(transform.position);
+            }
         }
-    }
-
-    public void AddMagneticCube()
-    {
-        GameObject magnet = Instantiate(_magneticObject);
-        _magneticObjects.Add(magnet.GetComponent<Rigidbody>());
-    }
-
-    public void DecreaseDemonWeight(float percentDecrease)
-    {
-        _magneticObjects.ForEach(rb => { rb.mass -= (rb.mass * percentDecrease); });
-    }
-
-    public int GetMagnetCount()
-    {
-        return _magneticObjects.Count;
-    }
-
-    public float GetDemonWeight()
-    {
-        return _magneticObjects[0].mass;
     }
 }
