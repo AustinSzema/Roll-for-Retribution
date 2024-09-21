@@ -99,7 +99,6 @@ public class Enemy : MonoBehaviour, IDamageable
                 StartCoroutine(PauseEnemy(_hitPauseTime));
             }
         }
-        _gameManager.IncreaseSuperMeter();
     }
 
     private IEnumerator PauseEnemy(float waitTime)

@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Player Fields
@@ -85,11 +85,11 @@ public class GameManager : MonoBehaviour
 
     // Flight Fields
     [HideInInspector] public int currentRound = 0;
-    
-    
+
+
     public bool enemiesShouldMove = true;
-    
-    
+
+
     [HideInInspector] public int enemiesHit = 0;
 
     [HideInInspector] public bool canUseSuper { get; private set; } = false;
@@ -98,6 +98,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int soulCount = 0;
 
     public bool shopActive = false;
+
+
+    [SerializeField] private GameObject pauseMenu;
     
     // public enum ActiveShotType
     // {
@@ -109,7 +112,7 @@ public class GameManager : MonoBehaviour
 
 
     private AudioManager _audioManager;
-    
+
     private void Start()
     {
         Setup();
@@ -119,7 +122,7 @@ public class GameManager : MonoBehaviour
     {
         Setup();
     }
-    
+
     // Example function that you want to call at the start of each scene
     public void OnSceneStart()
     {
@@ -143,39 +146,43 @@ public class GameManager : MonoBehaviour
 
     private void Setup()
     {
-        gameIsPaused = false;
         Time.timeScale = 1f;
+        gameIsPaused = false;
         _audioManager = AudioManager.Instance;
         _audioManager.PlayMainMusic();
-        Debug.Log("Game Manager Start");        
+        Debug.Log("Game Manager Start");
+    }
+
+
+    public void Pause()
+    {
+        shopActive = !shopActive;
+        if (shopActive)
+        {
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+            gameIsPaused = true;
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1;
+            gameIsPaused = false;
+        }
+
+        _audioManager.PlayClickSound();
     }
 
     // Update is called once per frame
-    // void Update() // This entire thing should be in the super meter not in the game manager. Probably
-    // {
-    // Debug.Log("Kill Count: " + killCount);
-    // if (canUseSuper && (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)))
-    // {
-    //     FindObjectOfType<DomainExpansion>().ExpandDomain(); // TODO: temporary hack, dont use find object
-    //     Enemy[] enemies = FindObjectsOfType<Enemy>(); // TODO: Instead of doing this we should have an enemy manager that keeps track of all of the enemies and then call takeDamage on all of the active ones.
-    //     foreach (Enemy e in enemies)
-    //     {
-    //         if (e.gameObject.activeInHierarchy)
-    //         {
-    //             e.takeDamage(e.healthPoints);
-    //         }
-    //     }
-    //
-    //     Debug.Log("used Super");
-    //     enemiesHit -= superMeterActivationAmount;
-    // }
-    //
-    // canUseSuper = enemiesHit >= superMeterActivationAmount;
-    // }
-
-
-    public void IncreaseSuperMeter()
+    void Update()
     {
-        enemiesHit++;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
     }
 }

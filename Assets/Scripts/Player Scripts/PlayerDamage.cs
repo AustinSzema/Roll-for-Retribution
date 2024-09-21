@@ -59,7 +59,6 @@ public class PlayerDamage : MonoBehaviour, IDamageable
             Die();
         } else {
             _audioManager.PlayInvariableSFX(_playerDamagedClip);
-            _gameManager.IncreaseSuperMeter();
         }
         Debug.Log("player took 1 damage, currently at " + _gameManager.playerCurrentHealth + " health");
         
