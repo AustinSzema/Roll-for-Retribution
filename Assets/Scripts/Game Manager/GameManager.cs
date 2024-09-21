@@ -98,9 +98,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int soulCount = 0;
 
     public bool shopActive = false;
-
-
-    [SerializeField] private GameObject pauseMenu;
+    
     
     // public enum ActiveShotType
     // {
@@ -154,35 +152,5 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Pause()
-    {
-        shopActive = !shopActive;
-        if (shopActive)
-        {
-            pauseMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0;
-            gameIsPaused = true;
-        }
-        else
-        {
-            pauseMenu.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            Time.timeScale = 1;
-            gameIsPaused = false;
-        }
 
-        _audioManager.PlayClickSound();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
-        }
-    }
 }

@@ -51,9 +51,13 @@ public class PlayerController : MonoBehaviour
 
         // handle drag
         if (grounded)
+        {
             rb.drag = groundDrag;
+        }
         else
+        {
             rb.drag = 0;
+        }
     }
 
     private void FixedUpdate()
