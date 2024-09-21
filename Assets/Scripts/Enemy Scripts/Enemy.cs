@@ -155,12 +155,5 @@ public class Enemy : MonoBehaviour, IDamageable
             _audioManager.PlaySFXAtLocation(_enemyGruntClip, transform.position);
         }
     }
-
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Shield"))
-        {
-            takeDamage(1);
-        }
-    }
+    
 }

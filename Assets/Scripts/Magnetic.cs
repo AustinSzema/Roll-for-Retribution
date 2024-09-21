@@ -9,8 +9,7 @@ public abstract class Magnetic : MonoBehaviour
     [SerializeField] protected float pullSpeed = 60f;
     
     
-    
-    [SerializeField] protected float damage = 1;
+    [SerializeField] private float damage = 1;
 
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
 
@@ -75,7 +74,7 @@ public abstract class Magnetic : MonoBehaviour
 
 
 // Unified method to handle hitting an enemy
-    protected void HitEnemy(GameObject target)
+    protected virtual void HitEnemy(GameObject target)
     {
         // Check if the target has IDamageable and is not the player
         if (target.TryGetComponent<IDamageable>(out IDamageable damageable) && !target.TryGetComponent<PlayerController>(out _))
