@@ -31,6 +31,23 @@ public class Spear : Magnetic
     public override void Shoot(Vector3 magnetForwardDirection)
     {
         rb.AddForce(shootForce * magnetForwardDirection);
-
+    }
+    
+    protected override void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag(TagManager.groundTag) || other.gameObject.CompareTag(TagManager.cageTag))
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        HitEnemy(other.gameObject);
+    }
+    
+    
+    public override void Attract(Vector3 magnetPosition)
+    {
+        rb.constraints = RigidbodyConstraints.None;
+        rb.velocity = Vector3.zero;
+        rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
+            Time.deltaTime * pullSpeed);
     }
 }

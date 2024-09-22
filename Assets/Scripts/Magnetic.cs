@@ -21,22 +21,22 @@ public abstract class Magnetic : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision other)
+    protected virtual void OnCollisionEnter(Collision other)
     {
         HitEnemy(other.gameObject);
     }
 
-    private void OnCollisionStay(Collision other)
+    protected virtual void OnCollisionStay(Collision other)
     {
         HitEnemy(other.gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         HitEnemy(other.gameObject);
     }
 
-    private void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         HitEnemy(other.gameObject);
     }
