@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class Spear : Magnetic
 {
+    private bool shouldRotate = true;
     // Update is called once per frame
-    void Update()
+    private Camera mainCam;
+
+    private void Start()
     {
-        // Get the rotation based on the camera's forward direction
-        Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        mainCam = Camera.main;
+    }
+    private void Update()
+    {
+        if (shouldRotate)
+        {
+            // Get the rotation based on the camera's forward direction
+            Quaternion targetRotation = Quaternion.LookRotation(mainCam.transform.forward);
 
-        // Apply the rotation to the spear and its Rigidbody
-        transform.rotation = targetRotation;
-        rb.rotation = targetRotation;
+            // Apply the rotation to the spear and its Rigidbody
+            transform.rotation = targetRotation;
+            rb.rotation = targetRotation;
 
-        Debug.Log("ROTATION CAMERA " + targetRotation);
+            Debug.Log("ROTATION CAMERA " + targetRotation);
+        }
     }
     
     public override void Slam()
@@ -38,6 +48,7 @@ public class Spear : Magnetic
         if (other.gameObject.CompareTag(TagManager.groundTag) || other.gameObject.CompareTag(TagManager.cageTag))
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
+            shouldRotate = false;
         }
         HitEnemy(other.gameObject);
     }
@@ -45,6 +56,7 @@ public class Spear : Magnetic
     
     public override void Attract(Vector3 magnetPosition)
     {
+        shouldRotate = true;
         rb.constraints = RigidbodyConstraints.None;
         rb.velocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,

@@ -14,11 +14,6 @@ public abstract class Magnetic : MonoBehaviour
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
 
     
-    
-    protected virtual void Start()
-    {
-        rb.AddForce(Random.onUnitSphere * 100f); // Common initialization
-    }
 
 
     protected virtual void OnCollisionEnter(Collision other)
