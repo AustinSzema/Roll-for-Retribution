@@ -14,6 +14,14 @@ public class Grenadier : Enemy
     [Tooltip("The radius around the player which the Grenadier will not enter")]
     public float minDistanceFromPlayer = 10f; // Minimum distance to maintain from the player
 
+    public GameObject grenade;
+    
+    protected override void Start()
+    {
+        Setup();
+        StartCoroutine(Shoot());
+    }
+    
     protected virtual void FixedUpdate()
     {
         if (_gameManager.gameIsPaused && enemyShouldMove)
@@ -21,11 +29,27 @@ public class Grenadier : Enemy
             // Calculate the distance to the player
             float distanceToPlayer = Vector3.Distance(transform.position, _gameManager.playerPosition);
 
-            // Move towards the player only if the distance is greater than the minimum distance
+            // If the distance is greater than the minimum distance, move towards the player
             if (distanceToPlayer > minDistanceFromPlayer)
             {
                 rb.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition, _moveSpeed * Time.deltaTime));
             }
+            // If the distance is less than or equal to the minimum, move away from the player
+            else
+            {
+                // Calculate the direction away from the player
+                Vector3 directionAwayFromPlayer = (transform.position - _gameManager.playerPosition).normalized;
+                
+                // Move in the opposite direction of the player
+                rb.MovePosition(Vector3.MoveTowards(transform.position, transform.position + directionAwayFromPlayer, _moveSpeed * Time.deltaTime));   
+            }
         }
     }
+
+    private IEnumerator Shoot()
+    {
+        yield return new WaitForSeconds(projectileCooldown);
+        Instantiate(grenade, transform.position, Quaternion.identity);
+    }
+    
 }
