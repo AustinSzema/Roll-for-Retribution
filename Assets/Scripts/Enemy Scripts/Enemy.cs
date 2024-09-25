@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
     
     
     private float healthPoints = 1;
-    private float _moveSpeed = 2f;
+    protected float _moveSpeed = 2f;
     private float rotationSpeed = 5f;
     private float _gravityMultiplier = 2f;
     private bool isFlyingType = false;
@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     
     
-    [FormerlySerializedAs("_rigidbody")] [SerializeField] private Rigidbody rb;
+    [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
     
     
     [FormerlySerializedAs("_explosionParticles")] [SerializeField] private ParticleSystem _deathParticles;
@@ -45,14 +45,14 @@ public class Enemy : MonoBehaviour, IDamageable
     private MeshRenderer[] _meshRenderers;
     [SerializeField] private Material _enemyPauseMaterial;
 
-    private bool enemyShouldMove = true;
+    protected bool enemyShouldMove = true;
     private Material[] _originalMaterials;
     private Material[] _pausedMaterials;
 
     private float _currentHealth;
     private bool _firstDisable = true;
 
-    private GameManager _gameManager;
+    protected GameManager _gameManager;
     
     private void AddGravity()
     {
@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
 
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (!_gameManager.gameIsPaused && enemyShouldMove)
         {

@@ -12,12 +12,16 @@ public class ExplodingCharger : Enemy
     [SerializeField] private float activationDistance = 15f;
     [SerializeField] private bool damagesOtherEnemies = true;
 
+    
     private bool explosionHasBeenTriggered = false;
 
+    
 
     [SerializeField] private ParticleSystem explosionParticles;
 
 
+    
+    
     protected override void Update()
     {
         OnTick();
