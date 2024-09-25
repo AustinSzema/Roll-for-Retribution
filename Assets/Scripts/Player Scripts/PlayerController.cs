@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
+    [SerializeField] private float _gravityMultiplier = 2f;
+
+
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Rigidbody rb;
 
+    
     
     private void Start()
     {
@@ -60,10 +64,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+ 
     private void FixedUpdate()
     {
         MovePlayer();
+        AddGravity();
     }
+
+    private void AddGravity()
+    {
+        rb.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
+    }
+
 
     private void MyInput()
     {

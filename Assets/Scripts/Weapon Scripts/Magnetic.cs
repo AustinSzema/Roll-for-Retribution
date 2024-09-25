@@ -12,9 +12,7 @@ public abstract class Magnetic : MonoBehaviour
     [SerializeField] private float damage = 1;
 
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
-
     
-
 
     protected virtual void OnCollisionEnter(Collision other)
     {

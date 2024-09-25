@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 4429400766943435830}
   - component: {fileID: 4429400766943435825}
   - component: {fileID: 1285920093}
-  - component: {fileID: 1285920081}
   - component: {fileID: 1285920094}
   - component: {fileID: 4002532168671568275}
   - component: {fileID: 7815982920914401407}
@@ -363,6 +362,7 @@ MonoBehaviour:
   airMultiplier: 1.5
   walkSpeed: 0
   sprintSpeed: 0
+  _gravityMultiplier: 2
   jumpKey: 32
   playerHeight: 1.5
   whatIsGround:
@@ -407,20 +407,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1285920081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429400766943435828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba5664fc4da8ad428ff097d7ddb0372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gravityMultiplier: 3
-  rb: {fileID: 4429400766943435831}
 --- !u!114 &1285920094
 MonoBehaviour:
   m_ObjectHideFlags: 0

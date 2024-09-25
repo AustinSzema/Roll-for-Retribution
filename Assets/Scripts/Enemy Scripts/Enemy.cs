@@ -1,11 +1,25 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] public int healthPoints = 1;
-    [SerializeField] private GameObject _enemy;
-    [SerializeField] private ParticleSystem _explosionParticles;
+
+
+
+    
+    public int healthPoints = 1;
+    [SerializeField] private float _moveSpeed = 2f;
+    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float _gravityMultiplier = 2f;
+    [SerializeField] private float _hitPauseTime = 2f;
+    public bool isFlyingType = false;
+    public bool dieOnContactWithPlayer = true;
+    
+    [FormerlySerializedAs("_rigidbody")] [SerializeField] private Rigidbody rb;
+    
+    
+    [FormerlySerializedAs("_explosionParticles")] [SerializeField] private ParticleSystem _deathParticles;
     [SerializeField] private ParticleSystem _hitParticles;
     [SerializeField] private AudioClip _hitClip;
     [SerializeField] private AudioClip _enemyGruntClip;
@@ -16,7 +30,6 @@ public class Enemy : MonoBehaviour, IDamageable
     [Header("Enemy Hit Values")]
     private MeshRenderer[] _meshRenderers;
     [SerializeField] private Material _enemyPauseMaterial;
-    [SerializeField] private float _hitPauseTime = 2f;
 
     private bool enemyShouldMove = true;
     private Material[] _originalMaterials;
@@ -26,9 +39,18 @@ public class Enemy : MonoBehaviour, IDamageable
     private bool _firstDisable = true;
 
     private GameManager _gameManager;
-    [SerializeField] private GameObject _soulPrefab;
+    
+    private void AddGravity()
+    {
+        rb.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
+    }
+    
+    protected virtual void Start()
+    {
+        Setup();
+    }
 
-    private void Start()
+    protected void Setup()
     {
         _gameManager = GameManager.Instance;
         _currentHealth = healthPoints;
@@ -69,14 +91,14 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    [SerializeField] private float _moveSpeed = 2f;
-    [SerializeField] private Rigidbody _rigidbody;
+
 
     private void FixedUpdate()
     {
         if (!_gameManager.gameIsPaused && enemyShouldMove)
         {
-            _rigidbody.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition, _moveSpeed * Time.deltaTime));
+            rb.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition, _moveSpeed * Time.deltaTime));
+            AddGravity();
         }
     }
 
@@ -87,7 +109,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (_currentHealth <= 0)
         {
             UnpauseEnemy();
-            Explode();
+            Die();
             _currentHealth = healthPoints;
         }
         else
@@ -130,14 +152,19 @@ public class Enemy : MonoBehaviour, IDamageable
         _hitParticles.Play();
     }
 
-    private void Explode()
+    private void Die()
     {
         _audioManager.PlaySFXAtLocation(_hitClip, transform.position);
-        _explosionParticles.Play();
-        _enemy.SetActive(false);
+        _deathParticles.Play();
+        gameObject.SetActive(false);
     }
 
-    private void Update()
+    protected virtual void Update()
+    {
+        OnTick();
+    }
+    
+    protected void OnTick()
     {
         if (transform.position.y <= -5f)
         {
@@ -145,6 +172,21 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         TryPlayGruntSoundRandomly();
+        
+        // Get the direction from the enemy to the player
+        Vector3 directionToPlayer = _gameManager.playerPosition - transform.position;
+        directionToPlayer.y = 0f; // Ignore the y-axis
+
+        // Check if the direction is non-zero before attempting rotation
+        if (directionToPlayer != Vector3.zero)
+        {
+            // Calculate the desired rotation based on the direction
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Smoothly rotate the enemy towards the player only on the Y axis
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+        
     }
 
     private void TryPlayGruntSoundRandomly()

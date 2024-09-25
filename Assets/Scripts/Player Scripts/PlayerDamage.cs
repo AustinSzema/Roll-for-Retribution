@@ -42,11 +42,12 @@ public class PlayerDamage : MonoBehaviour, IDamageable
         Enemy enemyScript = other.gameObject.GetComponentInParent<Enemy>();
         if (enemyScript != null)
         {
-            // if enemy touches player, take one damage
+            if (enemyScript.dieOnContactWithPlayer)
+            {
+                // If an enemy touches the player, the enemy should die. Int32 MaxValue might be overkill but it should ensure that nothing lives
+                enemyScript.takeDamage(Int32.MaxValue);
+            }
             takeDamage(1);
-            
-            // If an enemy touches the player, the enemy should die. Int32 MaxValue might be overkill but it should ensure that nothing lives
-            enemyScript.takeDamage(Int32.MaxValue);
         }
     }
 
