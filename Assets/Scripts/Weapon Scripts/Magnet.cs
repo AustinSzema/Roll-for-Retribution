@@ -36,8 +36,7 @@ public class Magnet : MonoBehaviour
 
     [SerializeField] private GameObject _repelParticlesRoot;
     [SerializeField] private GameObject _gravityParticlesRoot;
-
-    [Header("Particles")] [SerializeField] private Renderer _attractParticlesRenderer;
+    
     [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private ParticleSystem _gravityParticles;
     //[SerializeField] private MeshRenderer _centerSphere;
@@ -48,16 +47,10 @@ public class Magnet : MonoBehaviour
     // [SerializeField] private Material _levitateOuterMaterial;
 
 
-    [Header("Weapon Values")] [SerializeField]
-    private GameObject _magneticObject;
 
-    public float _pullSpeed;
 
-    [SerializeField] private float _slamSpeed;
     [SerializeField] private float _slamCooldown = 3.0f;
-    [SerializeField] private float _shotgunSpeed;
     [SerializeField] private float _shotgunCooldown = 3.0f;
-    [SerializeField] private float _reachThreshold = 1.0f;
 
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private AudioClip _outOfBreathClip;

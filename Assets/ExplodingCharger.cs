@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExplodingCharger : Enemy
 {
+    
+    [Header("ExplodingCharger Specific Values")]
     [SerializeField] private float explosionDamage = 25f;
     [SerializeField] private float explosionTimer = 3f;
     [SerializeField] private float explosionDiameter = 5f;
@@ -30,7 +32,7 @@ public class ExplodingCharger : Enemy
         {
             IDamageable damageable = hit.transform.GetComponent<IDamageable>();
 
-            Enemy possibleEnemy = hit.transform.GetComponent<Enemy>();
+            Enemy possibleEnemy = hit.transform.GetComponent<Enemy>(); // TODO: optimize this
             
             if (damageable != null)
             {
@@ -56,6 +58,7 @@ public class ExplodingCharger : Enemy
     {
         damageable.takeDamage(explosionDamage);   
         explosionParticles.Play();
+        gameObject.SetActive(false);
     }
     
     private void ExplodeIfInRange()

@@ -6,15 +6,26 @@ public class Enemy : MonoBehaviour, IDamageable
 {
 
 
-
+    [SerializeField] private EnemySO enemySO;
     
-    public int healthPoints = 1;
-    [SerializeField] private float _moveSpeed = 2f;
-    [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float _gravityMultiplier = 2f;
-    [SerializeField] private float _hitPauseTime = 2f;
-    public bool isFlyingType = false;
-    public bool dieOnContactWithPlayer = true;
+    
+    private float healthPoints = 1;
+    private float _moveSpeed = 2f;
+    private float rotationSpeed = 5f;
+    private float _gravityMultiplier = 2f;
+    private bool isFlyingType = false;
+    [HideInInspector] public bool dieOnContactWithPlayer = true;
+
+    private void Awake()
+    {
+        healthPoints = enemySO.healthPoints;
+        _moveSpeed = enemySO._moveSpeed;
+        rotationSpeed = enemySO.rotationSpeed;
+        _gravityMultiplier = enemySO._gravityMultiplier;
+        isFlyingType = enemySO.isFlyingType;
+        dieOnContactWithPlayer = enemySO.dieOnContactWithPlayer;
+    }
+    
     
     [FormerlySerializedAs("_rigidbody")] [SerializeField] private Rigidbody rb;
     
@@ -25,6 +36,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip _enemyGruntClip;
     [SerializeField] private AudioClip _enemyDamagedClip;
 
+    private float _hitPauseTime = 2f;
+
+    
     private static AudioManager _audioManager;
 
     [Header("Enemy Hit Values")]
