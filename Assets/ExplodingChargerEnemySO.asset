@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d524fb90d5f6854d9800ebc2b2ed045, type: 3}
   m_Name: ExplodingChargerEnemySO
   m_EditorClassIdentifier: 
-  healthPoints: 1
-  _moveSpeed: 2
+  enemyType: 1
+  healthPoints: 10
+  _moveSpeed: 23
   rotationSpeed: 5
-  _gravityMultiplier: 2
-  _hitPauseTime: 2
+  _gravityMultiplier: 10
   isFlyingType: 0
   dieOnContactWithPlayer: 1
+  explosionDamage: 50
+  explosionTimer: 0
+  explosionDiameter: 0
+  activationDistance: 0
+  damagesOtherEnemies: 0

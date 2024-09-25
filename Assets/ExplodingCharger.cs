@@ -22,6 +22,7 @@ public class ExplodingCharger : Enemy
     {
         OnTick();
         ExplodeIfInRange();
+        Debug.Log("explosion dmaage " + enemySO.explosionDamage);
     }
 
     private IEnumerator BeginExplosion()

@@ -21,24 +21,24 @@ public class EnemySO : ScriptableObject
     public bool isFlyingType = false;
     public bool dieOnContactWithPlayer = true;
 
-    // Only show these values if the enemy is an exploding charger
+    // Only show these values if the enemy is an ExplodingCharger
     [Header("ExplodingCharger Specific Values")]
-    public float explosionDamage = 25f;
-    public float explosionTimer = 3f;
-    public float explosionDiameter = 5f;
-    public float activationDistance = 15f;
-    public bool damagesOtherEnemies = true;
+    [HideInInspector] public float explosionDamage = 25f;
+    [HideInInspector] public float explosionTimer = 3f;
+    [HideInInspector] public float explosionDiameter = 5f;
+    [HideInInspector] public float activationDistance = 15f;
+    [HideInInspector] public bool damagesOtherEnemies = true;
 
     // Validate and hide/show specific fields based on EnemyType
     private void OnValidate()
     {
         if (enemyType == EnemyType.ExplodingCharger)
         {
-            // Values related to ExplodingCharger remain unchanged
+            // Values related to ExplodingCharger are kept as they are
         }
         else
         {
-            // Reset exploding charger-specific values if not an ExplodingCharger
+            // Reset ExplodingCharger-specific values if not an ExplodingCharger
             explosionDamage = 0;
             explosionTimer = 0;
             explosionDiameter = 0;

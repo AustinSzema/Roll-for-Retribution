@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
 
 
-    [SerializeField] private EnemySO enemySO;
+    [SerializeField] protected EnemySO enemySO;
     
     
     private float healthPoints = 1;

@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d524fb90d5f6854d9800ebc2b2ed045, type: 3}
   m_Name: GruntEnemySO
   m_EditorClassIdentifier: 
+  enemyType: 0
   healthPoints: 1
   _moveSpeed: 2
   rotationSpeed: 5
   _gravityMultiplier: 2
-  _hitPauseTime: 2
   isFlyingType: 0
   dieOnContactWithPlayer: 1
+  explosionDamage: 0
+  explosionTimer: 0
+  explosionDiameter: 0
+  activationDistance: 0
+  damagesOtherEnemies: 0

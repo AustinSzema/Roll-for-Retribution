@@ -16,7 +16,7 @@ public class EnemySOEditor : Editor
         if (enemySO.enemyType == EnemySO.EnemyType.ExplodingCharger)
         {
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("ExplodingCharger Specific Values", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Exploding Charger Specific Values", EditorStyles.boldLabel);
             enemySO.explosionDamage = EditorGUILayout.FloatField("Explosion Damage", enemySO.explosionDamage);
             enemySO.explosionTimer = EditorGUILayout.FloatField("Explosion Timer", enemySO.explosionTimer);
             enemySO.explosionDiameter = EditorGUILayout.FloatField("Explosion Diameter", enemySO.explosionDiameter);
