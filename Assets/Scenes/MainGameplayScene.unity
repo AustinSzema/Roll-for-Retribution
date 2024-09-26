@@ -1792,74 +1792,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6169576934071125201}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2114170033
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588077262683172668, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4774966363015993336, guid: 16ce0e9c27132c64789c91d4d7ad1dc9,
-        type: 3}
-      propertyPath: m_Name
-      value: Exploding Charger Enemy Prefab
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 16ce0e9c27132c64789c91d4d7ad1dc9, type: 3}
 --- !u!1001 &5495794769824289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5202,6 +5134,33 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616478367047515945, guid: 81ef82d47703f4e46b77310af88853bd,
+        type: 3}
+      propertyPath: enemiesToPool.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616478367047515945, guid: 81ef82d47703f4e46b77310af88853bd,
+        type: 3}
+      propertyPath: enemiesToPool.Array.data[6].enemy
+      value: 
+      objectReference: {fileID: 8777241286395400003, guid: e706f5c6e2e104e4cacd703d09a182e6,
+        type: 3}
+    - target: {fileID: 5616478367047515945, guid: 81ef82d47703f4e46b77310af88853bd,
+        type: 3}
+      propertyPath: enemiesToPool.Array.data[7].enemy
+      value: 
+      objectReference: {fileID: 2490131019288980999, guid: 4a0e978508f966f4b9bc95815804de29,
+        type: 3}
+    - target: {fileID: 5616478367047515945, guid: 81ef82d47703f4e46b77310af88853bd,
+        type: 3}
+      propertyPath: enemiesToPool.Array.data[6].number
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616478367047515945, guid: 81ef82d47703f4e46b77310af88853bd,
+        type: 3}
+      propertyPath: enemiesToPool.Array.data[7].number
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6289089765859564661, guid: 81ef82d47703f4e46b77310af88853bd,
         type: 3}
@@ -11353,4 +11312,3 @@ SceneRoots:
   - {fileID: 7581897039536191844}
   - {fileID: 1861939507}
   - {fileID: 1103197140}
-  - {fileID: 2114170033}

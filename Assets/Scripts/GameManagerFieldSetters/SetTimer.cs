@@ -13,6 +13,14 @@ public class SetTimer : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance.currentRound < _roundSpawnConfig.Value.Count)
+        {
+            if (_roundSpawnConfig.Value[GameManager.Instance.currentRound].Value.Count < 2)
+            {
+                throw new Exception("Spawn info variable must have at least 2 elements for the timer to work");
+            }
+        } 
+        
         // Assuming StartTime is the time in seconds for the current round
         countdown = _roundSpawnConfig.Value[GameManager.Instance.currentRound]
             .Value[_roundSpawnConfig.Value[GameManager.Instance.currentRound].Value.Count - 1].StartTime;

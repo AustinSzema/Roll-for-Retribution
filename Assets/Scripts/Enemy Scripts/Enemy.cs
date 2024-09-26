@@ -9,29 +9,15 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] protected EnemySO enemySO;
     
     
-    private float healthPoints = 1;
-    protected float _moveSpeed = 2f;
-    private float rotationSpeed = 5f;
-    private float _gravityMultiplier = 2f;
-    private bool isFlyingType = false;
-    [HideInInspector] public bool dieOnContactWithPlayer = true;
 
-    private void Awake()
-    {
-        healthPoints = enemySO.healthPoints;
-        _moveSpeed = enemySO._moveSpeed;
-        rotationSpeed = enemySO.rotationSpeed;
-        _gravityMultiplier = enemySO._gravityMultiplier;
-        isFlyingType = enemySO.isFlyingType;
-        dieOnContactWithPlayer = enemySO.dieOnContactWithPlayer;
-    }
+    [HideInInspector] public bool dieOnContactWithPlayer = true;
     
     
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
     
+    [SerializeField] private Material _enemyPauseMaterial;
     
-    [FormerlySerializedAs("_explosionParticles")] [SerializeField] private ParticleSystem _deathParticles;
-    [SerializeField] private ParticleSystem _hitParticles;
+    [Header("Audio")]
     [SerializeField] private AudioClip _hitClip;
     [SerializeField] private AudioClip _enemyGruntClip;
     [SerializeField] private AudioClip _enemyDamagedClip;
@@ -41,9 +27,13 @@ public class Enemy : MonoBehaviour, IDamageable
     
     private static AudioManager _audioManager;
 
-    [Header("Enemy Hit Values")]
     private MeshRenderer[] _meshRenderers;
-    [SerializeField] private Material _enemyPauseMaterial;
+
+
+
+    [Header("Particles")]
+    [FormerlySerializedAs("_explosionParticles")] [SerializeField] private ParticleSystem _deathParticles;
+    [SerializeField] private ParticleSystem _hitParticles;
 
     protected bool enemyShouldMove = true;
     private Material[] _originalMaterials;
@@ -56,7 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable
     
     private void AddGravity()
     {
-        rb.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
+        rb.AddForce(Physics.gravity * enemySO._gravityMultiplier, ForceMode.Acceleration);
     }
     
     protected virtual void Start()
@@ -67,7 +57,7 @@ public class Enemy : MonoBehaviour, IDamageable
     protected void Setup()
     {
         _gameManager = GameManager.Instance;
-        _currentHealth = healthPoints;
+        _currentHealth = enemySO.healthPoints;
         _audioManager = AudioManager.Instance;
 
         // Get all MeshRenderers in children without using LODGroup
@@ -111,7 +101,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (!_gameManager.gameIsPaused && enemyShouldMove)
         {
-            rb.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition, _moveSpeed * Time.deltaTime));
+            rb.MovePosition(Vector3.MoveTowards(transform.position, _gameManager.playerPosition, enemySO._moveSpeed * Time.deltaTime));
             AddGravity();
         }
     }
@@ -124,7 +114,7 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             UnpauseEnemy();
             Die();
-            _currentHealth = healthPoints;
+            _currentHealth = enemySO.healthPoints;
         }
         else
         {
@@ -198,7 +188,7 @@ public class Enemy : MonoBehaviour, IDamageable
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
             // Smoothly rotate the enemy towards the player only on the Y axis
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemySO.rotationSpeed * Time.deltaTime);
         }
         
     }

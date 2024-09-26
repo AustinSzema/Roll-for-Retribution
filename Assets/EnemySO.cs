@@ -29,6 +29,18 @@ public class EnemySO : ScriptableObject
     [HideInInspector] public float activationDistance = 15f;
     [HideInInspector] public bool damagesOtherEnemies = true;
 
+    
+    [Header("Grenadier Specific Values")]
+    [HideInInspector] public float gasDamage = 5f;
+    [HideInInspector] public float gasDuration = 10f;
+    [HideInInspector] public float gasCloudDiameter = 15f;
+    [HideInInspector] public bool damageOtherEnemies = true;
+    [HideInInspector] public float projectileSpeed = 50f;
+    [HideInInspector] public float projectileCooldown = 10f;
+    [HideInInspector] public float idealDistanceToPlayer = 100f;
+    [HideInInspector] public float minDistanceFromPlayer = 10f;
+
+    
     // Validate and hide/show specific fields based on EnemyType
     private void OnValidate()
     {

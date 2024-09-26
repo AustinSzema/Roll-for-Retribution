@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float flightDuration;
 
 
-    // Flight Fields
     [HideInInspector] public int currentRound = 0;
 
 

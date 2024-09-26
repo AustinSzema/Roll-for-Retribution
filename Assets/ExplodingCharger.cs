@@ -1,27 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExplodingCharger : Enemy
 {
-    
-    [Header("ExplodingCharger Specific Values")]
-    [SerializeField] private float explosionDamage = 25f;
-    [SerializeField] private float explosionTimer = 3f;
-    [SerializeField] private float explosionDiameter = 5f;
-    [SerializeField] private float activationDistance = 15f;
-    [SerializeField] private bool damagesOtherEnemies = true;
-
-    
     private bool explosionHasBeenTriggered = false;
 
-    
 
+    [Header("Exploding Charger Specific Fields")]
     [SerializeField] private ParticleSystem explosionParticles;
 
+    [SerializeField] private MeshRenderer meshRenderer;
 
-    
-    
     protected override void Update()
     {
         OnTick();
@@ -31,17 +23,28 @@ public class ExplodingCharger : Enemy
 
     private IEnumerator BeginExplosion()
     {
-        yield return new WaitForSeconds(explosionTimer);
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, explosionDiameter / 2, transform.forward);
+        if (explosionHasBeenTriggered)
+        {
+            yield return null;
+        }
+        explosionHasBeenTriggered = true;
+
+        meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(enemySO.explosionTimer);
+        
+        
+        explosionParticles.Play();
+
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, enemySO.explosionDiameter / 2, transform.forward);
         foreach (RaycastHit hit in hits)
         {
             IDamageable damageable = hit.transform.GetComponent<IDamageable>();
 
             Enemy possibleEnemy = hit.transform.GetComponent<Enemy>(); // TODO: optimize this
-            
+
             if (damageable != null)
             {
-                if (damagesOtherEnemies)
+                if (enemySO.damagesOtherEnemies)
                 {
                     if (possibleEnemy != null)
                     {
@@ -57,21 +60,20 @@ public class ExplodingCharger : Enemy
                 }
             }
         }
+        gameObject.SetActive(false);
     }
 
     private void Explode(IDamageable damageable)
     {
-        damageable.takeDamage(explosionDamage);   
-        explosionParticles.Play();
-        gameObject.SetActive(false);
+        damageable.takeDamage(enemySO.explosionDamage);
     }
-    
+
     private void ExplodeIfInRange()
     {
-        if (!explosionHasBeenTriggered && DistanceFromPlayer() < activationDistance)
+        Debug.Log("DistanceFromPlayer " + DistanceFromPlayer());
+        if (!explosionHasBeenTriggered && DistanceFromPlayer() < enemySO.activationDistance)
         {
             StartCoroutine(BeginExplosion());
-            explosionHasBeenTriggered = true;
         }
     }
 
@@ -79,6 +81,10 @@ public class ExplodingCharger : Enemy
     {
         return Vector3.Distance(transform.position, GameManager.Instance.playerPosition);
     }
-    
-    
+
+    private void OnEnable()
+    {
+        explosionHasBeenTriggered = false;
+        meshRenderer.material.color = Color.blue;
+    }
 }
