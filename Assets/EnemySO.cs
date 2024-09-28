@@ -41,21 +41,4 @@ public class EnemySO : ScriptableObject
     [HideInInspector] public float minDistanceFromPlayer = 10f;
 
     
-    // Validate and hide/show specific fields based on EnemyType
-    private void OnValidate()
-    {
-        if (enemyType == EnemyType.ExplodingCharger)
-        {
-            // Values related to ExplodingCharger are kept as they are
-        }
-        else
-        {
-            // Reset ExplodingCharger-specific values if not an ExplodingCharger
-            explosionDamage = 0;
-            explosionTimer = 0;
-            explosionDiameter = 0;
-            activationDistance = 0;
-            damagesOtherEnemies = false;
-        }
-    }
 }

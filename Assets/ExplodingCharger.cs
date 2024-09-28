@@ -35,6 +35,7 @@ public class ExplodingCharger : Enemy
         
         explosionParticles.Play();
 
+        
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, enemySO.explosionDiameter / 2, transform.forward);
         foreach (RaycastHit hit in hits)
         {
@@ -87,4 +88,17 @@ public class ExplodingCharger : Enemy
         explosionHasBeenTriggered = false;
         meshRenderer.material.color = Color.blue;
     }
+
+    private void OnDrawGizmos()
+    {
+        // Check if enemySO is assigned and valid
+        if (enemySO == null) return;
+
+        // Set the color for the gizmos (optional)
+        Gizmos.color = Color.red;
+
+        // Draw a sphere at the position of the enemy with a radius based on the explosion diameter
+        Gizmos.DrawWireSphere(transform.position, enemySO.explosionDiameter / 2);
+    }
+
 }
