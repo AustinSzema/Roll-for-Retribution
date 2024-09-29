@@ -33,7 +33,7 @@ public class SetTimer : MonoBehaviour
         }
         else
         {
-            var spawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
+            var spawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound-1];
         
             // Check if the Value (List<SpawnInfo>) in the spawnInfoVariable is not null or empty
             if (spawnInfoVariable.Value != null && spawnInfoVariable.Value.Count > 0)
