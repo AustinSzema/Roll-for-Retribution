@@ -31,8 +31,10 @@ public class ExplodingCharger : Enemy
 
         meshRenderer.material.color = Color.red;
         yield return new WaitForSeconds(enemySO.explosionTimer);
-        
-        
+
+        float particlesScale = enemySO.explosionDiameter / 15f; // magic number :D
+
+        explosionParticles.transform.localScale = new Vector3(particlesScale, particlesScale, particlesScale);
         explosionParticles.Play();
 
         

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Grenadier : Enemy
 {
     [Header("Grenadier Specific Fields")]
-    public GameObject grenade;
+    public Rigidbody grenade;
 
     private void Awake()
     {
@@ -49,7 +49,21 @@ public class Grenadier : Enemy
     private IEnumerator Shoot()
     {
         yield return new WaitForSeconds(enemySO.projectileCooldown);
-        Instantiate(grenade, transform.position, Quaternion.identity);
+
+        // Activate the grenade
+        grenade.gameObject.SetActive(true);
+
+        grenade.velocity = Vector3.zero;
+        grenade.transform.position = transform.position + Vector3.forward * 5f;
+        // Get the direction to the player
+        Vector3 directionToPlayer = (_gameManager.playerPosition - transform.position).normalized;
+
+        // Set the grenade's velocity towards the player
+        grenade.velocity = directionToPlayer * 100f;
+
+        // Optionally, add some height to the grenade's velocity to simulate an arc
+        grenade.velocity += Vector3.up * 30f;
     }
+
     
 }

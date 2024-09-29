@@ -146,7 +146,6 @@ MonoBehaviour:
   _hitParticles: {fileID: 939136871118022432}
   explosionParticles: {fileID: 2552859101780440343}
   meshRenderer: {fileID: 5112724387256375635}
-  sphere: {fileID: 0}
 --- !u!54 &4311424362677213797
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -454,6 +453,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334612509446014879, guid: aa7d71aa6a903c5478a148bfdf9579f9,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -561,6 +565,11 @@ PrefabInstance:
     - target: {fileID: 8334612509446014879, guid: bd19533bedd9d394497da02e0e9e64ce,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334612509446014879, guid: bd19533bedd9d394497da02e0e9e64ce,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

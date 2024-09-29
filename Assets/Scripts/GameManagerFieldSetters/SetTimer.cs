@@ -13,20 +13,44 @@ public class SetTimer : MonoBehaviour
 
     private void Start()
     {
+        // Check if currentRound exists in the _roundSpawnConfig
         if (GameManager.Instance.currentRound < _roundSpawnConfig.Value.Count)
         {
-            if (_roundSpawnConfig.Value[GameManager.Instance.currentRound].Value.Count < 2)
-            {
-                throw new Exception("Spawn info variable must have at least 2 elements for the timer to work");
-            }
-        } 
+            var spawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
         
-        // Assuming StartTime is the time in seconds for the current round
-        countdown = _roundSpawnConfig.Value[GameManager.Instance.currentRound]
-            .Value[_roundSpawnConfig.Value[GameManager.Instance.currentRound].Value.Count - 1].StartTime;
+            // Check if the Value (List<SpawnInfo>) in the spawnInfoVariable is not null or empty
+            if (spawnInfoVariable.Value != null && spawnInfoVariable.Value.Count > 0)
+            {
+                // Now safely access the last element's StartTime
+                countdown = spawnInfoVariable.Value[spawnInfoVariable.Value.Count - 1].StartTime;
+            }
+            else
+            {
+                // Handle the case where there's no spawn info for this round
+                Debug.LogError("No spawn info available for the current round.");
+                countdown = 0; // Set a default value or handle accordingly
+            }
+        }
+        else
+        {
+            var spawnInfoVariable = _roundSpawnConfig.Value[GameManager.Instance.currentRound];
+        
+            // Check if the Value (List<SpawnInfo>) in the spawnInfoVariable is not null or empty
+            if (spawnInfoVariable.Value != null && spawnInfoVariable.Value.Count > 0)
+            {
+                // Now safely access the last element's StartTime
+                countdown = spawnInfoVariable.Value[spawnInfoVariable.Value.Count - 1].StartTime;
+            }
+
+            
+            // Handle the case where the currentRound is out of bounds
+            //Debug.LogError("Current round exceeds available round configurations.");
+            //countdown = 0; // Set a default value or handle accordingly
+        }
 
         UpdateTimerText(countdown);
     }
+
 
     private void Update()
     {
