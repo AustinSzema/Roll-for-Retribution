@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Magnetic : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] protected float shootForce = 6000f;
     [SerializeField] protected float slamForce = 5500f;
@@ -11,8 +11,8 @@ public abstract class Magnetic : MonoBehaviour
     
     [SerializeField] private float damage = 1;
 
-    [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
-    
+    [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb; 
+    public Sprite weaponUISprite;
 
     protected virtual void OnCollisionEnter(Collision other)
     {

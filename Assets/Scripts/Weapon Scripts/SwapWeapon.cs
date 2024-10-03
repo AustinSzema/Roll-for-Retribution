@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SwapWeapon : MonoBehaviour
 {
+    [SerializeField] private Transform weaponSwapUI;
+    [SerializeField] private GameObject weaponSlot;
     private List<Image> weaponSlots = new List<Image>();
     [SerializeField] private List<GameObject> weaponParents = new List<GameObject>();
+    
     
     private int activeWeaponIndex = 0;
 
@@ -14,16 +18,18 @@ public class SwapWeapon : MonoBehaviour
     
     void Start()
     {
-        // Populate the weapon slots with Image components
-        for (int i = 0; i < transform.childCount; ++i)
+        for (int i = 0; i < weaponParents.Count; i++)
         {
-            Image weaponSlot = transform.GetChild(i).GetComponent<Image>();
-            if (weaponSlot != null)
-            {
-                weaponSlots.Add(weaponSlot);
-            }
-        }
+            Image slot = Instantiate(weaponSlot, weaponSwapUI).GetComponent<Image>();
+            slot.sprite = weaponParents[i].GetComponentInChildren<Weapon>().weaponUISprite; // TODO: this sucks
 
+            if (slot != null)
+            {
+                weaponSlots.Add(slot);
+            }
+
+        }
+        
         UpdateWeaponDisplay();
     }
 

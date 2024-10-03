@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Scythe : Magnetic
+public class Scythe : Weapon
 {
     private int NegOnePosOne() // returns -1 or 1
     {

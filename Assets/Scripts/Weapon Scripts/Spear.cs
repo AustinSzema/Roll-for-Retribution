@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spear : Magnetic
+public class Spear : Weapon
 {
     private bool shouldRotate = true;
     // Update is called once per frame

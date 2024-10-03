@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class Magnet : MonoBehaviour
 {
     // Stores a reference to all of the demon dice
-    private List<Magnetic> magneticObjects = new List<Magnetic>();
+    private List<Weapon> magneticObjects = new List<Weapon>();
 
     [Header("Magnet Positions")]
     //[SerializeField] private Transform _footPosition;
@@ -79,7 +79,7 @@ public class Magnet : MonoBehaviour
 
         _gameManager.flightDuration = _maxFlightDuration;
 
-        magneticObjects = FindObjectsOfType<Magnetic>(true).ToList();
+        magneticObjects = FindObjectsOfType<Weapon>(true).ToList();
         
     }
 
@@ -275,7 +275,7 @@ public class Magnet : MonoBehaviour
             _gravityParticles.Clear();
             _gravityParticles.Play();
             
-            foreach (Magnetic magnetic in magneticObjects)
+            foreach (Weapon magnetic in magneticObjects)
             {
                 magnetic.Slam();
             }
@@ -322,7 +322,7 @@ public class Magnet : MonoBehaviour
             _repelParticles.Clear();
             _repelParticles.Play();
                         
-            foreach (Magnetic magnetic in magneticObjects)
+            foreach (Weapon magnetic in magneticObjects)
             {
                 magnetic.Shoot(transform.forward);
             }
@@ -347,7 +347,7 @@ public class Magnet : MonoBehaviour
 
         if (_activateMagnet)
         {
-            foreach (Magnetic magnetic in magneticObjects)
+            foreach (Weapon magnetic in magneticObjects)
             {
                 magnetic.Attract(transform.position);
             }

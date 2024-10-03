@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Bubble : Magnetic
+public class Bubble : Weapon
 {
     private void Update()
     {

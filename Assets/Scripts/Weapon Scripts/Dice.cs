@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Dice : Magnetic
+public class Dice : Weapon
 {
     
     private void Start()
