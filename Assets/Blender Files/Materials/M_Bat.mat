@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4507306196589593078
+--- !u!114 &-4040864880656370069
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_MasterCrystalMat
-  m_Shader: {fileID: -6465566751694194690, guid: fae69ca5af9808f419ea7d9359bda5cd,
+  m_Name: M_Bat
+  m_Shader: {fileID: -6465566751694194690, guid: 6a79ce0ae16934142a361b7c02cf822a,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColor_Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 467e50807662ec248962c45aed5ac463, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -93,10 +93,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Opacity_Texture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -144,17 +140,16 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _Metallic_Multiplier: 0.9
+    - _Metallic_Multiplier: 0.15
     - _Mode: 0
     - _Normal_Strength: 1
     - _OcclusionStrength: 1
-    - _Opacity_Multiplier: 0.9
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rotation: 1
-    - _Roughness_Multiplier: 0.1
+    - _Roughness_Multiplier: 0.15
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -163,15 +158,14 @@ Material:
     - _Surface: 0
     - _UVSec: 0
     - _Use_AO_Texture: 0
-    - _Use_BaseColor_Texture: 0
+    - _Use_BaseColor_Texture: 1
     - _Use_Metallic_Texture: 0
-    - _Use_Opacity_Texture: 0
     - _Use_Roughness_Texture: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
-    - _BaseColor_Tint: {r: 0.865, g: 0.13493997, b: 0.13493997, a: 1}
+    - _BaseColor_Tint: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _Emissive_Tint: {r: 1, g: 1, b: 1, a: 0}
