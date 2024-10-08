@@ -113,7 +113,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6495180731337228809}
   m_Father: {fileID: 0}
@@ -156,6 +156,7 @@ MonoBehaviour:
   pullSpeed: 30
   damage: 0.5
   rb: {fileID: 1772442044046200143}
+  weaponUISprite: {fileID: 21300000, guid: fed0e3a68b76b7f4b862eb4bca9afeda, type: 3}
 --- !u!54 &1772442044046200143
 Rigidbody:
   m_ObjectHideFlags: 0

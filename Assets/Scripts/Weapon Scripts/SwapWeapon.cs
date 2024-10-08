@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,12 +21,26 @@ public class SwapWeapon : MonoBehaviour
     {
         for (int i = 0; i < weaponParents.Count; i++)
         {
-            Image slot = Instantiate(weaponSlot, weaponSwapUI).GetComponent<Image>();
-            slot.sprite = weaponParents[i].GetComponentInChildren<Weapon>().weaponUISprite; // TODO: this sucks
+            GameObject weaponUI = Instantiate(weaponSlot, weaponSwapUI);
+            Image weaponImage = weaponUI.transform.GetChild(0).GetComponent<Image>(); // stinky
+            TextMeshProUGUI slotNumber = weaponUI.GetComponentInChildren<TextMeshProUGUI>();
 
-            if (slot != null)
+            slotNumber.text = "[" + (i + 1) + "]";
+            if (weaponParents[i].GetComponent<Weapon>() == null)
             {
-                weaponSlots.Add(slot);
+                
+                weaponImage.sprite = weaponParents[i].GetComponentInChildren<Weapon>().weaponUISprite; // TODO: this sucks
+            }
+            else
+            {
+                weaponImage.sprite = weaponParents[i].GetComponent<Weapon>().weaponUISprite; // TODO: this sucks
+            }
+            
+
+
+            if (weaponImage != null)
+            {
+                weaponSlots.Add(weaponImage);
             }
 
         }
