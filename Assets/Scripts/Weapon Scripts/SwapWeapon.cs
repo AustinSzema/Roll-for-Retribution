@@ -40,7 +40,7 @@ public class SwapWeapon : MonoBehaviour
 
             if (weaponImage != null)
             {
-                weaponSlots.Add(weaponImage);
+                weaponSlots.Add(weaponUI.GetComponent<Image>());
             }
 
         }
