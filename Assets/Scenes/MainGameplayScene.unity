@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 619e305f5165a9946b7f72464e44ca4a, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06022572, g: 0.12739061, b: 0.12838593, a: 1}
+  m_IndirectSpecularColor: {r: 0.06027575, g: 0.12736067, b: 0.12847279, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5184,6 +5184,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1215995431017331767, guid: 93e6f067ae54ee745b6406f1b6b443d3,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215995431017331767, guid: 93e6f067ae54ee745b6406f1b6b443d3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215995431017331767, guid: 93e6f067ae54ee745b6406f1b6b443d3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215995431017331767, guid: 93e6f067ae54ee745b6406f1b6b443d3,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -5247,6 +5262,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6120944415977385698, guid: 93e6f067ae54ee745b6406f1b6b443d3,
+        type: 3}
+      propertyPath: pullSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120944415977385698, guid: 93e6f067ae54ee745b6406f1b6b443d3,
+        type: 3}
+      propertyPath: shootForce
+      value: 9000
+      objectReference: {fileID: 0}
     - target: {fileID: 7333158205391962964, guid: 93e6f067ae54ee745b6406f1b6b443d3,
         type: 3}
       propertyPath: m_Layer
@@ -5257,7 +5282,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4969984592269578724, guid: 93e6f067ae54ee745b6406f1b6b443d3, type: 3}
+    - {fileID: 2344772056279942023, guid: 93e6f067ae54ee745b6406f1b6b443d3, type: 3}
+    - {fileID: 1098512833727173314, guid: 93e6f067ae54ee745b6406f1b6b443d3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
