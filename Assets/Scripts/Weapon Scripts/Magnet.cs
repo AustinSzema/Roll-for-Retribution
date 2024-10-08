@@ -324,6 +324,15 @@ public class Magnet : MonoBehaviour
                         
             foreach (Weapon magnetic in magneticObjects)
             {
+                Rigidbody rb = magnetic.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isKinematic = false;
+                }
+            }
+            
+            foreach (Weapon magnetic in magneticObjects)
+            {
                 magnetic.Shoot(transform.forward);
             }
             
@@ -340,7 +349,6 @@ public class Magnet : MonoBehaviour
         SetWeaponsVelocityAndPosition();
     }
 
-
     private void SetWeaponsVelocityAndPosition()
     {
         _gameManager.pullingInDemons = _activateMagnet;
@@ -349,8 +357,42 @@ public class Magnet : MonoBehaviour
         {
             foreach (Weapon magnetic in magneticObjects)
             {
-                magnetic.Attract(transform.position);
+                Rigidbody rb = magnetic.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    // Distance threshold to decide when to snap
+                    float snapDistance = 1f; // Adjust as needed
+                    float distance = Vector3.Distance(magnetic.transform.position, transform.position);
+
+                    if (distance <= snapDistance)
+                    {
+                        // Snap directly to the hand position if within snapping range
+                        rb.isKinematic = true;
+                        magnetic.transform.position = transform.position;
+                    }
+                    else
+                    {
+                        // Otherwise, attract toward the hand position
+                        rb.isKinematic = false;
+                        magnetic.Attract(transform.position); // Use the Attract method for gradual movement
+                    }
+                }
+            }
+        }
+        else
+        {
+            // Reset the objects to non-kinematic when not magnetized
+            foreach (Weapon magnetic in magneticObjects)
+            {
+                Rigidbody rb = magnetic.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isKinematic = false;
+                }
             }
         }
     }
+
+
 }
