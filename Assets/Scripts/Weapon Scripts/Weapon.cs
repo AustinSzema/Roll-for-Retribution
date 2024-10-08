@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Weapon : MonoBehaviour
@@ -13,6 +15,7 @@ public abstract class Weapon : MonoBehaviour
 
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb; 
     public Sprite weaponUISprite;
+    
 
     protected virtual void OnCollisionEnter(Collision other)
     {
@@ -63,10 +66,17 @@ public abstract class Weapon : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
             Time.deltaTime * pullSpeed);
+        
     }
 
+    public void SetRotation(Quaternion targetRotation)
+    {
+        // Apply the rotation to the spear and its Rigidbody
+        transform.rotation = targetRotation;
+    }
+    
 
-// Unified method to handle hitting an enemy
+    // Unified method to handle hitting an enemy
     protected virtual void HitEnemy(GameObject target)
     {
         // Check if the target has IDamageable and is not the player

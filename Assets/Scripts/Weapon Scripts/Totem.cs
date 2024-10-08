@@ -6,10 +6,10 @@ public class Totem : Weapon
 {
     // Define the threshold distances
     private float shrinkDistance = 2.0f; // Distance within which the totem shrinks
-    private float maxDistance = 10.0f;    // Max distance for scaling
+    private float maxDistance = 30.0f;    // Max distance for scaling
     private float minScale = 0.5f;         // Minimum scale when close
-    private float maxScale = 1.0f;         // Maximum scale when far away
-    private float lerpSpeed = 5.0f;        // Speed of lerping
+    private float maxScale = 10.0f;         // Maximum scale when far away
+    private float lerpSpeed = 100.0f;        // Speed of lerping
 
     private void Update()
     {
@@ -37,5 +37,6 @@ public class Totem : Weapon
         
         // Apply the new scale
         transform.localScale = new Vector3(newScale, newScale, newScale);
+        
     }
 }

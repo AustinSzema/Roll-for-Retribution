@@ -34,20 +34,7 @@ public class SpikedShield : Weapon
         rb.AddForce(shootForce * magnetForwardDirection);
 
     }
-
-    public override void Attract(Vector3 magnetPosition)
-    {
-        
-        // Get the rotation based on the camera's forward direction
-        Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.forward);
-        
-        // Apply the rotation to the spear and its Rigidbody
-        transform.rotation = targetRotation;
-        
-        rb.velocity = Vector3.zero;
-        rb.position = magnetPosition;
-        transform.position = magnetPosition;
-    }
+    
 
     private void Update()
     {

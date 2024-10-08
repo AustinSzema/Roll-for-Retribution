@@ -70,6 +70,7 @@ public class Magnet : MonoBehaviour
 
     private GameManager _gameManager;
 
+    
     private void Start()
     {
         _gameManager = GameManager.Instance;
@@ -80,7 +81,6 @@ public class Magnet : MonoBehaviour
         _gameManager.flightDuration = _maxFlightDuration;
 
         magneticObjects = FindObjectsOfType<Weapon>(true).ToList();
-        
     }
 
     private bool _activateMagnet = false;
@@ -208,6 +208,7 @@ public class Magnet : MonoBehaviour
             // TODO: Consider renaming _flightDuration to _flightFuel
             if (Input.GetMouseButton(0) && canAttractWeapon)
             {
+                
                 _activateMagnet = true;
                 _audioManager.StartPullingSound();
                 transform.position = _handPosition.position;
@@ -215,6 +216,7 @@ public class Magnet : MonoBehaviour
                 _attractImage.gameObject.SetActive(true);
                 _defaultImage.gameObject.SetActive(false);
                 _attractParticlesRoot.SetActive(true);
+ 
             }
 
             if (Input.GetMouseButtonUp(0))
