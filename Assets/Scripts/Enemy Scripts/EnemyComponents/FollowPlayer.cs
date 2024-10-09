@@ -7,6 +7,8 @@ public class FollowPlayer : EnemyComponent
 {
     private GameManager _gameManager;
 
+    [SerializeField] private Rigidbody rb;
+
     private void Start()
     {
         _gameManager = GameManager.Instance;

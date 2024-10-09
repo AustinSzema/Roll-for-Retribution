@@ -8,6 +8,8 @@ public class FleeFromPlayer : EnemyComponent
 
     [SerializeField] private float rangeFromPlayer = 10f;
 
+    [SerializeField] private Rigidbody rb;
+    
     private GameManager _gameManager;
     private bool fleeing = false;
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,12 +17,16 @@ public class TakesDamage : EnemyComponent, IDamageable
     [SerializeField] private ParticleSystem _deathParticles;
     [SerializeField] private ParticleSystem _hitParticles;
 
+
+    [SerializeField] private Rigidbody rb;
+    
     private Material[] _originalMaterials;
     private Material[] _pausedMaterials;
 
     private float _currentHealth;
     private bool _firstDisable = true;
 
+    
     private GameManager _gameManager;
     
     protected virtual void Start()
@@ -76,17 +81,22 @@ public class TakesDamage : EnemyComponent, IDamageable
 
     public void takeDamage(float hitPoints)
     {
-        _currentHealth -= hitPoints;
-        EnemyHit();
-        if (_currentHealth <= 0)
+        if (enemyBase.enemySO.dieOnContactWithPlayer)
         {
-            UnpauseEnemy();
             Die();
-            _currentHealth = enemyBase.enemySO.healthPoints;
         }
         else
         {
-
+            _currentHealth -= hitPoints;
+        }
+        
+        EnemyHit();
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
             if (gameObject.activeSelf)
             {
                 StartCoroutine(PauseEnemy(_hitPauseTime));
@@ -122,10 +132,13 @@ public class TakesDamage : EnemyComponent, IDamageable
         _hitParticles.Play();
     }
 
+    
     private void Die()
     {
+        UnpauseEnemy();
         _deathParticles.Play();
         gameObject.SetActive(false);
+        _currentHealth = enemyBase.enemySO.healthPoints;
     }
 }
 
