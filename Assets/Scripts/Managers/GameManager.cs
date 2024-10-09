@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         }
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        weapons = FindObjectsOfType<Weapon>(true).ToList();
     }
 
     // Player Fields
@@ -100,6 +102,9 @@ public class GameManager : MonoBehaviour
     
     public bool shopActive = false;
     
+    [HideInInspector] public List<Weapon> weapons = new List<Weapon>();
+
+    
     
     // public enum ActiveShotType
     // {
@@ -150,6 +155,7 @@ public class GameManager : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _audioManager.PlayMainMusic();
         Debug.Log("Game Manager Start");
+
     }
 
 

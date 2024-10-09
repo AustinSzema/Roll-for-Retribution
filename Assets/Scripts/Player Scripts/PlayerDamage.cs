@@ -39,7 +39,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
 
     private void OnCollisionEnter(Collision other)
     {
-        Enemy enemyScript = other.gameObject.GetComponentInParent<Enemy>();
+        Enemy enemyScript = other.gameObject.GetComponent<Enemy>();
         if (enemyScript != null)
         {
             if (enemyScript.dieOnContactWithPlayer)

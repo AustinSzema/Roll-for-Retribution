@@ -10,9 +10,6 @@ using Random = UnityEngine.Random;
 // TODO: Does this script need to be broken up? It has so many references
 public class Magnet : MonoBehaviour
 {
-    // Stores a reference to all of the demon dice
-    private List<Weapon> magneticObjects = new List<Weapon>();
-
     [Header("Magnet Positions")]
     //[SerializeField] private Transform _footPosition;
 
@@ -79,8 +76,6 @@ public class Magnet : MonoBehaviour
         _audioManager = AudioManager.Instance;
 
         _gameManager.flightDuration = _maxFlightDuration;
-
-        magneticObjects = FindObjectsOfType<Weapon>(true).ToList();
     }
 
     private bool _activateMagnet = false;
@@ -277,7 +272,7 @@ public class Magnet : MonoBehaviour
             _gravityParticles.Clear();
             _gravityParticles.Play();
             
-            foreach (Weapon magnetic in magneticObjects)
+            foreach (Weapon magnetic in _gameManager.weapons)
             {
                 magnetic.Slam();
             }
@@ -324,7 +319,7 @@ public class Magnet : MonoBehaviour
             _repelParticles.Clear();
             _repelParticles.Play();
                         
-            foreach (Weapon magnetic in magneticObjects)
+            foreach (Weapon magnetic in _gameManager.weapons)
             {
                 Rigidbody rb = magnetic.GetComponent<Rigidbody>();
                 if (rb != null)
@@ -333,7 +328,7 @@ public class Magnet : MonoBehaviour
                 }
             }
             
-            foreach (Weapon magnetic in magneticObjects)
+            foreach (Weapon magnetic in _gameManager.weapons)
             {
                 magnetic.Shoot(transform.forward);
             }
@@ -357,7 +352,7 @@ public class Magnet : MonoBehaviour
 
         if (_activateMagnet)
         {
-            foreach (Weapon magnetic in magneticObjects)
+            foreach (Weapon magnetic in _gameManager.weapons)
             {
                 Rigidbody rb = magnetic.GetComponent<Rigidbody>();
 
@@ -385,7 +380,7 @@ public class Magnet : MonoBehaviour
         else
         {
             // Reset the objects to non-kinematic when not magnetized
-            foreach (Weapon magnetic in magneticObjects)
+            foreach (Weapon magnetic in _gameManager.weapons)
             {
                 Rigidbody rb = magnetic.GetComponent<Rigidbody>();
                 if (rb != null)

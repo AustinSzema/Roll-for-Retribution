@@ -8,8 +8,7 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private float _moveSpeed = 2f;
 
     [SerializeField] private Rigidbody _rigidbody;
-
-
+    
     private GameManager _gameManager;
 
     private void Start()

@@ -10,11 +10,10 @@ public class SwapWeapon : MonoBehaviour
     [SerializeField] private GameObject weaponSlot;
     private List<Image> weaponSlots = new List<Image>();
     [SerializeField] private List<GameObject> weaponParents = new List<GameObject>();
-    
+
     
     private int activeWeaponIndex = 0;
 
-    
     
     
     void Start()
@@ -28,7 +27,6 @@ public class SwapWeapon : MonoBehaviour
             slotNumber.text = "[" + (i + 1) + "]";
             if (weaponParents[i].GetComponent<Weapon>() == null)
             {
-                
                 weaponImage.sprite = weaponParents[i].GetComponentInChildren<Weapon>().weaponUISprite; // TODO: this sucks
             }
             else
@@ -46,6 +44,7 @@ public class SwapWeapon : MonoBehaviour
         }
         
         UpdateWeaponDisplay();
+
     }
 
     void Update()
@@ -55,7 +54,14 @@ public class SwapWeapon : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1 + i)) // Use KeyCode directly
             {
                 activeWeaponIndex = i;
+                
                 UpdateWeaponDisplay();
+
+                foreach (Weapon w in GameManager.Instance.weapons)
+                {
+                    w.transform.position = GameManager.Instance.handPosition;
+                }
+                
                 break; // Only update once per frame
             }
         }
