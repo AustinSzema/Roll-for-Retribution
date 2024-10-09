@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8708413282485601545}
   - component: {fileID: 3222580936476021540}
+  - component: {fileID: 9168013724325343096}
   - component: {fileID: 2951856054818607128}
   - component: {fileID: 7061100573816159975}
   - component: {fileID: 3429305948925722188}
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7519537069738014169}
@@ -45,7 +46,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7552813378875167091}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0dc62a8973de73d44a33fa322db0c235, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -59,6 +60,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!75 &9168013724325343096
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552813378875167091}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!114 &2951856054818607128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootForce: 5000
   slamForce: 5500
-  pullSpeed: 20
+  pullSpeed: 22.5
   damage: 1
   rb: {fileID: 7061100573816159975}
   weaponUISprite: {fileID: 21300000, guid: 92e520e8b9416d843ba70507adff604d, type: 3}

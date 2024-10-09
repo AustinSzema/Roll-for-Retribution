@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6396270416480677413}
   - component: {fileID: 104510172010628832}
+  - component: {fileID: 3858343923403151204}
   - component: {fileID: 2000617170928353632}
   - component: {fileID: -9066289227632087417}
   - component: {fileID: 8286308055222471916}
@@ -45,7 +46,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3248689125199883062}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7672907849ddb2241bb3eab19eb5e744, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -59,6 +60,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!75 &3858343923403151204
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248689125199883062}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -150, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!114 &2000617170928353632
 MonoBehaviour:
   m_ObjectHideFlags: 0
