@@ -96,6 +96,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public int soulCount = 0;
 
+    [HideInInspector] public float snapRangeAroundHand = 3f;
+    
     public bool shopActive = false;
     
     

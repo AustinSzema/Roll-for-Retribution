@@ -364,7 +364,7 @@ public class Magnet : MonoBehaviour
                 if (rb != null)
                 {
                     // Distance threshold to decide when to snap
-                    float snapDistance = 1f; // Adjust as needed
+                    float snapDistance = 3f; // Adjust as needed
                     float distance = Vector3.Distance(magnetic.transform.position, transform.position);
 
                     if (distance <= snapDistance)
