@@ -11,7 +11,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float pullSpeed = 60f;
     
     
-    [SerializeField] private float damage = 1;
+    [SerializeField] public float damage = 1;
 
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb; 
     public Sprite weaponUISprite;

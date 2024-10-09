@@ -49,8 +49,9 @@ public class GameManager : MonoBehaviour
         }
 
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-        weapons = FindObjectsOfType<Weapon>(true).ToList();
     }
+    
+    
 
     // Player Fields
     [HideInInspector] public Vector3 playerPosition;
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _audioManager.PlayMainMusic();
         Debug.Log("Game Manager Start");
+        weapons = FindObjectsOfType<Weapon>(true).ToList();
 
     }
 

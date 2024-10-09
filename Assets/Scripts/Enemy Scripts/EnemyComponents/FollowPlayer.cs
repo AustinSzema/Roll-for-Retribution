@@ -3,12 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class FollowPlayer : EnemyComponent
 {
-    [SerializeField] private float _moveSpeed = 2f;
-
-    [SerializeField] private Rigidbody _rigidbody;
-    
     private GameManager _gameManager;
 
     private void Start()
@@ -21,7 +17,7 @@ public class FollowPlayer : MonoBehaviour
     {
         if (_gameManager.gameIsPaused == false)
         {
-            _rigidbody.position = Vector3.MoveTowards(transform.position, _gameManager.playerPosition, _moveSpeed * Time.deltaTime);
+            rb.position = Vector3.MoveTowards(transform.position, _gameManager.playerPosition, enemyBase.enemySO._moveSpeed * Time.deltaTime);
         }
     }
 }

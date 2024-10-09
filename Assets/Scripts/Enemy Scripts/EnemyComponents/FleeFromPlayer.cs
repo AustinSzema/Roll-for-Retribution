@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FleeFromPlayer : MonoBehaviour
+public class FleeFromPlayer : EnemyComponent
 {
-    [SerializeField] private Rigidbody _rigidbody;
 
-    [Header("Movement Fields")]
-    [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float rangeFromPlayer = 10f;
 
     private GameManager _gameManager;
@@ -27,7 +24,7 @@ public class FleeFromPlayer : MonoBehaviour
             Vector3 directionAwayFromPlayer = (transform.position - _gameManager.playerPosition).normalized;
             
             // Move the enemy in the opposite direction of the player
-            _rigidbody.position +=  _moveSpeed * Time.deltaTime * directionAwayFromPlayer;
+            rb.position +=  enemyBase.enemySO._moveSpeed * Time.deltaTime * directionAwayFromPlayer;
         }
     }
 

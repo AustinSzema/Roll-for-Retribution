@@ -4,14 +4,9 @@ using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-
-
     [SerializeField] protected EnemySO enemySO;
     
-    
-
     [HideInInspector] public bool dieOnContactWithPlayer = true;
-    
     
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
     

@@ -380,12 +380,15 @@ public class Magnet : MonoBehaviour
         else
         {
             // Reset the objects to non-kinematic when not magnetized
-            foreach (Weapon magnetic in _gameManager.weapons)
+            foreach (Weapon weapon in _gameManager.weapons)
             {
-                Rigidbody rb = magnetic.GetComponent<Rigidbody>();
-                if (rb != null)
+                if (weapon.gameObject.activeInHierarchy)
                 {
-                    rb.isKinematic = false;
+                    Rigidbody rb = weapon.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.isKinematic = false;
+                    }
                 }
             }
         }
