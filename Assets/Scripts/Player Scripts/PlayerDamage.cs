@@ -36,6 +36,21 @@ public class PlayerDamage : MonoBehaviour, IDamageable
         
     }
     
+
+    private void OnCollisionEnter(Collision other) // TODO: REMOVE THIS ONCE WE IMPLEMENT THE NEW DealsDamage.cs
+    {
+        Enemy enemyScript = other.gameObject.GetComponent<Enemy>();
+        if (enemyScript != null)
+        {
+            if (enemyScript.dieOnContactWithPlayer)
+            {
+                // If an enemy touches the player, the enemy should die. Int32 MaxValue might be overkill but it should ensure that nothing lives
+                enemyScript.takeDamage(Int32.MaxValue);
+            }
+            takeDamage(1);
+        }
+    }
+
     public void takeDamage(float hitPoints)
     {
         StartCoroutine(_cameraShake.Shake(0.2f, 1f));

@@ -32,13 +32,18 @@ public class DealsDamage : EnemyComponent
 
     private void OnCollisionStay(Collision other)
     {
-        DealDamage(other.gameObject);
-
+        if (dealsDamageOnStay)
+        {
+            DealDamage(other.gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        DealDamage(other.gameObject);
+        if (dealsDamageOnStay)
+        {
+            DealDamage(other.gameObject);
+        }
     }
 
 
