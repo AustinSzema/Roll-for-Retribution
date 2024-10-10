@@ -9,9 +9,7 @@ public class ChargerFollowPlayer : MonoBehaviour
     
     [SerializeField] private Rigidbody _rigidbody;
 
-    [SerializeField] private int moveInterval;
-
-    [SerializeField] private float targetDistanceBehindPlayer;
+    [SerializeField] private int moveInterval = 3;
 
     private Vector3 _movement;
     private bool _charging;
@@ -50,7 +48,6 @@ public class ChargerFollowPlayer : MonoBehaviour
     {
       _charging = true;
       
-      float distToPlayer = Vector3.Distance(transform.position, _gameManager.playerPosition);
       Vector3 moveDirection = (_gameManager.playerPosition - transform.position).normalized;
       _movement = moveDirection * _moveSpeed;
       yield return new WaitForSeconds(moveInterval);

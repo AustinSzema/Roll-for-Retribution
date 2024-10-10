@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8219687511025049278}
   - component: {fileID: 9155895821128384104}
   - component: {fileID: 2429533487094299763}
+  - component: {fileID: 5984276401518430628}
   m_Layer: 0
   m_Name: Grenadier
   m_TagString: Enemy
@@ -127,6 +128,19 @@ CapsuleCollider:
   m_Height: 8.789229
   m_Direction: 1
   m_Center: {x: 0.06349182, y: 0.23024225, z: -0.62734306}
+--- !u!114 &5984276401518430628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023080135719153593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ccf95f92572f4aa67e59ded891820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySO: {fileID: 11400000, guid: e675542c6592c8a4dada10f1aa58369a, type: 2}
 --- !u!1 &2490131019288980999
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,8 +66,6 @@ public abstract class Weapon : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
             Time.deltaTime * pullSpeed);
-        Debug.Log(gameObject.name + pullSpeed);
-
     }
 
     public void SetRotation(Quaternion targetRotation)
