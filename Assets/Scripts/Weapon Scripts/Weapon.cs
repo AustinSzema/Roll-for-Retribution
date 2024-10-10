@@ -45,7 +45,7 @@ public abstract class Weapon : MonoBehaviour
     }
 
 
-    public virtual void Shoot(Vector3 magnetForwardDirection)
+    public virtual void Shoot(Vector3 magnetForwardDirection) // public because magnet needs to access it
     {
         Vector3 offsetDirection;
         float deviationAngleX = 0f;
@@ -66,7 +66,8 @@ public abstract class Weapon : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
             Time.deltaTime * pullSpeed);
-        
+        Debug.Log(gameObject.name + pullSpeed);
+
     }
 
     public void SetRotation(Quaternion targetRotation)
