@@ -30,8 +30,10 @@ public class EnemyPool : MonoBehaviour
             EnemyAndNumber current = enemiesToPool[i];
             for (int j = 0; j < current.number; j++)
             { 
+                //Debug.Log(current.enemy + " ENEMY NAME RAHH");
+
                 GameObject enemy = Instantiate(current.enemy);
-                Debug.Log(enemy.name + " ENEMY NAME RAHH");
+                //Debug.Log(enemy.name + " ENEMY NAME RAHH");
                 enemy.GetComponentInChildren<EnemyBase>(true).gameObject.SetActive(false);
                 if (_enemyPool.ContainsKey(current.enemy.name))
                 {
