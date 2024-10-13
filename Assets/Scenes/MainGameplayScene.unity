@@ -1539,6 +1539,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 349755574}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &356257464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3784213952604473035, guid: d166dc9d3acfde74c981c70e3ee30170,
+    type: 3}
+  m_PrefabInstance: {fileID: 1518359754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &356257465 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+    type: 3}
+  m_PrefabInstance: {fileID: 1518359754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &363310380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3749775542723276730, guid: acc0c4c156279b146be924a2512f7b61,
@@ -3947,6 +3959,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acc0c4c156279b146be924a2512f7b61, type: 3}
+--- !u!1001 &1518359754
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1861939507}
+    m_Modifications:
+    - target: {fileID: 3784213952604473035, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_Name
+      value: SpikeballSpawning
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618863479952958787, guid: d166dc9d3acfde74c981c70e3ee30170,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d166dc9d3acfde74c981c70e3ee30170, type: 3}
 --- !u!1 &1519296978
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,6 +4152,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1861939507}
     m_Modifications:
+    - target: {fileID: 265186720226331987, guid: 5321aac6a41f907469be897803957897,
+        type: 3}
+      propertyPath: fontSize
+      value: 134.7
+      objectReference: {fileID: 0}
     - target: {fileID: 1202870245389578418, guid: 5321aac6a41f907469be897803957897,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5328,6 +5413,7 @@ Transform:
   - {fileID: 6304699038541323538}
   - {fileID: 1276925578}
   - {fileID: 1570347217}
+  - {fileID: 356257465}
   - {fileID: 111065781670344871}
   - {fileID: 869264883986845258}
   - {fileID: 1722026957253074977}
@@ -5356,6 +5442,7 @@ MonoBehaviour:
   - {fileID: 1399576902673048992}
   - {fileID: 1276925577}
   - {fileID: 1570347216}
+  - {fileID: 356257464}
   - {fileID: 1346919073}
   - {fileID: 919132149445291080}
   - {fileID: 1130532261957435473}

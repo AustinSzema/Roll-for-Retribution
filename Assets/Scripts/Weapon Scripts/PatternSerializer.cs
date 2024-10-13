@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class PatternSerializer : MonoBehaviour
@@ -58,5 +59,26 @@ public class PatternSerializer : MonoBehaviour
                     : _patternTransforms[i].position, 
                 i);
         }
+    }
+
+    public void UpdatePoints()
+    {
+        _patternTransforms.Clear();
+        foreach(var t in gameObject.GetComponentsInChildren<Transform>())
+        {
+            if (t.gameObject.CompareTag("Point"))
+            {
+                _patternTransforms.Add(t);
+            }
+        }
+        
+        #if UNITY_EDITOR
+
+        var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+        if (prefabStage != null)
+        {
+            EditorSceneManager.MarkSceneDirty(prefabStage.scene);
+        }
+        #endif
     }
 }
