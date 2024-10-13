@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 6434939323653664240}
   - component: {fileID: 601739582748780970}
   - component: {fileID: 8038478436989450144}
+  - component: {fileID: 4945680932138241902}
   m_Layer: 0
   m_Name: Exploding Charger
   m_TagString: Enemy
@@ -188,7 +189,6 @@ MonoBehaviour:
   _moveSpeed: 100
   _rigidbody: {fileID: 4311424362677213797}
   moveInterval: 3
-  targetDistanceBehindPlayer: 10
 --- !u!1818360609 &601739582748780970
 RotationConstraint:
   m_ObjectHideFlags: 0
@@ -230,6 +230,19 @@ CapsuleCollider:
   m_Height: 3.1610274
   m_Direction: 2
   m_Center: {x: 0.0034106297, y: -0.1488412, z: -0.20240411}
+--- !u!114 &4945680932138241902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620514910433166595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392ccf95f92572f4aa67e59ded891820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySO: {fileID: 11400000, guid: 24cae059ad04c0c44ae1b4ec13250f39, type: 2}
 --- !u!1 &8777241286395400003
 GameObject:
   m_ObjectHideFlags: 0

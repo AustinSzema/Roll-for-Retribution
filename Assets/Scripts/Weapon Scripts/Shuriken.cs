@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shuriken : Weapon
 {
-    [Header("Totem specific fields")]
+    [Header("Shuriken specific fields")]
     [SerializeField] private float shrinkDistance = 2.0f; // Distance within which the totem shrinks
     [SerializeField] private float maxDistance = 30.0f;    // Max distance for scaling
     [SerializeField] private float minScale = 1f;        // Minimum scale when close

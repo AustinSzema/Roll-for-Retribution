@@ -73,7 +73,7 @@ public class ExplodingCharger : Enemy
 
     private void ExplodeIfInRange()
     {
-        Debug.Log("DistanceFromPlayer " + DistanceFromPlayer());
+        //Debug.Log("DistanceFromPlayer " + DistanceFromPlayer());
         if (!explosionHasBeenTriggered && DistanceFromPlayer() < enemySO.activationDistance)
         {
             StartCoroutine(BeginExplosion());

@@ -62,6 +62,9 @@ public class TakesDamage : EnemyComponent, IDamageable
             _pausedMaterials[i] = _enemyPauseMaterial;
         }
 
+        _hitParticles.transform.parent = null;
+        _deathParticles.transform.parent = null;
+
     }
 
     private void OnDisable()
@@ -129,6 +132,7 @@ public class TakesDamage : EnemyComponent, IDamageable
 
     private void EnemyHit()
     {
+        _hitParticles.transform.position = transform.position;
         _hitParticles.Play();
     }
 
@@ -136,6 +140,7 @@ public class TakesDamage : EnemyComponent, IDamageable
     private void Die()
     {
         UnpauseEnemy();
+        _deathParticles.transform.position = transform.position;
         _deathParticles.Play();
         gameObject.SetActive(false);
         _currentHealth = enemyBase.enemySO.healthPoints;

@@ -194,7 +194,7 @@ public class SpawnEnemies : MonoBehaviour
     }
 
     enemyInstance.transform.position = enemyPosition;
-    enemyInstance.GetComponentInChildren<Enemy>(true).gameObject.SetActive(true); // TODO: we can probably optimize this
+    enemyInstance.GetComponentInChildren<EnemyBase>(true).gameObject.SetActive(true); // TODO: we can probably optimize this
     EnemiesInScene++;
   }
    
