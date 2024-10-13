@@ -327,10 +327,20 @@ public class Magnet : MonoBehaviour
                     rb.isKinematic = false;
                 }
             }
+
+            int index = 0;
             
             foreach (Weapon magnetic in _gameManager.weapons)
             {
-                magnetic.Shoot(transform.forward);
+                if (magnetic is PatternShot pattern)
+                {
+                    pattern.Shoot(transform.forward, index);
+                    index++;
+                }
+                else
+                {
+                    magnetic.Shoot(transform.forward);
+                }
             }
             
                 

@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 5350465646013223087}
   - component: {fileID: 7772586082928752638}
   - component: {fileID: 5953005336262488033}
+  - component: {fileID: 8900489757587573152}
   - component: {fileID: 1772442044046200143}
   m_Layer: 0
   m_Name: Spiked Shield
@@ -157,6 +158,18 @@ MonoBehaviour:
   damage: 0.5
   rb: {fileID: 1772442044046200143}
   weaponUISprite: {fileID: 21300000, guid: fed0e3a68b76b7f4b862eb4bca9afeda, type: 3}
+--- !u!75 &8900489757587573152
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7624403658475767133}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -300, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!54 &1772442044046200143
 Rigidbody:
   m_ObjectHideFlags: 0

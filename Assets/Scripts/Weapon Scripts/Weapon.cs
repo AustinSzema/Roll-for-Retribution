@@ -58,7 +58,6 @@ public abstract class Weapon : MonoBehaviour
         offsetDirection = Quaternion.Euler(deviationAngleX, deviationAngleY, deviationAngleZ) *
                           magnetForwardDirection;
         rb.AddForce(offsetDirection * shootForce);
-
     }
 
     public virtual void Attract(Vector3 magnetPosition)
