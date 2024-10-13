@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -21,6 +22,11 @@ public class PatternSerializer : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        DrawPatternPoints();
+    }
+
     public bool PointsInitialized => PatternPoints.Count == _patternTransforms.Count;
 
     private void DrawPatternPoint(Vector3 origin, Vector3 point, int index)
@@ -40,10 +46,6 @@ public class PatternSerializer : MonoBehaviour
         textStyle.alignment = TextAnchor.MiddleCenter;
         textStyle.normal.textColor =_textColor;
         Handles.Label(point, index.ToString(), textStyle);
-    }
-    private void OnDrawGizmos()
-    {
-        DrawPatternPoints();
     }
 
     public void DrawPatternPoints()

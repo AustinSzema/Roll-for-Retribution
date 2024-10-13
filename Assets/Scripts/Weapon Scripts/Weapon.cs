@@ -82,7 +82,7 @@ public abstract class Weapon : MonoBehaviour
         transform.rotation = targetRotation;
     }
     
-
+    
     // Unified method to handle hitting an enemy
     protected virtual void HitEnemy(GameObject target)
     {
