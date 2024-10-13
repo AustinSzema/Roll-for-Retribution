@@ -13,4 +13,13 @@ public class PatternShot : Weapon
         Quaternion q = Quaternion.FromToRotation(Vector3.forward, magnetForwardDirection);
         rb.AddForce(q * pattern.PatternPoints[index%pattern.PatternPoints.Count].normalized * shootForce);
     }
+    private void OnDrawGizmos()
+    {
+        if (pattern != null)
+        {
+            pattern.DrawPatternPoints();
+        }
+    }
 }
+
+

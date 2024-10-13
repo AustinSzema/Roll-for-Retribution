@@ -9,6 +9,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float shootForce = 6000f;
     [SerializeField] protected float slamForce = 5500f;
     [SerializeField] protected float pullSpeed = 60f;
+
+    public Rigidbody Rb { get; private set; }
     
     
     [SerializeField] public float damage = 1;
@@ -44,6 +46,11 @@ public abstract class Weapon : MonoBehaviour
         rb.AddForce(Vector3.down * slamForce);
     }
 
+    private void Awake()
+    {
+        Rb = GetComponent<Rigidbody>();
+    }
+
 
     public virtual void Shoot(Vector3 magnetForwardDirection) // public because magnet needs to access it
     {
@@ -65,7 +72,7 @@ public abstract class Weapon : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
             Time.deltaTime * pullSpeed);
-        Debug.Log(gameObject.name + pullSpeed);
+        //Debug.Log(gameObject.name + pullSpeed);
 
     }
 

@@ -321,7 +321,7 @@ public class Magnet : MonoBehaviour
                         
             foreach (Weapon magnetic in _gameManager.weapons)
             {
-                Rigidbody rb = magnetic.GetComponent<Rigidbody>();
+                Rigidbody rb = magnetic.Rb;
                 if (rb != null)
                 {
                     rb.isKinematic = false;
@@ -364,25 +364,28 @@ public class Magnet : MonoBehaviour
         {
             foreach (Weapon magnetic in _gameManager.weapons)
             {
-                Rigidbody rb = magnetic.GetComponent<Rigidbody>();
-
-                if (rb != null)
+                if (magnetic.gameObject.activeInHierarchy)
                 {
-                    // Distance threshold to decide when to snap
-                    float snapDistance = 3f; // Adjust as needed
-                    float distance = Vector3.Distance(magnetic.transform.position, transform.position);
+                    Rigidbody rb = magnetic.Rb;
 
-                    if (distance <= snapDistance)
+                    if (rb != null)
                     {
-                        // Snap directly to the hand position if within snapping range
-                        rb.isKinematic = true;
-                        magnetic.transform.position = transform.position;
-                    }
-                    else
-                    {
-                        // Otherwise, attract toward the hand position
-                        rb.isKinematic = false;
-                        magnetic.Attract(transform.position); // Use the Attract method for gradual movement
+                        // Distance threshold to decide when to snap
+                        float snapDistance = 3f; // Adjust as needed
+                        float distance = Vector3.Distance(magnetic.transform.position, transform.position);
+
+                        if (distance <= snapDistance)
+                        {
+                            // Snap directly to the hand position if within snapping range
+                            rb.isKinematic = true;
+                            magnetic.transform.position = transform.position;
+                        }
+                        else
+                        {
+                            // Otherwise, attract toward the hand position
+                            rb.isKinematic = false;
+                            magnetic.Attract(transform.position); // Use the Attract method for gradual movement
+                        }
                     }
                 }
             }
@@ -394,7 +397,7 @@ public class Magnet : MonoBehaviour
             {
                 if (weapon.gameObject.activeInHierarchy)
                 {
-                    Rigidbody rb = weapon.GetComponent<Rigidbody>();
+                    Rigidbody rb = weapon.Rb;
                     if (rb != null)
                     {
                         rb.isKinematic = false;

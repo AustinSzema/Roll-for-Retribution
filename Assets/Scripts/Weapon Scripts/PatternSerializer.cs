@@ -9,6 +9,7 @@ public class PatternSerializer : MonoBehaviour
     [SerializeField] private Color _textColor = new(1f, 1f, 1f, 0.5f);
     [SerializeField] private Color _pointColor = Color.red;
     [SerializeField] private float _pointRadius = 1;
+    [SerializeField] private float fontSize = 36;
     public List<Vector3> PatternPoints { get; private set; } = new();
 
     private void Awake()
@@ -20,7 +21,7 @@ public class PatternSerializer : MonoBehaviour
         }
     }
 
-    private bool PointsInitialized => PatternPoints.Count == _patternTransforms.Count;
+    public bool PointsInitialized => PatternPoints.Count == _patternTransforms.Count;
 
     private void DrawPatternPoint(Vector3 origin, Vector3 point, int index)
     {
@@ -34,7 +35,6 @@ public class PatternSerializer : MonoBehaviour
         //draw number
         var textStyle = new GUIStyle();
         
-        int fontSize = 36;
         textStyle.fontStyle = FontStyle.Bold;
         textStyle.fontSize = Mathf.FloorToInt(fontSize / zoom);
         textStyle.alignment = TextAnchor.MiddleCenter;
@@ -43,7 +43,11 @@ public class PatternSerializer : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        
+        DrawPatternPoints();
+    }
+
+    public void DrawPatternPoints()
+    {
         for(int i =0; i< _patternTransforms.Count; i++)
         {
             DrawPatternPoint(transform.position, 
