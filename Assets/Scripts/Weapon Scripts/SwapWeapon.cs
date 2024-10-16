@@ -11,6 +11,12 @@ public class SwapWeapon : MonoBehaviour
     [SerializeField] private List<GameObject> weaponParents = new List<GameObject>();
 
     private int activeWeaponIndex = 0;
+    private readonly KeyCode[] weaponKeys = {
+        KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5,
+        KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0,
+        KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U,
+        KeyCode.I, KeyCode.O, KeyCode.P, KeyCode.LeftBracket, KeyCode.RightBracket
+    };
 
     void Start()
     {
@@ -20,24 +26,14 @@ public class SwapWeapon : MonoBehaviour
             Image weaponImage = weaponUI.transform.GetChild(0).GetComponent<Image>();
             TextMeshProUGUI slotNumber = weaponUI.GetComponentInChildren<TextMeshProUGUI>();
 
-            // Display slot numbers: 1-9 for the first 9 weapons, E for the 10th weapon
-            if (i < 9) // For indices 0-8 (1-9 in UI)
-            {
-                slotNumber.text = "[" + (i + 1) + "]";
-            }
-            else // For index 9 (10th weapon)
-            {
-                slotNumber.text = "[E]"; // Display E for the 10th weapon
-            }
+            // Set slot label based on weapon index and assigned key
+            slotNumber.text = "[" + GetWeaponSlotLabel(i) + "]";
 
             // Assign weapon image sprite
-            if (weaponParents[i].GetComponent<Weapon>() == null)
+            var weaponComponent = weaponParents[i].GetComponent<Weapon>() ?? weaponParents[i].GetComponentInChildren<Weapon>();
+            if (weaponComponent != null)
             {
-                weaponImage.sprite = weaponParents[i].GetComponentInChildren<Weapon>().weaponUISprite;
-            }
-            else
-            {
-                weaponImage.sprite = weaponParents[i].GetComponent<Weapon>().weaponUISprite;
+                weaponImage.sprite = weaponComponent.weaponUISprite;
             }
 
             if (weaponImage != null)
@@ -51,22 +47,12 @@ public class SwapWeapon : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < weaponSlots.Count; i++)
+        for (int i = 0; i < weaponKeys.Length; i++)
         {
-            // Check for number keys 1-9 which correspond to weapon indices 0-8
-            if (i < 9 && Input.GetKeyDown(KeyCode.Alpha1 + i))
+            if (Input.GetKeyDown(weaponKeys[i]))
             {
-                activeWeaponIndex = i; // Set to weapon index 0-8
+                activeWeaponIndex = i; // Set to corresponding weapon index
                 UpdateWeaponAndPosition();
-                break; // Only update once per frame
-            }
-
-            // Check for E key for the 10th weapon (index 9)
-            if (i == 9 && Input.GetKeyDown(KeyCode.E))
-            {
-                activeWeaponIndex = i; // Set to weapon index 9
-                UpdateWeaponAndPosition();
-                Debug.Log($"Switched to weapon index: {activeWeaponIndex} using E key.");
                 break; // Only update once per frame
             }
         }
@@ -96,5 +82,12 @@ public class SwapWeapon : MonoBehaviour
         {
             weaponParents[i].SetActive(i == activeWeaponIndex);
         }
+    }
+
+    private string GetWeaponSlotLabel(int index)
+    {
+        if (index < 9) return (index + 1).ToString(); // 1-9
+        else if (index == 9) return "0"; // 10th slot is '0'
+        else return weaponKeys[index].ToString(); // E, R, T, Y, U, I, O, P, [, ]
     }
 }
