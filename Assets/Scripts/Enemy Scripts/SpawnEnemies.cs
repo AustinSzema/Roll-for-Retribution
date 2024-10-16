@@ -91,12 +91,13 @@ public class SpawnEnemies : MonoBehaviour
       StartCoroutine(SwapSpawnInfo());
     }
 
-    if (_currentSpawnInfoIdx >= _spawnInfos.Count-1) // if we are on the last spawn info and there are no enemies in the scene
+    if (_currentSpawnInfoIdx >= _spawnInfos.Count-1) // if we are on the last spawn info
     {
       if (_currentSpawnInfo.StartTime <= Time.timeSinceLevelLoad) // mfw I nest an if statement
       {
         GameManager.Instance.currentRound++;
         Debug.Log("Currentround before repawns" + GameManager.Instance.currentRound);
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
       }
     }
