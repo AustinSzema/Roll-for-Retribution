@@ -11,6 +11,8 @@ public class SetTimer : MonoBehaviour
     
     private float countdown;
 
+    private bool complete = false;
+
     private void Start()
     {
         // Check if currentRound exists in the _roundSpawnConfig
@@ -76,6 +78,7 @@ public class SetTimer : MonoBehaviour
                 fiveSecondCountdown.rectTransform.sizeDelta = new Vector2(1600f, fiveSecondCountdown.rectTransform.sizeDelta.y);
                 fiveSecondCountdown.fontSize = 300;
                 fiveSecondCountdown.text = "Round " + (GameManager.Instance.currentRound + 1) + " Complete";
+                enabled = false;
             }
         }
         
