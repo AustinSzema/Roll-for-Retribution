@@ -8,6 +8,7 @@ public class SetTimer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private RoundSpawnConfig _roundSpawnConfig;
     [SerializeField] private TextMeshProUGUI fiveSecondCountdown;
+    [SerializeField] private GameObject loadingScreenFadeOut;
     
     private float countdown;
 
@@ -78,6 +79,8 @@ public class SetTimer : MonoBehaviour
                 fiveSecondCountdown.rectTransform.sizeDelta = new Vector2(1600f, fiveSecondCountdown.rectTransform.sizeDelta.y);
                 fiveSecondCountdown.fontSize = 300;
                 fiveSecondCountdown.text = "Round " + (GameManager.Instance.currentRound + 1) + " Complete";
+                GameManager.Instance.gameIsPaused = true;
+                loadingScreenFadeOut.SetActive(true);
                 enabled = false;
             }
         }

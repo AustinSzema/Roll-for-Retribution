@@ -26,9 +26,9 @@ public class LoadingScreenFadeIn : MonoBehaviour
                 new Color(_backgroundImage.color.r, _backgroundImage.color.g, _backgroundImage.color.b, _backgroundImage.color.a - Time.deltaTime / 5f);
         }
 
-        if (_backgroundImage.color.a >= 1f)
+        if (_backgroundImage.color.a <= 0f)
         {
-            _backgroundImage.enabled = false;
+            enabled = false;
         }
     }
 }

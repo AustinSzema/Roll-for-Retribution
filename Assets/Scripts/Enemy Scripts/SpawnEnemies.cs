@@ -91,16 +91,16 @@ public class SpawnEnemies : MonoBehaviour
       StartCoroutine(SwapSpawnInfo());
     }
 
-    if (_currentSpawnInfoIdx >= _spawnInfos.Count-1) // if we are on the last spawn info
-    {
-      if (_currentSpawnInfo.StartTime <= Time.timeSinceLevelLoad) // mfw I nest an if statement
-      {
-        GameManager.Instance.currentRound++;
-        Debug.Log("Currentround before repawns" + GameManager.Instance.currentRound);
-        
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-      }
-    }
+    // if (_currentSpawnInfoIdx >= _spawnInfos.Count-1) // if we are on the last spawn info
+    // {
+    //   if (_currentSpawnInfo.StartTime <= Time.timeSinceLevelLoad) // mfw I nest an if statement
+    //   {
+    //     GameManager.Instance.currentRound++;
+    //     Debug.Log("Currentround before repawns" + GameManager.Instance.currentRound);
+    //     
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    //   }
+    // }
     //Debug.Log(EnemiesInScene + " enemies in scene");
     Debug.Log("Current Spawn Info Index" + _currentSpawnInfoIdx + "   Count of spawn infos" + _spawnInfos.Count);
   }
