@@ -21,7 +21,10 @@ public class WeaponShop : MonoBehaviour
 
     private void OnEnable()
     {
-        internalWeaponsList = weaponList.weaponList;
+        foreach (GameObject obj in weaponList.weaponList)
+        {
+            internalWeaponsList.Add(obj);
+        }
         
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

@@ -6,8 +6,11 @@ using UnityEngine;
 public class DisableTrailsWhenInPlayerHand : MonoBehaviour
 {
 
+
     [SerializeField] private TrailRenderer _trail;
 
+    [SerializeField] private float distanceToDisableTrailFrom = 10f;
+    
     private GameManager _gameManager;
 
     private void Start()
@@ -21,7 +24,7 @@ public class DisableTrailsWhenInPlayerHand : MonoBehaviour
     void Update()
     {
 
-        _trail.enabled = Vector3.Distance(transform.position, _gameManager.handPosition) > 10f;
+        _trail.enabled = Vector3.Distance(transform.position, _gameManager.handPosition) > distanceToDisableTrailFrom;
 
 
         

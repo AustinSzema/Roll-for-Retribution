@@ -17,6 +17,7 @@ public abstract class Weapon : MonoBehaviour
 
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
     public Sprite weaponUISprite;
+    [Multiline]
     public string weaponDescription = "This is a weapon.";
 
 

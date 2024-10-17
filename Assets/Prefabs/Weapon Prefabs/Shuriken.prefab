@@ -34,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3395234199461132853}
+  - {fileID: 7320471454334112311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &588848225764617490
@@ -54,9 +55,10 @@ MonoBehaviour:
   damage: 1
   rb: {fileID: 3775498795293765145}
   weaponUISprite: {fileID: 21300000, guid: a3c70d6b761b37343bbf4286fd203e8b, type: 3}
+  weaponDescription: Throw deadly shurikens that glide across the ground
   shrinkDistance: 2
   maxDistance: 30
-  minScale: 1
+  minScale: 5
   maxScale: 20
   lerpSpeed: 100
   rotationSpeed: 100
@@ -129,6 +131,85 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.30152977, y: 0.01022592, z: 0.3481767}
   m_Center: {x: -0.000000007450581, y: 0, z: -0.000112956885}
+--- !u!1001 &149108717502073368
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1215995431017331767}
+    m_Modifications:
+    - target: {fileID: 5813925905881329310, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: distanceToDisableTrailFrom
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402659974849285165, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_Name
+      value: Weapon Trail
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8cbe4a67da6c034ea4c776d9455cd00, type: 3}
+--- !u!4 &7320471454334112311 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7459710950780229679, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+    type: 3}
+  m_PrefabInstance: {fileID: 149108717502073368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2924229211388255710
 PrefabInstance:
   m_ObjectHideFlags: 0

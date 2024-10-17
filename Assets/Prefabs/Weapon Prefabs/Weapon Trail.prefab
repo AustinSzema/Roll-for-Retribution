@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7459710950780229679}
   - component: {fileID: 546931506776471322}
+  - component: {fileID: 5813925905881329310}
   m_Layer: 12
   m_Name: Weapon Trail
   m_TagString: Untagged
@@ -145,3 +146,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 0
+--- !u!114 &5813925905881329310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402659974849285165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a0026d3dd79de49882acfe81a78b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trail: {fileID: 546931506776471322}

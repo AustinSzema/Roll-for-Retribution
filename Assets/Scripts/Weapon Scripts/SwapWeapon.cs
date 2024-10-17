@@ -6,19 +6,25 @@ using UnityEngine.UI;
 
 public class SwapWeapon : MonoBehaviour
 {
-    [SerializeField] private Transform weaponSwapUI;
-    [SerializeField] private GameObject weaponSlot;
-    private List<Image> weaponSlots = new List<Image>();
+    
+    [SerializeField] private WeaponList weaponList;
+    [SerializeField] private List<Image> weaponSlots = new List<Image>();
+    [SerializeField] private List<Image> weaponIcons = new List<Image>();
+
     private List<GameObject> weaponParents = new List<GameObject>();
 
-    [SerializeField] private WeaponList weaponList;
+    
+
 
     private int activeWeaponIndex = 0;
+    // private readonly KeyCode[] weaponKeys = {
+    //     KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5,
+    //     KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0,
+    //     KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U,
+    //     KeyCode.I, KeyCode.O, KeyCode.P, KeyCode.LeftBracket, KeyCode.RightBracket
+    // };
     private readonly KeyCode[] weaponKeys = {
-        KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5,
-        KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0,
-        KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U,
-        KeyCode.I, KeyCode.O, KeyCode.P, KeyCode.LeftBracket, KeyCode.RightBracket
+        KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3
     };
 
     private Weapon GetWeaponComponent(GameObject obj)
@@ -29,42 +35,19 @@ public class SwapWeapon : MonoBehaviour
 
     void Start()
     {
-        foreach (GameObject obj in weaponList.weaponList)
+
+        for (int i = 0; i < weaponIcons.Count; i++)
         {
-            GameObject weapon = Instantiate(obj, transform);
+            GameObject weapon = Instantiate(weaponList.weaponList[i], transform);
             
             weaponParents.Add(weapon);
-            weapon.SetActive(false);
             
+            weapon.SetActive(false);
 
-
+            weaponIcons[i].sprite = GetWeaponComponent(weaponParents[i]).weaponUISprite; // I hate this
         }
         
         GameManager.Instance.weapons = FindObjectsOfType<Weapon>(true).ToList();
-
-        for (int i = 0; i < weaponParents.Count; i++)
-        {
-            GameObject weaponUI = Instantiate(weaponSlot, weaponSwapUI);
-            Image weaponImage = weaponUI.transform.GetChild(0).GetComponent<Image>();
-            TextMeshProUGUI slotNumber = weaponUI.GetComponentInChildren<TextMeshProUGUI>();
-
-            // Set slot label based on weapon index and assigned key
-            slotNumber.text = "[" + GetWeaponSlotLabel(i) + "]";
-
-            
-            // Assign weapon image sprite
-            var weaponComponent = GetWeaponComponent(weaponParents[i]);
-            if (weaponComponent != null)
-            {
-                weaponImage.sprite = weaponComponent.weaponUISprite;
-            }
-
-            if (weaponImage != null)
-            {
-                weaponSlots.Add(weaponUI.GetComponent<Image>());
-            }
-        }
-
         UpdateWeaponDisplay();
     }
 
