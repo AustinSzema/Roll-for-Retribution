@@ -14,6 +14,8 @@ public class PatternShot : Weapon
         rb.AddForce(q * pattern.PatternPoints[index%pattern.PatternPoints.Count].normalized * shootForce);
     }
     
+    
+    
 }
 
 
