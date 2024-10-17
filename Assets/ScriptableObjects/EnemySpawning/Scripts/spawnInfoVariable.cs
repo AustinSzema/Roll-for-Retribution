@@ -27,7 +27,7 @@ public struct SpawnInfo
 }
 
 
-[CreateAssetMenu(menuName = "Scriptable Object Variable/Spawn Info",
+[CreateAssetMenu(menuName = "EnemyStuff/Spawn Info",
     fileName = "New Spawn Info Variable")]
 public class spawnInfoVariable : ScriptableObjectVariable<List<SpawnInfo>>
 {

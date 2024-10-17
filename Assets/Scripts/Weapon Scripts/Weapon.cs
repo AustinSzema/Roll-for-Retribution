@@ -15,9 +15,10 @@ public abstract class Weapon : MonoBehaviour
     
     [SerializeField] public float damage = 1;
 
-    [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb; 
+    [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
     public Sprite weaponUISprite;
-    
+    public string weaponDescription = "This is a weapon.";
+
 
     protected virtual void OnCollisionEnter(Collision other)
     {
