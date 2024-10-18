@@ -10,9 +10,7 @@ public class SwapWeapon : MonoBehaviour
     [SerializeField] private WeaponList weaponList;
     [SerializeField] private List<Image> weaponSlots = new List<Image>();
     [SerializeField] private List<Image> weaponIcons = new List<Image>();
-
     private List<GameObject> weaponParents = new List<GameObject>();
-
     
 
 
@@ -27,24 +25,35 @@ public class SwapWeapon : MonoBehaviour
         KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3
     };
 
-    private Weapon GetWeaponComponent(GameObject obj)
-    {
-        return obj.GetComponent<Weapon>() ?? obj.GetComponentInChildren<Weapon>();
-    }
+
     
 
     void Start()
     {
 
+        
         for (int i = 0; i < weaponIcons.Count; i++)
         {
-            GameObject weapon = Instantiate(weaponList.weaponList[i], transform);
-            
-            weaponParents.Add(weapon);
-            
-            weapon.SetActive(false);
+            if (WeaponManager.Instance.weaponParentList.Count < 1)
+            {
+                GameObject weapon = Instantiate(weaponList.weaponList[i], transform);
+                weaponParents.Add(weapon);
+                WeaponManager.Instance.weaponParentList.Add(weaponList.weaponList[i]);
+                            
+                weapon.SetActive(false);
 
-            weaponIcons[i].sprite = GetWeaponComponent(weaponParents[i]).weaponUISprite; // I hate this
+                weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
+            }
+            else
+            {
+                GameObject weapon = Instantiate(WeaponManager.Instance.weaponParentList[i], transform);
+                weaponParents.Add(weapon);
+                            
+                weapon.SetActive(false);
+
+                weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
+            }
+
         }
         
         GameManager.Instance.weapons = FindObjectsOfType<Weapon>(true).ToList();
@@ -86,6 +95,7 @@ public class SwapWeapon : MonoBehaviour
         // Activate the appropriate weapon parent
         for (int i = 0; i < weaponParents.Count; i++)
         {
+            
             weaponParents[i].SetActive(i == activeWeaponIndex);
         }
     }
