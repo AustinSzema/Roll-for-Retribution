@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public List<GameObject> weaponParentList = new List<GameObject>();
+    [HideInInspector] public List<GameObject> weaponParentList = new List<GameObject>();
     public static WeaponManager Instance { get; private set; }
     void Awake()
     {
