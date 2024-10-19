@@ -6,67 +6,64 @@ using UnityEngine.UI;
 
 public class SwapWeapon : MonoBehaviour
 {
-    
     [SerializeField] private WeaponList weaponList;
     [SerializeField] private List<Image> weaponSlots = new List<Image>();
     [SerializeField] private List<Image> weaponIcons = new List<Image>();
     private List<GameObject> weaponParents = new List<GameObject>();
-    
-
 
     private int activeWeaponIndex = 0;
-    // private readonly KeyCode[] weaponKeys = {
-    //     KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5,
-    //     KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0,
-    //     KeyCode.E, KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U,
-    //     KeyCode.I, KeyCode.O, KeyCode.P, KeyCode.LeftBracket, KeyCode.RightBracket
-    // };
+
+    // Limiting the number of keys to match potential weapon slots/icons
     private readonly KeyCode[] weaponKeys = {
         KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3
     };
 
-
-    
-
     void Start()
     {
+        // Ensure we don't go out of bounds by taking the smallest count between weaponIcons and weaponList
+        int weaponCount = Mathf.Min(weaponIcons.Count, weaponList.weaponList.Count);
 
-        
-        for (int i = 0; i < weaponIcons.Count; i++)
+        for (int i = 0; i < weaponCount; i++)
         {
-            if (WeaponManager.Instance.weaponParentList.Count < 1)
+            GameObject weapon;
+            if (WeaponManager.Instance.weaponParentList.Count < 3)
             {
-                GameObject weapon = Instantiate(weaponList.weaponList[i], transform);
-                weaponParents.Add(weapon);
-                WeaponManager.Instance.weaponParentList.Add(weaponList.weaponList[i]);
-                            
-                weapon.SetActive(false);
-
-                weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
+                // Instantiate and add weapons to weaponParents
+                weapon = Instantiate(weaponList.weaponList[i], transform);
+                
             }
             else
             {
-                GameObject weapon = Instantiate(WeaponManager.Instance.weaponParentList[i], transform);
-                weaponParents.Add(weapon);
-                            
-                weapon.SetActive(false);
+                weapon = Instantiate(WeaponManager.Instance.weaponParentList[i], transform);
+            }
+            weaponParents.Add(weapon);
 
-                weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
+            // Add weapon to WeaponManager if it's not already in the list
+            if (WeaponManager.Instance.weaponParentList.Count == i)
+            {
+                WeaponManager.Instance.weaponParentList.Add(weaponList.weaponList[i]);
             }
 
+            // Disable the weapon object initially
+            weapon.SetActive(false);
+
+            // Assign the weapon icon based on the corresponding weapon
+            weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
         }
-        
+
+        // Collect all weapons and update the display
         GameManager.Instance.weapons = FindObjectsOfType<Weapon>(true).ToList();
         UpdateWeaponDisplay();
     }
 
     void Update()
     {
+        // Check if any weapon key was pressed
         for (int i = 0; i < weaponKeys.Length; i++)
         {
             if (Input.GetKeyDown(weaponKeys[i]))
             {
-                activeWeaponIndex = i; // Set to corresponding weapon index
+                activeWeaponIndex = i; // Set active weapon index to corresponding weapon
                 UpdateWeaponAndPosition();
                 break; // Only update once per frame
             }
@@ -77,7 +74,7 @@ public class SwapWeapon : MonoBehaviour
     {
         UpdateWeaponDisplay();
 
-        // Move the weapons to the designated hand position
+        // Move all weapons to the designated hand position
         foreach (Weapon w in GameManager.Instance.weapons)
         {
             w.transform.position = GameManager.Instance.handPosition;
@@ -86,24 +83,23 @@ public class SwapWeapon : MonoBehaviour
 
     private void UpdateWeaponDisplay()
     {
-        // Update the weapon slots display
+        // Update the weapon slots UI color based on the active weapon
         for (int i = 0; i < weaponSlots.Count; i++)
         {
             weaponSlots[i].color = (i == activeWeaponIndex) ? Color.white : Color.grey;
         }
 
-        // Activate the appropriate weapon parent
+        // Activate the appropriate weapon parent based on the active weapon index
         for (int i = 0; i < weaponParents.Count; i++)
         {
-            
             weaponParents[i].SetActive(i == activeWeaponIndex);
         }
     }
 
     private string GetWeaponSlotLabel(int index)
     {
-        if (index < 9) return (index + 1).ToString(); // 1-9
-        else if (index == 9) return "0"; // 10th slot is '0'
-        else return weaponKeys[index].ToString(); // E, R, T, Y, U, I, O, P, [, ]
+        if (index < 9) return (index + 1).ToString(); // 1-9 for first 9 slots
+        else if (index == 9) return "0"; // 10th slot is labeled '0'
+        else return weaponKeys[index].ToString(); // Any additional keys like E, R, T, etc.
     }
 }
