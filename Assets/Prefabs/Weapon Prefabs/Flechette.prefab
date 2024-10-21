@@ -68,7 +68,7 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7552813378875167091}
   m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
+  m_Force: {x: 0, y: -4.6875, z: 0}
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
@@ -84,13 +84,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7a209cf5564a24ca9032b3ba4ad3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 10000
+  shootForce: 2500
   slamForce: 5500
   pullSpeed: 22.5
   damage: 1
   rb: {fileID: 7061100573816159975}
   weaponUISprite: {fileID: 21300000, guid: 92e520e8b9416d843ba70507adff604d, type: 3}
   pattern: {fileID: 0}
+  rotationSpeeds: 0
 --- !u!54 &7061100573816159975
 Rigidbody:
   m_ObjectHideFlags: 0
