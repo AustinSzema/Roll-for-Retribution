@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9139452839956237524}
-  - component: {fileID: 3078012550089448185}
+  - component: {fileID: 741289952458192707}
+  - component: {fileID: 8195576952485012401}
   - component: {fileID: 8733877959549429413}
-  - component: {fileID: 1277127535775297503}
   - component: {fileID: 7489967616577091386}
   - component: {fileID: 2997413582721136529}
   - component: {fileID: 5239175120953410042}
@@ -33,14 +33,34 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 0.1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1470369734409966614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3078012550089448185
-BoxCollider:
+--- !u!114 &741289952458192707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7989209348850309294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7a209cf5564a24ca9032b3ba4ad3d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootForce: 5500
+  slamForce: 5500
+  pullSpeed: 60
+  damage: 1
+  rb: {fileID: 7489967616577091386}
+  weaponUISprite: {fileID: 21300000, guid: dda192f5794647849b13e7d57d3a5233, type: 3}
+  pattern: {fileID: 0}
+  rotationSpeeds: 180
+--- !u!136 &8195576952485012401
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -52,13 +72,15 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2.05, z: 1}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 9.93
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!75 &8733877959549429413
 ConstantForce:
@@ -68,28 +90,10 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7989209348850309294}
   m_Enabled: 1
-  m_Force: {x: 0, y: -150, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 100}
+  m_Force: {x: 0, y: -75, z: 0}
+  m_RelativeForce: {x: 50, y: 0, z: 50}
   m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 1, z: 0}
---- !u!114 &1277127535775297503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7989209348850309294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2265cdabf3540eb4f81d0808a203bbce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootForce: 5000
-  slamForce: 5500
-  pullSpeed: 45
-  damage: 1
-  rb: {fileID: 7489967616577091386}
-  weaponUISprite: {fileID: 21300000, guid: dda192f5794647849b13e7d57d3a5233, type: 3}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!54 &7489967616577091386
 Rigidbody:
   m_ObjectHideFlags: 0
