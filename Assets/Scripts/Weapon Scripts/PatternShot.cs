@@ -18,8 +18,6 @@ public class PatternShot : Weapon
         rb.AddTorque(transform.up * rotationSpeeds);
     }
     
-    
-    
 }
 
 
