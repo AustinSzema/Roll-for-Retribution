@@ -81,7 +81,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    /*public void AddClipToQueue(AudioClip _clip, Vector3 position)
+    public void AddClipToQueue(AudioClip _clip, Vector3 position)
     {
         if (Vector3.Distance(_lastPosition, position) > 1)
         {
@@ -93,14 +93,14 @@ public class AudioManager : MonoBehaviour
             _queue.Enqueue(_bigHitClip);
             _lastPosition = position;
         }
-    }*/
+    }
 
     
-    /*public void PlayHitSound()
+    public void PlayHitSound()
     {
         _audioSource.pitch = Random.Range(0.8f, 1.2f);
-        _audioSource.PlayOneShot(_queue.Dequeue());
-    }*/
+        _audioSource.PlayOneShot(_hitClip);
+    }
 
     // Will refactor the looping clips into one function when optimizing
 

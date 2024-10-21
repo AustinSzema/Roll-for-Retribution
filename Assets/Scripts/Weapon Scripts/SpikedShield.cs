@@ -5,18 +5,16 @@ using UnityEngine;
 
 public class SpikedShield : Weapon
 {
-    // // Update is called once per frame
-    // void Update()
-    // {
-    //     // Get the rotation based on the camera's forward direction
-    //     Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.forward);
-    //
-    //     // Apply the rotation to the spear and its Rigidbody
-    //     transform.rotation = targetRotation;
-    //     rb.rotation = targetRotation;
-    //
-    //     Debug.Log("ROTATION CAMERA " + targetRotation);
-    // }
+    // Update is called once per frame
+    private void SetRotation()
+    {
+        // Get the rotation based on the camera's forward direction
+        Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.forward);
+    
+        // Apply the rotation to the spear and its Rigidbody
+        transform.rotation = targetRotation;
+        rb.rotation = targetRotation;
+        }
     
     public override void Slam()
     {
@@ -39,6 +37,7 @@ public class SpikedShield : Weapon
     private void Update()
     {
         AddWeight();
+        SetRotation();
     }
 
     private void AddWeight()

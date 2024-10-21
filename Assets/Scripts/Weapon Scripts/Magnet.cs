@@ -36,7 +36,6 @@ public class Magnet : MonoBehaviour
     [SerializeField] private float _shotgunCooldown = 3.0f;
 
     [SerializeField] private AudioManager _audioManager;
-    [SerializeField] private AudioClip _outOfBreathClip;
 
     [Header("Levitate Ability")] public float _maxFlightDuration = 10;
     [SerializeField] private float _fuelDecrementAmount = 1;
@@ -104,7 +103,7 @@ public class Magnet : MonoBehaviour
                 }
                 else if (!_outOfBreathClipPlayed)
                 {
-                    _audioManager.PlayInvariableSFX(_outOfBreathClip);
+                    //_audioManager.PlayInvariableSFX(_outOfBreathClip);
                     _outOfBreathClipPlayed = true;
                 }
             }
