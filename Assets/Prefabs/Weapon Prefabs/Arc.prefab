@@ -90,6 +90,7 @@ MonoBehaviour:
   damage: 1
   rb: {fileID: 7489967616577091386}
   weaponUISprite: {fileID: 21300000, guid: dda192f5794647849b13e7d57d3a5233, type: 3}
+  weaponDescription: Fires a huge wave of bullets in an arc
   pattern: {fileID: 0}
 --- !u!54 &7489967616577091386
 Rigidbody:
@@ -244,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trail: {fileID: 2997413582721136529}
+  distanceToDisableTrailFrom: 10
 --- !u!114 &3427432388731040503
 MonoBehaviour:
   m_ObjectHideFlags: 0

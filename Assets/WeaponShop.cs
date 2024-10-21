@@ -38,12 +38,22 @@ public class WeaponShop : MonoBehaviour
         weaponOptions.Clear();
         for (int i = 0; i < buttons.Count; i++)
         {
-            int random = Random.Range(0, internalWeaponsList.Count); // Include last element
-            Weapon weapon = WeaponManager.Instance.GetWeaponComponent(internalWeaponsList[random]);
-            weaponOptions.Add(internalWeaponsList[random]);
+            GameObject selectedWeapon = null;
+            Weapon weapon = null;
+
+            // Try to get a random weapon that is not in currentWeapons
+            do
+            {
+                int random = Random.Range(0, internalWeaponsList.Count); // Include last element
+                selectedWeapon = internalWeaponsList[random];
+                weapon = WeaponManager.Instance.GetWeaponComponent(selectedWeapon);
+
+            } while (IsWeaponInCurrentWeapons(selectedWeapon)); // Ensure the selected weapon isn't already in the current weapons list
+
+            weaponOptions.Add(selectedWeapon);
             buttons[i].sprite = weapon.weaponUISprite;
             descriptions[i].text = weapon.weaponDescription;
-            internalWeaponsList.RemoveAt(random); // Remove selected weapon from list
+            internalWeaponsList.Remove(selectedWeapon); // Remove selected weapon from list
         }
 
         Cursor.visible = true;
@@ -66,5 +76,19 @@ public class WeaponShop : MonoBehaviour
         
         GameManager.Instance.currentRound++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // Method to check if a weapon is already in the current weapons list
+    private bool IsWeaponInCurrentWeapons(GameObject weapon)
+    {
+        foreach (Image weaponImage in currentWeapons)
+        {
+            Weapon currentWeapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[currentWeapons.IndexOf(weaponImage)]);
+            if (currentWeapon != null && currentWeapon.gameObject == weapon)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -2,17 +2,22 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SwapWeapon : MonoBehaviour
 {
-    [SerializeField] private WeaponList weaponList;
+    [SerializeField] private WeaponList mainWeaponList;
+    [SerializeField] private WeaponList startingWeaponList;
+
     [SerializeField] private List<Image> weaponSlots = new List<Image>();
     [SerializeField] private List<Image> weaponIcons = new List<Image>();
     private List<GameObject> weaponParents = new List<GameObject>();
 
     private int activeWeaponIndex = 0;
 
+    
+    
     // Limiting the number of keys to match potential weapon slots/icons
     private readonly KeyCode[] weaponKeys = {
         KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3
@@ -21,34 +26,42 @@ public class SwapWeapon : MonoBehaviour
     void Start()
     {
         // Ensure we don't go out of bounds by taking the smallest count between weaponIcons and weaponList
-        int weaponCount = Mathf.Min(weaponIcons.Count, weaponList.weaponList.Count);
+        int weaponCount = Mathf.Min(weaponIcons.Count, mainWeaponList.weaponList.Count);
 
         for (int i = 0; i < weaponCount; i++)
         {
             GameObject weapon;
-            if (WeaponManager.Instance.weaponParentList.Count < 3)
+            if (GameManager.Instance.currentRound == 0)
             {
                 // Instantiate and add weapons to weaponParents
-                weapon = Instantiate(weaponList.weaponList[i], transform);
-                
+                weapon = Instantiate(startingWeaponList.weaponList[i], transform);
+
+
+                // Add weapon to WeaponManager if it's not already in the list
+                if (WeaponManager.Instance.weaponParentList.Count == i)
+                {
+                    WeaponManager.Instance.weaponParentList.Add(startingWeaponList.weaponList[i]);
+                }
+
             }
             else
             {
                 weapon = Instantiate(WeaponManager.Instance.weaponParentList[i], transform);
+
+                // Add weapon to WeaponManager if it's not already in the list
+                if (WeaponManager.Instance.weaponParentList.Count == i)
+                {
+                    WeaponManager.Instance.weaponParentList.Add(mainWeaponList.weaponList[i]);
+                }
+
             }
             weaponParents.Add(weapon);
-
-            // Add weapon to WeaponManager if it's not already in the list
-            if (WeaponManager.Instance.weaponParentList.Count == i)
-            {
-                WeaponManager.Instance.weaponParentList.Add(weaponList.weaponList[i]);
-            }
-
             // Disable the weapon object initially
             weapon.SetActive(false);
 
             // Assign the weapon icon based on the corresponding weapon
             weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
+            
         }
 
         // Collect all weapons and update the display
