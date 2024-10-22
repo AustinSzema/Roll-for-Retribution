@@ -103,6 +103,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void takeDamage(float hitPoints)
     {
+        _audioManager.PlayHitSound();
         _currentHealth -= hitPoints;
         EnemyHit();
         if (_currentHealth <= 0)

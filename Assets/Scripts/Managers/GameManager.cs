@@ -156,7 +156,6 @@ public class GameManager : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _audioManager.PlayMainMusic();
         Debug.Log("Game Manager Start");
-        weapons = FindObjectsOfType<Weapon>(true).ToList();
 
     }
 

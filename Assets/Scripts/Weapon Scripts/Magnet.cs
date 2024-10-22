@@ -23,11 +23,6 @@ public class Magnet : MonoBehaviour
     [SerializeField] private Sprite _shotgunRepelSprite;
     [SerializeField] private Sprite _shotgunDefaultSprite;
 
-    // [SerializeField] private Sprite _rocketAttractSprite;
-    // [SerializeField] private Sprite _rocketRepelSprite;
-    // [SerializeField] private Sprite _rocketDefaultSprite;
-
-
     [Header("Root Objects")] [SerializeField]
     private GameObject _attractParticlesRoot;
 
@@ -36,21 +31,11 @@ public class Magnet : MonoBehaviour
     
     [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private ParticleSystem _gravityParticles;
-    //[SerializeField] private MeshRenderer _centerSphere;
-    //[SerializeField] private MeshRenderer _outerSphere;
-    // [SerializeField] private Material _attractCenterMaterial;
-    // [SerializeField] private Material _attractOuterMaterial;
-    // [SerializeField] private Material _levitateCenterMaterial;
-    // [SerializeField] private Material _levitateOuterMaterial;
-
-
-
 
     [SerializeField] private float _slamCooldown = 3.0f;
     [SerializeField] private float _shotgunCooldown = 3.0f;
 
     [SerializeField] private AudioManager _audioManager;
-    [SerializeField] private AudioClip _outOfBreathClip;
 
     [Header("Levitate Ability")] public float _maxFlightDuration = 10;
     [SerializeField] private float _fuelDecrementAmount = 1;
@@ -90,34 +75,6 @@ public class Magnet : MonoBehaviour
     {
         if (!_gameManager.gameIsPaused)
         {
-            // if (Input.GetKeyDown(KeyCode.Q)) // TODO: Make this event based instead of in update
-            // {
-            //     _usingShotgun = !_usingShotgun;
-            //     if (_usingShotgun)
-            //     {
-            //         _currentShotType = GameManager.ActiveShotType.Shotgun;
-            //     }
-            //     else
-            //     {
-            //         _currentShotType = GameManager.ActiveShotType.Rocket;
-            //     }
-            //
-            //     _gameManager.activeShot = _currentShotType;
-            // }
-
-
-            // if (Input.GetKeyDown(KeyCode.Alpha1))
-            // {
-            //     _currentShotType = GameManager.ActiveShotType.Shotgun;
-            // }
-            // else if (Input.GetKeyDown(KeyCode.Alpha2))
-            // {
-            //     _currentShotType = GameManager.ActiveShotType.Sniper;
-            // }
-            // else if (Input.GetKeyDown(KeyCode.Alpha3))
-            // {
-            //     _currentShotType = GameManager.ActiveShotType.Spray;
-            // }
 
             if (_gameManager.flightDuration <= 0f)
             {
@@ -136,24 +93,17 @@ public class Magnet : MonoBehaviour
                     _playerRigidbody.AddForce(Vector3.up * 10f);
                     //transform.position = _footPosition.position;
                     _gameManager.playerIsFlying = true;
-
-                    // // Set Sprites
-                    // _attractImage.sprite = _rocketAttractSprite;
-                    // _repelImage.sprite = _rocketRepelSprite;
-                    // _defaultImage.sprite = _rocketDefaultSprite;
-
+                    
 
                     _audioManager.StartFlyingSound();
                     _gameManager.flightDuration -= _fuelDecrementAmount;
-                    // _attractParticlesRenderer.material = _levitateCenterMaterial;
-                    // _centerSphere.material = _levitateCenterMaterial;
-                    // _outerSphere.material = _levitateOuterMaterial;
+                    
                     _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _flightForce,
                         _playerRigidbody.velocity.z);
                 }
                 else if (!_outOfBreathClipPlayed)
                 {
-                    _audioManager.PlayInvariableSFX(_outOfBreathClip);
+                    //_audioManager.PlayInvariableSFX(_outOfBreathClip);
                     _outOfBreathClipPlayed = true;
                 }
             }

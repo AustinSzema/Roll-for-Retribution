@@ -84,6 +84,7 @@ public class TakesDamage : EnemyComponent, IDamageable
 
     public void takeDamage(float hitPoints)
     {
+        AudioManager.Instance.PlayHitSound();
         if (enemyBase.enemySO.dieOnContactWithPlayer)
         {
             Die();

@@ -8,6 +8,7 @@ public class LoadingScreenFadeOut : MonoBehaviour
 {
     [SerializeField] private Image _backgroundImage;
 
+    [SerializeField] private GameObject weaponShop;
     private void Start()
     {
         _backgroundImage.enabled = true;
@@ -15,6 +16,7 @@ public class LoadingScreenFadeOut : MonoBehaviour
             new Color(_backgroundImage.color.r, _backgroundImage.color.g, _backgroundImage.color.b, 0f);
     }
 
+    private bool faded = false;
     private void Update()
     {
         _backgroundImage.color =
@@ -22,8 +24,7 @@ public class LoadingScreenFadeOut : MonoBehaviour
 
         if (_backgroundImage.color.a >= 1f)
         {
-            GameManager.Instance.currentRound++;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            weaponShop.SetActive(true);
         }
     }
 }

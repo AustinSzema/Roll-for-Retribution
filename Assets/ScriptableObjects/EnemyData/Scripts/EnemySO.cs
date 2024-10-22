@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New EnemySO", menuName = "Scriptable Object Variable/EnemySO")]
+[CreateAssetMenu(fileName = "New EnemySO", menuName = "EnemyStuff/EnemySO")]
 public class EnemySO : ScriptableObject
 {
     public enum EnemyType
