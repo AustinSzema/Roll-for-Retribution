@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade : Weapon
 {
     [SerializeField] GameObject smallProjectilePrefab;
     [SerializeField] private int numberofSchrapnelObjects = 10;
     [SerializeField] private float explosionForce = 10f; 
-    [SerializeField] private float despawnTime = 3f; 
+    [SerializeField] private float despawnTime = 3f;
+    [SerializeField] private float explosionDelayTime = 3f;
+
+    private bool hasExploded = false;
+    
+    public override void Shoot(Vector3 magnetForwardDirection)
+    { 
+        base.Shoot(magnetForwardDirection);
+        hasExploded = false; 
+    }
+
+    public override void Attract(Vector3 magnetPosition)
+    {
+        if(!hasExploded)
+        base.Attract(magnetPosition);
+    }
+    
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground")) 
+        if (!hasExploded && collision.gameObject.CompareTag("Ground")) 
         {
-            Explode();
+            StartCoroutine(ExplosionDelay(explosionDelayTime));
             //Destroy(gameObject);
         }
     }
@@ -24,13 +40,13 @@ public class Grenade : MonoBehaviour
         {
             // Instantiate the small projectile at the current position with no rotation
             GameObject smallProjectile = Instantiate(smallProjectilePrefab, transform.position, Quaternion.identity);
-            Rigidbody rb = smallProjectile.GetComponent<Rigidbody>();
+            Rigidbody projectileRb = smallProjectile.GetComponent<Rigidbody>();
 
-            if (rb != null)
+            if (projectileRb != null)
             {
                 // Generate a random direction for each small projectile
                 Vector3 randomDirection = GetRandomDirection();
-                rb.AddForce(randomDirection * explosionForce, ForceMode.Impulse);
+                projectileRb.AddForce(randomDirection * explosionForce, ForceMode.Impulse);
             }
 
             // Start a coroutine to despawn the small projectile
@@ -55,6 +71,14 @@ public class Grenade : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(obj);
     }
-}
 
+    private IEnumerator ExplosionDelay(float explosionDelayTime)
+    {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        hasExploded = true;
+        yield return new WaitForSeconds(explosionDelayTime);
+        Explode();
+        rb.constraints = RigidbodyConstraints.None;
+    }
+}
 
