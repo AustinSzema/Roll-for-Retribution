@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2668800872837929998}
   - component: {fileID: 6605961527676298812}
+  - component: {fileID: 5620426909622294644}
   - component: {fileID: 1809873874113952187}
   - component: {fileID: 4176080282499764448}
   - component: {fileID: 7617721948469016300}
@@ -111,17 +112,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6660618609321785502}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6568604297488018312}
   - {fileID: 7673967764872144115}
   - {fileID: 3126269247009975730}
   - {fileID: 1978211628327805715}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &6605961527676298812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,13 +135,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da09e6da69da2140bf93f27897c03da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 15000
+  shootForce: 30000
   slamForce: 5500
   pullSpeed: 50
   damage: 100
   rb: {fileID: 4176080282499764448}
   weaponUISprite: {fileID: 21300000, guid: a274214aa827fa840903e3bd59e474ff, type: 3}
-  weaponDescription: Throw a deadly spear that pierces through enemies
+--- !u!75 &5620426909622294644
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6660618609321785502}
+  m_Enabled: 1
+  m_Force: {x: 0, y: -150, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!65 &1809873874113952187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -160,8 +172,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 5}
-  m_Center: {x: 0, y: 0, z: 1}
+  m_Size: {x: 1.2, y: 1, z: 1.2}
+  m_Center: {x: 0, y: 0, z: 2.01}
 --- !u!54 &4176080282499764448
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -199,10 +211,10 @@ BoxCollider:
   m_Material: {fileID: 13400000, guid: 9f1590556b74f0e429bf95322621282d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 32311
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0

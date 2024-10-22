@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1215995431017331767}
   - component: {fileID: 588848225764617490}
+  - component: {fileID: 3662592857479701484}
   - component: {fileID: 3775498795293765145}
   - component: {fileID: 5052042881690983566}
   - component: {fileID: 4726000607493560282}
@@ -62,6 +63,18 @@ MonoBehaviour:
   maxScale: 20
   lerpSpeed: 100
   rotationSpeed: 100
+--- !u!75 &3662592857479701484
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210603346248058261}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!54 &3775498795293765145
 Rigidbody:
   m_ObjectHideFlags: 0

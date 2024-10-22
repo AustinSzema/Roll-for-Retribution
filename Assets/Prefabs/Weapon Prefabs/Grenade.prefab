@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 5758810526109050709}
   - component: {fileID: 1611218661030416272}
   - component: {fileID: 2496382861374021140}
-  - component: {fileID: 5812789971508171895}
+  - component: {fileID: 5997698503118064824}
   - component: {fileID: 1513605697879730167}
   - component: {fileID: 7336813362092131740}
   - component: {fileID: 4207003744765902788}
   - component: {fileID: 6034707486263942561}
   m_Layer: 12
-  m_Name: Ball
+  m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,11 +68,11 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4195894887983325766}
   m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
+  m_Force: {x: 0, y: -75, z: 0}
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
---- !u!114 &5812789971508171895
+--- !u!114 &5997698503118064824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,16 +81,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4195894887983325766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc7a209cf5564a24ca9032b3ba4ad3d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ee234032ef868840b0d8e7345cc84d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 12000
+  shootForce: 10000
   slamForce: 5500
   pullSpeed: 60
   damage: 1
   rb: {fileID: 1513605697879730167}
-  weaponUISprite: {fileID: 21300000, guid: b7fa995ad8094c24e89c7d928f925863, type: 3}
-  pattern: {fileID: 0}
+  weaponUISprite: {fileID: 21300000, guid: dda192f5794647849b13e7d57d3a5233, type: 3}
+  smallProjectilePrefab: {fileID: 6300605475754654919, guid: acc0c4c156279b146be924a2512f7b61,
+    type: 3}
+  numberofSchrapnelObjects: 50
+  explosionForce: 125
+  despawnTime: 3
 --- !u!54 &1513605697879730167
 Rigidbody:
   m_ObjectHideFlags: 0
