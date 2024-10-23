@@ -1,8 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
+#endif
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PatternSerializer : MonoBehaviour
@@ -16,47 +16,55 @@ public class PatternSerializer : MonoBehaviour
 
     private void Awake()
     {
-        foreach(Transform t in _patternTransforms)
+        foreach (Transform t in _patternTransforms)
         {
             PatternPoints.Add(t.localPosition);
             Destroy(t.gameObject);
         }
     }
 
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         DrawPatternPoints();
     }
+    #endif
 
     public bool PointsInitialized => PatternPoints.Count == _patternTransforms.Count;
 
     private void DrawPatternPoint(Vector3 origin, Vector3 point, int index)
     {
+        #if UNITY_EDITOR
         Camera camera = SceneView.currentDrawingSceneView.camera;
         float zoom = camera.orthographicSize;
-        //draw point
+
+        // Draw point
         Gizmos.color = _pointColor;
         Gizmos.DrawWireSphere(point, _pointRadius);
-        //draw line
+
+        // Draw line
         Gizmos.DrawRay(origin, point - origin);
-        //draw number
-        var textStyle = new GUIStyle();
-        
-        textStyle.fontStyle = FontStyle.Bold;
-        textStyle.fontSize = Mathf.FloorToInt(fontSize / zoom);
-        textStyle.alignment = TextAnchor.MiddleCenter;
-        textStyle.normal.textColor =_textColor;
+
+        // Draw number
+        var textStyle = new GUIStyle
+        {
+            fontStyle = FontStyle.Bold,
+            fontSize = Mathf.FloorToInt(fontSize / zoom),
+            alignment = TextAnchor.MiddleCenter,
+            normal = { textColor = _textColor }
+        };
         Handles.Label(point, index.ToString(), textStyle);
+        #endif
     }
 
     public void DrawPatternPoints()
     {
-        for(int i =0; i< _patternTransforms.Count; i++)
+        for (int i = 0; i < _patternTransforms.Count; i++)
         {
-            DrawPatternPoint(transform.position, 
-                PointsInitialized 
-                    ? PatternPoints[i]+ transform.position 
-                    : _patternTransforms[i].position, 
+            DrawPatternPoint(transform.position,
+                PointsInitialized
+                    ? PatternPoints[i] + transform.position
+                    : _patternTransforms[i].position,
                 i);
         }
     }
@@ -64,16 +72,15 @@ public class PatternSerializer : MonoBehaviour
     public void UpdatePoints()
     {
         _patternTransforms.Clear();
-        foreach(var t in gameObject.GetComponentsInChildren<Transform>())
+        foreach (var t in gameObject.GetComponentsInChildren<Transform>())
         {
             if (t.gameObject.CompareTag("Point"))
             {
                 _patternTransforms.Add(t);
             }
         }
-        
-        #if UNITY_EDITOR
 
+        #if UNITY_EDITOR
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
         if (prefabStage != null)
         {

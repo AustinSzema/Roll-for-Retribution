@@ -1,7 +1,9 @@
-using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class BulletPattern : MonoBehaviour
 {
@@ -15,9 +17,10 @@ public class BulletPattern : MonoBehaviour
     private float _pointRadius = 1;
 
     public List<Vector3> PatternPoints { get; private set; } = new();
+
     private void Awake()
     {
-        foreach(Transform t in _patternTransforms)
+        foreach (Transform t in _patternTransforms)
         {
             PatternPoints.Add(t.localPosition);
             Destroy(t.gameObject);
@@ -26,35 +29,42 @@ public class BulletPattern : MonoBehaviour
 
     private bool PointsInitialized => PatternPoints.Count == _patternTransforms.Count;
 
+#if UNITY_EDITOR
     private void DrawPatternPoint(Vector3 origin, Vector3 point, int index)
     {
         Camera camera = SceneView.currentDrawingSceneView.camera;
         float zoom = camera.orthographicSize;
-        //draw point
+
+        // Draw point
         Gizmos.color = _pointColor;
         Gizmos.DrawWireSphere(point, _pointRadius);
-        //draw line
+
+        // Draw line
         Gizmos.DrawRay(origin, point - origin);
-        //draw number
-        var textStyle = new GUIStyle();
-        
-        int fontSize = 96;
-        textStyle.fontStyle = FontStyle.Bold;
-        textStyle.fontSize = Mathf.FloorToInt(fontSize / zoom);
-        textStyle.alignment = TextAnchor.MiddleCenter;
-        textStyle.normal.textColor =_textColor;
+
+        // Draw number
+        var textStyle = new GUIStyle
+        {
+            fontStyle = FontStyle.Bold,
+            fontSize = Mathf.FloorToInt(96 / zoom),
+            alignment = TextAnchor.MiddleCenter,
+            normal = { textColor = _textColor }
+        };
         Handles.Label(point, index.ToString(), textStyle);
     }
+
     private void OnDrawGizmosSelected()
     {
-        
-        for(int i =0; i< _patternTransforms.Count; i++)
+        for (int i = 0; i < _patternTransforms.Count; i++)
         {
-            DrawPatternPoint(transform.position, 
-                PointsInitialized 
-                ? PatternPoints[i]- transform.position 
-                : _patternTransforms[i].position, 
-                i);
+            DrawPatternPoint(
+                transform.position,
+                PointsInitialized
+                    ? PatternPoints[i] + transform.position
+                    : _patternTransforms[i].position,
+                i
+            );
         }
     }
+#endif
 }

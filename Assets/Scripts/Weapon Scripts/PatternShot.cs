@@ -27,8 +27,8 @@ public class PatternShot : Weapon
     [SerializeField] private bool shrinksWhenInHand = false; 
     [SerializeField] private float shrinkDistance = 2.0f; // Distance within which the totem shrinks
     [SerializeField] private float maxDistance = 30.0f;    // Max distance for scaling
-    [SerializeField] private float minScaleFactor = 0.5f;        // Minimum scale when close
-    [SerializeField] private float maxScaleFactor = 1f;       // Maximum scale when far away
+    [SerializeField] private float minScale = 0.5f;        // Minimum scale when close
+    [SerializeField] private float maxScale = 20.0f;       // Maximum scale when far away
     [SerializeField] private float lerpSpeed = 100.0f;     // Speed of scaling transition
 
     private void Update()
@@ -39,7 +39,7 @@ public class PatternShot : Weapon
             float distance = Vector3.Distance(transform.position, GameManager.Instance.handPosition);
         
             // Calculate the target scale based on distance
-            float targetScale = distance <= shrinkDistance ? minScaleFactor : Mathf.Lerp(minScaleFactor, maxScaleFactor, Mathf.InverseLerp(shrinkDistance, maxDistance, distance));
+            float targetScale = distance <= shrinkDistance ? minScale : Mathf.Lerp(minScale, maxScale, Mathf.InverseLerp(shrinkDistance, maxDistance, distance));
 
             // Lerp the current scale to the target scale for smooth transition
             float currentScaleFactor = transform.localScale.x / startingSize.x; // Determine the current scale factor relative to the starting size
