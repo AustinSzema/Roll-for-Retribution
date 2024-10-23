@@ -69,6 +69,7 @@ MonoBehaviour:
   damage: 1
   rb: {fileID: 3800158465581486445}
   weaponUISprite: {fileID: 21300000, guid: b0d5cde4974c79b49928477c1db7ec6a, type: 3}
+  weaponDescription: Fire a shotgun that curves upwards instead of downwards
 --- !u!54 &3800158465581486445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -222,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trail: {fileID: 2638000390370885270}
+  distanceToDisableTrailFrom: 10
 --- !u!114 &2601457577992515769
 MonoBehaviour:
   m_ObjectHideFlags: 0
