@@ -57,23 +57,15 @@ MonoBehaviour:
   _attractParticlesRoot: {fileID: 1451311809702768337}
   _repelParticlesRoot: {fileID: 4868501334452338877}
   _gravityParticlesRoot: {fileID: 3030605421018085180}
-  _attractParticlesRenderer: {fileID: 1915053375502716700}
   _repelParticles: {fileID: 2049163855307491643}
   _gravityParticles: {fileID: 5450375253094309412}
-  _magneticObject: {fileID: 3248689125199883062, guid: ef4ec04d6f92a4543bf8ee3630dce397,
-    type: 3}
-  _pullSpeed: 60
-  _slamSpeed: 5500
   _slamCooldown: 0.5
-  _shotgunSpeed: 6000
   _shotgunCooldown: 0.5
-  _reachThreshold: 1
   _audioManager: {fileID: 0}
-  _outOfBreathClip: {fileID: 8300000, guid: db206465fa36b40a2925783e19b8241d, type: 3}
-  _maxFlightDuration: 100
-  _fuelDecrementAmount: 2
+  _maxFlightDuration: 50
+  _fuelDecrementAmount: 3
   _fuelRechargeAmount: 0.5
-  _flightForce: 17.5
+  _flightForce: 35
   _fuelPenaltyThreshold: 75
   _playerRigidbody: {fileID: 0}
 --- !u!1 &1059871769
@@ -537,12 +529,6 @@ PrefabInstance:
 --- !u!1 &1451311809702768337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2595510798867579976, guid: 14316b86b6fa84d4ead1250f56ddd30a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3468056723390524057}
-  m_PrefabAsset: {fileID: 0}
---- !u!199 &1915053375502716700 stripped
-ParticleSystemRenderer:
-  m_CorrespondingSourceObject: {fileID: 3076699415245251973, guid: 14316b86b6fa84d4ead1250f56ddd30a,
     type: 3}
   m_PrefabInstance: {fileID: 3468056723390524057}
   m_PrefabAsset: {fileID: 0}
