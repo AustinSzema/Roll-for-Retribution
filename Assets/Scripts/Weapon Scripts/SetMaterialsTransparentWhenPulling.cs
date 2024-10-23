@@ -27,10 +27,17 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
     [Space]
     
     private GameManager _gameManager;
-    
+
+    // delete if SetFloat() doesn't work
+    private float pullOpacity;
+    private float pushOpacity;
     
     private void Start()
     {
+        // delete if SetFloat() doesn't work
+        pullOpacity = 0.7f;
+        pushOpacity = 1f;
+
         _gameManager = GameManager.Instance;;
         _attractDemonMaterials = _attractMeshRenderer.materials;
         _repelDemonMaterials = _repelMeshRenderer.materials;
@@ -45,7 +52,11 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
         {
             foreach (Material mat in _attractDemonMaterials)
             {
-                mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 0f);
+                // mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 0f);
+                if (mat.HasFloat("_Opacity Multiplier"))
+                {
+                    mat.SetFloat("_Opacity Multiplier", pullOpacity);
+                }
             }
             // _attractDemonVisual.SetActive(true);
             // _repelDemonVisual.SetActive(false);
@@ -56,7 +67,11 @@ public class SetMaterialsTransparentWhenPulling : MonoBehaviour
         {
             foreach (Material mat in _attractDemonMaterials)
             {
-                mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 1f);
+                // mat.color = new Color (mat.color.r, mat.color.g, mat.color.b, 1f);
+                if (mat.HasFloat("_Opacity Multiplier"))
+                {
+                    mat.SetFloat("_Opacity Multiplier", pushOpacity);
+                }
             }
             // _attractDemonVisual.SetActive(false);
             // _repelDemonVisual.SetActive(true);
