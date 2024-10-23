@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: TankTest
   m_EditorClassIdentifier: 
   value:
-  - StartTime: 10
+  - StartTime: 1
     Spawnables:
     - enemy: {fileID: 2476969678762307974, guid: 3060d308a8d5649479d34935b743d1ee,
         type: 3}
-      number: 1
+      number: 3
+    MaxEnemiesInScene: -1
+  - StartTime: 1000
+    Spawnables:
+    - enemy: {fileID: 2476969678762307974, guid: 3060d308a8d5649479d34935b743d1ee,
+        type: 3}
+      number: 0
     MaxEnemiesInScene: -1
