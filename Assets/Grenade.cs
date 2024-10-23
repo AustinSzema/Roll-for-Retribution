@@ -20,8 +20,14 @@ public class Grenade : Weapon
 
     public override void Attract(Vector3 magnetPosition)
     {
-        if(!hasExploded)
-        base.Attract(magnetPosition);
+        if (!hasExploded)
+        {
+            base.Attract(magnetPosition);
+        }
+        else
+        {
+            
+        }
     }
     
     void OnCollisionEnter(Collision collision)
