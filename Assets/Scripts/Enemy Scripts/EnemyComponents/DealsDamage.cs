@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DealsDamage : EnemyComponent
 {
-    [SerializeField] private float damageToDeal = 1f;
+    public float damageToDeal = 1f;
 
     [SerializeField] private bool dealsDamageOnStay = false;
     

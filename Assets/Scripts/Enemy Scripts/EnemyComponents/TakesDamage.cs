@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class TakesDamage : EnemyComponent, IDamageable
 {
@@ -84,15 +83,10 @@ public class TakesDamage : EnemyComponent, IDamageable
 
     public void takeDamage(float hitPoints)
     {
+        Debug.Log("Current health: " + _currentHealth + ", damage taken: " + hitPoints);
         AudioManager.Instance.PlayHitSound();
-        if (enemyBase.enemySO.dieOnContactWithPlayer)
-        {
-            Die();
-        }
-        else
-        {
-            _currentHealth -= hitPoints;
-        }
+        _currentHealth -= hitPoints;
+        
         
         EnemyHit();
         if (_currentHealth <= 0)
@@ -138,13 +132,13 @@ public class TakesDamage : EnemyComponent, IDamageable
     }
 
     
-    private void Die()
+    public void Die()
     {
         UnpauseEnemy();
         _deathParticles.transform.position = transform.position;
         _deathParticles.Play();
-        gameObject.SetActive(false);
         _currentHealth = enemyBase.enemySO.healthPoints;
+        gameObject.SetActive(false);
     }
 }
 
