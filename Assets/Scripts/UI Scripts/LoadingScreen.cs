@@ -24,14 +24,17 @@ public class LoadingScreen : MonoBehaviour
 
 
     public void MainRestart()
-    {
+    {   
+        GameManager.Instance.currentRound = 0;
+        WeaponManager.Instance.weaponParentList = new List<GameObject>();
         foreach (GameObject c in _otherCanvases)
         {
             c.SetActive(false);
         }
+        
         _loadingSlider.gameObject.SetActive(true);
         FadeIn();
-        StartCoroutine(LoadSceneAsync(2));   
+        StartCoroutine(LoadSceneAsync(2));
     }
     
     public IEnumerator LoadSceneAsync(int sceneIndex)

@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector] public List<Weapon> weapons = new List<Weapon>();
 
-    
+    [HideInInspector] public WeaponList actualStartingWeaponList;
     
     // public enum ActiveShotType
     // {

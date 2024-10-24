@@ -21,6 +21,7 @@ public class WeaponShop : MonoBehaviour
 
     private void OnEnable()
     {
+        
         // Reset internal weapons list each time OnEnable is called
         internalWeaponsList.Clear();
         foreach (GameObject obj in weaponList.weaponList)

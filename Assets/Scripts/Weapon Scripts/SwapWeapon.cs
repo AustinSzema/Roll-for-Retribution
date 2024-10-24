@@ -25,6 +25,7 @@ public class SwapWeapon : MonoBehaviour
 
     void Start()
     {
+        
         // Ensure we don't go out of bounds by taking the smallest count between weaponIcons and weaponList
         int weaponCount = Mathf.Min(weaponIcons.Count, mainWeaponList.weaponList.Count);
 
