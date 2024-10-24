@@ -85,6 +85,91 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4920709193708227808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897075710169769041}
+  - component: {fileID: 2451103792801174533}
+  - component: {fileID: 4175688218396520268}
+  m_Layer: 0
+  m_Name: Paused Bat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1897075710169769041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920709193708227808}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2344803617200230902}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2451103792801174533
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920709193708227808}
+  m_Mesh: {fileID: 7862126321498759513, guid: 33bcc6f8df8988a4baad6d25f5963d45, type: 3}
+--- !u!23 &4175688218396520268
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4920709193708227808}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9b8a50e949e1de14d8b43a66875685e3, type: 2}
+  - {fileID: 2100000, guid: 9b8a50e949e1de14d8b43a66875685e3, type: 2}
+  - {fileID: 2100000, guid: 9b8a50e949e1de14d8b43a66875685e3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7688580540974025677
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +242,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2808918482118390320, guid: 616fd75277f465e4dad945c8cbb211eb,
+        type: 3}
+      propertyPath: pausedMesh
+      value: 
+      objectReference: {fileID: 4920709193708227808}
+    - target: {fileID: 2808918482118390320, guid: 616fd75277f465e4dad945c8cbb211eb,
+        type: 3}
+      propertyPath: unpausedMesh
+      value: 
+      objectReference: {fileID: 675371386302328405}
     - target: {fileID: 3332745159304729054, guid: 616fd75277f465e4dad945c8cbb211eb,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -222,6 +317,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5470223979468142858, guid: 616fd75277f465e4dad945c8cbb211eb,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 4905223293617779708}
     - target: {fileID: 6117526538739826664, guid: 616fd75277f465e4dad945c8cbb211eb,
         type: 3}
       propertyPath: m_Mesh
@@ -296,6 +396,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 4365973234942223375}
+    - targetCorrespondingSourceObject: {fileID: 3332745159304729054, guid: 616fd75277f465e4dad945c8cbb211eb,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1897075710169769041}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2669397336558570340, guid: 616fd75277f465e4dad945c8cbb211eb,
         type: 3}

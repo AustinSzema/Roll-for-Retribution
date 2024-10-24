@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class TakesDamage : EnemyComponent, IDamageable
 {
-    [SerializeField] private Material _enemyPauseMaterial;
+    [SerializeField] private GameObject unpausedMesh;
+    [SerializeField] private GameObject pausedMesh;
 
     private float _hitPauseTime = 2f;
-    
-    private MeshRenderer[] _meshRenderers;
 
     private RigidbodyConstraints startingConstraints;
 
@@ -19,8 +18,6 @@ public class TakesDamage : EnemyComponent, IDamageable
 
     [SerializeField] private Rigidbody rb;
     
-    private Material[] _originalMaterials;
-    private Material[] _pausedMaterials;
 
     private float _currentHealth;
     private bool _firstDisable = true;
@@ -40,30 +37,11 @@ public class TakesDamage : EnemyComponent, IDamageable
 
 
         startingConstraints = rb.constraints;
-        
-        // Get all MeshRenderers in children without using LODGroup
-        _meshRenderers = GetComponentsInChildren<MeshRenderer>();
-
-        
-        // If there are no mesh renderers, log a warning
-        if (_meshRenderers.Length == 0)
-        {
-            Debug.LogWarning("No MeshRenderers found in child objects.");
-            return;
-        }
-
-        // Assume all mesh renderers share the same material setup
-        _originalMaterials = _meshRenderers[0].materials;
-        _pausedMaterials = new Material[_originalMaterials.Length];
-
-        for (int i = 0; i < _pausedMaterials.Length; i++)
-        {
-            _pausedMaterials[i] = _enemyPauseMaterial;
-        }
 
         _hitParticles.transform.parent = null;
         _deathParticles.transform.parent = null;
 
+        EnablePausedMesh(false);
     }
 
     private void OnDisable()
@@ -105,24 +83,22 @@ public class TakesDamage : EnemyComponent, IDamageable
     private IEnumerator PauseEnemy(float waitTime)
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        SetRendererMaterials(true);
+        EnablePausedMesh(true);
         yield return new WaitForSeconds(waitTime);
         UnpauseEnemy();
         yield return null;
     }
 
-    private void SetRendererMaterials(bool pause)
+    private void EnablePausedMesh(bool pause)
     {
-        foreach (MeshRenderer mr in _meshRenderers)
-        {
-            mr.materials = pause ? _pausedMaterials : _originalMaterials;
-        }
+        unpausedMesh.SetActive(!pause);
+        pausedMesh.SetActive(pause);
     }
 
     private void UnpauseEnemy()
     {
         rb.constraints = startingConstraints;
-        SetRendererMaterials(false);
+        EnablePausedMesh(false);
     }
 
     private void EnemyHit()

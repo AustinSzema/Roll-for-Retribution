@@ -135,7 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBase: {fileID: 3445609164514352314}
-  _enemyPauseMaterial: {fileID: 2100000, guid: 9b8a50e949e1de14d8b43a66875685e3, type: 2}
+  unpausedMesh: {fileID: 0}
+  pausedMesh: {fileID: 0}
   _deathParticles: {fileID: 6512361771436754113}
   _hitParticles: {fileID: 2858455048733788034}
   rb: {fileID: 1672955631685481756}
@@ -167,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBase: {fileID: 3445609164514352314}
+  renderer: {fileID: 0}
   rb: {fileID: 1672955631685481756}
 --- !u!1001 &720900378263311518
 PrefabInstance:
@@ -369,7 +371,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5ae3c90381d8e114abb2636a44f8c3b3, type: 2}
+      objectReference: {fileID: 2100000, guid: af0715648b6f63346879273ddf35270e, type: 2}
     - target: {fileID: 8334612509446014874, guid: bd19533bedd9d394497da02e0e9e64ce,
         type: 3}
       propertyPath: m_Name
