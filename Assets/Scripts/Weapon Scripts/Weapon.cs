@@ -20,6 +20,7 @@ public abstract class Weapon : MonoBehaviour
     [Multiline]
     public string weaponDescription = "This is a weapon.";
 
+    public string weaponName = "weapon";
 
     protected virtual void OnCollisionEnter(Collision other)
     {

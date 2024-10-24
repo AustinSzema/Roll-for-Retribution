@@ -91,6 +91,7 @@ public class SwapWeapon : MonoBehaviour
         // Move all weapons to the designated hand position
         foreach (Weapon w in GameManager.Instance.weapons)
         {
+            w.Attract(GameManager.Instance.handPosition);
             w.transform.position = GameManager.Instance.handPosition;
         }
     }

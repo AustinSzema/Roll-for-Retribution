@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class WeaponShop : MonoBehaviour
@@ -13,31 +14,36 @@ public class WeaponShop : MonoBehaviour
     [SerializeField] private List<Image> currentWeapons = new List<Image>();
     [SerializeField] private List<TextMeshProUGUI> currentDescriptions = new List<TextMeshProUGUI>();
     
-    [Space] [SerializeField] private List<Image> buttons = new List<Image>();
-    [SerializeField] private List<TextMeshProUGUI> descriptions = new List<TextMeshProUGUI>();
+    [FormerlySerializedAs("buttons")] [Space] [SerializeField] private List<Image> availableWeaponsImages = new List<Image>();
+    [FormerlySerializedAs("descriptions")] [SerializeField] private List<TextMeshProUGUI> availableWeaponsDescriptions = new List<TextMeshProUGUI>();
 
     private List<GameObject> weaponOptions = new List<GameObject>();
     private List<GameObject> internalWeaponsList = new List<GameObject>();
 
+    [SerializeField] private List<TextMeshProUGUI> arrowDescriptions = new List<TextMeshProUGUI>();
+    
     private void OnEnable()
     {
-        
+        GameManager.Instance.gameIsPaused = true;
         // Reset internal weapons list each time OnEnable is called
         internalWeaponsList.Clear();
         foreach (GameObject obj in weaponList.weaponList)
         {
             internalWeaponsList.Add(obj);
         }
+        
 
         // Update current weapons displayed
         for (int i = 0; i < currentWeapons.Count; i++)
         {
             currentWeapons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
+            currentDescriptions[i].text = WeaponManager.Instance
+                .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponDescription;
         }
 
         // Select random weapons for the buttons
         weaponOptions.Clear();
-        for (int i = 0; i < buttons.Count; i++)
+        for (int i = 0; i < availableWeaponsImages.Count; i++)
         {
             GameObject selectedWeapon = null;
             Weapon weapon = null;
@@ -52,11 +58,19 @@ public class WeaponShop : MonoBehaviour
             } while (IsWeaponInCurrentWeapons(selectedWeapon)); // Ensure the selected weapon isn't already in the current weapons list
 
             weaponOptions.Add(selectedWeapon);
-            buttons[i].sprite = weapon.weaponUISprite;
-            descriptions[i].text = weapon.weaponDescription;
+            availableWeaponsImages[i].sprite = weapon.weaponUISprite;
+            availableWeaponsDescriptions[i].text = weapon.weaponDescription;
+            arrowDescriptions[i].text = "Replace " + WeaponManager.Instance
+                .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponName + " with " + weapon.weaponName;
+
+            
             internalWeaponsList.Remove(selectedWeapon); // Remove selected weapon from list
+
+
         }
 
+
+        
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -67,16 +81,18 @@ public class WeaponShop : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void NextScene(int slotIndex)
+    public void SwapToNewWeapon(int slotIndex)
+    {
+        // Replace the weapon in the chosen slot with the selected weapon from the shop
+        int randomWeaponIndex = availableWeaponsImages.IndexOf(availableWeaponsImages[slotIndex]);
+        WeaponManager.Instance.weaponParentList[slotIndex] = weaponOptions[randomWeaponIndex];
+    }
+    
+    public void NextScene()
     {
         loadingText.SetActive(true);
-        
-        // Replace the weapon in the chosen slot with the selected weapon from the shop
-        int randomWeaponIndex = buttons.IndexOf(buttons[slotIndex]);
-        WeaponManager.Instance.weaponParentList[slotIndex] = weaponOptions[randomWeaponIndex];
-        
         GameManager.Instance.currentRound++;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
 
     // Method to check if a weapon is already in the current weapons list
