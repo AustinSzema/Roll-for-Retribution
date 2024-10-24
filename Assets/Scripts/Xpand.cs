@@ -8,6 +8,12 @@ public class Xpand : Weapon
     [SerializeField] private float expandSize = 10f;
 
     [SerializeField] private float rotationSpeed = 100f;
+
+    [SerializeField] private float upwardsShootForce = 100f;
+
+    private float sizeInHand = 5f;
+    
+    private bool inHand = false;
     
     // [SerializeField] private GameObject[] objectsToExpand;
     //
@@ -27,11 +33,15 @@ public class Xpand : Weapon
     private void Start()
     {
         startSize = transform.localScale;
+        transform.localScale /= sizeInHand;
     }
 
     public override void Shoot(Vector3 magnetForwardDirection)
-    {  
-        rb.AddForce(magnetForwardDirection* shootForce);
+    {
+        rb.AddForce(Vector3.up * upwardsShootForce);
+        rb.AddForce(magnetForwardDirection * shootForce);
+        
+        inHand = false;
     }
     
     protected override void OnCollisionEnter(Collision other)
@@ -50,7 +60,7 @@ public class Xpand : Weapon
 
     private void Expand(GameObject other)
     {
-        if (other.CompareTag(TagManager.groundTag))
+        if (!other.CompareTag(TagManager.playerTag) && !inHand)
         {
             transform.localScale = startSize * expandSize;
             rb.velocity = Vector3.zero;
@@ -71,7 +81,7 @@ public class Xpand : Weapon
     {
         base.Attract(magnetPosition);
         rb.constraints = RigidbodyConstraints.None;
-        transform.localScale = Vector3.one;
+        transform.localScale = Vector3.one / sizeInHand;
         
         /*for (int i = 0; i < objectsToExpand.Length; i++)
         {
@@ -82,6 +92,7 @@ public class Xpand : Weapon
 
         // Smoothly rotate towards the target rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        inHand = true;
     }
     
 }
