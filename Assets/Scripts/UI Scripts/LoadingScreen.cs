@@ -24,9 +24,16 @@ public class LoadingScreen : MonoBehaviour
 
 
     public void MainRestart()
-    {   
-        GameManager.Instance.currentRound = 0;
-        WeaponManager.Instance.weaponParentList = new List<GameObject>();
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.currentRound = 0;
+        }
+        if (WeaponManager.Instance != null)
+        {
+            WeaponManager.Instance.weaponParentList = new List<GameObject>();
+        }
+
         foreach (GameObject c in _otherCanvases)
         {
             c.SetActive(false);
