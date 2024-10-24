@@ -86,6 +86,19 @@ public class WeaponShop : MonoBehaviour
         // Replace the weapon in the chosen slot with the selected weapon from the shop
         int randomWeaponIndex = availableWeaponsImages.IndexOf(availableWeaponsImages[slotIndex]);
         WeaponManager.Instance.weaponParentList[slotIndex] = weaponOptions[randomWeaponIndex];
+
+        for (int i = 0; i < currentWeapons.Count; i++)
+        {
+            if (i != slotIndex)
+            {
+                availableWeaponsImages[i].color = Color.yellow;
+            }
+            else
+            {
+                currentWeapons[i].color = Color.yellow;
+            }
+        }
+        
     }
     
     public void NextScene()
