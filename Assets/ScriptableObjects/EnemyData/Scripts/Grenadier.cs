@@ -62,7 +62,7 @@ public class Grenadier : Enemy
         grenade.velocity = directionToPlayer * 100f;
 
         // Optionally, add some height to the grenade's velocity to simulate an arc
-        grenade.velocity += Vector3.up * 30f;
+        grenade.velocity += Vector3.up * 20f;
     }
 
     
