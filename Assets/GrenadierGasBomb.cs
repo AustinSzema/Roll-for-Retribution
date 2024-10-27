@@ -8,7 +8,7 @@ public class GrenadierGasBomb : MonoBehaviour
     private float scale = 50f;
     private Vector3 expandSize = new Vector3(10f, 10f, 10f);
     [SerializeField] private Rigidbody rb;
-    
+
     private void Start()
     {
         expandSize = new Vector3(scale, scale, scale);
@@ -28,8 +28,11 @@ public class GrenadierGasBomb : MonoBehaviour
     {
         while (transform.localScale.magnitude > 1f)
         {
-            transform.localScale *= 0.9999f; 
-            yield return null;
+            if (GameManager.Instance.gameIsPaused == false)
+            {
+                transform.localScale *= 0.9999f;
+                yield return null;
+            }
         }
     }
 }
