@@ -7,7 +7,7 @@ public class TakesDamage : EnemyComponent, IDamageable
     [SerializeField] private GameObject unpausedMesh;
     [SerializeField] private GameObject pausedMesh;
 
-    private float _hitPauseTime = 2f;
+    [SerializeField] private float _hitPauseTime = 2f;
 
     private RigidbodyConstraints startingConstraints;
 

@@ -8,9 +8,19 @@ public class PatternShot : Weapon
 {
     [SerializeField] private PatternSerializer pattern;
     [SerializeField] private float rotationSpeeds = 0f; // Speed of rotation on the Y axis
-
     private Vector3 startingSize = Vector3.one;
-
+    
+    [Header("Shrink Weapon In Hand Fields")] 
+    [SerializeField] private bool shrinksWhenInHand = false; 
+    [SerializeField] private float shrinkDistance = 2.0f; // Distance within which the totem shrinks
+    [SerializeField] private float maxDistance = 30.0f;    // Max distance for scaling
+    [SerializeField] private float minScaleFactor = 0.5f;        // Minimum scale when close
+    [SerializeField] private float maxScaleFactor = 1f;       // Maximum scale when far away
+    [SerializeField] private float lerpSpeed = 100.0f;     // Speed of scaling transition
+    
+    [Header("Spear")]
+    [SerializeField] private bool isSpear = false; 
+    
     private void Start()
     {
         startingSize = transform.localScale;
@@ -19,17 +29,15 @@ public class PatternShot : Weapon
     public void Shoot(Vector3 magnetForwardDirection, int index)
     {
         Quaternion q = Quaternion.FromToRotation(Vector3.forward, magnetForwardDirection);
-        rb.AddForce(q * pattern.PatternPoints[index % pattern.PatternPoints.Count].normalized * shootForce);
+        Vector3 force = q * pattern.PatternPoints[index % pattern.PatternPoints.Count].normalized * shootForce;
+        rb.AddForce(force);
         rb.AddTorque(transform.up * rotationSpeeds);
+        
+        Quaternion targetRotation = Quaternion.LookRotation(force);
+        rb.rotation = targetRotation;
     }
 
-    [Header("Shrink Weapon In Hand Fields")] 
-    [SerializeField] private bool shrinksWhenInHand = false; 
-    [SerializeField] private float shrinkDistance = 2.0f; // Distance within which the totem shrinks
-    [SerializeField] private float maxDistance = 30.0f;    // Max distance for scaling
-    [SerializeField] private float minScaleFactor = 0.5f;        // Minimum scale when close
-    [SerializeField] private float maxScaleFactor = 1f;       // Maximum scale when far away
-    [SerializeField] private float lerpSpeed = 100.0f;     // Speed of scaling transition
+    
 
     private void Update()
     {
@@ -47,6 +55,36 @@ public class PatternShot : Weapon
         
             // Apply the new scale while maintaining the original proportions
             transform.localScale = startingSize * newScaleFactor;
+        }
+    }
+    
+    protected override void OnCollisionEnter(Collision other)
+    {
+        if (isSpear)
+        {
+            if (other.gameObject.CompareTag(TagManager.groundTag) || other.gameObject.CompareTag(TagManager.cageTag))
+            {
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+            }
+
+            HitEnemy(other.gameObject);
+        }
+    }
+    
+    public override void Attract(Vector3 magnetPosition)
+    {
+        if (isSpear)
+        {
+            rb.constraints = RigidbodyConstraints.None;
+            rb.velocity = Vector3.zero;
+            rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
+                Time.deltaTime * pullSpeed);
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
+                Time.deltaTime * pullSpeed);
         }
     }
 }
