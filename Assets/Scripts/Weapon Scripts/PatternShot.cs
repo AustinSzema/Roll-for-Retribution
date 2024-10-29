@@ -80,5 +80,11 @@ public class PatternShot : Weapon
             rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
                 Time.deltaTime * pullSpeed);
         }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
+                Time.deltaTime * pullSpeed);
+        }
     }
 }
