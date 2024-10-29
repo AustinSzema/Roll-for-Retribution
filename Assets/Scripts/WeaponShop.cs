@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,6 +7,9 @@ using UnityEngine.UI;
 
 public class WeaponShop : MonoBehaviour
 {
+    // Add this to track the last swapped weapon slot
+    private int lastSwappedSlot = -1;
+
     [SerializeField] private WeaponList weaponList;
     [SerializeField] private GameObject loadingText;
 
@@ -36,94 +38,96 @@ public class WeaponShop : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Instance.gameIsPaused = true;
-        // Reset internal weapons list each time OnEnable is called
+        PlayerController player = FindObjectOfType<PlayerController>();
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        player.GetComponent<Collider>().enabled = false;
         internalWeaponsList.Clear();
-        foreach (GameObject obj in weaponList.weaponList)
-        {
-            internalWeaponsList.Add(obj);
-        }
-
+        internalWeaponsList.AddRange(weaponList.weaponList);
 
         // Update current weapons displayed
         for (int i = 0; i < currentWeaponsImages.Count; i++)
         {
-            currentWeaponsImages[i].sprite = WeaponManager.Instance
-                .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
-            currentDescriptions[i].text = WeaponManager.Instance
-                .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponDescription;
+            var weapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]);
+            currentWeaponsImages[i].sprite = weapon.weaponUISprite;
+            currentDescriptions[i].text = weapon.weaponDescription;
         }
 
-        // Select random weapons for the buttons
+        // Initialize available weapons for swapping
         weaponOptions.Clear();
         for (int i = 0; i < availableWeaponsImages.Count; i++)
         {
             GameObject selectedWeapon = null;
             Weapon weapon = null;
 
-            // Try to get a random weapon that is not in currentWeapons
             do
             {
-                int random = Random.Range(0, internalWeaponsList.Count); // Include last element
+                int random = Random.Range(0, internalWeaponsList.Count);
                 selectedWeapon = internalWeaponsList[random];
                 weapon = WeaponManager.Instance.GetWeaponComponent(selectedWeapon);
-            } while
-                (IsWeaponInCurrentWeapons(
-                    selectedWeapon)); // Ensure the selected weapon isn't already in the current weapons list
+            } while (IsWeaponInCurrentWeapons(selectedWeapon));
 
             weaponOptions.Add(selectedWeapon);
             availableWeaponsImages[i].sprite = weapon.weaponUISprite;
             availableWeaponsDescriptions[i].text = weapon.weaponDescription;
             arrowDescriptions[i].text = "Replace " + WeaponManager.Instance
                                             .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponName +
-                                        " with " +
-                                        weapon.weaponName;
-
-
-            internalWeaponsList.Remove(selectedWeapon); // Remove selected weapon from list
+                                        " with " + weapon.weaponName;
+            internalWeaponsList.Remove(selectedWeapon);
         }
-
-        for (int i = 0; i < currentWeaponsImages.Count; i++)
-        {
-            currentSprites.Add(currentWeaponsImages[i].sprite);
-        }
-
-        for (int i = 0; i < availableWeaponsImages.Count; i++)
-        {
-            availableSprites.Add(availableWeaponsImages[i].sprite);
-        }
-
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void OnDisable()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     public void SwapToNewWeapon(int slotIndex)
     {
-        // Replace the weapon in the chosen slot with the selected weapon from the shop
-        int randomWeaponIndex = availableWeaponsImages.IndexOf(availableWeaponsImages[slotIndex]);
-        WeaponManager.Instance.weaponParentList[slotIndex] = weaponOptions[randomWeaponIndex];
+    
+        if (slotIndex < 0 || slotIndex >= currentWeaponsImages.Count) return;
 
-        for (int i = 0; i < currentWeaponsImages.Count; i++)
+        // Check if there's an existing swap and reset it if necessary
+        if (lastSwappedSlot != -1 && lastSwappedSlot != slotIndex)
         {
-            if (i == slotIndex)
-            {
-                currentWeaponsImages[i].sprite = availableSprites[i];
-                availableWeaponsImages[i].sprite = currentSprites[i];
-            }
-            else
-            {
-                currentWeaponsImages[i].sprite = currentSprites[i];
-                availableWeaponsImages[i].sprite = availableSprites[i];
-            }
+            // Reset the previous swap
+            ResetSwap(lastSwappedSlot);
         }
 
+        // Perform the new swap
+        lastSwappedSlot = slotIndex;
+
+        // Swap the top weapon with the bottom weapon for the given index
+        var topWeapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[slotIndex]);
+        var bottomWeapon = WeaponManager.Instance.GetWeaponComponent(weaponOptions[slotIndex]);
+
+        // Swap images and descriptions for the selected top-bottom pair
+        currentWeaponsImages[slotIndex].sprite = bottomWeapon.weaponUISprite;
+        currentDescriptions[slotIndex].text = bottomWeapon.weaponDescription;
+
+        availableWeaponsImages[slotIndex].sprite = topWeapon.weaponUISprite;
+        availableWeaponsDescriptions[slotIndex].text = topWeapon.weaponDescription;
+
+        // Update the arrow description to reflect the swap
+        arrowDescriptions[slotIndex].text = "Replace " + bottomWeapon.weaponName + " with " + topWeapon.weaponName;
+
         hasSwappedWeapon = true;
+        
+
+
+    }
+
+    private void ResetSwap(int slotIndex)
+    {
+        // Restore original weapon images and descriptions
+        var originalTopWeapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[slotIndex]);
+        var originalBottomWeapon = WeaponManager.Instance.GetWeaponComponent(weaponOptions[slotIndex]);
+
+        currentWeaponsImages[slotIndex].sprite = originalTopWeapon.weaponUISprite;
+        currentDescriptions[slotIndex].text = originalTopWeapon.weaponDescription;
+
+        availableWeaponsImages[slotIndex].sprite = originalBottomWeapon.weaponUISprite;
+        availableWeaponsDescriptions[slotIndex].text = originalBottomWeapon.weaponDescription;
+
+        // Reset arrow description
+        arrowDescriptions[slotIndex].text = "Replace " + originalTopWeapon.weaponName + " with " + originalBottomWeapon.weaponName;
     }
 
     public void NextScene()
@@ -136,7 +140,6 @@ public class WeaponShop : MonoBehaviour
         }
     }
 
-    // Method to check if a weapon is already in the current weapons list
     private bool IsWeaponInCurrentWeapons(GameObject weapon)
     {
         foreach (Image weaponImage in currentWeaponsImages)
