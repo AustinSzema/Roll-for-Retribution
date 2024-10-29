@@ -19,8 +19,12 @@ public class PatternShot : Weapon
     public void Shoot(Vector3 magnetForwardDirection, int index)
     {
         Quaternion q = Quaternion.FromToRotation(Vector3.forward, magnetForwardDirection);
-        rb.AddForce(q * pattern.PatternPoints[index % pattern.PatternPoints.Count].normalized * shootForce);
+        Vector3 force = q * pattern.PatternPoints[index % pattern.PatternPoints.Count].normalized * shootForce;
+        rb.AddForce(force);
         rb.AddTorque(transform.up * rotationSpeeds);
+        
+        Quaternion targetRotation = Quaternion.LookRotation(force);
+        rb.rotation = targetRotation;
     }
 
     [Header("Shrink Weapon In Hand Fields")] 
