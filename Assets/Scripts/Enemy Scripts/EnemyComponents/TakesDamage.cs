@@ -61,7 +61,7 @@ public class TakesDamage : EnemyComponent, IDamageable
 
     public void takeDamage(float hitPoints)
     {
-        Debug.Log("Current health: " + _currentHealth + ", damage taken: " + hitPoints);
+        //Debug.Log("Current health: " + _currentHealth + ", damage taken: " + hitPoints);
         AudioManager.Instance.PlayHitSound();
         _currentHealth -= hitPoints;
         

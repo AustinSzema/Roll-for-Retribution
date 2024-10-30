@@ -37,7 +37,7 @@ public class SpawnEnemies : MonoBehaviour
   
   void Start()
   {
-    Debug.Log("Current Round " + GameManager.Instance.currentRound);
+    //Debug.Log("Current Round " + GameManager.Instance.currentRound);
     
     if (_roundSpawnConfig == null)
     {
@@ -102,7 +102,7 @@ public class SpawnEnemies : MonoBehaviour
     //   }
     // }
     //Debug.Log(EnemiesInScene + " enemies in scene");
-    Debug.Log("Current Spawn Info Index" + _currentSpawnInfoIdx + "   Count of spawn infos" + _spawnInfos.Count);
+    //Debug.Log("Current Spawn Info Index" + _currentSpawnInfoIdx + "   Count of spawn infos" + _spawnInfos.Count);
   }
 
   IEnumerator SwapSpawnInfo()
