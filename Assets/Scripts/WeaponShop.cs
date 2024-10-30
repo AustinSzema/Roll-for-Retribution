@@ -39,8 +39,9 @@ public class WeaponShop : MonoBehaviour
     private List<GameObject> oldCopyWeapons = new List<GameObject>();
     private List<GameObject> newWeapons = new List<GameObject>();
     private List<GameObject> newCopyWeapons = new List<GameObject>();
-    
-    
+
+
+    private List<bool> flipped = new List<bool>();
     
     
     
@@ -64,6 +65,8 @@ public class WeaponShop : MonoBehaviour
             currentDescriptions[i].text = weapon.weaponDescription;
             oldWeapons = WeaponManager.Instance.weaponParentList;
             oldCopyWeapons = WeaponManager.Instance.weaponParentList;
+            flipped.Add(false);
+
         }
 
         // Initialize available weapons for swapping
@@ -73,14 +76,11 @@ public class WeaponShop : MonoBehaviour
             GameObject selectedWeaponObject = null;
             Weapon weapon = null;
 
-            do
-            {
                 int random = Random.Range(0, internalWeaponsList.Count);
                 selectedWeaponObject = internalWeaponsList[random];
                 newWeapons.Add(selectedWeaponObject);
                 newCopyWeapons.Add(selectedWeaponObject);
                 weapon = WeaponManager.Instance.GetWeaponComponent(selectedWeaponObject);
-            } while (IsWeaponInCurrentWeapons(selectedWeaponObject));
 
             
             
@@ -105,46 +105,98 @@ public class WeaponShop : MonoBehaviour
 
     public void SwapToNewWeapon(int slotIndex)
     {
-        if (slotIndex < 0 || slotIndex >= currentWeaponsImages.Count || hasSwappedThisRound) return;
-
-        // Check if there's an existing swap and reset it if necessary
-        if (lastSwappedSlot != -1 && lastSwappedSlot != slotIndex)
+        for (int i = 0; i < currentWeaponsImages.Count; i++)
         {
-            // Reset the previous swap before performing the new swap
-            ResetSwap(lastSwappedSlot);
+            if (i == slotIndex)
+            {
+                flipped[slotIndex] = !flipped[slotIndex];
+
+                if (flipped[slotIndex])
+                {
+                    currentWeaponsImages[slotIndex].sprite = WeaponManager.Instance.GetWeaponComponent(oldWeapons[slotIndex]).weaponUISprite;
+                    currentDescriptions[slotIndex].text =
+                        WeaponManager.Instance.GetWeaponComponent(oldCopyWeapons[slotIndex]).weaponDescription;
+
+                    availableWeaponsImages[slotIndex].sprite = WeaponManager.Instance.GetWeaponComponent(newCopyWeapons[slotIndex]).weaponUISprite;
+                    availableWeaponsDescriptions[slotIndex].text = 
+                        WeaponManager.Instance.GetWeaponComponent(newCopyWeapons[slotIndex]).weaponDescription;
+                }
+                else
+                {
+                    currentWeaponsImages[slotIndex].sprite =  WeaponManager.Instance.GetWeaponComponent(newCopyWeapons[slotIndex]).weaponUISprite;
+                    currentDescriptions[slotIndex].text =
+                        WeaponManager.Instance.GetWeaponComponent(newCopyWeapons[slotIndex]).weaponDescription;
+
+                    availableWeaponsImages[slotIndex].sprite = WeaponManager.Instance.GetWeaponComponent(oldWeapons[slotIndex]).weaponUISprite;
+                    availableWeaponsDescriptions[slotIndex].text = 
+                        WeaponManager.Instance.GetWeaponComponent(oldCopyWeapons[slotIndex]).weaponDescription;
+                }
+            }
+            else
+            {
+                currentWeaponsImages[i].sprite = WeaponManager.Instance.GetWeaponComponent(oldWeapons[i]).weaponUISprite;
+                currentDescriptions[i].text =
+                    WeaponManager.Instance.GetWeaponComponent(oldCopyWeapons[i]).weaponDescription;
+
+                availableWeaponsImages[i].sprite = WeaponManager.Instance.GetWeaponComponent(newCopyWeapons[i]).weaponUISprite;
+                availableWeaponsDescriptions[i].text = 
+                    WeaponManager.Instance.GetWeaponComponent(newCopyWeapons[i]).weaponDescription;
+            }
+
         }
+        
 
-        // Get references for current and new weapons
-        var currentWeapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[slotIndex]);
-        var newWeapon = WeaponManager.Instance.GetWeaponComponent(weaponOptions[slotIndex]);
-
-        // Check if we are trying to swap to the same weapon
-        if (currentWeapon.gameObject == newWeapon.gameObject)
-        {
-            // If the same weapon is clicked, reset it
-            ResetSwap(slotIndex);
-            return; // Exit the method
-        }
-
-        // Perform the swap
-        lastSwappedSlot = slotIndex;
-
-        // Update the current weapon images and descriptions
-        currentWeaponsImages[slotIndex].sprite = newWeapon.weaponUISprite;
-        currentDescriptions[slotIndex].text = newWeapon.weaponDescription;
-
-        // Update the available weapon images and descriptions
-        availableWeaponsImages[slotIndex].sprite = currentWeapon.weaponUISprite;
-        availableWeaponsDescriptions[slotIndex].text = currentWeapon.weaponDescription;
-
-        // Update the arrow description to reflect the swap
-        arrowDescriptions[slotIndex].text = "Replace " + newWeapon.weaponName + " with " + currentWeapon.weaponName;
-
-        // Update the weaponParentList to point to the new weapon
-        WeaponManager.Instance.weaponParentList[slotIndex] = newCopyWeapons[slotIndex];
-        newWeapons[slotIndex] = oldCopyWeapons[slotIndex];
-
-        hasSwappedThisRound = true; // Mark that a swap has occurred
+        // if (slotIndex < 0 || slotIndex >= currentWeaponsImages.Count) return;
+        //
+        // // Check if there's an existing swap and reset it if necessary
+        // if (lastSwappedSlot != -1 && lastSwappedSlot != slotIndex)
+        // {
+        //     // Reset the previous swap before performing the new swap
+        //     ResetSwap(lastSwappedSlot);
+        // }
+        //
+        // // Get references for current and new weapons
+        // var currentWeapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[slotIndex]);
+        // var newWeapon = WeaponManager.Instance.GetWeaponComponent(weaponOptions[slotIndex]);
+        //
+        // // Check if we are trying to swap to the same weapon
+        // if (currentWeapon.gameObject == newWeapon.gameObject)
+        // {
+        //     // If the same weapon is clicked, reset it
+        //     ResetSwap(slotIndex);
+        //     return; // Exit the method
+        // }
+        //
+        // // Perform the swap
+        // lastSwappedSlot = slotIndex;
+        //
+        // // Update the current weapon images and descriptions
+        // currentWeaponsImages[slotIndex].sprite = newWeapon.weaponUISprite;
+        // currentDescriptions[slotIndex].text = newWeapon.weaponDescription;
+        //
+        // // Update the available weapon images and descriptions
+        // availableWeaponsImages[slotIndex].sprite = currentWeapon.weaponUISprite;
+        // availableWeaponsDescriptions[slotIndex].text = currentWeapon.weaponDescription;
+        //
+        // // Update the arrow description to reflect the swap
+        // arrowDescriptions[slotIndex].text = "Replace " + newWeapon.weaponName + " with " + currentWeapon.weaponName;
+        //
+        // for (int i = 0; i < WeaponManager.Instance.weaponParentList.Count; i++)
+        // {
+        //     if(i == slotIndex){
+        //         // Update the weaponParentList to point to the new weapon
+        //         WeaponManager.Instance.weaponParentList[slotIndex] = newCopyWeapons[slotIndex];
+        //         newWeapons[slotIndex] = oldCopyWeapons[slotIndex];
+        //     }
+        //     else
+        //     {
+        //         WeaponManager.Instance.weaponParentList[slotIndex] = oldCopyWeapons[slotIndex];
+        //         newWeapons[slotIndex] = newCopyWeapons[slotIndex];
+        //     }
+        // }
+        //
+        //
+        // hasSwappedThisRound = true; // Mark that a swap has occurred
         hasSwappedWeapon = true;
     }
 
@@ -153,13 +205,13 @@ public class WeaponShop : MonoBehaviour
         // Restore original weapon images and descriptions
         var originalTopWeapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[slotIndex]);
         var originalBottomWeapon = WeaponManager.Instance.GetWeaponComponent(weaponOptions[slotIndex]);
-
+        
         currentWeaponsImages[slotIndex].sprite = originalTopWeapon.weaponUISprite;
         currentDescriptions[slotIndex].text = originalTopWeapon.weaponDescription;
-
+        
         availableWeaponsImages[slotIndex].sprite = originalBottomWeapon.weaponUISprite;
         availableWeaponsDescriptions[slotIndex].text = originalBottomWeapon.weaponDescription;
-
+        
         // Reset arrow description
         arrowDescriptions[slotIndex].text = "Replace " + originalTopWeapon.weaponName + " with " + originalBottomWeapon.weaponName;
     }
