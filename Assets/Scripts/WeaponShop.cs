@@ -16,7 +16,7 @@ public class WeaponShop : MonoBehaviour
     // Add this to track if a weapon has already been swapped this round
     private bool hasSwappedThisRound = false;
 
-    [SerializeField] private WeaponList weaponList;
+    [FormerlySerializedAs("weaponList")] [SerializeField] private WeaponList everyWeaponList;
     [SerializeField] private GameObject loadingText;
 
     [FormerlySerializedAs("currentWeapons")] [SerializeField]
@@ -68,8 +68,6 @@ public class WeaponShop : MonoBehaviour
         PlayerController player = FindObjectOfType<PlayerController>();
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         player.GetComponent<Collider>().enabled = false;
-        internalWeaponsList.Clear();
-        internalWeaponsList.AddRange(weaponList.weaponList);
 
         // Update current weapons displayed
         for (int i = 0; i < currentWeaponsImages.Count; i++)
@@ -79,7 +77,20 @@ public class WeaponShop : MonoBehaviour
             var weapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]);
             currentWeaponsImages[i].sprite = weapon.weaponUISprite;
             //currentDescriptions[i].text = weapon.weaponDescription;
+            
         }
+        internalWeaponsList.Clear();
+        for (int i = 0; i < everyWeaponList.weaponList.Count; i++)
+        {
+            if (!WeaponManager.Instance.weaponParentList.Contains(everyWeaponList.weaponList[i]))
+            {
+                internalWeaponsList.Add(everyWeaponList.weaponList[i]);
+            }
+        }
+
+
+
+        
 
         // Initialize available weapons for swapping
         weaponOptions.Clear();
