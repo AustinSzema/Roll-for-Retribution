@@ -26,7 +26,7 @@ public class FleeFromPlayer : EnemyComponent
             Vector3 directionAwayFromPlayer = (transform.position - _gameManager.playerPosition).normalized;
             
             // Move the enemy in the opposite direction of the player
-            rb.position +=  enemyBase.enemySO._moveSpeed * Time.deltaTime * directionAwayFromPlayer;
+            rb.position += enemyBase.enemySO._moveSpeed * directionAwayFromPlayer;
         }
     }
 
