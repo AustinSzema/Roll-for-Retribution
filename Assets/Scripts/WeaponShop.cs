@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -5,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class WeaponShop : MonoBehaviour
 {
@@ -20,18 +22,18 @@ public class WeaponShop : MonoBehaviour
     [FormerlySerializedAs("currentWeapons")] [SerializeField]
     private List<Image> currentWeaponsImages = new List<Image>();
 
-    [SerializeField] private List<TextMeshProUGUI> currentDescriptions = new List<TextMeshProUGUI>();
+    //[SerializeField] private List<TextMeshProUGUI> currentDescriptions = new List<TextMeshProUGUI>();
 
     [FormerlySerializedAs("buttons")] [Space] [SerializeField]
     private List<Image> availableWeaponsImages = new List<Image>();
 
-    [FormerlySerializedAs("descriptions")] [SerializeField]
-    private List<TextMeshProUGUI> availableWeaponsDescriptions = new List<TextMeshProUGUI>();
+    // [FormerlySerializedAs("descriptions")] [SerializeField]
+    // private List<TextMeshProUGUI> availableWeaponsDescriptions = new List<TextMeshProUGUI>();
 
     private List<GameObject> weaponOptions = new List<GameObject>();
     private List<GameObject> internalWeaponsList = new List<GameObject>();
 
-    [SerializeField] private List<TextMeshProUGUI> arrowDescriptions = new List<TextMeshProUGUI>();
+    //[SerializeField] private List<TextMeshProUGUI> arrowDescriptions = new List<TextMeshProUGUI>();
 
     [HideInInspector] public bool hasSwappedWeapon = false;
 
@@ -44,6 +46,8 @@ public class WeaponShop : MonoBehaviour
     [HideInInspector] public List<bool> flippedList = new List<bool>();
 
     [SerializeField] private GameObject nextRoundButton;
+
+    [SerializeField] private GameObject WeaponShopParent;
     
     private struct weaponShit
     {
@@ -51,7 +55,13 @@ public class WeaponShop : MonoBehaviour
         private Image weaponImage;
         private Image weaponDescription;
     }
-    
+
+    private void Awake()
+    {
+        WeaponShopParent.SetActive(false);
+    }
+
+
     private void OnEnable()
     {
         GameManager.Instance.gameIsPaused = true;
@@ -68,7 +78,7 @@ public class WeaponShop : MonoBehaviour
             oldWeapons.Add(WeaponManager.Instance.weaponParentList[i]);
             var weapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]);
             currentWeaponsImages[i].sprite = weapon.weaponUISprite;
-            currentDescriptions[i].text = weapon.weaponDescription;
+            //currentDescriptions[i].text = weapon.weaponDescription;
         }
 
         // Initialize available weapons for swapping
@@ -88,10 +98,10 @@ public class WeaponShop : MonoBehaviour
 
             weaponOptions.Add(selectedWeapon);
             availableWeaponsImages[i].sprite = weapon.weaponUISprite;
-            availableWeaponsDescriptions[i].text = weapon.weaponDescription;
-            arrowDescriptions[i].text = "Replace " + WeaponManager.Instance
-                                            .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponName +
-                                        " with " + weapon.weaponName;
+            //availableWeaponsDescriptions[i].text = weapon.weaponDescription;
+            // arrowDescriptions[i].text = "Replace " + WeaponManager.Instance
+            //                                 .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponName +
+            //                             " with " + weapon.weaponName;
             internalWeaponsList.Remove(selectedWeapon);
         }
 
@@ -136,14 +146,14 @@ public class WeaponShop : MonoBehaviour
 
         // Update the current weapon images and descriptions
         currentWeaponsImages[slotIndex].sprite = newWeapon.weaponUISprite;
-        currentDescriptions[slotIndex].text = newWeapon.weaponDescription;
+        //currentDescriptions[slotIndex].text = newWeapon.weaponDescription;
 
         // Update the available weapon images and descriptions
         availableWeaponsImages[slotIndex].sprite = currentWeapon.weaponUISprite;
-        availableWeaponsDescriptions[slotIndex].text = currentWeapon.weaponDescription;
+        //availableWeaponsDescriptions[slotIndex].text = currentWeapon.weaponDescription;
 
         // Update the arrow description to reflect the swap
-        arrowDescriptions[slotIndex].text = "Replace " + newWeapon.weaponName + " with " + currentWeapon.weaponName;
+        //arrowDescriptions[slotIndex].text = "Replace " + newWeapon.weaponName + " with " + currentWeapon.weaponName;
 
         // Update the weaponParentList to point to the new weapon
         WeaponManager.Instance.weaponParentList[slotIndex] = weaponOptions[slotIndex];
@@ -159,13 +169,13 @@ public class WeaponShop : MonoBehaviour
         var originalBottomWeapon = WeaponManager.Instance.GetWeaponComponent(weaponOptions[slotIndex]);
 
         currentWeaponsImages[slotIndex].sprite = originalTopWeapon.weaponUISprite;
-        currentDescriptions[slotIndex].text = originalTopWeapon.weaponDescription;
+        //currentDescriptions[slotIndex].text = originalTopWeapon.weaponDescription;
 
         availableWeaponsImages[slotIndex].sprite = originalBottomWeapon.weaponUISprite;
-        availableWeaponsDescriptions[slotIndex].text = originalBottomWeapon.weaponDescription;
+        //availableWeaponsDescriptions[slotIndex].text = originalBottomWeapon.weaponDescription;
 
         // Reset arrow description
-        arrowDescriptions[slotIndex].text = "Replace " + originalTopWeapon.weaponName + " with " + originalBottomWeapon.weaponName;
+        //arrowDescriptions[slotIndex].text = "Replace " + originalTopWeapon.weaponName + " with " + originalBottomWeapon.weaponName;
     }
 
     public void NextScene()
