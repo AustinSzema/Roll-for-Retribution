@@ -137,6 +137,7 @@ MonoBehaviour:
   enemyBase: {fileID: 3445609164514352314}
   unpausedMesh: {fileID: 0}
   pausedMesh: {fileID: 0}
+  _hitPauseTime: 2
   _deathParticles: {fileID: 6512361771436754113}
   _hitParticles: {fileID: 2858455048733788034}
   rb: {fileID: 1672955631685481756}
@@ -228,6 +229,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6837861621307075446, guid: f3a35624987a8354d9faa21bbbf8f6bb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 887cbc2c68573dd4eb5ed1b09e82cae5, type: 2}
     - target: {fileID: 7676661087566500892, guid: f3a35624987a8354d9faa21bbbf8f6bb,
         type: 3}
       propertyPath: m_Name
