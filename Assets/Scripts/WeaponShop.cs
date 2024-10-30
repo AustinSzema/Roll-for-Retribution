@@ -20,14 +20,10 @@ public class WeaponShop : MonoBehaviour
     private List<GameObject> oldWeapons = new List<GameObject>();
     private List<GameObject> newWeapons = new List<GameObject>();
 
-    // Store initial state to allow reset on any call
-    private List<Sprite> originalCurrentImages = new List<Sprite>();
-    private List<string> originalCurrentDescriptions = new List<string>();
-    private List<Sprite> originalAvailableImages = new List<Sprite>();
-    private List<string> originalAvailableDescriptions = new List<string>();
+    // Store the initial weapon list state
+    private List<GameObject> originalWeaponParentList = new List<GameObject>();
 
     private int lastSwappedSlot = -1;
-    private bool hasSwappedThisRound = false;
     private bool hasSwappedWeapon = false;
 
     private void OnEnable()
@@ -41,13 +37,12 @@ public class WeaponShop : MonoBehaviour
         DisplayCurrentWeapons();
         InitializeAvailableWeapons();
 
-        // Store the initial state for resetting as needed
-        StoreInitialState();
+        // Store the initial state of weaponParentList for resetting purposes
+        originalWeaponParentList = new List<GameObject>(WeaponManager.Instance.weaponParentList);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GameManager.Instance.shopActive = true;
-        hasSwappedThisRound = false;
     }
 
     private void InitializeWeaponLists()
@@ -94,27 +89,11 @@ public class WeaponShop : MonoBehaviour
         }
     }
 
-    private void StoreInitialState()
-    {
-        originalCurrentImages.Clear();
-        originalCurrentDescriptions.Clear();
-        originalAvailableImages.Clear();
-        originalAvailableDescriptions.Clear();
-
-        for (int i = 0; i < currentWeaponsImages.Count; i++)
-        {
-            originalCurrentImages.Add(currentWeaponsImages[i].sprite);
-            originalCurrentDescriptions.Add(currentDescriptions[i].text);
-            originalAvailableImages.Add(availableWeaponsImages[i].sprite);
-            originalAvailableDescriptions.Add(availableWeaponsDescriptions[i].text);
-        }
-    }
-
     public void SwapToNewWeapon(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= currentWeaponsImages.Count) return;
 
-        // Reset all slots except the selected one to their original state
+        // Reset all slots to original state except for the selected slot
         ResetAllExcept(slotIndex);
 
         var currentWeapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[slotIndex]);
@@ -136,11 +115,18 @@ public class WeaponShop : MonoBehaviour
         {
             if (i != selectedIndex)
             {
-                currentWeaponsImages[i].sprite = originalCurrentImages[i];
-                currentDescriptions[i].text = originalCurrentDescriptions[i];
-                availableWeaponsImages[i].sprite = originalAvailableImages[i];
-                availableWeaponsDescriptions[i].text = originalAvailableDescriptions[i];
-                arrowDescriptions[i].text = $"Replace {originalCurrentDescriptions[i]} with {originalAvailableDescriptions[i]}";
+                // Reset the weaponParentList to the initial state for all slots except the selected one
+                WeaponManager.Instance.weaponParentList[i] = originalWeaponParentList[i];
+
+                // Update images and descriptions for current and available weapons
+                var originalWeapon = WeaponManager.Instance.GetWeaponComponent(originalWeaponParentList[i]);
+                currentWeaponsImages[i].sprite = originalWeapon.weaponUISprite;
+                currentDescriptions[i].text = originalWeapon.weaponDescription;
+
+                var availableWeapon = WeaponManager.Instance.GetWeaponComponent(weaponOptions[i]);
+                availableWeaponsImages[i].sprite = availableWeapon.weaponUISprite;
+                availableWeaponsDescriptions[i].text = availableWeapon.weaponDescription;
+                arrowDescriptions[i].text = $"Replace {originalWeapon.weaponName} with {availableWeapon.weaponName}";
             }
         }
     }
@@ -156,7 +142,7 @@ public class WeaponShop : MonoBehaviour
         WeaponManager.Instance.weaponParentList[slotIndex] = newWeapons[slotIndex];
         newWeapons[slotIndex] = oldWeapons[slotIndex];
 
-        hasSwappedThisRound = true;
+
         hasSwappedWeapon = true;
     }
 
