@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,7 +41,7 @@ public class WeaponShop : MonoBehaviour
     private List<GameObject> oldWeapons = new List<GameObject>();
     private List<GameObject> newWeapons = new List<GameObject>();
 
-    [HideInInspector] public List<bool> flippedList = new List<bool>();
+    public List<bool> flippedList = new List<bool>();
     
     private struct weaponShit
     {
@@ -167,7 +168,8 @@ public class WeaponShop : MonoBehaviour
 
     public void NextScene()
     {
-        if (hasSwappedWeapon)
+        
+        if (flippedList.Contains(true))
         {
             // Update current weapons displayed
             for (int i = 0; i < currentWeaponsImages.Count; i++)
@@ -187,6 +189,7 @@ public class WeaponShop : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
 
     private bool IsWeaponInCurrentWeapons(GameObject weapon)
     {

@@ -624,6 +624,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2024774228}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Revert
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 948579967}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Revert
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &511315477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,8 +700,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topImage: {fileID: 1652692807}
   bottomImage: {fileID: 2014211016}
+  otherPoops:
+  - {fileID: 2024774228}
+  - {fileID: 948579967}
+  topImages:
+  - {fileID: 1652692807}
+  - {fileID: 356626302}
+  - {fileID: 392479783}
+  bottomImages:
+  - {fileID: 2014211016}
+  - {fileID: 87016833}
+  - {fileID: 369507938}
   weaponShop: {fileID: 580326936}
   index: 0
+  flipped: 0
 --- !u!114 &580326936 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
@@ -1107,6 +1143,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 511315479}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Revert
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2024774228}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Revert
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &948579965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,8 +1219,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topImage: {fileID: 392479783}
   bottomImage: {fileID: 369507938}
+  otherPoops:
+  - {fileID: 511315479}
+  - {fileID: 2024774228}
+  topImages:
+  - {fileID: 1652692807}
+  - {fileID: 356626302}
+  - {fileID: 392479783}
+  bottomImages:
+  - {fileID: 2014211016}
+  - {fileID: 87016833}
+  - {fileID: 369507938}
   weaponShop: {fileID: 580326936}
   index: 2
+  flipped: 0
 --- !u!1 &1045264904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,6 +2392,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 511315479}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Revert
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 948579967}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Revert
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2024774226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2372,8 +2468,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topImage: {fileID: 356626302}
   bottomImage: {fileID: 87016833}
+  otherPoops:
+  - {fileID: 511315479}
+  - {fileID: 948579967}
+  topImages:
+  - {fileID: 1652692807}
+  - {fileID: 356626302}
+  - {fileID: 392479783}
+  bottomImages:
+  - {fileID: 2014211016}
+  - {fileID: 87016833}
+  - {fileID: 369507938}
   weaponShop: {fileID: 580326936}
   index: 1
+  flipped: 0
 --- !u!1001 &497000186225071642
 PrefabInstance:
   m_ObjectHideFlags: 0
