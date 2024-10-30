@@ -41,7 +41,7 @@ public class WeaponShop : MonoBehaviour
     private List<GameObject> oldWeapons = new List<GameObject>();
     private List<GameObject> newWeapons = new List<GameObject>();
 
-    public List<bool> flippedList = new List<bool>();
+    [HideInInspector] public List<bool> flippedList = new List<bool>();
 
     [SerializeField] private GameObject nextRoundButton;
     
