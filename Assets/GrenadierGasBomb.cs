@@ -26,13 +26,11 @@ public class GrenadierGasBomb : MonoBehaviour
 
     private IEnumerator Shrink()
     {
-        while (transform.localScale.magnitude > 1f)
-        {
             if (GameManager.Instance.gameIsPaused == false)
             {
                 transform.localScale *= 0.9999f;
                 yield return null;
             }
-        }
+        
     }
 }
