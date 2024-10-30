@@ -42,6 +42,8 @@ public class WeaponShop : MonoBehaviour
     private List<GameObject> newWeapons = new List<GameObject>();
 
     public List<bool> flippedList = new List<bool>();
+
+    [SerializeField] private GameObject nextRoundButton;
     
     private struct weaponShit
     {
@@ -205,5 +207,10 @@ public class WeaponShop : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void ShouldShowNextRoundButton()
+    {
+            nextRoundButton.SetActive(flippedList.Contains(true));
     }
 }

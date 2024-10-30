@@ -45,6 +45,7 @@ public class WeaponPoop : MonoBehaviour
 
     public bool flipped = false;
     
+    
     public void Swap()
     {
         if (topImage.sprite == bottomImage.sprite)
@@ -87,10 +88,8 @@ public class WeaponPoop : MonoBehaviour
 
         }
         
-        
-
         weaponShop.hasSwappedWeapon = true;
-
+        weaponShop.ShouldShowNextRoundButton();
     }
 
     public void Revert()
