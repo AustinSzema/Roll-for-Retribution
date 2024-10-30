@@ -13,7 +13,9 @@ public class WeaponShop : MonoBehaviour
     // Add this to track if a weapon has already been swapped this round
     private bool hasSwappedThisRound = false;
 
-    [SerializeField] private WeaponList weaponList;
+    [FormerlySerializedAs("weaponList")] [SerializeField] private WeaponList everyWeaponList;
+    
+    
     [SerializeField] private GameObject loadingText;
 
     [FormerlySerializedAs("currentWeapons")] [SerializeField]
@@ -31,11 +33,19 @@ public class WeaponShop : MonoBehaviour
     private List<GameObject> internalWeaponsList = new List<GameObject>();
 
     [SerializeField] private List<TextMeshProUGUI> arrowDescriptions = new List<TextMeshProUGUI>();
+    
+    
+    private List<GameObject> oldWeapons = new List<GameObject>();
+    private List<GameObject> oldCopyWeapons = new List<GameObject>();
+    private List<GameObject> newWeapons = new List<GameObject>();
+    private List<GameObject> newCopyWeapons = new List<GameObject>();
+    
+    
+    
+    
+    
 
     private bool hasSwappedWeapon = false;
-
-    private List<Sprite> currentSprites = new List<Sprite>();
-    private List<Sprite> availableSprites = new List<Sprite>();
 
     private void OnEnable()
     {
@@ -44,7 +54,7 @@ public class WeaponShop : MonoBehaviour
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         player.GetComponent<Collider>().enabled = false;
         internalWeaponsList.Clear();
-        internalWeaponsList.AddRange(weaponList.weaponList);
+        internalWeaponsList.AddRange(everyWeaponList.weaponList);
 
         // Update current weapons displayed
         for (int i = 0; i < currentWeaponsImages.Count; i++)
@@ -52,34 +62,43 @@ public class WeaponShop : MonoBehaviour
             var weapon = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]);
             currentWeaponsImages[i].sprite = weapon.weaponUISprite;
             currentDescriptions[i].text = weapon.weaponDescription;
+            oldWeapons = WeaponManager.Instance.weaponParentList;
+            oldCopyWeapons = WeaponManager.Instance.weaponParentList;
         }
 
         // Initialize available weapons for swapping
         weaponOptions.Clear();
         for (int i = 0; i < availableWeaponsImages.Count; i++)
         {
-            GameObject selectedWeapon = null;
+            GameObject selectedWeaponObject = null;
             Weapon weapon = null;
 
             do
             {
                 int random = Random.Range(0, internalWeaponsList.Count);
-                selectedWeapon = internalWeaponsList[random];
-                weapon = WeaponManager.Instance.GetWeaponComponent(selectedWeapon);
-            } while (IsWeaponInCurrentWeapons(selectedWeapon));
+                selectedWeaponObject = internalWeaponsList[random];
+                newWeapons.Add(selectedWeaponObject);
+                newCopyWeapons.Add(selectedWeaponObject);
+                weapon = WeaponManager.Instance.GetWeaponComponent(selectedWeaponObject);
+            } while (IsWeaponInCurrentWeapons(selectedWeaponObject));
 
-            weaponOptions.Add(selectedWeapon);
+            
+            
+            weaponOptions.Add(selectedWeaponObject);
             availableWeaponsImages[i].sprite = weapon.weaponUISprite;
             availableWeaponsDescriptions[i].text = weapon.weaponDescription;
             arrowDescriptions[i].text = "Replace " + WeaponManager.Instance
                                             .GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponName +
                                         " with " + weapon.weaponName;
-            internalWeaponsList.Remove(selectedWeapon);
+            internalWeaponsList.Remove(selectedWeaponObject);
         }
+        
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
+        GameManager.Instance.shopActive = true;
+        
         // Reset swap tracker for new round
         hasSwappedThisRound = false; // Reset swap state when the shop opens
     }
@@ -91,7 +110,7 @@ public class WeaponShop : MonoBehaviour
         // Check if there's an existing swap and reset it if necessary
         if (lastSwappedSlot != -1 && lastSwappedSlot != slotIndex)
         {
-            // Reset the previous swap
+            // Reset the previous swap before performing the new swap
             ResetSwap(lastSwappedSlot);
         }
 
@@ -122,9 +141,11 @@ public class WeaponShop : MonoBehaviour
         arrowDescriptions[slotIndex].text = "Replace " + newWeapon.weaponName + " with " + currentWeapon.weaponName;
 
         // Update the weaponParentList to point to the new weapon
-        WeaponManager.Instance.weaponParentList[slotIndex] = weaponOptions[slotIndex];
+        WeaponManager.Instance.weaponParentList[slotIndex] = newCopyWeapons[slotIndex];
+        newWeapons[slotIndex] = oldCopyWeapons[slotIndex];
 
         hasSwappedThisRound = true; // Mark that a swap has occurred
+        hasSwappedWeapon = true;
     }
 
     private void ResetSwap(int slotIndex)
