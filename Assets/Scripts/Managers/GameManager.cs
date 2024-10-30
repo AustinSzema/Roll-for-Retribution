@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
     // Example function that you want to call at the start of each scene
     public void OnSceneStart()
     {
-        Debug.Log("Scene has started!");
+        //Debug.Log("Scene has started!");
         Setup();
         // Add the logic you want to execute at the start of each scene
     }
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
         gameIsPaused = false;
         _audioManager = AudioManager.Instance;
         _audioManager.PlayMainMusic();
-        Debug.Log("Game Manager Start");
+        //Debug.Log("Game Manager Start");
 
     }
 

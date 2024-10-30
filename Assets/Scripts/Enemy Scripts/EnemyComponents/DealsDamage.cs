@@ -11,7 +11,7 @@ public class DealsDamage : EnemyComponent
     
     private void DealDamage(GameObject obj)
     {
-        Debug.Log("hit this thing with this tag " + obj.name + " "  + obj.tag);
+        //Debug.Log("hit this thing with this tag " + obj.name + " "  + obj.tag);
         if (obj.CompareTag(TagManager.playerTag))
         {
             PlayerDamage player = obj.GetComponent<PlayerDamage>();
