@@ -232,6 +232,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63474423}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &87016833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5985951774327435583, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &154130607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -474,6 +486,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356626302 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6360495201132056234, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &369507938 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3113407106633185320, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &392479783 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1304373486790841428, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &409526390 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6262331098503541290, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
@@ -492,6 +540,7 @@ GameObject:
   - component: {fileID: 511315478}
   - component: {fileID: 511315477}
   - component: {fileID: 511315476}
+  - component: {fileID: 511315479}
   m_Layer: 5
   m_Name: Weapon Button (4)
   m_TagString: Untagged
@@ -563,25 +612,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 580326936}
-        m_TargetAssemblyTypeName: WeaponShop, Assembly-CSharp
-        m_MethodName: SwapToNewWeapon
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1652692804}
-        m_TargetAssemblyTypeName: WeaponShop, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 511315479}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Swap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -625,6 +662,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511315474}
   m_CullTransparentMesh: 1
+--- !u!114 &511315479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511315474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e94290d6f61364c84ce66b4477b267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topImage: {fileID: 1652692807}
+  bottomImage: {fileID: 2014211016}
+  weaponShop: {fileID: 580326936}
+  index: 0
 --- !u!114 &580326936 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
@@ -840,6 +893,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617298785}
   m_CullTransparentMesh: 1
+--- !u!114 &686841152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3083861758479251453, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &736604513
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +1023,7 @@ GameObject:
   - component: {fileID: 948579966}
   - component: {fileID: 948579965}
   - component: {fileID: 948579964}
+  - component: {fileID: 948579967}
   m_Layer: 5
   m_Name: Weapon Button (6)
   m_TagString: Untagged
@@ -1029,14 +1095,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 580326936}
-        m_TargetAssemblyTypeName: WeaponShop, Assembly-CSharp
-        m_MethodName: SwapToNewWeapon
-        m_Mode: 3
+      - m_Target: {fileID: 948579967}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Swap
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1079,6 +1145,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948579962}
   m_CullTransparentMesh: 1
+--- !u!114 &948579967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948579962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e94290d6f61364c84ce66b4477b267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topImage: {fileID: 392479783}
+  bottomImage: {fileID: 369507938}
+  weaponShop: {fileID: 580326936}
+  index: 2
 --- !u!1 &1045264904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,12 +1572,30 @@ Transform:
   - {fileID: 241797179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1652692804 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1377036496923584560, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+--- !u!114 &1599951546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 331159561652885232, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
     type: 3}
   m_PrefabInstance: {fileID: 7581897039536191844}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1652692807 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4075274423583974692, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1670856335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,6 +2011,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770898559}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1796614102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5113702707729797403, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1861939506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2100,6 +2212,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011830123}
   m_CullTransparentMesh: 1
+--- !u!114 &2014211016 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2418090682973594986, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7581897039536191844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2024774223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2112,6 +2236,7 @@ GameObject:
   - component: {fileID: 2024774227}
   - component: {fileID: 2024774226}
   - component: {fileID: 2024774225}
+  - component: {fileID: 2024774228}
   m_Layer: 5
   m_Name: Weapon Button (5)
   m_TagString: Untagged
@@ -2183,14 +2308,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 580326936}
-        m_TargetAssemblyTypeName: WeaponShop, Assembly-CSharp
-        m_MethodName: SwapToNewWeapon
-        m_Mode: 3
+      - m_Target: {fileID: 2024774228}
+        m_TargetAssemblyTypeName: WeaponPoop, Assembly-CSharp
+        m_MethodName: Swap
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2233,6 +2358,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024774223}
   m_CullTransparentMesh: 1
+--- !u!114 &2024774228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024774223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e94290d6f61364c84ce66b4477b267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topImage: {fileID: 356626302}
+  bottomImage: {fileID: 87016833}
+  weaponShop: {fileID: 580326936}
+  index: 1
 --- !u!1001 &497000186225071642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3051,6 +3192,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
         type: 3}
+      propertyPath: everyWeaponList
+      value: 
+      objectReference: {fileID: 11400000, guid: e1b3e6570fbf28948809a329b83dddfb,
+        type: 2}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
       propertyPath: arrowDescriptions.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -3069,6 +3216,66 @@ PrefabInstance:
       propertyPath: arrowDescriptions.Array.data[2]
       value: 
       objectReference: {fileID: 1137279099}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: currentWeaponsImages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsImages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: currentWeaponsImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 1652692807}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: currentWeaponsImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 356626302}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: currentWeaponsImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 392479783}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 2014211016}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 87016833}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 369507938}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsDescriptions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsDescriptions.Array.data[0]
+      value: 
+      objectReference: {fileID: 1599951546}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsDescriptions.Array.data[1]
+      value: 
+      objectReference: {fileID: 686841152}
+    - target: {fileID: 1268228471591266707, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: availableWeaponsDescriptions.Array.data[2]
+      value: 
+      objectReference: {fileID: 1796614102}
     - target: {fileID: 1304373486790841428, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
         type: 3}
       propertyPath: m_Color.b
