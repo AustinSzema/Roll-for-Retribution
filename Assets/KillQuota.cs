@@ -8,6 +8,8 @@ public class KillQuota : MonoBehaviour
 {
     [SerializeField] private Slider killQuotaSlider;
 
+    [SerializeField] private GameObject portal;
+
     public static KillQuota Instance;
 
     private int killCount = 0;
@@ -26,5 +28,13 @@ public class KillQuota : MonoBehaviour
     void Update()
     {
         killQuotaSlider.value = killCount;
+    }
+
+    public void EnablePortal()
+    {
+        if (killQuotaSlider.value >= killQuotaSlider.maxValue)
+        {
+            portal.SetActive(true);
+        }
     }
 }
