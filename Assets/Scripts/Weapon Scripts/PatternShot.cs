@@ -7,17 +7,17 @@ using UnityEngine;
 public class PatternShot : Weapon
 {
     [SerializeField] private PatternSerializer pattern;
-    [SerializeField] private float rotationSpeeds = 0f; // Speed of rotation on the Y axis
     private Vector3 startingSize = Vector3.one;
     
-    [Header("Shrink Weapon In Hand Fields")] 
+    [Header("Scaling and Rotating")] 
     [SerializeField] private bool shrinksWhenInHand = false; 
     [SerializeField] private float shrinkDistance = 2.0f; // Distance within which the totem shrinks
     [SerializeField] private float maxDistance = 30.0f;    // Max distance for scaling
     [SerializeField] private float minScaleFactor = 0.5f;        // Minimum scale when close
     [SerializeField] private float maxScaleFactor = 1f;       // Maximum scale when far away
     [SerializeField] private float lerpSpeed = 100.0f;     // Speed of scaling transition
-    
+    [SerializeField] private float rotationSpeeds = 0f; // Speed of rotation on the Y axis
+
     [Header("Spear")]
     [SerializeField] private bool isSpear = false; 
     
