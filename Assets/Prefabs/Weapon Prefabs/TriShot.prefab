@@ -113,15 +113,17 @@ MonoBehaviour:
   rb: {fileID: 2098395508316031394}
   weaponUISprite: {fileID: 21300000, guid: 111cf00e31bf28542973da6e57c33abf, type: 3}
   weaponDescription: what the..
+  weaponName: weapon
   pattern: {fileID: 0}
-  rotationSpeeds: 0
   shrinksWhenInHand: 1
   shrinkDistance: 2
   maxDistance: 30
-  minScaleFactor: 0.05
-  maxScaleFactor: 1
+  minScaleFactor: 1
+  maxScaleFactor: 5
   lerpSpeed: 100
+  rotationSpeeds: 0
   isSpear: 1
+  freezeRotation: 0
 --- !u!54 &2098395508316031394
 Rigidbody:
   m_ObjectHideFlags: 0

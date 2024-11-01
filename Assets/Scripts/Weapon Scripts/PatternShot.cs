@@ -18,27 +18,29 @@ public class PatternShot : Weapon
     [SerializeField] private float lerpSpeed = 100.0f;     // Speed of scaling transition
     [SerializeField] private float rotationSpeeds = 0f; // Speed of rotation on the Y axis
 
-    [Header("Spear")]
-    [SerializeField] private bool isSpear = false; 
-    
-    private void Start()
+    [Header("Checks")]
+    [SerializeField] private bool isSpear = false;
+    [SerializeField] private bool freezeRotation = false;
+
+    public void Start()
     {
-        startingSize = transform.localScale;
+        transform.localScale = startingSize;
     }
 
     public void Shoot(Vector3 magnetForwardDirection, int index)
     {
-        Quaternion q = Quaternion.FromToRotation(Vector3.forward, magnetForwardDirection);
+        Quaternion q = Quaternion.LookRotation(magnetForwardDirection);
         Vector3 force = q * pattern.PatternPoints[index % pattern.PatternPoints.Count].normalized * shootForce;
         rb.AddForce(force);
         rb.AddTorque(transform.up * rotationSpeeds);
         
-        Quaternion targetRotation = Quaternion.LookRotation(force);
-        rb.rotation = targetRotation;
+        if (!freezeRotation)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(force);
+            rb.rotation = targetRotation;
+        }
     }
-
     
-
     private void Update()
     {
         if (shrinksWhenInHand)
@@ -48,13 +50,13 @@ public class PatternShot : Weapon
         
             // Calculate the target scale based on distance
             float targetScale = distance <= shrinkDistance ? minScaleFactor : Mathf.Lerp(minScaleFactor, maxScaleFactor, Mathf.InverseLerp(shrinkDistance, maxDistance, distance));
-
+    
             // Lerp the current scale to the target scale for smooth transition
-            float currentScaleFactor = transform.localScale.x / startingSize.x; // Determine the current scale factor relative to the starting size
-            float newScaleFactor = Mathf.Lerp(currentScaleFactor, targetScale, Time.deltaTime * lerpSpeed);
+            float currentScale = transform.localScale.x; // Assuming uniform scaling
+            float newScale = Mathf.Lerp(currentScale, targetScale, Time.deltaTime * lerpSpeed);
         
-            // Apply the new scale while maintaining the original proportions
-            transform.localScale = startingSize * newScaleFactor;
+            // Apply the new scale
+            transform.localScale = new Vector3(newScale, newScale, newScale);
         }
     }
     
