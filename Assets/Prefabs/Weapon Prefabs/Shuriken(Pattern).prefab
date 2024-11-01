@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 6135227712247987915}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0011297464, z: 0.0011301041}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7a209cf5564a24ca9032b3ba4ad3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 6000
+  shootForce: 12500
   slamForce: 5500
   pullSpeed: 60
   damage: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
   minScaleFactor: 5
   maxScaleFactor: 20
   lerpSpeed: 100
-  rotationSpeeds: 100
+  rotationSpeeds: 10000
   isSpear: 0
   freezeRotation: 1
 --- !u!75 &3440567560557975730
@@ -78,7 +78,7 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6135227712247987915}
   m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
+  m_Force: {x: 0, y: -6.25, z: 0}
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
@@ -172,7 +172,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2825bbde6bf065d4f987b81795db2602, type: 2}
+  - {fileID: 2100000, guid: d679b1747a70b9549b3fae6bacb92ef7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
