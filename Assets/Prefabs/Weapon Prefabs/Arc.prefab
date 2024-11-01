@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 40, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9139452839956237524}
@@ -113,8 +113,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 0.1, z: 4}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1470369734409966614}
   - {fileID: 9059816290010689654}
@@ -142,13 +142,15 @@ MonoBehaviour:
   weaponDescription: Fire several orbs that slide around the arena like snakes
   weaponName: Snakes
   pattern: {fileID: 0}
-  rotationSpeeds: 180
   shrinksWhenInHand: 1
   shrinkDistance: 2
   maxDistance: 30
-  minScaleFactor: 0.3
-  maxScaleFactor: 1
+  minScaleFactor: 1
+  maxScaleFactor: 4
   lerpSpeed: 100
+  rotationSpeeds: 180
+  isSpear: 0
+  freezeRotation: 0
 --- !u!136 &8195576952485012401
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -169,7 +171,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 9.93
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!75 &8733877959549429413

@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.64801353, w: 0.76162887}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2695538742812845037}
@@ -115,14 +115,15 @@ MonoBehaviour:
   weaponDescription: what the..
   weaponName: Spike Ball
   pattern: {fileID: 0}
-  rotationSpeeds: 0
   shrinksWhenInHand: 1
   shrinkDistance: 2
   maxDistance: 30
-  minScaleFactor: 0.05
-  maxScaleFactor: 1
+  minScaleFactor: 0.25
+  maxScaleFactor: 10
   lerpSpeed: 100
+  rotationSpeeds: 0
   isSpear: 1
+  freezeRotation: 0
 --- !u!54 &3234779428535124986
 Rigidbody:
   m_ObjectHideFlags: 0
