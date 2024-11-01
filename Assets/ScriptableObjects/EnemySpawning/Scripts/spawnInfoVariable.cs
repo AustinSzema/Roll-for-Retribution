@@ -31,5 +31,6 @@ public struct SpawnInfo
     fileName = "New Spawn Info Variable")]
 public class spawnInfoVariable : ScriptableObjectVariable<List<SpawnInfo>>
 {
+    public int killQuota = 1500;
 }
 

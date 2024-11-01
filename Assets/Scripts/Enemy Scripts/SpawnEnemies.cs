@@ -78,7 +78,8 @@ public class SpawnEnemies : MonoBehaviour
     _currentSpawnInfo = _spawnInfos[0];
     _currentSpawnInfoIdx = 0;
     _changeSpawnInfo = true;
-
+    
+      KillQuota.Instance.killQuotaSlider.maxValue = currentSpawnInfoVariable.killQuota;
 
     InvokeRepeating("SpawnCurrentEnemies", 0f, secondsBetweenSpawn);
   }

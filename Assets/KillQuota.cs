@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class KillQuota : MonoBehaviour
 {
-    [SerializeField] private Slider killQuotaSlider;
+    public Slider killQuotaSlider;
 
     [SerializeField] private GameObject portal;
-
+    
     public static KillQuota Instance;
-
+    
     private int killCount = 0;
 
     private void Awake()
