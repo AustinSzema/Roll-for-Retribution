@@ -18,6 +18,7 @@ public class EnemySO : ScriptableObject
     public float _moveSpeed = 2f;
     public float rotationSpeed = 5f;
     public float _gravityMultiplier = 2f;
+    public int killThresholdValue = 1;
     public bool isFlyingType = false;
     public bool dieOnContactWithPlayer = true;
 
@@ -28,6 +29,7 @@ public class EnemySO : ScriptableObject
     [HideInInspector] public float explosionDiameter = 5f;
     [HideInInspector] public float activationDistance = 15f;
     [HideInInspector] public bool damagesOtherEnemies = true;
+    
 
     
     [Header("Grenadier Specific Values")]
