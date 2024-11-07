@@ -65,7 +65,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     public void takeDamage(float hitPoints)
     {
         //StartCoroutine(_cameraShake.Shake(0.2f, 1f));
-        StartCoroutine(_cameraShake.Shake(cameraShakeFrequency, camerShakeDuration, cameraShakeMaxAngle, cameraMagnitudeForXY));
+//        StartCoroutine(_cameraShake.Shake(cameraShakeFrequency, camerShakeDuration, cameraShakeMaxAngle, cameraMagnitudeForXY));
         _gameManager.playerCurrentHealth -= hitPoints;
         if (_gameManager.playerCurrentHealth <= 0)
         {

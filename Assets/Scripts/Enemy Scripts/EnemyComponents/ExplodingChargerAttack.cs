@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class ExplodingChargerAttack : MonoBehaviour
     [SerializeField] private ParticleSystem chargerExplosionParticles;
     [SerializeField] private Collider chargerExplosionCollider;
 
+    [SerializeField] private TakesDamage takeDamage;
+    
     private Vector3 playerPosition = Vector3.zero;
     private Vector3 chargerVelocity = Vector3.zero;
     private bool isCharging = false;
@@ -58,7 +61,8 @@ public class ExplodingChargerAttack : MonoBehaviour
         chargerExplosionParticles.Clear();
         chargerExplosionParticles.Play();
         chargerExplosionCollider.enabled = true;
-        
+
+        takeDamage.takeDamage(Int32.MaxValue);
     }
     
     private IEnumerator ExplodeCharger()
