@@ -1,9 +1,76 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class CameraShake : MonoBehaviour
 {
-    [SerializeField] private float cameraShakeMin = -1f;
+    float cameraShakeFrequency;
+    float camerShakeDuration;
+    float cameraShakeMaxAngle;
+    float cameraMagnitudeForXY;
+
+    /*public void Start()
+    {
+        StartCoroutine(KeepShaking());
+    }
+
+    public IEnumerator KeepShaking()
+    {
+        while (true)
+        {
+            CameraShaker(cameraShakeFrequency, cameraShakeFrequency, cameraShakeAngle, cameraMagnitudeForXY);
+            yield return new WaitForSeconds(3f);
+        }
+    }
+
+    public void CameraShaker(float cameraShakeFrequency, float camerShakeDuration, float cameraShakeMaxAngle,
+        float cameraMagnitudeForXY)
+    {
+        StartCoroutine(Shake(cameraShakeFrequency, camerShakeDuration, cameraShakeAngle, cameraMagnitudeForXY));
+    }*/
+
+    public IEnumerator Shake(float cameraShakeFrequency, float camerShakeDuration, float cameraShakeMaxAngle,
+        float cameraMagnitudeForXY)
+    {
+        float elapsed = 0.0f;
+        Vector3 originalCamPos = Camera.main.transform.position;
+
+        while (elapsed < camerShakeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float percentComplete = elapsed / camerShakeDuration;
+            float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
+            
+            float seed1 = Random.Range(0.5f, 1f) * Time.time * cameraShakeFrequency;
+            float seed2 = Random.Range(0.5f, 1f) * Time.time * cameraShakeFrequency;
+            float seed3 = Random.Range(0.5f, 1f) * Time.time * cameraShakeFrequency;
+
+            float x = Mathf.PerlinNoise(seed1, 0f) * 2.0f - 1.0f;
+            float y = Mathf.PerlinNoise(0f, seed2) * 2.0f - 1.0f;
+            float shake = Mathf.PerlinNoise(seed3, 0f) * 2.0f - 1f;
+
+            x *= cameraMagnitudeForXY * damper;
+            y *= cameraMagnitudeForXY * damper;
+            shake *= cameraShakeMaxAngle * damper;
+            
+            if (!GameManager.Instance.gameIsPaused)
+            {
+                transform.localRotation = Quaternion.Euler(0.0f, 0.0f, shake);
+                transform.position = originalCamPos + new Vector3(x, y, originalCamPos.z);
+            }
+            
+            yield return null;
+        }
+
+        transform.localPosition = originalCamPos;
+        transform.localRotation = Quaternion.identity;
+    }
+}
+
+/*[SerializeField] private float cameraShakeMin = -1f;
     [SerializeField] private float cameraShakeMax = 1f;
     public IEnumerator Shake (float duration, float magnitude)
     {
@@ -21,5 +88,4 @@ public class CameraShake : MonoBehaviour
             yield return null;
         }
         transform.localPosition = originalPos;
-    }
-}
+    }*/
