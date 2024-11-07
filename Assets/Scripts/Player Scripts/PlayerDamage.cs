@@ -17,10 +17,10 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     [SerializeField] private GameObject _mainCanvas;
 
     [SerializeField] private CameraShake _cameraShake;
-    [SerializeField] public float cameraShakeFrequency;
-    [SerializeField] public float camerShakeDuration;
-    [SerializeField] public float cameraShakeMaxAngle;
-    [SerializeField] public float cameraMagnitudeForXY;
+    [SerializeField] public float cameraShakeFrequency = 0.0f;
+    [SerializeField] public float camerShakeDuration = 0.0f;
+    [SerializeField] public float cameraShakeMaxAngle = 0.0f;
+    [SerializeField] public float cameraMagnitudeForXY = 0.0f;
     
     private HighScore _highScore;
     
@@ -65,7 +65,7 @@ public class PlayerDamage : MonoBehaviour, IDamageable
     public void takeDamage(float hitPoints)
     {
         //StartCoroutine(_cameraShake.Shake(0.2f, 1f));
-//        StartCoroutine(_cameraShake.Shake(cameraShakeFrequency, camerShakeDuration, cameraShakeMaxAngle, cameraMagnitudeForXY));
+        StartCoroutine(_cameraShake.Shake(cameraShakeFrequency, camerShakeDuration, cameraShakeMaxAngle, cameraMagnitudeForXY));
         _gameManager.playerCurrentHealth -= hitPoints;
         if (_gameManager.playerCurrentHealth <= 0)
         {
