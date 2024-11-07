@@ -428,7 +428,11 @@ MonoBehaviour:
   _playerDamagedClip: {fileID: 8300000, guid: 8cd57c005f1974f1c9295c92b318a509, type: 3}
   displayHighScore: {fileID: 0}
   _mainCanvas: {fileID: 0}
-  _cameraShake: {fileID: 518708476885470120}
+  _cameraShake: {fileID: 6271854986686588121}
+  cameraShakeFrequency: 1
+  camerShakeDuration: 0.25
+  cameraShakeMaxAngle: 2
+  cameraMagnitudeForXY: 0.1
 --- !u!114 &4002532168671568275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,18 +1188,29 @@ PrefabInstance:
       propertyPath: _cameraPosition
       value: 
       objectReference: {fileID: 4429400767039744803}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1628664853279144995, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3468056722852948538, guid: d822a961e824b3a43b1a29dd8c22a0eb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6271854986686588121}
   m_SourcePrefab: {fileID: 100100000, guid: d822a961e824b3a43b1a29dd8c22a0eb, type: 3}
---- !u!114 &518708476885470120 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1628664853279144995, guid: d822a961e824b3a43b1a29dd8c22a0eb,
+--- !u!1 &2416743761845280177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3468056722852948538, guid: d822a961e824b3a43b1a29dd8c22a0eb,
     type: 3}
   m_PrefabInstance: {fileID: 1272544601401718667}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &6271854986686588121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2416743761845280177}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c189822840e855f4387dc0a2a71e3dc5, type: 3}
