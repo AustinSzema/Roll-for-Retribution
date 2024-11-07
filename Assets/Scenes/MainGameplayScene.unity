@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.9386859, g: 0.90466136, b: 0.84687346, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 2
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: e78597827cfbd264e8ccf1f745b7fa80, type: 2}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 619e305f5165a9946b7f72464e44ca4a, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06027575, g: 0.12736067, b: 0.12847279, a: 1}
+  m_IndirectSpecularColor: {r: 0.03105887, g: 0.0022124406, b: 0.0000005143406, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -327,7 +327,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182564393}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -584,6 +584,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3060277406321216238, guid: 0c6fb73e74e94614ab6904ffe24963cb,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3573034542302936805, guid: 0c6fb73e74e94614ab6904ffe24963cb,
         type: 3}
       propertyPath: m_Name
@@ -641,9 +646,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8736311877135077845, guid: 0c6fb73e74e94614ab6904ffe24963cb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1609406493}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c6fb73e74e94614ab6904ffe24963cb, type: 3}
+--- !u!4 &604587746 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8736311877135077845, guid: 0c6fb73e74e94614ab6904ffe24963cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 604587745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &736604513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1141,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.65
+  m_Intensity: 4
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1165,7 +1180,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1000, y: 1000}
   m_BounceIntensity: 1
@@ -1184,12 +1199,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609406490}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 37.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 604587746}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1725007255
 GameObject:
@@ -2847,4 +2862,3 @@ SceneRoots:
   - {fileID: 7581897039536191844}
   - {fileID: 1499382733}
   - {fileID: 182564396}
-  - {fileID: 1609406493}
