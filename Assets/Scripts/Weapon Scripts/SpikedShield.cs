@@ -5,17 +5,22 @@ using UnityEngine;
 
 public class SpikedShield : Weapon
 {
-    // Update is called once per frame
+    private bool rotateTowardsPlayerAndLock = true;
     private void SetRotation()
     {
-        // Get the rotation based on the camera's forward direction
         Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.forward);
-    
-        // Apply the rotation to the spear and its Rigidbody
         transform.rotation = targetRotation;
         rb.rotation = targetRotation;
-        }
+    }
     
+    public override void Attract(Vector3 magnetPosition)
+    {
+        rb.velocity = Vector3.zero;
+        rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
+            Time.deltaTime * pullSpeed);
+        rotateTowardsPlayerAndLock = true;
+    }
+
     public override void Slam()
     {
         rb.velocity = Vector3.zero;
@@ -30,18 +35,26 @@ public class SpikedShield : Weapon
     public override void Shoot(Vector3 magnetForwardDirection)
     {
         rb.AddForce(shootForce * magnetForwardDirection);
-
+        rotateTowardsPlayerAndLock = false;
+        rb.velocity = Vector3.zero;
+        // Use Quaternion.Euler to specify the rotation in degrees
+        Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
+        transform.rotation = rotation;
+        rb.rotation = rotation;
     }
     
 
     private void Update()
     {
-        AddWeight();
-        SetRotation();
+        //AddWeight();
+        if (rotateTowardsPlayerAndLock)
+        {
+            SetRotation();
+        }
     }
 
-    private void AddWeight()
+    /*private void AddWeight()
     {
         rb.AddForce(new Vector3(0f, -5f, 1f));
-    }
+    }*/
 }

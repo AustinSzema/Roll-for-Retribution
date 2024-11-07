@@ -23,7 +23,7 @@ public class Spear : Weapon
             transform.rotation = targetRotation;
             rb.rotation = targetRotation;
 
-            Debug.Log("ROTATION CAMERA " + targetRotation);
+            //Debug.Log("ROTATION CAMERA " + targetRotation);
         }
     }
     
