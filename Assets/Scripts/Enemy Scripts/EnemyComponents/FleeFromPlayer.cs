@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class FleeFromPlayer : EnemyComponent
 {
-    [SerializeField] private float rangeFromPlayer = 10f;
+    [SerializeField] private float fleeRangeFromPlayer = 10f;
+    [SerializeField] private float fleeingSpeedMultiplier = 0f;
+    //[SerializeField] private float fleeDuration = 0f;
     [SerializeField] private Rigidbody rb;
 
     private GameManager _gameManager;
@@ -25,6 +27,15 @@ public class FleeFromPlayer : EnemyComponent
             Debug.LogError("EnemyBase or enemySO is not assigned on " + gameObject.name);
         }
     }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag(TagManager.groundTag))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -35,14 +46,31 @@ public class FleeFromPlayer : EnemyComponent
 
             // Move the enemy in the opposite direction of the player
             float moveSpeed = enemyBase.enemySO._moveSpeed;
-            Vector3 newPosition = rb.position + moveSpeed * Time.fixedDeltaTime * directionAwayFromPlayer;
-            rb.MovePosition(newPosition);
+            //Vector3 newPosition = rb.position + moveSpeed * Time.fixedDeltaTime * directionAwayFromPlayer;
+            //rb.MovePosition(newPosition);
+            rb.AddForce(directionAwayFromPlayer * (moveSpeed * fleeingSpeedMultiplier), ForceMode.Acceleration);
         }
     }
 
     private void Update()
     {
         // Start fleeing if within a certain range from the player
-        fleeing = Vector3.Distance(transform.position, _gameManager.playerPosition) < rangeFromPlayer;
+        //fleeing = Vector3.Distance(transform.position, _gameManager.playerPosition) < rangeFromPlayer;
+        if (Vector3.Distance(transform.position, _gameManager.playerPosition) < fleeRangeFromPlayer)
+        {
+            fleeing = true;
+        }
+        else
+        {
+            fleeing = false; 
+        }
+        //Debug.Log(fleeing);
+        //Debug.Log(Vector3.Distance(transform.position, _gameManager.playerPosition));
     }
+    
+    /*IEnumerator FleeCooldown()
+    {
+        yield return new WaitForSeconds(fleeDuration);
+        Debug.Log("Cooldown active");
+    }*/
 }

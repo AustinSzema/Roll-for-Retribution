@@ -158,7 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyBase: {fileID: 5984276401518430628}
-  rangeFromPlayer: 10
+  fleeRangeFromPlayer: 50
+  fleeingSpeedMultiplier: 2
   rb: {fileID: 8219687511025049278}
 --- !u!114 &5315197293821447577
 MonoBehaviour:
@@ -546,6 +547,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5507632320071271139, guid: fcd1fc60a93551e4d8872ffa0f38c274,
+        type: 3}
+      propertyPath: grenadeCollider
+      value: 
+      objectReference: {fileID: 7182519906474160946}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -562,6 +568,12 @@ PrefabInstance:
 --- !u!4 &6735314281967000236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1859740931780085625, guid: fcd1fc60a93551e4d8872ffa0f38c274,
+    type: 3}
+  m_PrefabInstance: {fileID: 4951571594033208789}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &7182519906474160946 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2817823923097562855, guid: fcd1fc60a93551e4d8872ffa0f38c274,
     type: 3}
   m_PrefabInstance: {fileID: 4951571594033208789}
   m_PrefabAsset: {fileID: 0}

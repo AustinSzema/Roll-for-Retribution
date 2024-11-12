@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 2
   healthPoints: 10
-  _moveSpeed: 200
+  _moveSpeed: 25
   rotationSpeed: 5
   _gravityMultiplier: 10
+  killThresholdValue: 10
   isFlyingType: 1
   dieOnContactWithPlayer: 1
   explosionDamage: 0
@@ -29,6 +30,6 @@ MonoBehaviour:
   gasCloudDiameter: 15
   damageOtherEnemies: 1
   projectileSpeed: 50
-  projectileCooldown: 10
-  idealDistanceToPlayer: 100
-  minDistanceFromPlayer: 10
+  projectileCooldown: 5
+  idealDistanceToPlayer: 0
+  minDistanceFromPlayer: 100
