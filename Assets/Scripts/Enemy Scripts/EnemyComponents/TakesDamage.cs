@@ -65,7 +65,6 @@ public class TakesDamage : EnemyComponent, IDamageable
         AudioManager.Instance.PlayHitSound();
         _currentHealth -= hitPoints;
         
-        KillQuota.Instance.AddKills(enemyBase.enemySO.killThresholdValue);
         EnemyHit();
         if (_currentHealth <= 0)
         {
@@ -113,6 +112,9 @@ public class TakesDamage : EnemyComponent, IDamageable
         UnpauseEnemy();
         _deathParticles.transform.position = transform.position;
         _deathParticles.Play();
+        
+        KillQuota.Instance.AddKills(enemyBase.enemySO.killThresholdValue);
+
         _currentHealth = enemyBase.enemySO.healthPoints;
         gameObject.SetActive(false);
     }
