@@ -93,13 +93,15 @@ MonoBehaviour:
   weaponDescription: "\rTous saluent le puissant poisson-globe"
   weaponName: Caltrops
   pattern: {fileID: 0}
-  rotationSpeeds: 0
   shrinksWhenInHand: 0
   shrinkDistance: 2
   maxDistance: 30
   minScaleFactor: 0.5
   maxScaleFactor: 1
   lerpSpeed: 100
+  rotationSpeeds: 0
+  isSpear: 0
+  freezeRotation: 0
 --- !u!54 &7061100573816159975
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -347,6 +349,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8d65a032d191ad0479983bdecfdb8145,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dc16c81e5f30ed41bc248d0ce6eb924, type: 2}
     - target: {fileID: 919132149155446097, guid: 8d65a032d191ad0479983bdecfdb8145,
         type: 3}
       propertyPath: m_Name
