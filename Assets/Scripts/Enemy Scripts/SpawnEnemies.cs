@@ -68,7 +68,7 @@ public class SpawnEnemies : MonoBehaviour
     {
         if (_currentSpawnInfoIdx < _spawnInfos.Count - 1)
         {
-            float timeUntilSwap = _spawnInfos[_currentSpawnInfoIdx + 1].StartTime - Time.timeSinceLevelLoad;
+            float timeUntilSwap = _spawnInfos[_currentSpawnInfoIdx + 1].StartTime - Time.timeSinceLevelLoad + startDelay;
             if (timeUntilSwap < 0)
             {
                 _currentSpawnInfoIdx++;
