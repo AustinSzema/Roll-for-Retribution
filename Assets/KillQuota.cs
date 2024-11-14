@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class KillQuota : MonoBehaviour
 {
     public Slider killQuotaSlider;
+    public Color filledSliderColor;
+    public Image targetImage;
 
     [SerializeField] private GameObject portal;
     
@@ -35,6 +37,7 @@ public class KillQuota : MonoBehaviour
         if (killQuotaSlider.value >= killQuotaSlider.maxValue)
         {
             portal.SetActive(true);
+            targetImage.color = filledSliderColor;
         }
     }
 }
