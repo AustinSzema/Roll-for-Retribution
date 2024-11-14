@@ -7,7 +7,8 @@ using UnityEngine.UIElements;
 public class Grenadier : Enemy
 {
     [Header("Grenadier Specific Fields")]
-    public Rigidbody grenade;
+    public GameObject grenade;
+    private float nextFireTime = 0f;
 
     private void Awake()
     {
@@ -16,11 +17,18 @@ public class Grenadier : Enemy
             throw new Exception("enemySO is not a Grenadier");
         }
     }
-
+    void Update()
+    {
+        if (Time.time >= nextFireTime)
+        {
+            StartCoroutine(Shoot());
+            nextFireTime = Time.time + enemySO.projectileCooldown;
+        }
+    }
     protected override void Start()
     {
         Setup();
-        StartCoroutine(Shoot());
+        //StartCoroutine(Shoot());
     }
     
     protected virtual void FixedUpdate()
@@ -51,7 +59,12 @@ public class Grenadier : Enemy
 
     private IEnumerator Shoot()
     {
-        yield return new WaitForSeconds(enemySO.projectileCooldown);
+        Vector3 spawnPosition = transform.position;
+        Quaternion spawnRotation = transform.rotation;
+        Instantiate(grenade, spawnPosition, spawnRotation);
+        Debug.Log("Instantiated grenade");
+        yield return null;
+        /*yield return new WaitForSeconds(enemySO.projectileCooldown);
 
         // Activate the grenade
         grenade.gameObject.SetActive(true);
@@ -65,6 +78,6 @@ public class Grenadier : Enemy
         grenade.velocity = directionToPlayer * 100f;
 
         // Optionally, add some height to the grenade's velocity to simulate an arc
-        grenade.velocity += Vector3.up * 20f;
+        grenade.velocity += Vector3.up * 20f;*/
     }
 }
