@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Velocity: " + rb.velocity.magnitude);
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.5f, whatIsGround);
 
