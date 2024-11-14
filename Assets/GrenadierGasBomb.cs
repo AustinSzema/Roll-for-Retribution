@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class GrenadierGasBomb : MonoBehaviour
 {
     private float scale = 50f;
-    private Vector3 expandSize = new Vector3(10f, 10f, 10f);
+    [SerializeField] private Vector3 expandSize = new Vector3(10f, 10f, 10f);
     [SerializeField] private Rigidbody rb;
     [SerializeField] private int shrinkDelay;
     [SerializeField] private float shrnkSpeedMultiplier;

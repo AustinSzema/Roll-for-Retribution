@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1859740931780085625}
+  - component: {fileID: 5507632320071271139}
   - component: {fileID: 6406671725229822129}
   - component: {fileID: 1654797971057566228}
   - component: {fileID: 2817823923097562855}
   - component: {fileID: 3281916029581051734}
-  - component: {fileID: 5507632320071271139}
   - component: {fileID: 965581267019030744}
   m_Layer: 0
   m_Name: Grenade
@@ -37,6 +37,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5507632320071271139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740484313071993104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99daa90c1b67c7409ddc23d794b41fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expandSize: {x: 15, y: 15, z: 15}
+  rb: {fileID: 3281916029581051734}
+  shrinkDelay: 3
+  shrnkSpeedMultiplier: 0.9
 --- !u!33 &6406671725229822129
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -135,21 +151,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &5507632320071271139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3740484313071993104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c99daa90c1b67c7409ddc23d794b41fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 3281916029581051734}
-  shrinkDelay: 3
-  shrnkSpeedMultiplier: 0.9
 --- !u!75 &965581267019030744
 ConstantForce:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5984276401518430628}
   - component: {fileID: 8870310939545624537}
   - component: {fileID: 5315197293821447577}
-  - component: {fileID: 5752277015412460553}
   m_Layer: 0
   m_Name: Grenadier
   m_TagString: Enemy
@@ -64,7 +63,7 @@ MonoBehaviour:
   _deathParticles: {fileID: 3343217734205102093}
   _hitParticles: {fileID: 3126967182610272865}
   grenade: {fileID: 3740484313071993104, guid: fcd1fc60a93551e4d8872ffa0f38c274, type: 3}
-  enemySO: {fileID: 11400000, guid: e675542c6592c8a4dada10f1aa58369a, type: 2}
+  upwardsForce: 50
 --- !u!54 &8219687511025049278
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -181,20 +180,6 @@ MonoBehaviour:
   _deathParticles: {fileID: 3343217734205102093}
   _hitParticles: {fileID: 3126967182610272865}
   rb: {fileID: 8219687511025049278}
---- !u!114 &5752277015412460553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023080135719153593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95a9bf45675f74f44bb984b8a062f42a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 8219687511025049278}
-  upwardsForce: 10
 --- !u!1 &2490131019288980999
 GameObject:
   m_ObjectHideFlags: 0

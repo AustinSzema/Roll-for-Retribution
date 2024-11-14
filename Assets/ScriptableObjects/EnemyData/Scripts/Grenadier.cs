@@ -9,6 +9,8 @@ public class Grenadier : Enemy
     [Header("Grenadier Specific Fields")]
     public GameObject grenade;
     private float nextFireTime = 0f;
+    [SerializeField] private float upwardsForce = 10f;
+
 
     private void Awake()
     {
@@ -33,6 +35,14 @@ public class Grenadier : Enemy
     
     protected virtual void FixedUpdate()
     {
+        rb.AddForce(upwardsForce * Vector3.up);
+        
+        Vector3 directionToPlayer = (_gameManager.playerPosition - transform.position).normalized;
+        
+        // Rotate the object to face the player
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * enemySO.rotationSpeed);
+        
         if (!_gameManager.gameIsPaused && enemyShouldMove)
         {
             // Calculate the distance to the player
