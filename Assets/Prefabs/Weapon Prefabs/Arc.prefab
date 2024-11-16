@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 9139452839956237524}
   - component: {fileID: 741289952458192707}
   - component: {fileID: 8195576952485012401}
+  - component: {fileID: 7056309457607865598}
   - component: {fileID: 8733877959549429413}
   - component: {fileID: 7489967616577091386}
   m_Layer: 12
@@ -165,6 +166,29 @@ CapsuleCollider:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &7056309457607865598
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7989209348850309294}
+  m_Material: {fileID: 13400000, guid: c29389a210e4bf44589e3dce08a2f2e8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 32311
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
