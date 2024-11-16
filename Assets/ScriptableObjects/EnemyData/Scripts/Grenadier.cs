@@ -10,6 +10,7 @@ public class Grenadier : Enemy
     public GameObject grenade;
     private float nextFireTime = 0f;
     [SerializeField] private float upwardsForce = 10f;
+    [SerializeField] private float heightToMaintain = 50;
 
 
     private void Awake()
@@ -35,8 +36,6 @@ public class Grenadier : Enemy
     
     protected virtual void FixedUpdate()
     {
-        rb.AddForce(upwardsForce * Vector3.up);
-        
         Vector3 directionToPlayer = (_gameManager.playerPosition - transform.position).normalized;
         
         // Rotate the object to face the player
@@ -48,6 +47,18 @@ public class Grenadier : Enemy
             // Calculate the distance to the player
             float distanceToPlayer = Vector3.Distance(transform.position, _gameManager.playerPosition);
             Vector3 direction;
+            float verticalVelocity = rb.velocity.y;
+            //Debug.Log("The Rigidbody is moving in the direction: " + verticalVelocity);
+            
+            if (rb.position.y < heightToMaintain && verticalVelocity < 5)
+            {
+                rb.AddForce(Vector3.up * upwardsForce, ForceMode.Impulse);
+            }
+            else if (rb.position.y > heightToMaintain && verticalVelocity > -5)
+            {
+                rb.AddForce(Vector3.down * upwardsForce, ForceMode.Impulse);
+            }
+            
             // If the distance is greater than the minimum distance, move towards the player
             if (distanceToPlayer > enemySO.minDistanceFromPlayer)
             {

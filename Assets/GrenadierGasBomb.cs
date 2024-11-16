@@ -10,7 +10,7 @@ public class GrenadierGasBomb : MonoBehaviour
     [SerializeField] private Vector3 expandSize = new Vector3(10f, 10f, 10f);
     [SerializeField] private Rigidbody rb;
     [SerializeField] private int shrinkDelay;
-    [SerializeField] private float shrnkSpeedMultiplier;
+    [SerializeField] private float shrinkSpeedMultiplier;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class GrenadierGasBomb : MonoBehaviour
         transform.position = transform.position + Vector3.forward * 5f;
         Vector3 directionToPlayer = (GameManager.Instance.playerPosition - transform.position).normalized;
         rb.velocity = directionToPlayer * 100f;
-        rb.velocity += Vector3.up * 20f;
+        //rb.velocity += Vector3.up * 20f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +39,7 @@ public class GrenadierGasBomb : MonoBehaviour
         {
             if (!GameManager.Instance.gameIsPaused)
             {
-                transform.localScale *= shrnkSpeedMultiplier;
+                transform.localScale *= shrinkSpeedMultiplier;
                 yield return new WaitForSeconds(0f);
             }
             else
