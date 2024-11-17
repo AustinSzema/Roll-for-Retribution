@@ -30,7 +30,8 @@ public class SetHealthBar : MonoBehaviour
         _slider.value = _currentHealth;
         if (_currentHealth >= 0f)
         {
-            _healthText.text = "Health " + _currentHealth * 100f;
+            int healthValue = Mathf.RoundToInt(_currentHealth * 100f);
+            _healthText.text = "Health " + healthValue;
         }
         else
         {
