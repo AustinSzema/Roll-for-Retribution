@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 7.5, y: 7.5, z: 7.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expandSize: {x: 15, y: 15, z: 15}
   rb: {fileID: 3281916029581051734}
+  shootForce: 125
+  shootUpwardArc: 5
   shrinkDelay: 3
   shrinkSpeedMultiplier: 0.99
 --- !u!114 &7448449124612413552
@@ -77,8 +79,8 @@ ConstantForce:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3740484313071993104}
   m_Enabled: 1
-  m_Force: {x: 0, y: 0, z: 0}
-  m_RelativeForce: {x: 0, y: -10, z: 0}
+  m_Force: {x: 0, y: -20, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!33 &6406671725229822129

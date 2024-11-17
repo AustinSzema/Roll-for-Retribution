@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     // Player Fields
     [HideInInspector] public Vector3 playerPosition;
+    [HideInInspector] public Vector3 playerRigidBodyVelocity;
     [HideInInspector] public bool playerIsGrounded;
     [HideInInspector] public bool playerIsFlying;
 

@@ -9,6 +9,8 @@ public class GrenadierGasBomb : MonoBehaviour
     private float scale = 50f;
     [SerializeField] private Vector3 expandSize = new Vector3(10f, 10f, 10f);
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private float shootForce = 100f;
+    [SerializeField] private float shootUpwardArc = 30f;
     [SerializeField] private int shrinkDelay;
     [SerializeField] private float shrinkSpeedMultiplier;
 
@@ -17,9 +19,16 @@ public class GrenadierGasBomb : MonoBehaviour
         expandSize = new Vector3(scale, scale, scale);
         rb.velocity = Vector3.zero;
         transform.position = transform.position + Vector3.forward * 5f;
-        Vector3 directionToPlayer = (GameManager.Instance.playerPosition - transform.position).normalized;
-        rb.velocity = directionToPlayer * 100f;
-        //rb.velocity += Vector3.up * 20f;
+        
+        Vector3 playerVelocity = GameManager.Instance.playerRigidBodyVelocity;
+        float timeToReach = Vector3.Distance(GameManager.Instance.playerPosition, transform.position) / shootForce;
+        Vector3 futurePlayerPosition = GameManager.Instance.playerPosition + playerVelocity * timeToReach;
+        Vector3 directionToFuturePosition = (futurePlayerPosition - transform.position).normalized;
+        rb.velocity = directionToFuturePosition * shootForce;
+        
+        //Vector3 directionToPlayer = (GameManager.Instance.playerPosition - transform.position).normalized;
+        //rb.velocity = directionToPlayer * shootForce;
+        rb.velocity += Vector3.up * shootUpwardArc;
     }
 
     private void OnTriggerEnter(Collider other)

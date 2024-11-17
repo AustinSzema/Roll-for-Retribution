@@ -5,6 +5,7 @@ public class SetPlayerPosition : MonoBehaviour
 {
 
     private GameManager _gameManager;
+    public Rigidbody playerRb;
 
     private void Start()
     {
@@ -14,6 +15,7 @@ public class SetPlayerPosition : MonoBehaviour
     void Update()
     {
         _gameManager.playerPosition = transform.position;
-        
+        _gameManager.playerRigidBodyVelocity = playerRb.velocity;
+        //Debug.Log("player velocity: " + playerRb.velocity);
     }
 }

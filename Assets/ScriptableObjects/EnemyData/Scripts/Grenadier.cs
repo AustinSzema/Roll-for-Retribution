@@ -83,7 +83,7 @@ public class Grenadier : Enemy
         Vector3 spawnPosition = transform.position;
         Quaternion spawnRotation = transform.rotation;
         Instantiate(grenade, spawnPosition, spawnRotation);
-        Debug.Log("Instantiated grenade");
+        //Debug.Log("Instantiated grenade");
         yield return null;
         /*yield return new WaitForSeconds(enemySO.projectileCooldown);
 
