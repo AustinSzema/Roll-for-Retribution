@@ -17,7 +17,13 @@ MonoBehaviour:
     Spawnables:
     - enemy: {fileID: 2490131019288980999, guid: 4a0e978508f966f4b9bc95815804de29,
         type: 3}
-      number: 10
+      number: 1
+    MaxEnemiesInScene: 200
+  - StartTime: 2
+    Spawnables:
+    - enemy: {fileID: 2490131019288980999, guid: 4a0e978508f966f4b9bc95815804de29,
+        type: 3}
+      number: 0
     MaxEnemiesInScene: 200
   - StartTime: 600
     Spawnables:
@@ -25,3 +31,4 @@ MonoBehaviour:
         type: 3}
       number: 50
     MaxEnemiesInScene: 200
+  killQuota: 1500
