@@ -16,8 +16,6 @@ public class SwapWeapon : MonoBehaviour
 
     private int activeWeaponIndex = 0;
 
-    
-    
     // Limiting the number of keys to match potential weapon slots/icons
     private readonly KeyCode[] weaponKeys = {
         KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3
@@ -25,7 +23,6 @@ public class SwapWeapon : MonoBehaviour
 
     void Start()
     {
-        
         // Ensure we don't go out of bounds by taking the smallest count between weaponIcons and weaponList
         int weaponCount = Mathf.Min(weaponIcons.Count, mainWeaponList.weaponList.Count);
 
@@ -37,13 +34,11 @@ public class SwapWeapon : MonoBehaviour
                 // Instantiate and add weapons to weaponParents
                 weapon = Instantiate(startingWeaponList.weaponList[i], transform);
 
-
                 // Add weapon to WeaponManager if it's not already in the list
                 if (WeaponManager.Instance.weaponParentList.Count == i)
                 {
                     WeaponManager.Instance.weaponParentList.Add(startingWeaponList.weaponList[i]);
                 }
-
             }
             else
             {
@@ -54,7 +49,6 @@ public class SwapWeapon : MonoBehaviour
                 {
                     WeaponManager.Instance.weaponParentList.Add(mainWeaponList.weaponList[i]);
                 }
-
             }
             weaponParents.Add(weapon);
             // Disable the weapon object initially
@@ -62,7 +56,6 @@ public class SwapWeapon : MonoBehaviour
 
             // Assign the weapon icon based on the corresponding weapon
             weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
-            
         }
 
         // Collect all weapons and update the display
@@ -79,8 +72,23 @@ public class SwapWeapon : MonoBehaviour
             {
                 activeWeaponIndex = i; // Set active weapon index to corresponding weapon
                 UpdateWeaponAndPosition();
-                break; // Only update once per frame
+                return; // Only update once per frame
             }
+        }
+
+        // Handle weapon swapping with the scroll wheel
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollInput > 0f)
+        {
+            // Scroll up
+            activeWeaponIndex = (activeWeaponIndex - 1 + weaponParents.Count) % weaponParents.Count;
+            UpdateWeaponAndPosition();
+        }
+        else if (scrollInput < 0f)
+        {
+            // Scroll down
+            activeWeaponIndex = (activeWeaponIndex + 1) % weaponParents.Count;
+            UpdateWeaponAndPosition();
         }
     }
 
