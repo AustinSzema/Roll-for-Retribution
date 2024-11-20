@@ -11,7 +11,7 @@ public class LoadingScreenFadeOut : MonoBehaviour
 
     [SerializeField] private GameObject weaponShop;
 
-    [SerializeField] private RoundSpawnConfig mainRoundSpawn;
+    private RoundSpawnConfig mainRoundSpawn;
     [SerializeField] private GameObject winMenu;
 
     private void Start()
@@ -19,6 +19,7 @@ public class LoadingScreenFadeOut : MonoBehaviour
         _backgroundImage.enabled = true;
         _backgroundImage.color =
             new Color(_backgroundImage.color.r, _backgroundImage.color.g, _backgroundImage.color.b, 0f);
+        mainRoundSpawn = SpawnEnemies.Instance._roundSpawnConfig;
     }
 
     private bool faded = false;

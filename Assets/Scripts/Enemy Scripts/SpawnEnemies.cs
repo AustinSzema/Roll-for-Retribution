@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class SpawnEnemies : MonoBehaviour
 {
     [SerializeField] private int secondsBetweenSpawn;
-    [SerializeField] private RoundSpawnConfig _roundSpawnConfig;
+    public RoundSpawnConfig _roundSpawnConfig;
     private spawnInfoVariable currentSpawnInfoVariable;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float noNoZoneDistance = 100f;
@@ -20,6 +20,13 @@ public class SpawnEnemies : MonoBehaviour
     private List<spawnInfoVariable> _roundSpawns;
     [SerializeField] private float startDelay = 5f;
     private Coroutine spawnCoroutine;
+
+    public static SpawnEnemies Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
