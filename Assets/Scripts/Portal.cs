@@ -13,7 +13,6 @@ public class Portal : MonoBehaviour
         {
             GameManager.Instance.gameIsPaused = true;
             loadingScreenFadeOut.SetActive(true);
-            
         }
     }
 }

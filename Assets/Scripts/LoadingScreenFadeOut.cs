@@ -6,9 +6,14 @@ using UnityEngine.UI;
 
 public class LoadingScreenFadeOut : MonoBehaviour
 {
+    
     [SerializeField] private Image _backgroundImage;
 
     [SerializeField] private GameObject weaponShop;
+
+    [SerializeField] private RoundSpawnConfig mainRoundSpawn;
+    [SerializeField] private GameObject winMenu;
+
     private void Start()
     {
         _backgroundImage.enabled = true;
@@ -24,7 +29,14 @@ public class LoadingScreenFadeOut : MonoBehaviour
 
         if (_backgroundImage.color.a >= 1f)
         {
-            weaponShop.SetActive(true);
+            if (GameManager.Instance.currentRound != mainRoundSpawn.Value.Count - 1)
+            {
+                weaponShop.SetActive(true);
+            }
+            else
+            {
+                winMenu.SetActive(true);
+            }
         }
     }
 }
