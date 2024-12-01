@@ -10,19 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd65c56b1ea645c49b88747502c58a20, type: 3}
-  m_Name: BatTest
+  m_Name: Berserker Test
   m_EditorClassIdentifier: 
   value:
-  - StartTime: 1
+  - StartTime: 0
     Spawnables:
-    - enemy: {fileID: 7688580540974025677, guid: b0488291a59b2be41a9f626a810dca63,
+    - enemy: {fileID: 5178844718107594740, guid: dddef71ae0e640d498138b535fb66442,
         type: 3}
       number: 5
-    MaxEnemiesInScene: 500
-  - StartTime: 10000
+    MaxEnemiesInScene: 200
+  - StartTime: 6
     Spawnables:
-    - enemy: {fileID: 7688580540974025677, guid: b0488291a59b2be41a9f626a810dca63,
+    - enemy: {fileID: 2490131019288980999, guid: 4a0e978508f966f4b9bc95815804de29,
         type: 3}
       number: 0
-    MaxEnemiesInScene: -1
+    MaxEnemiesInScene: 200
+  - StartTime: 600
+    Spawnables:
+    - enemy: {fileID: 2490131019288980999, guid: 4a0e978508f966f4b9bc95815804de29,
+        type: 3}
+      number: 50
+    MaxEnemiesInScene: 200
   killQuota: 1500
