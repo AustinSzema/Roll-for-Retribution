@@ -12,7 +12,7 @@ public class SetHealthBar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _healthText;
 
     
-    private float _currentHealth;
+    private float _currentPlayerHealth;
 
     private GameManager _gameManager;
 
@@ -26,11 +26,11 @@ public class SetHealthBar : MonoBehaviour
     void Update()
     {
 
-        _currentHealth = (float)_gameManager.playerCurrentHealth / _gameManager.playerMaxHealth;
-        _slider.value = _currentHealth;
-        if (_currentHealth >= 0f)
+        _currentPlayerHealth = (float)_gameManager.playerCurrentHealth;
+        _slider.value = _currentPlayerHealth / 100;
+        if (_currentPlayerHealth >= 0f)
         {
-            int healthValue = Mathf.RoundToInt(_currentHealth * 100f);
+            int healthValue = Mathf.RoundToInt(_currentPlayerHealth);
             _healthText.text = "Health " + healthValue;
         }
         else

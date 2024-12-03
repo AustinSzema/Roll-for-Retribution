@@ -30,6 +30,7 @@ public class KillQuota : MonoBehaviour
     void Update()
     {
         killQuotaSlider.value = killCount;
+        Debug.Log("kill quota = " + killQuotaSlider.maxValue);
     }
 
     public void EnablePortal()
