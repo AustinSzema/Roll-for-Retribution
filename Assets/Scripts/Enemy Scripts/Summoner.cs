@@ -25,6 +25,10 @@ public class Summoner : MonoBehaviour
     private bool _delaying;
 
     private GameManager _gameManager;
+    
+    public AudioSource audioSource;
+    public AudioClip summonSFX;
+
 
     private void Start()
     {
@@ -81,5 +85,12 @@ public class Summoner : MonoBehaviour
       _delaying = false;
     }
     
-    
+    void PlaySummonSfx()
+    {
+      if (audioSource != null && summonSFX != null)
+      {
+        audioSource.clip = summonSFX;
+        audioSource.Play();
+      }
+    }
 }
