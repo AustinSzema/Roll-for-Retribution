@@ -13,9 +13,13 @@ public class GrenadierGasBomb : MonoBehaviour
     [SerializeField] private float shootUpwardArc = 30f;
     [SerializeField] private int shrinkDelay;
     [SerializeField] private float shrinkSpeedMultiplier;
+    public AudioSource audioSource;
+    public AudioClip fireSFX;
+    public AudioClip explodeSFX;
 
     private void Start()
     {
+        PlayGrenadeFireSfx();
         expandSize = new Vector3(scale, scale, scale);
         rb.velocity = Vector3.zero;
         transform.position = transform.position + Vector3.forward * 5f;
@@ -35,6 +39,7 @@ public class GrenadierGasBomb : MonoBehaviour
     {
         if (!other.gameObject.CompareTag(TagManager.enemyTag))
         {
+            PlayGrenadeExplodeSfx();
             rb.velocity = Vector3.zero;
             transform.localScale = expandSize;
             rb.isKinematic = true;
@@ -62,6 +67,24 @@ public class GrenadierGasBomb : MonoBehaviour
     {
         yield return new WaitForSeconds(shrinkDelay); 
         StartCoroutine(Shrink());
+    }
+
+    void PlayGrenadeFireSfx()
+    {
+        if (audioSource != null && fireSFX != null)
+        {
+            audioSource.clip = fireSFX;
+            audioSource.Play();
+        }
+    }
+    
+    void PlayGrenadeExplodeSfx()
+    {
+        if (audioSource != null && explodeSFX != null)
+        {
+            audioSource.clip = explodeSFX;
+            audioSource.Play();
+        }
     }
     
 }
