@@ -99,13 +99,13 @@ public class PatternShot : Weapon
         if (isSpear)
         {
             rb.constraints = RigidbodyConstraints.None;
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
                 Time.deltaTime * pullSpeed);
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
                 Time.deltaTime * pullSpeed);
         }

@@ -98,8 +98,8 @@ public class Magnet : MonoBehaviour
                     _audioManager.StartFlyingSound();
                     _gameManager.flightDuration -= _fuelDecrementAmount;
                     
-                    _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _flightForce,
-                        _playerRigidbody.velocity.z);
+                    _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, _flightForce,
+                        _playerRigidbody.linearVelocity.z);
                 }
                 else if (!_outOfBreathClipPlayed)
                 {
@@ -119,8 +119,8 @@ public class Magnet : MonoBehaviour
                 // _attractParticlesRenderer.material = _attractCenterMaterial;
                 // _centerSphere.material = _attractCenterMaterial;
                 // _outerSphere.material = _attractOuterMaterial;
-                _playerRigidbody.velocity = new Vector3(_playerRigidbody.velocity.x, _playerRigidbody.velocity.y,
-                    _playerRigidbody.velocity.z);
+                _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y,
+                    _playerRigidbody.linearVelocity.z);
                 // Set sprites
                 _attractImage.sprite = _shotgunAttractSprite;
                 _repelImage.sprite = _shotgunRepelSprite;

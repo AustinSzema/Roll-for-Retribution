@@ -10,7 +10,7 @@ public class Scythe : Weapon
     public override void Attract(Vector3 magnetPosition)
     {
 
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
             Time.deltaTime * pullSpeed);
     }

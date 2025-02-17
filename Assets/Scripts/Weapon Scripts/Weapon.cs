@@ -45,7 +45,7 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void Slam()
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.AddForce(Vector3.down * slamForce);
     }
 
@@ -72,7 +72,7 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void Attract(Vector3 magnetPosition)
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
             Time.deltaTime * pullSpeed);
     }

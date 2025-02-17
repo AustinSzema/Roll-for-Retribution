@@ -15,7 +15,7 @@ public class SpikedShield : Weapon
     
     public override void Attract(Vector3 magnetPosition)
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.position = Vector3.MoveTowards(rb.position, magnetPosition,
             Time.deltaTime * pullSpeed);
         rotateTowardsPlayerAndLock = true;
@@ -23,7 +23,7 @@ public class SpikedShield : Weapon
 
     public override void Slam()
     {
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         // Use Quaternion.Euler to specify the rotation in degrees
         Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
         transform.rotation = rotation;
@@ -36,7 +36,7 @@ public class SpikedShield : Weapon
     {
         rb.AddForce(shootForce * magnetForwardDirection);
         rotateTowardsPlayerAndLock = false;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         // Use Quaternion.Euler to specify the rotation in degrees
         Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
         transform.rotation = rotation;

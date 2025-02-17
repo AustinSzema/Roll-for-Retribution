@@ -21,18 +21,18 @@ public class GrenadierGasBomb : MonoBehaviour
     {
         PlayGrenadeFireSfx();
         expandSize = new Vector3(scale, scale, scale);
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         transform.position = transform.position + Vector3.forward * 5f;
         
         Vector3 playerVelocity = GameManager.Instance.playerRigidBodyVelocity;
         float timeToReach = Vector3.Distance(GameManager.Instance.playerPosition, transform.position) / shootForce;
         Vector3 futurePlayerPosition = GameManager.Instance.playerPosition + playerVelocity * timeToReach;
         Vector3 directionToFuturePosition = (futurePlayerPosition - transform.position).normalized;
-        rb.velocity = directionToFuturePosition * shootForce;
+        rb.linearVelocity = directionToFuturePosition * shootForce;
         
         //Vector3 directionToPlayer = (GameManager.Instance.playerPosition - transform.position).normalized;
         //rb.velocity = directionToPlayer * shootForce;
-        rb.velocity += Vector3.up * shootUpwardArc;
+        rb.linearVelocity += Vector3.up * shootUpwardArc;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +40,7 @@ public class GrenadierGasBomb : MonoBehaviour
         if (!other.gameObject.CompareTag(TagManager.enemyTag))
         {
             PlayGrenadeExplodeSfx();
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             transform.localScale = expandSize;
             rb.isKinematic = true;
             StartCoroutine(WaitAndShrink());

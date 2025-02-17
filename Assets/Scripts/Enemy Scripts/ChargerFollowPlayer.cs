@@ -51,7 +51,7 @@ public class ChargerFollowPlayer : MonoBehaviour
       Vector3 moveDirection = (_gameManager.playerPosition - transform.position).normalized;
       _movement = moveDirection * _moveSpeed;
       yield return new WaitForSeconds(moveInterval);
-      _rigidbody.velocity = Vector3.zero;
+      _rigidbody.linearVelocity = Vector3.zero;
       _charging = false;
     }
     

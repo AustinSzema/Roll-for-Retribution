@@ -90,7 +90,7 @@ public class ExplodingChargerAttack : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
             
-            rb.velocity = chargerVelocity;
+            rb.linearVelocity = chargerVelocity;
         }
     }
 }

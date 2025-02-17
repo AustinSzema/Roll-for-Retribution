@@ -63,7 +63,7 @@ public class Xpand : Weapon
         if (!other.CompareTag(TagManager.playerTag) && !inHand)
         {
             transform.localScale = startSize * expandSize;
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             /*
             foreach (GameObject obj in objectsToExpand)

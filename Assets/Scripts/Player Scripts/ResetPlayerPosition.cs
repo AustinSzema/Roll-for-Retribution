@@ -24,7 +24,7 @@ public class ResetPlayerPosition : MonoBehaviour
         {
             playerTransform.position = originalPos;
             playerTransform.rotation = originalRotation;
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
 
         }
     }

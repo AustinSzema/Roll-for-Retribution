@@ -47,7 +47,7 @@ public class Grenadier : Enemy
             // Calculate the distance to the player
             float distanceToPlayer = Vector3.Distance(transform.position, _gameManager.playerPosition);
             Vector3 direction;
-            float verticalVelocity = rb.velocity.y;
+            float verticalVelocity = rb.linearVelocity.y;
             //Debug.Log("The Rigidbody is moving in the direction: " + verticalVelocity);
             
             if (rb.position.y < heightToMaintain && verticalVelocity < 5)
