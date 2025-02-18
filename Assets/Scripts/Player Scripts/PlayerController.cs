@@ -38,13 +38,22 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Rigidbody rb;
 
-    
+    [SerializeField] private AbilityList abilityList;
+
+    public void ActivateAll()
+    {
+        foreach (var ability in abilityList._abilities)
+        {
+            ability.Activate(this);
+        }
+    }
     
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         readyToJump = true;
+        ActivateAll();
     }
 
     private void Update()
