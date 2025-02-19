@@ -20,7 +20,32 @@ public abstract class Weapon : MonoBehaviour
     [Multiline]
     public string weaponDescription = "This is a weapon.";
 
+
     public string weaponName = "weapon";
+
+    
+    private LineRenderer lineRenderer;
+
+
+    public void OnUpdate()
+    {
+        if (!lineRenderer)
+        {
+            lineRenderer = gameObject.AddComponent<LineRenderer>();
+            lineRenderer.startWidth = 0.01f;
+            lineRenderer.endWidth = 0.01f;
+        }
+        else
+        {
+            var points = new Vector3[2];
+            points[0] = transform.position;
+            points[1] = GameManager.Instance.handPosition;
+            lineRenderer.SetPositions(points);
+            
+        }
+        
+    }
+
 
     protected virtual void OnCollisionEnter(Collision other)
     {

@@ -12,7 +12,7 @@ public class Dice : Weapon
 
     private void Update()
     {
-
+        OnUpdate();
         float distance = Vector3.Distance(transform.position, GameManager.Instance.handPosition);
 
         if (distance < GameManager.Instance.snapRangeAroundHand) // TODO: this is dumb
