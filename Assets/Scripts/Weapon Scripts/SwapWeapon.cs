@@ -52,7 +52,7 @@ public class SwapWeapon : MonoBehaviour
             }
             weaponParents.Add(weapon);
             // Disable the weapon object initially
-            weapon.SetActive(false);
+            weapon.SetActive(true);
 
             // Assign the weapon icon based on the corresponding weapon
             weaponIcons[i].sprite = WeaponManager.Instance.GetWeaponComponent(WeaponManager.Instance.weaponParentList[i]).weaponUISprite;
@@ -115,7 +115,8 @@ public class SwapWeapon : MonoBehaviour
         // Activate the appropriate weapon parent based on the active weapon index
         for (int i = 0; i < weaponParents.Count; i++)
         {
-            weaponParents[i].SetActive(i == activeWeaponIndex);
+            weaponParents[i].SetActive(true);
+            //weaponParents[i].SetActive(i == activeWeaponIndex);
         }
     }
 
