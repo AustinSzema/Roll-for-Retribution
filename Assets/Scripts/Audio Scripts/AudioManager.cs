@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
@@ -210,6 +208,15 @@ public class AudioManager : MonoBehaviour
         _musicSource.clip = musicClip;
         _musicSource.loop = true;
         _musicSource.Play();
+        StartCoroutine(VaryMusicPitch());
+    }
+    private IEnumerator VaryMusicPitch()
+    {
+        while (true)
+        {
+            _musicSource.pitch = Random.Range(0.85f, 1.15f);
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+        }
     }
 
     // for playing a sound effect

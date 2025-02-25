@@ -24,14 +24,17 @@ public abstract class Weapon : MonoBehaviour
     public string weaponName = "weapon";
 
     
+    /*
     private LineRenderer lineRenderer;
+    [SerializeField] private Material lineRendererMaterial;
+    */
 
 
-    public void OnUpdate()
+    /*public void OnUpdate()
     {
         if (!lineRenderer)
         {
-            lineRenderer = gameObject.AddComponent<LineRenderer>();
+            lineRenderer = gameObject.GetComponent<LineRenderer>();
             lineRenderer.startWidth = 0.01f;
             lineRenderer.endWidth = 0.01f;
         }
@@ -41,10 +44,10 @@ public abstract class Weapon : MonoBehaviour
             points[0] = transform.position;
             points[1] = GameManager.Instance.handPosition;
             lineRenderer.SetPositions(points);
-            
+            lineRenderer.material = lineRendererMaterial;
         }
         
-    }
+    }*/
 
 
     protected virtual void OnCollisionEnter(Collision other)
