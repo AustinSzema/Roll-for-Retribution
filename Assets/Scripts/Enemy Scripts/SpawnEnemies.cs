@@ -123,7 +123,7 @@ public class SpawnEnemies : MonoBehaviour
     {
         float xOffset = Random.Range(minDistance, maxDistance) * (Random.value > 0.5f ? 1 : -1);
         float zOffset = Random.Range(minDistance, maxDistance) * (Random.value > 0.5f ? 1 : -1);
-        return new Vector3(centralLocation.x + xOffset, 20f, centralLocation.z + zOffset);
+        return new Vector3(centralLocation.x + xOffset, 50f, centralLocation.z + zOffset);
     }
 
     public void SpawnEnemy(GameObject enemy, Vector3 centralLocation, float minRange = 40f, float maxRange = 60f)
