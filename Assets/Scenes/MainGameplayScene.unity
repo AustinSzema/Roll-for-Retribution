@@ -593,12 +593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cabce8a04828847b3bce8d7e214f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &502166102 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4429400767078327401, guid: 81ef82d47703f4e46b77310af88853bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 2531983785383244963}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &604587745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1001,6 +995,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452219501}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1458275493 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1272544601417165713, guid: 81ef82d47703f4e46b77310af88853bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2531983785383244963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1519296978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,8 +1158,9 @@ GameObject:
   - component: {fileID: 1600831507}
   - component: {fileID: 1600831509}
   - component: {fileID: 1600831508}
-  m_Layer: 5
-  m_Name: Sphere
+  - component: {fileID: 1600831510}
+  m_Layer: 10
+  m_Name: Eyeball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1172,16 +1173,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600831506}
-  m_LocalRotation: {x: -0.11902681, y: 0.48935166, z: -0.2504992, w: 0.8268118}
+  m_LocalRotation: {x: -0.08498235, y: 0.37615404, z: -0.26399577, w: 0.88407713}
   m_LocalPosition: {x: 0, y: 0, z: 40}
-  m_LocalScale: {x: 17.553675, y: 17.553675, z: 17.553675}
+  m_LocalScale: {x: 13, y: 13, z: 13}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 502166102}
-  m_LocalEulerAnglesHint: {x: 2.771, y: 60.441, z: -32.096}
+  m_Father: {fileID: 1458275493}
+  m_LocalEulerAnglesHint: {x: 2.771, y: 45.3, z: -32.096}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20.060059, y: -12.119995}
+  m_AnchoredPosition: {x: -31.1, y: -15.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1600831508
@@ -1237,6 +1238,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600831506}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1600831510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600831506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8a60a85215c1c4c8428e8df7122c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 200
 --- !u!1 &1725007255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,7 +2110,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4429400767078327401, guid: 81ef82d47703f4e46b77310af88853bd,
+    - targetCorrespondingSourceObject: {fileID: 1272544601417165713, guid: 81ef82d47703f4e46b77310af88853bd,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1600831507}
@@ -2689,6 +2703,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4887808148474644485, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5189335624894432377, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
         type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -2838,6 +2857,16 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541388801784453021, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 509.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8046777310277697346, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8602792822618957282, guid: ef04fcc6a27e8c74fb94492ca22e3ea0,
         type: 3}
