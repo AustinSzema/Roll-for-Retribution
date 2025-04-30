@@ -10,7 +10,8 @@ public class Collectable : ScriptableObject
     public float damage = 1;
     public float _slamCooldown = 3.0f;
     public float _shotgunCooldown = 3.0f;
-
+    public float scale = 0f;
+    
     [Header("Levitate Ability")]
     public float _maxFlightDuration = 10;
     public float _fuelDecrementAmount = 1;

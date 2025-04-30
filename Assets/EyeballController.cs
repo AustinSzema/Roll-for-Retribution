@@ -102,8 +102,7 @@ public class EyeballController : MonoBehaviour
             weapon.slamForce += eyeballs[i].slamForce;
             weapon.pullSpeed += eyeballs[i].pullSpeed;
             weapon.damage += eyeballs[i].damage;
-           
-
+            weapon.transform.localScale += new Vector3(eyeballs[i].scale, eyeballs[i].scale, eyeballs[i].scale);
         }
 
     }
