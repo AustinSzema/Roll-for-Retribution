@@ -11,7 +11,7 @@ public class Eyeball : MonoBehaviour
 
     private Quaternion lookRotation = Quaternion.identity;
 
-    [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] private float rotationSpeed = 200f;
     
     private IEnumerator Start()
     {
