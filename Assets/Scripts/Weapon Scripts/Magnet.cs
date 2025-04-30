@@ -26,23 +26,24 @@ public class Magnet : MonoBehaviour
     [Header("Root Objects")] [SerializeField]
     private GameObject _attractParticlesRoot;
 
+    
+    [SerializeField] private AudioManager _audioManager;
+
     [SerializeField] private GameObject _repelParticlesRoot;
     [SerializeField] private GameObject _gravityParticlesRoot;
     
     [SerializeField] private ParticleSystem _repelParticles;
     [SerializeField] private ParticleSystem _gravityParticles;
 
-    [SerializeField] private float _slamCooldown = 3.0f;
-    [SerializeField] private float _shotgunCooldown = 3.0f;
-
-    [SerializeField] private AudioManager _audioManager;
+    [SerializeField] public float _slamCooldown = 3.0f;
+    [SerializeField] public float _shotgunCooldown = 3.0f;
 
     [Header("Levitate Ability")] public float _maxFlightDuration = 10;
-    [SerializeField] private float _fuelDecrementAmount = 1;
-    [SerializeField] private float _fuelRechargeAmount = 1;
+    [SerializeField] public float _fuelDecrementAmount = 1;
+    [SerializeField] public float _fuelRechargeAmount = 1;
 
     [Tooltip("Sets the Y value of player's velocity")] [SerializeField]
-    private float _flightForce = 30f;
+    public float _flightForce = 30f;
 
     [FormerlySerializedAs("_minimumFuelAmount")]
     public float _fuelPenaltyThreshold = 1;
@@ -61,6 +62,8 @@ public class Magnet : MonoBehaviour
         _audioManager = AudioManager.Instance;
 
         _gameManager.flightDuration = _maxFlightDuration;
+        EyeballController.Instance.ModifyStats(this);
+
     }
 
     private bool _activateMagnet = false;

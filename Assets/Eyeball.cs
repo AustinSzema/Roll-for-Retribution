@@ -12,7 +12,8 @@ public class Eyeball : MonoBehaviour
     private Quaternion lookRotation = Quaternion.identity;
 
     [SerializeField] private float rotationSpeed = 200f;
-    
+
+    [SerializeField] private MeshRenderer meshRenderer;
     private IEnumerator Start()
     {
         while(true)
@@ -25,5 +26,10 @@ public class Eyeball : MonoBehaviour
     private void Update()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
+
+    public void SetMaterial(Material material)
+    {
+        meshRenderer.material = material;
     }
 }

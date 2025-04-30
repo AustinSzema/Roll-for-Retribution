@@ -6,15 +6,14 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] protected float shootForce = 6000f;
-    [SerializeField] protected float slamForce = 5500f;
-    [SerializeField] protected float pullSpeed = 60f;
-
-    public Rigidbody Rb { get; private set; }
-    
+    [SerializeField] public float shootForce = 6000f;
+    [SerializeField] public float slamForce = 5500f;
+    [SerializeField] public float pullSpeed = 60f;
     
     [SerializeField] public float damage = 1;
 
+    public Rigidbody Rb { get; private set; }
+    
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
     public Sprite weaponUISprite;
     [Multiline]
@@ -49,6 +48,10 @@ public abstract class Weapon : MonoBehaviour
         
     }*/
 
+    private void OnEnable()
+    {
+        EyeballController.Instance.ModifyStats(this);
+    }
 
     protected virtual void OnCollisionEnter(Collision other)
     {

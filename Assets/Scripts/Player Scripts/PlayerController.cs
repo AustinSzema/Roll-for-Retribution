@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
-    [SerializeField] private float _gravityMultiplier = 2f;
+    public float gravityMultiplier = 2f;
 
 
 
@@ -54,6 +55,10 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         readyToJump = true;
         ActivateAll();
+
+        EyeballController.Instance.ModifyStats(this);
+
+    
     }
 
     private void Update()
@@ -85,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
     private void AddGravity()
     {
-        rb.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
+        rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
     }
 
 
