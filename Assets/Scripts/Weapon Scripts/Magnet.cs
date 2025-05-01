@@ -1,364 +1,154 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-// TODO: Does this script need to be broken up? It has so many references
 public class Magnet : MonoBehaviour
 {
-    [Header("Magnet Positions")]
-    //[SerializeField] private Transform _footPosition;
+    private List<Rigidbody> _magneticObjects = new List<Rigidbody>();
+
+
+    [SerializeField] private Transform _footPosition;
 
     [SerializeField] private Transform _handPosition;
 
-    [Header("UI Images")] [SerializeField] private Image _attractImage;
-    [SerializeField] private Image _repelImage;
-    [SerializeField] private Image _defaultImage;
-
-    [SerializeField] private Sprite _shotgunAttractSprite;
-    [SerializeField] private Sprite _shotgunRepelSprite;
-    [SerializeField] private Sprite _shotgunDefaultSprite;
-
-    [Header("Root Objects")] [SerializeField]
-    private GameObject _attractParticlesRoot;
+    [SerializeField] private Transform _explodePosition;
 
     
-    [SerializeField] private AudioManager _audioManager;
+    [SerializeField]
+    private GameObject _cubePrefab;
 
+
+
+    [SerializeField] private GameObject _attractImage;
+    [SerializeField] private GameObject _repelImage;
+    [SerializeField] private GameObject _defaultImage;
+
+
+
+    [SerializeField] private GameObject _attractParticlesRoot;
     [SerializeField] private GameObject _repelParticlesRoot;
-    [SerializeField] private GameObject _gravityParticlesRoot;
-    
     [SerializeField] private ParticleSystem _repelParticles;
+    [SerializeField] private GameObject _gravityParticlesRoot;
     [SerializeField] private ParticleSystem _gravityParticles;
-
-    [SerializeField] public float _slamCooldown = 3.0f;
-    [SerializeField] public float _shotgunCooldown = 3.0f;
-
-    [Header("Levitate Ability")] public float _maxFlightDuration = 10;
-    [SerializeField] public float _fuelDecrementAmount = 1;
-    [SerializeField] public float _fuelRechargeAmount = 1;
-
-    [Tooltip("Sets the Y value of player's velocity")] [SerializeField]
-    public float _flightForce = 30f;
-
-    [FormerlySerializedAs("_minimumFuelAmount")]
-    public float _fuelPenaltyThreshold = 1;
-
-    [Header("Player")] [SerializeField] private Rigidbody _playerRigidbody;
-
-
-    private GameManager _gameManager;
-
-    
     private void Start()
     {
-        _gameManager = GameManager.Instance;
+        /*for (int i = 0; i < 100; i++)
+        {
+            GameObject cube = Instantiate(_cubePrefab, transform.position + new Vector3(Random.Range(-100f, 100f), Random.Range(-100f, 100f), Random.Range(-100f, 100f)), Quaternion.identity);
+            _magneticObjects.Add(cube.GetComponent<Rigidbody>());
+            
+        }*/
+        
+        Magnetic[] magneticObjects = GameObject.FindObjectsOfType<Magnetic>();
 
-        // caches the reference to the audio manager at start
-        _audioManager = AudioManager.Instance;
-
-        _gameManager.flightDuration = _maxFlightDuration;
-        EyeballController.Instance.ModifyStats(this);
+        // Do something with each object that has the Magnetic script
+        foreach (Magnetic magneticObject in magneticObjects)
+        {
+            // Perform actions on each object, for example:
+            _magneticObjects.Add(magneticObject.GetComponent<Rigidbody>());
+        }
+        
 
     }
 
     private bool _activateMagnet = false;
-
-    private bool _outOfBreathClipPlayed = false;
-
-    private bool _usingShotgun = true;
-
-    private bool canAttractWeapon = true;
-
+    
     private void Update()
     {
-        if (!_gameManager.gameIsPaused)
+        if (Input.GetKey(KeyCode.Space))
         {
-
-            if (_gameManager.flightDuration <= 0f)
-            {
-                _gameManager.outOfFuel = true;
-            }
-
-
-            // When the player is holding right mouse button and holding space and has demons in hand and has fuel
-            if (Input.GetKey(KeyCode.Space) &&
-                _gameManager.flightDuration >= 0)
-            {
-                // if player is not out of fuel make them fly
-                if (!_gameManager.outOfFuel)
-                {
-                    _outOfBreathClipPlayed = false;
-                    _playerRigidbody.AddForce(Vector3.up * 10f);
-                    //transform.position = _footPosition.position;
-                    _gameManager.playerIsFlying = true;
-                    
-
-                    _audioManager.StartFlyingSound();
-                    _gameManager.flightDuration -= _fuelDecrementAmount;
-                    
-                    _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, _flightForce,
-                        _playerRigidbody.linearVelocity.z);
-                }
-                else if (!_outOfBreathClipPlayed)
-                {
-                    //_audioManager.PlayInvariableSFX(_outOfBreathClip);
-                    _outOfBreathClipPlayed = true;
-                }
-            }
-            else
-            {
-                if (_gameManager.playerIsFlying == true)
-                {
-                    _audioManager.StopFlyingSound();
-                }
-
-                _gameManager.playerIsFlying = false;
-                transform.position = _handPosition.position;
-                // _attractParticlesRenderer.material = _attractCenterMaterial;
-                // _centerSphere.material = _attractCenterMaterial;
-                // _outerSphere.material = _attractOuterMaterial;
-                _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y,
-                    _playerRigidbody.linearVelocity.z);
-                // Set sprites
-                _attractImage.sprite = _shotgunAttractSprite;
-                _repelImage.sprite = _shotgunRepelSprite;
-                _defaultImage.sprite = _shotgunDefaultSprite;
-            }
-
-            // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
-            // Makes it so the fuel must regenerate a bit before the player can use flight again 
-
-            if (_gameManager.flightDuration >= _fuelPenaltyThreshold)
-            {
-                _gameManager.outOfFuel = false;
-            }
-
-            // if the player is out of fuel stop flying
-            if (_gameManager.flightDuration <= 0)
-            {
-                _gameManager.outOfFuel = true;
-                transform.position = _handPosition.position;
-                _gameManager.playerIsFlying = false;
-                _audioManager.StopFlyingSound();
-            }
-
-            // if the player's fuel is not full and the player is not flying, fill up their fuel
-            if (_gameManager.flightDuration < _maxFlightDuration && !_gameManager.playerIsFlying)
-            {
-                _gameManager.flightDuration += _fuelRechargeAmount;
-            }
-
-            // TODO: Consider renaming _flightDuration to _flightFuel
-            if (Input.GetMouseButton(0) && canAttractWeapon)
-            {
-                
-                _activateMagnet = true;
-                _audioManager.StartPullingSound();
-                transform.position = _handPosition.position;
-                _repelImage.gameObject.SetActive(false);
-                _attractImage.gameObject.SetActive(true);
-                _defaultImage.gameObject.SetActive(false);
-                _attractParticlesRoot.SetActive(true);
- 
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                _activateMagnet = false;
-                _audioManager.StopPullingSound();
-                _audioManager.PlayPullingEndSound();
-                _repelImage.gameObject.SetActive(true);
-                _attractImage.gameObject.SetActive(false);
-                _defaultImage.gameObject.SetActive(false);
-                _attractParticlesRoot.SetActive(false);
-                StartCoroutine(ResetHandVisual());
-                StartCoroutine(Shoot());
-            }
-
-
-            // //shotgun push
-            // if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
-            // {
-            //     StartCoroutine(ShotgunAbility());
-            // }
-
-            //slam 
-            if (Input.GetMouseButtonDown(1))
-            {
-                StartCoroutine(Slam());
-            }
-
-            SetWeaponsVelocityAndPosition();
-        }
-    }
-
-    private IEnumerator ResetHandVisual()
-    {
-        canAttractWeapon = false;
-        yield return new WaitForSeconds(0.2f);
-        _repelImage.gameObject.SetActive(false);
-        _attractImage.gameObject.SetActive(false);
-        _defaultImage.gameObject.SetActive(true);
-        canAttractWeapon = true;
-
-    }
-
-    private bool _slamOnCooldown;
-
-    private IEnumerator Slam()
-    {
-        if (!_slamOnCooldown)
-        {
-            _slamOnCooldown = true;
-            _audioManager.PlaySlamSound();
-
-            _attractImage.gameObject.SetActive(false);
-            _repelImage.gameObject.SetActive(true);
-            _defaultImage.gameObject.SetActive(false);
-            _attractParticlesRoot.SetActive(false);
-            _gravityParticlesRoot.SetActive(true);
-            _gravityParticles.Clear();
-            _gravityParticles.Play();
-            
-            foreach (Weapon magnetic in _gameManager.weapons)
-            {
-                magnetic.Slam();
-            }
-            
-            yield return new WaitForSeconds(_slamCooldown);
-            _slamOnCooldown = false;
-        }
-    }
-
-    private bool _shotgunOnCooldown;
-
-    //private GameManager.ActiveShotType _currentShotType;
-
-    private IEnumerator Shoot()
-    {
-        if (!_shotgunOnCooldown)
-        {
-            _shotgunOnCooldown = true;
-
-            _audioManager.PlayShotgunSound();
-
-            // switch (_currentShotType)
-            // {
-            //     case GameManager.ActiveShotType.Shotgun:
-            //         _audioManager.PlayShotgunSound();
-            //         break;
-            //     case GameManager.ActiveShotType.Rocket:
-            //         _audioManager.PlaySniperSound();
-            //         break;
-            //     case GameManager.ActiveShotType.Spray:
-            //         _audioManager.PlaySpraySound();
-            //         break;
-            //     case GameManager.ActiveShotType.Beam:
-            //         break;
-            //     default:
-            //         break;
-            // }
-
-            _attractImage.gameObject.SetActive(false);
-            _repelImage.gameObject.SetActive(true);
-            _defaultImage.gameObject.SetActive(false);
-            _attractParticlesRoot.SetActive(false);
-            _repelParticlesRoot.SetActive(true);
-            _repelParticles.Clear();
-            _repelParticles.Play();
-                        
-            foreach (Weapon magnetic in _gameManager.weapons)
-            {
-                Rigidbody rb = magnetic.Rb;
-                if (rb != null)
-                {
-                    rb.isKinematic = false;
-                }
-            }
-
-            int index = 0;
-            
-            foreach (Weapon magnetic in _gameManager.weapons)
-            {
-                if (magnetic is PatternShot pattern)
-                {
-                    pattern.Shoot(transform.forward, index);
-                    index++;
-                }
-                else
-                {
-                    magnetic.Shoot(transform.forward);
-                }
-            }
-            
-                
-            _activateMagnet = false;
-
-            yield return new WaitForSeconds(_shotgunCooldown);
-            _shotgunOnCooldown = false;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        SetWeaponsVelocityAndPosition();
-    }
-
-    private void SetWeaponsVelocityAndPosition()
-    {
-        _gameManager.pullingInDemons = _activateMagnet;
-
-        if (_activateMagnet)
-        {
-            foreach (Weapon magnetic in _gameManager.weapons)
-            {
-                if (magnetic.gameObject.activeInHierarchy)
-                {
-                    Rigidbody rb = magnetic.Rb;
-
-                    if (rb != null)
-                    {
-                        // Distance threshold to decide when to snap
-                        float snapDistance = 3f; // Adjust as needed
-                        float distance = Vector3.Distance(magnetic.transform.position, transform.position);
-
-                        if (distance <= snapDistance)
-                        {
-                            // Snap directly to the hand position if within snapping range
-                            rb.isKinematic = true;
-                            magnetic.transform.position = transform.position;
-                        }
-                        else
-                        {
-                            // Otherwise, attract toward the hand position
-                            rb.isKinematic = false;
-                            magnetic.Attract(transform.position); // Use the Attract method for gradual movement
-                        }
-                    }
-                }
-            }
+            transform.position = _footPosition.position;
         }
         else
         {
-            // Reset the objects to non-kinematic when not magnetized
-            foreach (Weapon weapon in _gameManager.weapons)
+            transform.position = _handPosition.position;
+        }
+        
+        if (Input.GetMouseButtonDown(1))
+        {
+            _activateMagnet = true;
+            transform.position = _handPosition.position;
+            _repelImage.SetActive(false);
+            _attractImage.SetActive(true);
+            _defaultImage.SetActive(false);
+            _attractParticlesRoot.SetActive(true);
+        }
+        if(Input.GetMouseButtonUp(1))
+        {
+            _activateMagnet = false;
+            /*foreach (Rigidbody rb in _magneticObjects)
             {
-                if (weapon.gameObject.activeInHierarchy)
-                {
-                    Rigidbody rb = weapon.Rb;
-                    if (rb != null)
-                    {
-                        rb.isKinematic = false;
-                    }
-                }
+                transform.position = _explodePosition.position;
+                rb.AddExplosionForce(20000f, transform.position, 100f, 0.0F);
+            }*/
+            _repelImage.SetActive(false);
+            _attractImage.SetActive(false);
+            _defaultImage.SetActive(true);
+            _attractParticlesRoot.SetActive(false);
+
+        }
+
+        if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(0))
+        {
+            foreach (Rigidbody rb in _magneticObjects)
+            {
+                _attractImage.SetActive(false);
+                _repelImage.SetActive(true);
+                _defaultImage.SetActive(false);
+                _attractParticlesRoot.SetActive(false);
+                _repelParticlesRoot.SetActive(true);
+                _repelParticles.Clear();
+                _repelParticles.Play();
+                rb.AddForce(transform.forward * 5000f);
+                _activateMagnet = false;
             }
         }
+        
+        
+        if (Input.GetMouseButton(1) && Input.GetMouseButtonDown(2))
+        {
+            foreach (Rigidbody rb in _magneticObjects)
+            {
+                _attractImage.SetActive(false);
+                _repelImage.SetActive(true);
+                _defaultImage.SetActive(false);
+                _attractParticlesRoot.SetActive(false);
+                _gravityParticlesRoot.SetActive(true);
+                _gravityParticles.Clear();
+                _gravityParticles.Play();
+                
+                rb.AddForce(Vector3.down * 5000f);
+                
+                _activateMagnet = false;
+            }
+        }
+
+
+
+        
     }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (_activateMagnet)
+        {
+            foreach (Rigidbody obj in _magneticObjects )
+            {
+                obj.linearVelocity = Vector3.zero;
+                obj.position = Vector3.MoveTowards(obj.transform.position, transform.position, Time.deltaTime * 50f);
 
+                /*// Calculate the direction from the current position to the target position
+                Vector3 direction = (transform.position - obj.position).normalized;
+
+                // Set the velocity of the Rigidbody in the calculated direction
+                obj.velocity = Time.fixedDeltaTime * 2000f * direction;*/
+            }
+            
+        }
+    }
 }

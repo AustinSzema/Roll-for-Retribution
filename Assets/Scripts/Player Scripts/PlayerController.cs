@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,9 +17,6 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
-    public float gravityMultiplier = 2f;
-
-
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -37,62 +33,36 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDirection;
 
-    [SerializeField] Rigidbody rb;
+    Rigidbody rb;
 
-    [SerializeField] private AbilityList abilityList;
-
-    public void ActivateAll()
-    {
-        foreach (var ability in abilityList._abilities)
-        {
-            ability.Activate(this);
-        }
-    }
     
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+
         readyToJump = true;
-        ActivateAll();
-
-        EyeballController.Instance.ModifyStats(this);
-
-    
     }
 
     private void Update()
     {
-        //Debug.Log("Velocity: " + rb.velocity.magnitude);
         // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.5f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
         MyInput();
         SpeedControl();
 
         // handle drag
         if (grounded)
-        {
             rb.linearDamping = groundDrag;
-        }
         else
-        {
             rb.linearDamping = 0;
-        }
     }
 
- 
     private void FixedUpdate()
     {
         MovePlayer();
-        AddGravity();
     }
-
-    private void AddGravity()
-    {
-        rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
-    }
-
 
     private void MyInput()
     {
@@ -122,11 +92,11 @@ public class PlayerController : MonoBehaviour
 
         // on ground
         if (grounded)
-            rb.AddForce(moveSpeed * 10f * moveDirection.normalized, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
         else if (!grounded)
-            rb.AddForce(airMultiplier * moveSpeed * 10f * moveDirection.normalized, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
     

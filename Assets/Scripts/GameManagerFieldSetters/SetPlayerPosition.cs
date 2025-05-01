@@ -1,21 +1,12 @@
-using System;
 using UnityEngine;
 
 public class SetPlayerPosition : MonoBehaviour
 {
-
-    private GameManager _gameManager;
-    public Rigidbody playerRb;
-
-    private void Start()
-    {
-        _gameManager = GameManager.Instance;
-    }
-
+    [SerializeField] private Vector3Variable playerPos; 
+    
     void Update()
     {
-        _gameManager.playerPosition = transform.position;
-        _gameManager.playerRigidBodyVelocity = playerRb.linearVelocity;
-        //Debug.Log("player velocity: " + playerRb.velocity);
+        playerPos.Value = transform.position;
+        
     }
 }

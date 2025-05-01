@@ -28,6 +28,16 @@ public class DomainExpansion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _expandDomain == false)
+        {
+            _meshRenderer.enabled = true;
+            transform.localScale = _originalSize;
+            _expandDomain = true;
+            
+            _domainParticles.Play();
+            
+            
+        }
 
         if (_expandDomain)
         {
@@ -44,7 +54,7 @@ public class DomainExpansion : MonoBehaviour
 
         if (_domainSizeValue - transformAverage <= 0)
         {
-            StartCoroutine(ShrinkDomain(1f));
+            StartCoroutine(ShrinkDomain(2f));
             Debug.Log("Begun shrinking domain");
 
         }
@@ -57,17 +67,6 @@ public class DomainExpansion : MonoBehaviour
         }*/
     }
 
-    public void ExpandDomain()
-    {
-        
-        _meshRenderer.enabled = true;
-        transform.localScale = _originalSize;
-        _expandDomain = true;
-            
-        _domainParticles.Play();
-
-    }
-    
     private void OnTriggerEnter(Collider other)
     {
         
@@ -76,14 +75,6 @@ public class DomainExpansion : MonoBehaviour
             other.gameObject.GetComponent<IDamageable>().takeDamage(1);
         }
     }
-
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     if (other.gameObject.GetComponent<IDamageable>() != null && other.gameObject.GetComponent<PlayerController>() == null)
-    //     {
-    //         other.gameObject.GetComponent<IDamageable>().takeDamage(1);
-    //     }
-    // }
 
     /*private void OnParticleCollision(GameObject other)
     {

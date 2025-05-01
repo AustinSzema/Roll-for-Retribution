@@ -1,41 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SetHealthBar : MonoBehaviour
 {
+    [SerializeField] private intVariable _entityHealth;
+
     [SerializeField] private Slider _slider;
-
-    [SerializeField] private TextMeshProUGUI _healthText;
-
-    
-    private float _currentHealth;
-
-    private GameManager _gameManager;
 
     private void Start()
     {
-        _gameManager = GameManager.Instance;
+        _slider.maxValue = _entityHealth.Value;
     }
-
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(_entityHealth.name + " : " + _entityHealth.Value);
 
-        _currentHealth = (float)_gameManager.playerCurrentHealth / _gameManager.playerMaxHealth;
-        _slider.value = _currentHealth;
-        if (_currentHealth >= 0f)
-        {
-            int healthValue = Mathf.RoundToInt(_currentHealth * 100f);
-            _healthText.text = "Health " + healthValue;
-        }
-        else
-        {
-            _healthText.text = "Health: 0";
-        }
+        _slider.value = _entityHealth.Value;
     }
 }

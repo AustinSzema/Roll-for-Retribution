@@ -1,27 +1,23 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowPlayer : EnemyComponent
+public class FollowPlayer : MonoBehaviour
 {
-    private GameManager _gameManager;
+    [SerializeField] private float _moveSpeed = 2f;
 
-    [SerializeField] private Renderer renderer;
-    
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Vector3Variable _playerPosition;
 
-    private void Start()
-    {
-        _gameManager = GameManager.Instance;
-    }
+    [SerializeField] private boolVariable _gameIsPaused;
+
+    [SerializeField] private Rigidbody _rigidbody;
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (_gameManager.gameIsPaused == false && renderer.isVisible)
+        if (_gameIsPaused.Value == false)
         {
-            rb.position = Vector3.MoveTowards(transform.position, _gameManager.playerPosition, enemyBase.enemySO._moveSpeed * Time.deltaTime);
+            _rigidbody.position = Vector3.MoveTowards(transform.position, _playerPosition.Value, _moveSpeed * Time.deltaTime);
         }
     }
 }

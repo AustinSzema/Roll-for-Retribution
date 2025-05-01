@@ -1,11 +1,12 @@
-using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class EndlessTerrain : MonoBehaviour
 {
-    const float scale = 1f;
+
+
+    const float scale = 2.5f;
 
     const float viewerMoveThresholdForChunkUpdate = 25f;
     const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
@@ -14,7 +15,7 @@ public class EndlessTerrain : MonoBehaviour
     public static float maxViewDst;
 
     public Transform viewer;
-    private Material mapMaterial;
+    public Material mapMaterial;
 
     [SerializeField] private MeshRenderer _mesh;
 
@@ -24,15 +25,11 @@ public class EndlessTerrain : MonoBehaviour
     int chunkSize;
     int chunksVisibleInViewDst;
 
-    private Dictionary<Vector2, TerrainChunk> terrainChunkDictionary;
-    private static List<TerrainChunk> terrainChunksVisibleLastUpdate;
-    
-    
+    Dictionary<Vector2, TerrainChunk> terrainChunkDictionary;
+    static List<TerrainChunk> terrainChunksVisibleLastUpdate;
+
     void Start()
     {
-        terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
-        terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
-        
         mapMaterial = _mesh.material;
         mapGenerator = FindObjectOfType<MapGenerator>();
 
@@ -40,16 +37,11 @@ public class EndlessTerrain : MonoBehaviour
         chunkSize = MapGenerator.mapChunkSize - 1;
         chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / chunkSize);
 
-        UpdateVisibleChunks();
+        terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
+        terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
         
+        UpdateVisibleChunks();
     }
-
-    /*
-    private void OnDestroy()
-    {
-        terrainChunkDictionary.Clear();
-    }
-    */
 
     void Update()
     {
@@ -86,7 +78,6 @@ public class EndlessTerrain : MonoBehaviour
                 }
                 else
                 {
-                    // this is where the TerrainChunk class is being instantiated
                     terrainChunkDictionary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial));
                 }
 
@@ -96,7 +87,7 @@ public class EndlessTerrain : MonoBehaviour
 
     public class TerrainChunk
     {
-        // meshObject is being instanitated here
+
         GameObject meshObject;
         Vector2 position;
         Bounds bounds;
@@ -126,7 +117,6 @@ public class EndlessTerrain : MonoBehaviour
             meshFilter = meshObject.AddComponent<MeshFilter>();
             meshCollider = meshObject.AddComponent<MeshCollider>();
             meshRenderer.material = material;
-            meshObject.tag = "Ground";
 
             meshObject.transform.position = positionV3 * scale;
             meshObject.transform.parent = parent;
@@ -218,7 +208,6 @@ public class EndlessTerrain : MonoBehaviour
 
         public void SetVisible(bool visible)
         {
-            //This is the object that is throwing a null reference exception when the scene is reloaded
             meshObject.SetActive(visible);
         }
 
