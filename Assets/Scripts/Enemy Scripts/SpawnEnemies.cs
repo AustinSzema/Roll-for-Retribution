@@ -142,7 +142,7 @@ public class SpawnEnemies : MonoBehaviour
         }
         while (InTriangle(enemyPosition, centralLocation, NoNoZoneLeft + centralLocation, NoNoZoneRight + centralLocation));
 
-        enemyInstance.transform.position = enemyPosition;
+        enemyInstance.transform.position = enemyPosition + Vector3.up * 100f;
         enemyInstance.GetComponentInChildren<EnemyBase>(true).gameObject.SetActive(true);
         EnemiesInScene++;
     }

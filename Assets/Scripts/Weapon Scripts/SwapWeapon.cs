@@ -34,6 +34,11 @@ public class SwapWeapon : MonoBehaviour
                 // Instantiate and add weapons to weaponParents
                 weapon = Instantiate(startingWeaponList.weaponList[i], transform);
 
+                Vector3 upOffset = Vector3.up * 50f;
+                Vector3 sphereOffset = Random.onUnitSphere * ((Random.Range(0, 2) == 0)? 20f : -20f);
+
+                weapon.transform.position += upOffset + sphereOffset;
+                
                 // Add weapon to WeaponManager if it's not already in the list
                 if (WeaponManager.Instance.weaponParentList.Count == i)
                 {
