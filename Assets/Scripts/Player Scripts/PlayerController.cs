@@ -6,29 +6,18 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed;
-
-    public float groundDrag;
-
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    bool readyToJump;
-
-    [HideInInspector] public float walkSpeed;
-    [HideInInspector] public float sprintSpeed;
-    public float gravityMultiplier = 2f;
+    [Header("Player Stats SO")]
+    [field: SerializeField]
+    public PlayerStatsSO playerStats { get; private set; }
 
 
+    private bool readyToJump = true;
+    private bool readyToGroundPound = true;
+    private bool canGroundPound = true;
 
-    [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-
-    [Header("Ground Check")]
-    public float playerHeight;
+    [Header("Ground Check")] public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
+    private bool grounded;
 
     public Transform orientation;
 
@@ -48,17 +37,15 @@ public class PlayerController : MonoBehaviour
             ability.Activate(this);
         }
     }
-    
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        readyToJump = true;
+        //readyToJump = true;
         ActivateAll();
 
         EyeballController.Instance.ModifyStats(this);
-
-    
     }
 
     private void Update()
@@ -67,13 +54,14 @@ public class PlayerController : MonoBehaviour
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.5f, whatIsGround);
 
+        Debug.Log("Player is grounded: " + grounded);
         MyInput();
         SpeedControl();
 
         // handle drag
         if (grounded)
         {
-            rb.linearDamping = groundDrag;
+            rb.linearDamping = playerStats.groundDrag;
         }
         else
         {
@@ -81,7 +69,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
- 
+
     private void FixedUpdate()
     {
         MovePlayer();
@@ -90,7 +78,19 @@ public class PlayerController : MonoBehaviour
 
     private void AddGravity()
     {
-        rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
+        // Custom gravity control
+        if (rb.linearVelocity.y < 0) // Falling
+        {
+            rb.AddForce(playerStats.baseGravity * playerStats.fallGravityMultiplier * Vector3.up, ForceMode.Acceleration);
+        }
+        else if (rb.linearVelocity.y > 0 && !Input.GetKey(playerStats.jumpKey)) // Letting go of jump
+        {
+            rb.AddForce(playerStats.baseGravity * playerStats.lowJumpGravityMultiplier * Vector3.up, ForceMode.Acceleration);
+        }
+        else // Rising normally
+        {
+            rb.AddForce(Vector3.up * playerStats.baseGravity, ForceMode.Acceleration);
+        }
     }
 
 
@@ -100,20 +100,30 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
 
-        
-        
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(playerStats.jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
             Jump();
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+            Invoke(nameof(ResetJump), playerStats.jumpCooldown);
         }
 
+        if (Input.GetKeyUp(playerStats.groundPoundKey))
+        {
+            canGroundPound = true;
+        }
 
+        // when to ground pound
+        /*if (Input.GetKeyDown(playerStats.groundPoundKey) && canGroundPound && readyToGroundPound && !grounded)
+        {
+            canGroundPound = false;
+            GroundPound();
+            Invoke(nameof(ResetGroundPound), playerStats.groundPoundCooldown);
+        }*/
     }
+
 
     private void MovePlayer()
     {
@@ -122,25 +132,25 @@ public class PlayerController : MonoBehaviour
 
         // on ground
         if (grounded)
-            rb.AddForce(moveSpeed * 10f * moveDirection.normalized, ForceMode.Force);
+            rb.AddForce(playerStats.moveSpeed * 10f * moveDirection.normalized, ForceMode.Force);
 
         // in air
         else if (!grounded)
-            rb.AddForce(airMultiplier * moveSpeed * 10f * moveDirection.normalized, ForceMode.Force);
+            rb.AddForce(playerStats.airMultiplier * playerStats.moveSpeed * 10f * moveDirection.normalized,
+                ForceMode.Force);
     }
 
-    
+
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         // limit velocity if needed
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > playerStats.moveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * playerStats.moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
-        
     }
 
     private void Jump()
@@ -148,10 +158,25 @@ public class PlayerController : MonoBehaviour
         // reset y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * playerStats.jumpForce, ForceMode.Impulse);
     }
+
+    private void GroundPound()
+    {
+        // reset y velocity
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+        rb.AddForce(transform.up * playerStats.groundPoundForce, ForceMode.Impulse);
+    }
+
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void ResetGroundPound()
+    {
+        readyToGroundPound = true;
+        canGroundPound = true;
     }
 }

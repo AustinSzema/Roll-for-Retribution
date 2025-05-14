@@ -51,17 +51,17 @@ public class EyeballController : MonoBehaviour
 
         for (int i = 0; i < eyeballs.Count; i++)
         {
-            playerController.moveSpeed += eyeballs[i].moveSpeed;
-            playerController.groundDrag += eyeballs[i].groundDrag;
+            playerController.playerStats.moveSpeed += eyeballs[i].moveSpeed;
+            playerController.playerStats.groundDrag += eyeballs[i].groundDrag;
 
-            playerController.jumpForce += eyeballs[i].jumpForce;
-            playerController.jumpCooldown += eyeballs[i].jumpCooldown;
+            playerController.playerStats.jumpForce += eyeballs[i].jumpForce;
+            playerController.playerStats.jumpCooldown += eyeballs[i].jumpCooldown;
 
-            playerController.airMultiplier += eyeballs[i].airMultiplier;
-            playerController.walkSpeed += eyeballs[i].walkSpeed;
+            playerController.playerStats.airMultiplier += eyeballs[i].airMultiplier;
+            playerController.playerStats.walkSpeed += eyeballs[i].walkSpeed;
 
-            playerController.sprintSpeed += eyeballs[i].sprintSpeed;
-            playerController.gravityMultiplier += eyeballs[i].gravityMultiplier;
+            playerController.playerStats.sprintSpeed += eyeballs[i].sprintSpeed;
+            //playerController.playerStats.gravityMultiplier += eyeballs[i].gravityMultiplier;
         }
 
     }

@@ -5,6 +5,6 @@ public class Abiility_Jump : Ability
 {
     public override void Activate(PlayerController player)
     {
-        player.jumpForce *= 2f;
+        player.playerStats.jumpForce *= 2f;
     }
 }
