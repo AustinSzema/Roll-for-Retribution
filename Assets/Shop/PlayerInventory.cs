@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 public static class PlayerInventory
 {	public static int money = 0;
-	public static List<ShopItemSO> eyeballs;
-	public static List<ShopItemSO> scrolls;
-	public static List<ShopItemSO> weapons;
+	public static List<ShopItemSO> eyeballs = new List<ShopItemSO>();
+	public static List<ShopItemSO> scrolls = new List<ShopItemSO>();
+	public static List<ShopItemSO> weapons = new List<ShopItemSO>();
 	public static void AddItem(ShopItemSO itemSO){
 		switch(itemSO.itemType){
 			case ShopItemSO.ItemType.Eyeball:

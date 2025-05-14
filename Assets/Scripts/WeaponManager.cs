@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class WeaponManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -34,7 +34,8 @@ public class WeaponManager : MonoBehaviour
         }
         foreach (ShopItemSO weapon in PlayerInventory.weapons)
         {
-            Instantiate(weapon.itemPrefab, transform);
+            Vector3 randomOffset = Random.onUnitSphere * 20f;
+            Instantiate(weapon.itemPrefab, transform.position + randomOffset, Quaternion.identity);
         }
         weapons = FindObjectsByType<Weapon>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
     }
