@@ -217,7 +217,7 @@ public class Magnet : MonoBehaviour
             _gravityParticles.Clear();
             _gravityParticles.Play();
             
-            foreach (Weapon magnetic in _gameManager.weapons)
+            foreach (Weapon magnetic in WeaponManager.weapons)
             {
                 magnetic.Slam();
             }
@@ -264,7 +264,7 @@ public class Magnet : MonoBehaviour
             _repelParticles.Clear();
             _repelParticles.Play();
                         
-            foreach (Weapon magnetic in _gameManager.weapons)
+            foreach (Weapon magnetic in WeaponManager.weapons)
             {
                 Rigidbody rb = magnetic.Rb;
                 if (rb != null)
@@ -275,7 +275,7 @@ public class Magnet : MonoBehaviour
 
             int index = 0;
             
-            foreach (Weapon magnetic in _gameManager.weapons)
+            foreach (Weapon magnetic in WeaponManager.weapons)
             {
                 if (magnetic is PatternShot pattern)
                 {
@@ -307,7 +307,7 @@ public class Magnet : MonoBehaviour
 
         if (_activateMagnet)
         {
-            foreach (Weapon magnetic in _gameManager.weapons)
+            foreach (Weapon magnetic in WeaponManager.weapons)
             {
                 if (magnetic.gameObject.activeInHierarchy)
                 {
@@ -338,7 +338,7 @@ public class Magnet : MonoBehaviour
         else
         {
             // Reset the objects to non-kinematic when not magnetized
-            foreach (Weapon weapon in _gameManager.weapons)
+            foreach (Weapon weapon in WeaponManager.weapons)
             {
                 if (weapon.gameObject.activeInHierarchy)
                 {

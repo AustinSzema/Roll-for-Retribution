@@ -32,7 +32,7 @@ public class SwapWeapon : MonoBehaviour
             if (GameManager.Instance.currentRound == 0)
             {
                 // Instantiate and add weapons to weaponParents
-                weapon = Instantiate(startingWeaponList.weaponList[i], transform);
+                weapon = Instantiate(startingWeaponList.weaponList[i].itemPrefab, transform);
 
                 Vector3 upOffset = Vector3.up * 50f;
                 Vector3 sphereOffset = Random.onUnitSphere * ((Random.Range(0, 2) == 0)? 20f : -20f);
@@ -42,7 +42,7 @@ public class SwapWeapon : MonoBehaviour
                 // Add weapon to WeaponManager if it's not already in the list
                 if (WeaponManager.Instance.weaponParentList.Count == i)
                 {
-                    WeaponManager.Instance.weaponParentList.Add(startingWeaponList.weaponList[i]);
+                    WeaponManager.Instance.weaponParentList.Add(startingWeaponList.weaponList[i].itemPrefab);
                 }
             }
             else
@@ -52,7 +52,7 @@ public class SwapWeapon : MonoBehaviour
                 // Add weapon to WeaponManager if it's not already in the list
                 if (WeaponManager.Instance.weaponParentList.Count == i)
                 {
-                    WeaponManager.Instance.weaponParentList.Add(mainWeaponList.weaponList[i]);
+                    WeaponManager.Instance.weaponParentList.Add(mainWeaponList.weaponList[i].itemPrefab);
                 }
             }
             weaponParents.Add(weapon);
@@ -64,7 +64,7 @@ public class SwapWeapon : MonoBehaviour
         }
 
         // Collect all weapons and update the display
-        GameManager.Instance.weapons = FindObjectsOfType<Weapon>(true).ToList();
+        WeaponManager.weapons = FindObjectsOfType<Weapon>(true).ToList();
         UpdateWeaponDisplay();
     }
 
@@ -102,7 +102,7 @@ public class SwapWeapon : MonoBehaviour
         UpdateWeaponDisplay();
 
         // Move all weapons to the designated hand position
-        foreach (Weapon w in GameManager.Instance.weapons)
+        foreach (Weapon w in WeaponManager.weapons)
         {
             w.Attract(GameManager.Instance.handPosition);
             w.transform.position = GameManager.Instance.handPosition;

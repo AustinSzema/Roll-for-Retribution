@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New WeaponList", menuName = "WeaponStuff/WeaponList")]
 public class WeaponList : ScriptableObject
 {
-    public List<GameObject> weaponList = new List<GameObject>();
+    public List<WeaponSO> weaponList = new List<WeaponSO>();
 }

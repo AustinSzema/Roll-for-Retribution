@@ -82,9 +82,9 @@ public class WeaponShop : MonoBehaviour
         internalWeaponsList.Clear();
         for (int i = 0; i < everyWeaponList.weaponList.Count; i++)
         {
-            if (!WeaponManager.Instance.weaponParentList.Contains(everyWeaponList.weaponList[i]))
+            if (!WeaponManager.Instance.weaponParentList.Contains(everyWeaponList.weaponList[i].itemPrefab))
             {
-                internalWeaponsList.Add(everyWeaponList.weaponList[i]);
+                internalWeaponsList.Add(everyWeaponList.weaponList[i].itemPrefab);
             }
         }
 

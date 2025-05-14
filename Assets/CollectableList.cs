@@ -4,6 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CollectableList", menuName = "Scriptable Objects/CollectableList")]
 public class CollectableList : ScriptableObject
 {
-    public List<Collectable> list = new List<Collectable>(5);
+    public List<EyeballSO> list = new List<EyeballSO>(5);
 
 }

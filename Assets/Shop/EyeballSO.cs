@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Collectable", menuName = "Scriptable Objects/Collectable")]
-public class Collectable : ScriptableObject
+[CreateAssetMenu(fileName = "EyeballSO", menuName = "Scriptable Objects/EyeballSO")]
+public class EyeballSO : ShopItemSO
 {
     [Header("Attacking")]
     public float shootForce = 6000f;

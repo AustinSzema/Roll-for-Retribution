@@ -10,7 +10,7 @@ public class EyeballController : MonoBehaviour
     public static EyeballController Instance;
 
     
-    private List<Collectable> eyeballs = new List<Collectable>(5);
+    private List<EyeballSO> eyeballs = new List<EyeballSO>(5);
 
     [SerializeField] private List<Eyeball> eyeballsInHand = new List<Eyeball>();
     
@@ -21,7 +21,7 @@ public class EyeballController : MonoBehaviour
 
     private void Start()
     {
-        foreach (Collectable coll in collectableList.list)
+        foreach (EyeballSO coll in collectableList.list)
         {
             eyeballs.Add(coll);
         }

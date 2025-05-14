@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
     
     public bool shopActive = false;
     
-    [HideInInspector] public List<Weapon> weapons = new List<Weapon>();
 
     [HideInInspector] public WeaponList actualStartingWeaponList;
 
