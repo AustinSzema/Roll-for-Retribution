@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AbilityList abilityList;
 
+    
+    
     public void ActivateAll()
     {
         foreach (var ability in abilityList._abilities)

@@ -11,7 +11,7 @@ public class SetFlightFuelValue : MonoBehaviour
     
     [SerializeField] private GameObject _flightSliderBackground;
 
-    [SerializeField] private Magnet _magnet;
+    [SerializeField] private PlayerController _playerController;
     
     [SerializeField] private Slider _minimumFuelSlider;
 
@@ -28,8 +28,8 @@ public class SetFlightFuelValue : MonoBehaviour
     private void Start()
     {
         _gameManager = GameManager.Instance;;
-        _flightFuelSlider.maxValue = _magnet._maxFlightDuration;
-        _minimumFuelSlider.maxValue = _magnet._maxFlightDuration;
+        _flightFuelSlider.maxValue = _playerController.playerStats._maxFlightDuration;
+        _minimumFuelSlider.maxValue = _playerController.playerStats._maxFlightDuration;
         _originalFillColor = _fuelFill.color;
     }
 
@@ -43,14 +43,14 @@ public class SetFlightFuelValue : MonoBehaviour
         {
             // Set the slider value
             _flightFuelSlider.value = _gameManager.flightDuration;
-            _minimumFuelSlider.value = _magnet._fuelPenaltyThreshold;
+            _minimumFuelSlider.value = _playerController.playerStats._fuelPenaltyThreshold;
 
             if (_gameManager.outOfFuel == true)
             {
                 _fuelFill.color = _originalFillColor / 2;
             }
 
-            if (_flightFuelSlider.value >= _magnet._fuelPenaltyThreshold)
+            if (_flightFuelSlider.value >= _playerController.playerStats._fuelPenaltyThreshold)
             {
                 //Debug.Log("Flight Fuel Slider Value: " + _flightFuelSlider.value);
                 _fuelFill.color = _originalFillColor;

@@ -38,18 +38,12 @@ public class Magnet : MonoBehaviour
     [SerializeField] public float _slamCooldown = 3.0f;
     [SerializeField] public float _shotgunCooldown = 3.0f;
 
-    [Header("Levitate Ability")] public float _maxFlightDuration = 10;
-    [SerializeField] public float _fuelDecrementAmount = 1;
-    [SerializeField] public float _fuelRechargeAmount = 1;
 
-    [Tooltip("Sets the Y value of player's velocity")] [SerializeField]
-    public float _flightForce = 30f;
 
-    [FormerlySerializedAs("_minimumFuelAmount")]
-    public float _fuelPenaltyThreshold = 1;
 
-    [Header("Player")] [SerializeField] private Rigidbody _playerRigidbody;
-
+    [Header("Player")]
+    [SerializeField] private Rigidbody _playerRigidbody;
+    [SerializeField] private PlayerController _playerController;
 
     private GameManager _gameManager;
 
@@ -61,9 +55,7 @@ public class Magnet : MonoBehaviour
         // caches the reference to the audio manager at start
         _audioManager = AudioManager.Instance;
 
-        _gameManager.flightDuration = _maxFlightDuration;
-        EyeballController.Instance.ModifyStats(this);
-
+        _gameManager.flightDuration = _playerController.playerStats._maxFlightDuration;
     }
 
     private bool _activateMagnet = false;
@@ -99,9 +91,9 @@ public class Magnet : MonoBehaviour
                     
 
                     _audioManager.StartFlyingSound();
-                    _gameManager.flightDuration -= _fuelDecrementAmount;
+                    _gameManager.flightDuration -= _playerController.playerStats._fuelDecrementAmount;
                     
-                    _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, _flightForce,
+                    _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, _playerController.playerStats._flightForce,
                         _playerRigidbody.linearVelocity.z);
                 }
                 else if (!_outOfBreathClipPlayed)
@@ -133,7 +125,7 @@ public class Magnet : MonoBehaviour
             // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
             // Makes it so the fuel must regenerate a bit before the player can use flight again 
 
-            if (_gameManager.flightDuration >= _fuelPenaltyThreshold)
+            if (_gameManager.flightDuration >= _playerController.playerStats._fuelPenaltyThreshold)
             {
                 _gameManager.outOfFuel = false;
             }
@@ -148,9 +140,9 @@ public class Magnet : MonoBehaviour
             }
 
             // if the player's fuel is not full and the player is not flying, fill up their fuel
-            if (_gameManager.flightDuration < _maxFlightDuration && !_gameManager.playerIsFlying)
+            if (_gameManager.flightDuration < _playerController.playerStats._maxFlightDuration && !_gameManager.playerIsFlying)
             {
-                _gameManager.flightDuration += _fuelRechargeAmount;
+                _gameManager.flightDuration += _playerController.playerStats._fuelRechargeAmount;
             }
 
             // TODO: Consider renaming _flightDuration to _flightFuel

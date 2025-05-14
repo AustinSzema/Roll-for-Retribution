@@ -66,30 +66,6 @@ public class EyeballController : MonoBehaviour
 
     }
     
-    public void ModifyStats(Magnet magnet)
-    {
-        if (eyeballs.Count <= 0)
-        {
-            return;
-        }
-        for (int i = 0; i < eyeballs.Count; i++)
-        {
-            magnet._slamCooldown += eyeballs[i]._slamCooldown;
-            magnet._shotgunCooldown += eyeballs[i]._shotgunCooldown;
-
-            magnet._maxFlightDuration += eyeballs[i]._maxFlightDuration;
-            magnet._fuelDecrementAmount += eyeballs[i]._fuelDecrementAmount;
-
-            magnet._fuelRechargeAmount += eyeballs[i]._fuelRechargeAmount;
-            magnet._flightForce += eyeballs[i]._flightForce;
-
-            magnet._fuelPenaltyThreshold += eyeballs[i]._fuelPenaltyThreshold;
-           
-
-        }
-
-    }
-        
     public void ModifyStats(Weapon weapon)
     {
         if (eyeballs.Count <= 0)
