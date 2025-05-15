@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using AudioSystem;
 using UnityEngine;
 
 public class TakesDamage : EnemyComponent, IDamageable
@@ -24,11 +25,23 @@ public class TakesDamage : EnemyComponent, IDamageable
 
     
     private GameManager _gameManager;
+
+    
+    [Header("Audio")]
+    
+    
+    [SerializeField] SoundData soundData;
+
+    private SoundBuilder soundBuilder;
+
+
     
     protected virtual void Start()
     {
         Setup();
+        soundBuilder = SoundManager.Instance.CreateSoundBuilder();
     }
+    
 
     protected void Setup()
     {
@@ -63,6 +76,7 @@ public class TakesDamage : EnemyComponent, IDamageable
     {
         //Debug.Log("Current health: " + _currentHealth + ", damage taken: " + hitPoints);
         AudioManager.Instance.PlayHitSound();
+        soundBuilder.WithRandomPitch().WithPosition(transform.position).Play(soundData);
         _currentHealth -= hitPoints;
         
         EnemyHit();

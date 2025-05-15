@@ -1,4 +1,5 @@
 using System.Collections;
+using AudioSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -22,6 +23,13 @@ public class Enemy : MonoBehaviour, IDamageable
     
     private static AudioManager _audioManager;
 
+    
+    [SerializeField] SoundData soundData;
+
+    SoundBuilder soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+
+    
+    
     private MeshRenderer[] _meshRenderers;
 
 
@@ -103,7 +111,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void takeDamage(float hitPoints)
     {
-        _audioManager.PlayHitSound();
+        //_audioManager.PlayHitSound();
+        soundBuilder.WithRandomPitch().WithPosition(transform.position).Play(soundData);
+
         _currentHealth -= hitPoints;
         EnemyHit();
         if (_currentHealth <= 0)

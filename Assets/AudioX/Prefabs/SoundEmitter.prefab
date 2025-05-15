@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6533779566757002753
+--- !u!1 &6090579874278877196
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,71 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6478797255029826021}
-  - component: {fileID: 4785118776927533014}
-  - component: {fileID: 6437269175576694771}
-  - component: {fileID: 9170263300104559674}
+  - component: {fileID: 2192071873588530787}
+  - component: {fileID: 2814089227792753307}
+  - component: {fileID: 8400026968397468002}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: SoundEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6478797255029826021
+--- !u!4 &2192071873588530787
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533779566757002753}
+  m_GameObject: {fileID: 6090579874278877196}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9.367252, y: 9.663172, z: -26.63866}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4785118776927533014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533779566757002753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e37e503bb9fc614d9ee8e6cff4e8411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _musicSource: {fileID: 0}
-  _sfxSource: {fileID: 0}
-  _invariableSFXSource: {fileID: 0}
-  _pullingSource: {fileID: 0}
-  _flyingSource: {fileID: 0}
-  _pullingClip: {fileID: 8300000, guid: e41b7fb2da79042418ab66566f3569e4, type: 3}
-  _pullingEndClip: {fileID: 8300000, guid: 6091e6c4eea134f559fcbdec212dbe7d, type: 3}
-  _objectReachedClip: {fileID: 8300000, guid: 70bce92e4d7774450807817663818040, type: 3}
-  _shotgunClip: {fileID: 8300000, guid: e1767cf3843e7c64d9ee00f42428cab5, type: 3}
-  _sniperClip: {fileID: 8300000, guid: 103f47a5b1d774e80bd0f2f0ad09be23, type: 3}
-  _sprayClip: {fileID: 8300000, guid: 21cae23b09f1f45dd94bd37191c1c2fc, type: 3}
-  _slamClip: {fileID: 8300000, guid: 0f85cdf8aeac74b97bfec0b4a76732e4, type: 3}
-  _flyingClip: {fileID: 8300000, guid: fad6f7a9e0ba14f809157efc538ef3c2, type: 3}
-  _flyStartClip: {fileID: 8300000, guid: 0cbb6876f38254000b4beccd63c6a66e, type: 3}
-  _flyEndClip: {fileID: 8300000, guid: 085f9aa4cbeca47c0bf1648016ea20ca, type: 3}
-  _audioSource: {fileID: 6437269175576694771}
-  _hitClip: {fileID: 8300000, guid: c2a23a86103a39040bf6955dd7b97c5a, type: 3}
-  _bigHitClip: {fileID: 8300000, guid: e1767cf3843e7c64d9ee00f42428cab5, type: 3}
-  _clickClip: {fileID: 8300000, guid: dbb4220e2f7377045a60314b2196a688, type: 3}
-  _mainMusic: {fileID: 8300000, guid: 108c418d0b0c6aa4abf3b9f53c336863, type: 3}
---- !u!82 &6437269175576694771
+--- !u!82 &2814089227792753307
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533779566757002753}
+  m_GameObject: {fileID: 6090579874278877196}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -163,22 +130,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9170263300104559674
+--- !u!114 &8400026968397468002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533779566757002753}
+  m_GameObject: {fileID: 6090579874278877196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3a6f7fee90847f8a6abe3fa2964e45b, type: 3}
+  m_Script: {fileID: 11500000, guid: d33fa71f5c76490799f6b2f371b3e18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AutoUnparentOnAwake: 1
-  soundEmitterPrefab: {fileID: 8400026968397468002, guid: 9c24cda77957e7147ae757011cf75f47,
-    type: 3}
-  collectionCheck: 1
-  defaultCapacity: 10
-  maxPoolSize: 100
-  maxSoundInstances: 30
