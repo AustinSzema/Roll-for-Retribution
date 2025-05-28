@@ -9,9 +9,14 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] public float shootForce = 6000f;
     [SerializeField] public float slamForce = 5500f;
     [SerializeField] public float pullSpeed = 60f;
-    
+    [SerializeField] public Vector3 size;
     [SerializeField] public float damage = 1;
+    [SerializeField] public Color color;
+    [SerializeField] public int amount;
+    [SerializeField] public int maxAmount;
 
+
+    // TODO: what the hell is this why are there two rigidbody references
     public Rigidbody Rb { get; private set; }
     
     [FormerlySerializedAs("_rigidbody")] [SerializeField] protected Rigidbody rb;
@@ -126,4 +131,11 @@ public abstract class Weapon : MonoBehaviour
             damageable.takeDamage(damage);
         }
     }
+
+    public int GetAmount()
+    {
+        return amount;
+    }
+    
+    // make a weapon pool, spawn the max amount, then only enable the amount;
 }
