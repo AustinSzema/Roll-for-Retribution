@@ -138,4 +138,9 @@ public abstract class Weapon : MonoBehaviour
     }
     
     // make a weapon pool, spawn the max amount, then only enable the amount;
+
+
+    public void Snap(){
+        Slam();
+    }
 }
