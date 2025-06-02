@@ -21,7 +21,7 @@ public class SpikedShield : Weapon
         rotateTowardsPlayerAndLock = true;
     }
 
-    public override void Slam()
+    public override void Snap()
     {
         rb.linearVelocity = Vector3.zero;
         // Use Quaternion.Euler to specify the rotation in degrees

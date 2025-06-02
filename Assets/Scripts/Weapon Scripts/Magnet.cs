@@ -219,7 +219,7 @@ public class Magnet : MonoBehaviour
             
             foreach (Weapon magnetic in WeaponManager.weapons)
             {
-                magnetic.Slam();
+                magnetic.Snap();
             }
             
             yield return new WaitForSeconds(_slamCooldown);

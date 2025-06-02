@@ -27,7 +27,7 @@ public class Spear : Weapon
         }
     }
     
-    public override void Slam()
+    public override void Snap()
     {
         rb.linearVelocity = Vector3.zero;
         // Use Quaternion.Euler to specify the rotation in degrees

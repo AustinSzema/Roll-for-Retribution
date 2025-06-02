@@ -79,7 +79,7 @@ public abstract class Weapon : MonoBehaviour
     }
 
 
-    public virtual void Slam()
+    public virtual void Snap()
     {
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(Vector3.down * slamForce);
@@ -140,7 +140,4 @@ public abstract class Weapon : MonoBehaviour
     // make a weapon pool, spawn the max amount, then only enable the amount;
 
 
-    public void Snap(){
-        Slam();
-    }
 }

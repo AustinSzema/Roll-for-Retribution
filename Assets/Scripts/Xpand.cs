@@ -44,7 +44,7 @@ public class Xpand : Weapon
         inHand = false;
     }
     
-    protected override void OnCollisionEnter(Collision other)
+    /*protected override void OnCollisionEnter(Collision other)
     {
         base.OnCollisionEnter(other);
         Expand(other.gameObject);
@@ -56,7 +56,7 @@ public class Xpand : Weapon
     {
         base.OnTriggerEnter(other);
         Expand(other.gameObject);
-    }
+    }*/
 
     private void Expand(GameObject other)
     {
@@ -76,6 +76,13 @@ public class Xpand : Weapon
         }
     }
 
+
+    public override void Snap()
+    {
+        transform.localScale = startSize * expandSize;
+        rb.linearVelocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
     
     public override void Attract(Vector3 magnetPosition)
     {
