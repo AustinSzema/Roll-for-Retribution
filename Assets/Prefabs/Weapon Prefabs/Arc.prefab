@@ -58,6 +58,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -137,7 +140,11 @@ MonoBehaviour:
   shootForce: 5500
   slamForce: 5500
   pullSpeed: 60
+  size: {x: 0, y: 0, z: 0}
   damage: 1
+  color: {r: 0, g: 0, b: 0, a: 0}
+  amount: 0
+  maxAmount: 0
   rb: {fileID: 7489967616577091386}
   weaponUISprite: {fileID: 21300000, guid: 3ce60024d06a4304e80437f6ba8cee05, type: 3}
   weaponDescription: Fire several orbs that slide around the arena like snakes
@@ -317,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: f7998e2bc07a2be4db50a2b5c3db2f2a,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 9dc16c81e5f30ed41bc248d0ce6eb924, type: 2}
     - target: {fileID: -5754084199372789682, guid: f7998e2bc07a2be4db50a2b5c3db2f2a,
@@ -354,6 +361,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9139452839956237524}
     m_Modifications:
+    - target: {fileID: 546931506776471322, guid: c8cbe4a67da6c034ea4c776d9455cd00,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 546931506776471322, guid: c8cbe4a67da6c034ea4c776d9455cd00,
         type: 3}
       propertyPath: m_Parameters.widthMultiplier

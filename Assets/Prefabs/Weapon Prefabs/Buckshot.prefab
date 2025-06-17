@@ -67,13 +67,15 @@ MonoBehaviour:
   shootForce: 10000
   slamForce: 5500
   pullSpeed: 45
+  size: {x: 0, y: 0, z: 0}
   damage: 1
+  color: {r: 0, g: 0, b: 0, a: 0}
+  amount: 0
+  maxAmount: 0
   rb: {fileID: -9066289227632087417}
   weaponUISprite: {fileID: 21300000, guid: b7fa995ad8094c24e89c7d928f925863, type: 3}
   weaponDescription: The standard shotgun
   weaponName: Shotgun
-  lineRendererMaterial: {fileID: 2100000, guid: 43fbb93d9092b7e4c944a6ee59931073,
-    type: 2}
 --- !u!54 &-9066289227632087417
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,7 +112,7 @@ TrailRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3248689125199883062}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
