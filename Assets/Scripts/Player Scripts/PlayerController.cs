@@ -181,4 +181,29 @@ public class PlayerController : MonoBehaviour
         readyToGroundPound = true;
         canGroundPound = true;
     }
+    
+    public void TemporarilySetVelocity(Vector3 newVelocity, float duration)
+    {
+        StopCoroutine(nameof(ResetVelocityAfterTime)); // in case it's already running
+        rb.linearVelocity = newVelocity;
+        StartCoroutine(ResetVelocityAfterTime(duration));
+    }
+
+    private IEnumerator ResetVelocityAfterTime(float time)
+    {
+        // Optionally disable movement while bouncing
+        float originalSpeed = playerStats.moveSpeed;
+        float originalAirMultiplier = playerStats.airMultiplier;
+
+        // Temporarily disable speed control to preserve bounce momentum
+        playerStats.moveSpeed = 0f;
+        playerStats.airMultiplier = 0f;
+
+        yield return new WaitForSeconds(time);
+
+        // Restore original speed
+        playerStats.moveSpeed = originalSpeed;
+        playerStats.airMultiplier = originalAirMultiplier;
+    }
+
 }
