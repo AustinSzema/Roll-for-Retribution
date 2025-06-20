@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour, IDamageable
     
     [SerializeField] SoundData soundData;
 
-    SoundBuilder soundBuilder = SoundManager.Instance.CreateSoundBuilder();
+    //SoundBuilder soundBuilder = SoundManager.Instance.CreateSoundBuilder();
 
     
     
@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void takeDamage(float hitPoints)
     {
         //_audioManager.PlayHitSound();
-        soundBuilder.WithRandomPitch().WithPosition(transform.position).Play(soundData);
+        //soundBuilder.WithRandomPitch().WithPosition(transform.position).Play(soundData);
 
         _currentHealth -= hitPoints;
         EnemyHit();

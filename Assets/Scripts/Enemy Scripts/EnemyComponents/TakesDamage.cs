@@ -127,7 +127,7 @@ public class TakesDamage : EnemyComponent, IDamageable
         _deathParticles.transform.position = transform.position;
         _deathParticles.Play();
         
-        KillQuota.Instance.AddKills(enemyBase.enemySO.killThresholdValue);
+        //KillQuota.Instance.AddKills(enemyBase.enemySO.killThresholdValue);
 
         _currentHealth = enemyBase.enemySO.healthPoints;
         gameObject.SetActive(false);

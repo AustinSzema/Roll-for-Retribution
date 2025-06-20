@@ -44,7 +44,7 @@ public class SpawnEnemies : MonoBehaviour
         _currentSpawnInfoIdx = 0;
         _changeSpawnInfo = true;
 
-        KillQuota.Instance.killQuotaSlider.maxValue = currentSpawnInfoVariable.killQuota;
+        //KillQuota.Instance.killQuotaSlider.maxValue = currentSpawnInfoVariable.killQuota;
         StartCoroutine(WaitToStart(startDelay));
     }
 
