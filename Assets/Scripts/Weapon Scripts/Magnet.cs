@@ -15,9 +15,7 @@ public class Magnet : MonoBehaviour
 
     [SerializeField] private Transform _handPosition;
 
-    [Header("UI Images")] [SerializeField] private Image _attractImage;
-    [SerializeField] private Image _repelImage;
-    [SerializeField] private Image _defaultImage;
+    [FormerlySerializedAs("_attractImage")] [Header("UI Images")] [SerializeField] private Image handImage;
 
     [SerializeField] private Sprite _shotgunAttractSprite;
     [SerializeField] private Sprite _shotgunRepelSprite;
@@ -116,10 +114,6 @@ public class Magnet : MonoBehaviour
                 // _outerSphere.material = _attractOuterMaterial;
                 _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, _playerRigidbody.linearVelocity.y,
                     _playerRigidbody.linearVelocity.z);
-                // Set sprites
-                _attractImage.sprite = _shotgunAttractSprite;
-                _repelImage.sprite = _shotgunRepelSprite;
-                _defaultImage.sprite = _shotgunDefaultSprite;
             }
 
             // This makes it so that the player can't just hold the flight ability buttons and have the fuel go from 1 to 0 to 1 over and over again, giving them infinite flight.
@@ -152,9 +146,7 @@ public class Magnet : MonoBehaviour
                 _activateMagnet = true;
                 _audioManager.StartPullingSound();
                 transform.position = _handPosition.position;
-                _repelImage.gameObject.SetActive(false);
-                _attractImage.gameObject.SetActive(true);
-                _defaultImage.gameObject.SetActive(false);
+                handImage.sprite = _shotgunAttractSprite;
                 _attractParticlesRoot.SetActive(true);
  
             }
@@ -164,9 +156,7 @@ public class Magnet : MonoBehaviour
                 _activateMagnet = false;
                 _audioManager.StopPullingSound();
                 _audioManager.PlayPullingEndSound();
-                _repelImage.gameObject.SetActive(true);
-                _attractImage.gameObject.SetActive(false);
-                _defaultImage.gameObject.SetActive(false);
+                handImage.sprite = _shotgunRepelSprite;
                 _attractParticlesRoot.SetActive(false);
                 StartCoroutine(ResetHandVisual());
                 StartCoroutine(Shoot());
@@ -193,9 +183,7 @@ public class Magnet : MonoBehaviour
     {
         canAttractWeapon = false;
         yield return new WaitForSeconds(0.2f);
-        _repelImage.gameObject.SetActive(false);
-        _attractImage.gameObject.SetActive(false);
-        _defaultImage.gameObject.SetActive(true);
+        handImage.sprite = _shotgunDefaultSprite;
         canAttractWeapon = true;
 
     }
@@ -209,9 +197,7 @@ public class Magnet : MonoBehaviour
             _slamOnCooldown = true;
             _audioManager.PlaySlamSound();
 
-            _attractImage.gameObject.SetActive(false);
-            _repelImage.gameObject.SetActive(true);
-            _defaultImage.gameObject.SetActive(false);
+            handImage.sprite = _shotgunRepelSprite;
             _attractParticlesRoot.SetActive(false);
             _gravityParticlesRoot.SetActive(true);
             _gravityParticles.Clear();
@@ -256,9 +242,8 @@ public class Magnet : MonoBehaviour
             //         break;
             // }
 
-            _attractImage.gameObject.SetActive(false);
-            _repelImage.gameObject.SetActive(true);
-            _defaultImage.gameObject.SetActive(false);
+            handImage.sprite = _shotgunRepelSprite;
+
             _attractParticlesRoot.SetActive(false);
             _repelParticlesRoot.SetActive(true);
             _repelParticles.Clear();
