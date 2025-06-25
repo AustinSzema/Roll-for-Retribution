@@ -41,7 +41,7 @@ public class LoadingScreen : MonoBehaviour
         
         _loadingSlider.gameObject.SetActive(true);
         FadeIn();
-        StartCoroutine(LoadSceneAsync(0));
+        StartCoroutine(LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
     }
     
     public IEnumerator LoadSceneAsync(int sceneIndex)

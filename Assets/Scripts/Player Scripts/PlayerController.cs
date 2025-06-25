@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool readyToGroundPound = true;
     private bool canGroundPound = true;
 
-    [Header("Ground Check")] public float playerHeight;
+    [Header("Ground Check")] public float playerHeight = 1.5f;
     public LayerMask whatIsGround;
     private bool grounded;
 

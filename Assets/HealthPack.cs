@@ -20,7 +20,7 @@ public class HealthPack : MonoBehaviour
 
     public void Heal()
     {
-        GameManager.Instance.playerCurrentHealth += 10;
+        GameManager.Instance.HealPlayer();
     }
 
 }

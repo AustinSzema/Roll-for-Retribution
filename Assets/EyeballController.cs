@@ -26,15 +26,23 @@ public class EyeballController : MonoBehaviour
             eyeballs.Add(coll);
         }
 
-        foreach (Eyeball eye in eyeballsInHand)
+        if (eyeballsInHand[0] == null)
         {
-            eye.gameObject.SetActive(false);
+            Debug.LogWarning("No eyeballs in hand in eyeball controller");
         }
-
-        for (int i = 0; i < eyeballs.Count; i++)
+        else
         {
-            eyeballsInHand[i].gameObject.SetActive(true);
-            eyeballsInHand[i].SetMaterial(eyeballs[i].eyeMaterial);
+            foreach (Eyeball eye in eyeballsInHand)
+            {
+                eye.gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i < eyeballs.Count; i++)
+            {
+                eyeballsInHand[i].gameObject.SetActive(true);
+                eyeballsInHand[i].SetMaterial(eyeballs[i].eyeMaterial);
+            }
+            
         }
 
         

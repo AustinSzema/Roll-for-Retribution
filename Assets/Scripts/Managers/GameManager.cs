@@ -164,6 +164,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void HealPlayer()
+    {
+        if (playerCurrentHealth < playerMaxHealth){
+            playerCurrentHealth += 1;
+        }
 
+    }
 
 }
